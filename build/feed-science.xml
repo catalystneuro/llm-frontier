@@ -4,7 +4,7 @@
   <link href="https://llm-frontier.catalystneuro.com/science/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-science.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-science.xml</id>
-  <updated>2026-09-11T06:00:00Z</updated>
+  <updated>2026-09-21T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of GPQA Diamond, through a release or a price change.</subtitle>
   <entry>
@@ -32,12 +32,12 @@
     <summary>Qwen3.8-Flash-Next: now the cheapest way to reach GPQA Diamond 91.2% to 92.3% at $0.097 per task, taking it from MiniMax-M3 and DeepSeek V4 Flash Vision; DeepSeek V4 Flash Vision left the frontier. Open weights.</summary>
   </entry>
   <entry>
-    <title>2026-08-26: GLM-5.3-Flash (new model, GPQA Diamond 91.2%)</title>
+    <title>2026-08-26: GLM 5.3 Flash (new model, GPQA Diamond 91.2%)</title>
     <link href="https://llm-frontier.catalystneuro.com/science/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/science/2026-08-26-glm-5-3-flash.png" />
     <id>https://llm-frontier.catalystneuro.com/science/advance/2026-08-26/glm-5-3-flash</id>
     <updated>2026-08-26T00:00:00Z</updated>
-    <summary>GLM-5.3-Flash: now the cheapest way to reach GPQA Diamond 91.1% to 91.2% at $0.087 per task, taking it from DeepSeek V4 Flash Vision. Open weights.</summary>
+    <summary>GLM 5.3 Flash: now the cheapest way to reach GPQA Diamond 91.1% to 91.2% at $0.087 per task, taking it from DeepSeek V4 Flash Vision. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-08-26: Agnes 2.5 Pro Beta (new model, GPQA Diamond 90.5%)</title>

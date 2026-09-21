@@ -4,7 +4,7 @@
   <link href="https://llm-frontier.catalystneuro.com/knowledge/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-knowledge.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-knowledge.xml</id>
-  <updated>2026-09-11T06:00:00Z</updated>
+  <updated>2026-09-21T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AA Omniscience, through a release or a price change.</subtitle>
   <entry>
@@ -72,12 +72,12 @@
     <summary>Claude Fable 5.1 (Adaptive Reasoning, Low Effort, Default Fallback): now the cheapest way to reach AA Omniscience 31.9 to 34.1 at $0.77 per task, taking it from Claude Opus 5. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-08-26: GLM-5.3-Flash (new model, AA Omniscience 7.5)</title>
+    <title>2026-08-26: GLM 5.3 Flash (new model, AA Omniscience 7.5)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-08-26-glm-5-3-flash.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-08-26/glm-5-3-flash</id>
     <updated>2026-08-26T00:00:00Z</updated>
-    <summary>GLM-5.3-Flash: now the cheapest way to reach AA Omniscience 3.2 to 7.5 at $0.087 per task, taking it from Grok 4.3 and Gemini 3.5 Flash-Lite; Gemini 3.5 Flash-Lite left the frontier. Open weights.</summary>
+    <summary>GLM 5.3 Flash: now the cheapest way to reach AA Omniscience 3.2 to 7.5 at $0.087 per task, taking it from Grok 4.3 and Gemini 3.5 Flash-Lite; Gemini 3.5 Flash-Lite left the frontier. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-08-25: Granite 4.2 3B (new model, AA Omniscience -14.7)</title>

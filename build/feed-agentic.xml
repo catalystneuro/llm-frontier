@@ -4,7 +4,7 @@
   <link href="https://llm-frontier.catalystneuro.com/agentic/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-agentic.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-agentic.xml</id>
-  <updated>2026-09-11T06:00:00Z</updated>
+  <updated>2026-09-21T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AutomationBench-AA, through a release or a price change.</subtitle>
   <entry>
@@ -40,12 +40,12 @@
     <summary>GPT-6 Astra (medium): now the cheapest way to reach AutomationBench-AA 62.2% to 64.6% at $0.75 per task, taking it from Grok 4.6. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-08-26: GLM-5.3-Flash (new model, AutomationBench-AA 60.4%)</title>
+    <title>2026-08-26: GLM 5.3 Flash (new model, AutomationBench-AA 60.4%)</title>
     <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-08-26-glm-5-3-flash.png" />
     <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-08-26/glm-5-3-flash</id>
     <updated>2026-08-26T00:00:00Z</updated>
-    <summary>GLM-5.3-Flash: now the cheapest way to reach AutomationBench-AA 56.3% to 60.4% at $0.087 per task, taking it from Gemini 3.7 Flash, Grok 4.5, and DeepSeek V4 Pro 0813; Grok 4.5 and DeepSeek V4 Pro 0813 left the frontier. New cost record for AutomationBench-AA ≥ 60%. Open weights.</summary>
+    <summary>GLM 5.3 Flash: now the cheapest way to reach AutomationBench-AA 56.3% to 60.4% at $0.087 per task, taking it from Gemini 3.7 Flash, Grok 4.5, and DeepSeek V4 Pro 0813; Grok 4.5 and DeepSeek V4 Pro 0813 left the frontier. New cost record for AutomationBench-AA ≥ 60%. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-08-26: Agnes 2.5 Pro Beta (new model, AutomationBench-AA 43.8%)</title>
@@ -117,7 +117,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-07-30-gpt-5-6-luna.png" />
     <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-07-30/gpt-5-6-luna</id>
     <updated>2026-07-30T00:00:00Z</updated>
-    <summary>GPT-5.6 Luna (max): price moved from $0.236 to $0.047 per task; now the cheapest way to reach AutomationBench-AA 42.6% to 50.2%, taking it from DeepSeek V4 Pro. New cost record for AutomationBench-AA ≥ 50%. Proprietary.</summary>
+    <summary>GPT-5.6 Luna (max): price moved from $0.236 to $0.047 per task; now the cheapest way to reach AutomationBench-AA 42.6% to 50.2%, taking it from DeepSeek V4 Pro 0424. New cost record for AutomationBench-AA ≥ 50%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-07-30: GPT-5.6 Luna (xhigh) (price change, AutomationBench-AA 42.6%)</title>
@@ -125,7 +125,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-07-30-gpt-5-6-luna.png" />
     <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-07-30/gpt-5-6-luna-xhigh</id>
     <updated>2026-07-30T00:00:00Z</updated>
-    <summary>GPT-5.6 Luna (xhigh): price moved from $0.158 to $0.032 per task; now the cheapest way to reach AutomationBench-AA 35.6% to 42.6%, taking it from DeepSeek V4 Pro. New cost record for AutomationBench-AA ≥ 40%. Proprietary.</summary>
+    <summary>GPT-5.6 Luna (xhigh): price moved from $0.158 to $0.032 per task; now the cheapest way to reach AutomationBench-AA 35.6% to 42.6%, taking it from DeepSeek V4 Pro 0424. New cost record for AutomationBench-AA ≥ 40%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-07-30: GPT-5.6 Luna (high) (price change, AutomationBench-AA 35.6%)</title>
@@ -133,7 +133,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-07-30-gpt-5-6-luna.png" />
     <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-07-30/gpt-5-6-luna-high</id>
     <updated>2026-07-30T00:00:00Z</updated>
-    <summary>GPT-5.6 Luna (high): price moved from $0.108 to $0.022 per task; now the cheapest way to reach AutomationBench-AA 23.1% to 35.6%, taking it from DeepSeek V4 Pro. New cost record for AutomationBench-AA ≥ 30%. Proprietary.</summary>
+    <summary>GPT-5.6 Luna (high): price moved from $0.108 to $0.022 per task; now the cheapest way to reach AutomationBench-AA 23.1% to 35.6%, taking it from DeepSeek V4 Pro 0424 and DeepSeek V4 Pro; DeepSeek V4 Pro left the frontier. New cost record for AutomationBench-AA ≥ 30%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-07-30: GPT-5.6 Luna (medium) (price change, AutomationBench-AA 23.1%)</title>
@@ -176,12 +176,12 @@
     <summary>Grok 4.5 (high): pushed the AutomationBench-AA ceiling from 56.3% to 57.9%, at $0.36 per task. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-04-24: DeepSeek V4 Pro (Reasoning, Max Effort) (new model, AutomationBench-AA 56.3%)</title>
+    <title>2026-04-24: DeepSeek V4 Pro 0424 (Reasoning, Max Effort) (new model, AutomationBench-AA 56.3%)</title>
     <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-04-24-deepseek-v4-pro.png" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-04-24-deepseek-v4-pro-0424.png" />
     <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-04-24/deepseek-v4-pro-0424</id>
     <updated>2026-04-24T00:00:00Z</updated>
-    <summary>DeepSeek V4 Pro (Reasoning, Max Effort): pushed the AutomationBench-AA ceiling from 47.3% to 56.3%, at $0.047 per task, taking it from GPT-5.5 and Gemini 3.1 Pro Preview, both of which left the frontier. New cost record for AutomationBench-AA ≥ 50%. Open weights.</summary>
+    <summary>DeepSeek V4 Pro 0424 (Reasoning, Max Effort): pushed the AutomationBench-AA ceiling from 47.3% to 56.3%, at $0.047 per task, taking it from GPT-5.5 and Gemini 3.1 Pro Preview, both of which left the frontier. New cost record for AutomationBench-AA ≥ 50%. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-04-24: DeepSeek V4 Pro (Reasoning, High Effort) (new model, AutomationBench-AA 35.3%)</title>
