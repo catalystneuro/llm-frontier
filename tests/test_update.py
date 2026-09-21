@@ -77,7 +77,7 @@ def test_fetch_payload_rejects_pages_without_chunks(monkeypatch):
 
 
 def test_extract_models_reads_fields_and_capabilities():
-    o = source_object(terminalbenchV21=0.789, omniscience=-10.76, automationBenchPartialScore=0.444)
+    o = source_object(terminalBench21=0.789, omniscience=-10.76, automationBenchPartialScore=0.444)
     got = extract_models(payload_for([o]))["test-model"]
     assert got["name"] == "Test Model (high)"
     assert got["creator"] == "Lab"
@@ -619,6 +619,11 @@ def test_check_live_set_guards():
 
     with pytest.raises(RuntimeError, match="live set dropped"):
         check_live_set(dict(list(live_same.items())[:60]), history, [], "2026-09-06")
+
+    # A capability field that vanishes from every live model is refused.
+    scored = {"models": {s: dict(m, capabilities={"coding": 50.0}) for s, m in history["models"].items()}}
+    with pytest.raises(RuntimeError, match="Terminal-Bench 2.1"):
+        check_live_set(live_same, scored, [], "2026-09-06")
 
     shifted = {s: live_record(r["name"], "2026-01-01", 45.0, 1.0) for s, r in live_same.items()}
     with pytest.raises(RuntimeError, match="median index shift"):
