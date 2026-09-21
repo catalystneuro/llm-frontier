@@ -4,9 +4,17 @@
   <link href="https://llm-frontier.catalystneuro.com/longcontext/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-longcontext.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-longcontext.xml</id>
-  <updated>2026-09-11T06:00:00Z</updated>
+  <updated>2026-09-21T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AA-LCR, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-09-18: Step 5 Preview (new model, AA-LCR 88.3%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/longcontext/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/longcontext/2026-09-18-step-5-preview.png" />
+    <id>https://llm-frontier.catalystneuro.com/longcontext/advance/2026-09-18/step-5</id>
+    <updated>2026-09-18T00:00:00Z</updated>
+    <summary>Step 5 Preview: now the cheapest way to reach AA-LCR 84.0% to 88.3% at $0.71 per task, taking it from Kimi K3 and GPT-5.5; GPT-5.5 left the frontier. Proprietary.</summary>
+  </entry>
   <entry>
     <title>2026-09-10: DeepSeek V4.1 Flash (Reasoning, Max Effort) (new model, AA-LCR 84.0%)</title>
     <link href="https://llm-frontier.catalystneuro.com/longcontext/#advances" />
