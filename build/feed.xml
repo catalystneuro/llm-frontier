@@ -8,6 +8,14 @@
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of the Artificial Analysis Intelligence Index, through a release or a price change.</subtitle>
   <entry>
+    <title>2026-09-21: MiMo-V2.6-Pro (new model, index 46.3)</title>
+    <link href="https://llm-frontier.catalystneuro.com/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-09-21-mimo-v2-6-pro.png" />
+    <id>https://llm-frontier.catalystneuro.com/advance/2026-09-21/mimo-v2-6-pro</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <summary>MiMo-V2.6-Pro: now the cheapest way to reach index 34.6 to 46.3 at $0.13 per task, taking it from GPT-6 Astra, Step 5 Preview, GLM 5.3 Flash, and GPT-5.6 Luna; Step 5 Preview and GLM 5.3 Flash left the frontier. Open weights.</summary>
+  </entry>
+  <entry>
     <title>2026-09-18: Step 5 Preview (new model, index 43.6)</title>
     <link href="https://llm-frontier.catalystneuro.com/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-09-18-step-5-preview.png" />
@@ -478,13 +486,5 @@
     <id>https://llm-frontier.catalystneuro.com/advance/2026-02-19/gemini-3-1-pro-preview</id>
     <updated>2026-02-19T00:00:00Z</updated>
     <summary>Gemini 3.1 Pro Preview: now the cheapest way to reach index 37.5 to 47.7 at $0.33 per task, taking it from Claude Sonnet 4.6. New cost record for index ≥ 40. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2026-02-17: Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort) (new model, index 48.4)</title>
-    <link href="https://llm-frontier.catalystneuro.com/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-02-17-claude-sonnet-4-6.png" />
-    <id>https://llm-frontier.catalystneuro.com/advance/2026-02-17/claude-sonnet-4-6-adaptive</id>
-    <updated>2026-02-17T00:00:00Z</updated>
-    <summary>Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort): pushed the intelligence ceiling from 37.5 to 48.4, at $1.22 per task. New cost record for index ≥ 40. Proprietary.</summary>
   </entry>
 </feed>
