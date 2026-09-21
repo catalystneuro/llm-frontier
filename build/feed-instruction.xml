@@ -8,6 +8,14 @@
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of IFBench, through a release or a price change.</subtitle>
   <entry>
+    <title>2026-09-11: gpt-oss-20b (high) (price change, IFBench 65.1%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/instruction/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/instruction/2026-09-11-gpt-oss-20b.png" />
+    <id>https://llm-frontier.catalystneuro.com/instruction/advance/2026-09-11/gpt-oss-20b</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <summary>gpt-oss-20b (high): price moved from $0.014 to $0.011 per task; now the cheapest way to reach IFBench 0.0% to 65.1%. Open weights.</summary>
+  </entry>
+  <entry>
     <title>2026-06-01: MiniMax-M3 (new model, IFBench 82.9%)</title>
     <link href="https://llm-frontier.catalystneuro.com/instruction/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/instruction/2026-06-01-minimax-m3.png" />
