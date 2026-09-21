@@ -59,7 +59,7 @@ SETTLE_DAYS = 7
 # measured for only a small fraction of models (LiveCodeBench, AIME) are left
 # out. The blurb is shown on the dashboard when the capability's tab is active.
 CAPABILITIES = [
-    dict(key="coding", url="https://artificialanalysis.ai/evaluations/terminalbench-v2-1", field="terminalbenchV21", label="Coding", metric="Terminal-Bench 2.1", percent=True,
+    dict(key="coding", url="https://artificialanalysis.ai/evaluations/terminalbench-v2-1", field="terminalBench21", label="Coding", metric="Terminal-Bench 2.1", percent=True,
          blurb="Completion rate on Terminal-Bench 2.1: real software engineering tasks run agentically in a terminal. The axis to watch when picking a model for a coding assistant or an autonomous software agent."),
     # agenticIndex was removed when AA recomposed the index (v4.3, September
     # 2026); AutomationBench-AA is its successor for tool use and multi-step
@@ -941,6 +941,14 @@ def check_live_set(live: dict, history: dict, eras: list, today: str) -> None:
     the updater will merge it."""
     if len(live) < 50:
         raise RuntimeError(f"only {len(live)} live models parsed; refusing to update")
+    # A capability that history has scores for but no live model reports means
+    # the source renamed or dropped its field; merging would erase the scores.
+    for cap in CAPABILITIES:
+        had = any(cap["key"] in (m.get("capabilities") or {}) for m in history["models"].values() if not m.get("retired"))
+        if had and not any(cap["key"] in (rec.get("capabilities") or {}) for rec in live.values()):
+            raise RuntimeError(
+                f"no live model reports {cap['metric']} (field {cap['field']!r}); "
+                f"the source may have renamed the field")
     recent_era = any(abs((dt.date.fromisoformat(today) - dt.date.fromisoformat(e["start"])).days) <= 7 for e in eras)
     if recent_era:
         return
