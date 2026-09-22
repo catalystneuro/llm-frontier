@@ -347,10 +347,10 @@ def draw_removed(ax, removed: set, state: dict, models: dict, xlo: float, xhi: f
         # Right of the dot is preferred: departed dots sit on the old frontier
         # to the right of the advance, so a label on the left would cross the
         # shaded push region or the new staircase. Near the right edge the
-        # label goes left instead. Slots step downwards, preferred side first,
-        # so the nearest free slot wins and the leader stays short.
+        # label goes left instead. Slots step downwards on the preferred side,
+        # so neighbouring labels stack into a column, and only then switch sides.
         sides = [True, False] if frac > 0.75 else [False, True]  # True: label sits left of the dot
-        slots = [(left, drop) for drop in (-14, -28, -42, -56, -70) for left in sides]
+        slots = [(left, drop) for left in sides for drop in (-14, -28, -42, -56, -70)]
         for left, drop in slots:
             ox = -12 if left else 12
             x0 = dx + ox * px - (w if left else 0)
