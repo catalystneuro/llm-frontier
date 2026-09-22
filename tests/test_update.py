@@ -243,6 +243,18 @@ def test_tier_records_track_the_running_minimum():
         ("2026-01-01", 1.0, "A"), ("2026-03-01", 0.5, "C")]
 
 
+def test_advance_lists_every_tier_it_sets_a_record_for():
+    # Gamma's 45 at 0.5 undercuts Alpha's >= 30 record and Beta's >= 40 one on
+    # the same day; the advance names both tiers, not just the last one.
+    models = {
+        "alpha": model("Alpha", "2026-01-01", 35.0, 1.0),
+        "beta": model("Beta", "2026-02-01", 45.0, 2.0),
+        "gamma": model("Gamma", "2026-03-01", 45.0, 0.5),
+    }
+    advances = frontier_advances(models, [], tier_records(models, [], tiers=[30, 40]))
+    assert {a["model"]: a["records"] for a in advances}["Gamma"] == [30, 40]
+
+
 def three_model_history():
     return {
         "alpha": model("Alpha", "2026-01-01", 40.0, 1.0),
@@ -384,6 +396,25 @@ def test_tier_records_reset_at_the_era_boundary():
     # and its higher new-suite cost is a fresh record, not compared to 0.10.
     assert [(r[0], r[1], r[2]) for r in recs] == [
         ("2026-01-01", 0.10, "Stale"), ("2026-09-05", 0.30, "Fresh")]
+
+
+def test_tier_records_reseed_when_the_era_settles():
+    # Six models get provisional scores on the boundary day and are revised
+    # together two days later (a mass move, so the era settles on the 7th).
+    # P's provisional 0.05 at index 45 was revised to 0.30 at index 35; without
+    # the reseed, that 0.05 would block every later >= 40 record.
+    models = {}
+    for i in range(6):
+        models[f"m{i}"] = model(f"M{i}", "2026-01-01", 45.0, 1.0,
+                                obs=[["2026-01-01", 1.0, 45.0], ["2026-09-05", 1.2, 44.0], ["2026-09-07", 1.5, 41.0]])
+    models["p"] = model("P", "2026-01-01", 45.0, 0.05,
+                        obs=[["2026-01-01", 0.08, 45.0], ["2026-09-05", 0.05, 45.0], ["2026-09-07", 0.30, 35.0]])
+    models["q"] = model("Q", "2026-09-21", 46.0, 0.13, obs=[["2026-09-21", 0.13, 46.0]])
+    recs = tier_records(models, [], tiers=[40], eras=ERAS)["40"]
+    new_era = [(r[0], r[2], r[4] if len(r) > 4 else None) for r in recs if r[0] >= "2026-09-05"]
+    assert new_era == [("2026-09-07", "M0", "measurements settled"), ("2026-09-21", "Q", None)]
+    # The provisional row from the 5th is gone; the old era is untouched.
+    assert [r[2] for r in recs if r[0] < "2026-09-05"] == ["P"]
 
 
 def test_stale_models_cannot_hold_new_era_records():

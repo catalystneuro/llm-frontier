@@ -348,21 +348,42 @@ def price_timeline(models: dict, events: list) -> list:
 
 def tier_records(models: dict, events: list, tiers: list = None, eras: list = None) -> dict:
     """Running cost minimums per tier. The minimum resets at each era boundary,
-    since neither the scores nor the measured costs are comparable across one."""
+    since neither the scores nor the measured costs are comparable across one.
+    It resets again on the day the era's measurements settle: the first days'
+    observations are provisional (v4.3 was first measured on September 5, 2026
+    and revised en masse on September 7), and a minimum set by a provisional
+    value that was then revised away would block every later record. That
+    reset keeps the models, re-seeding each tier from the settled values."""
     timeline = price_timeline(models, events)
     starts = [e["start"] for e in eras or []]
+    settled = settled_date(models, events, eras or []) if eras else ""
+    by_date = {}
+    for date, cost, slug, iq, note in timeline:
+        by_date.setdefault(date, []).append((cost, slug, iq, note))
     out = {}
     for t in TIERS if tiers is None else tiers:
         best = math.inf
         pending = list(starts)
+        state = {}
         recs = []
-        for date, cost, slug, iq, note in timeline:
+        for date in sorted(by_date):
             while pending and date >= pending[0]:
                 best = math.inf
+                state = {}
                 pending.pop(0)
-            if iq >= t and cost < best:
-                best = cost
-                recs.append([date, round(cost, 6), models[slug]["name"], iq] + ([note] if note else []))
+            for cost, slug, iq, note in by_date[date]:
+                state[slug] = (cost, iq)
+                if iq >= t and cost < best:
+                    best = cost
+                    recs.append([date, round(cost, 6), models[slug]["name"], iq] + ([note] if note else []))
+            if date == settled and date not in starts:
+                best = math.inf
+                era_start = max(d for d in starts if d <= date)
+                recs = [r for r in recs if r[0] < era_start]  # provisional rows go
+                holder = min(((c, s) for s, (c, iq) in state.items() if iq >= t), default=None)
+                if holder:
+                    best = holder[0]
+                    recs.append([date, round(best, 6), models[holder[1]]["name"], state[holder[1]][1], "measurements settled"])
         out[str(t)] = recs
     return out
 
@@ -423,7 +444,10 @@ def frontier_advances(models: dict, events: list, records: dict, eras: list = No
     """
     timeline = price_timeline(models, events)
     mass_days = set(mass_move_dates(models, events, eras))
-    record_keys = {(r[0], r[2]): t for t, recs in records.items() for r in recs}
+    record_keys = {}
+    for t, recs in records.items():
+        for r in recs:
+            record_keys.setdefault((r[0], r[2]), []).append(t)
     state = {}
     current = set()
     advances = []
@@ -484,7 +508,7 @@ def frontier_advances(models: dict, events: list, records: dict, eras: list = No
         for slug in sorted(entered, key=lambda s: -state[s][1]):
             cost, iq = state[slug]
             kind, prev_cost = changed[slug]
-            tiers = [t for (d, name), t in record_keys.items() if d == date and name == models[slug]["name"]]
+            tiers = record_keys.get((date, models[slug]["name"]), [])
             # index range this model now owns: from its index down to the next frontier model below it
             below = [state[o][1] for o in new_front if state[o][1] < iq]
             lower = max(below) if below else 0.0
