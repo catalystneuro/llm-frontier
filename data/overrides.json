@@ -4,5 +4,23 @@
    "value": true,
    "note": "Z.ai published the weights at https://huggingface.co/zai-org/GLM-5.3-Flash; Artificial Analysis still lists the model as proprietary."
   }
+ },
+ "release_date": {
+  "claude-opus-5-5-low": {
+   "value": "2026-09-22",
+   "note": "Anthropic released Claude Opus 5.5 on 2026-09-22; Artificial Analysis dates the effort variants 2026-09-17, five days before the model was available, while its Max Effort entry has the release day."
+  },
+  "claude-opus-5-5-medium": {
+   "value": "2026-09-22",
+   "note": "Anthropic released Claude Opus 5.5 on 2026-09-22; Artificial Analysis dates the effort variants 2026-09-17, five days before the model was available, while its Max Effort entry has the release day."
+  },
+  "claude-opus-5-5-high": {
+   "value": "2026-09-22",
+   "note": "Anthropic released Claude Opus 5.5 on 2026-09-22; Artificial Analysis dates the effort variants 2026-09-17, five days before the model was available, while its Max Effort entry has the release day."
+  },
+  "claude-opus-5-5-xhigh": {
+   "value": "2026-09-22",
+   "note": "Anthropic released Claude Opus 5.5 on 2026-09-22; Artificial Analysis dates the effort variants 2026-09-17, five days before the model was available, while its Max Effort entry has the release day."
+  }
  }
 }

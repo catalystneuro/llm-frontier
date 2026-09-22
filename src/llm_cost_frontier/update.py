@@ -216,11 +216,12 @@ def apply_overrides(models: dict, overrides: dict) -> None:
     Applied to the in-memory models when building the outputs, never to the
     stored history, which stays a faithful record of what the source reports.
     """
-    for slug, fix in (overrides.get("open_weights") or {}).items():
-        if slug in models:
-            models[slug]["open_weights"] = bool(fix["value"])
-        else:
-            print(f"warning: open_weights override for unknown slug {slug!r}")
+    for field, cast in (("open_weights", bool), ("release_date", str)):
+        for slug, fix in (overrides.get(field) or {}).items():
+            if slug in models:
+                models[slug][field] = cast(fix["value"])
+            else:
+                print(f"warning: {field} override for unknown slug {slug!r}")
 
 
 def add_months(d: dt.date, months: int) -> dt.date:
