@@ -318,8 +318,10 @@ def draw_highlights(ax, group: list, state: dict, xlo: float, xhi: float):
 
 def draw_removed(ax, removed: set, state: dict, models: dict, xlo: float, xhi: float):
     """Name the models this advance pushed off the frontier: one label per base
-    model, on its highest-scoring departed variant, placed below the dot where
-    the chart is empty of frontier lines."""
+    model, on its highest-scoring departed variant. Departed models cluster
+    along the old frontier, so each label takes the first slot around its dot
+    that does not overlap a dot or a label already placed, and a leader line
+    ties it back to its dot."""
     import math
 
     by_base = {}
@@ -327,19 +329,40 @@ def draw_removed(ax, removed: set, state: dict, models: dict, xlo: float, xhi: f
         b = split_variant(models[s]["name"])[0]
         if b not in by_base or state[s][1] > state[by_base[b]][1]:
             by_base[b] = s
-    # Departed models cluster along the old frontier at similar heights, so
-    # labels near each other in x are stepped further down to avoid colliding.
-    last_frac = None
-    drop = -14
+    fs = 10.5
+    px = ax.figure.dpi / 72  # points to pixels
+    placed = []  # occupied boxes in pixels: (x0, y0, x1, y1)
+    for s in by_base.values():  # keep labels off the departed dots themselves
+        dx, dy = ax.transData.transform(state[s])
+        placed.append((dx - 6 * px, dy - 6 * px, dx + 6 * px, dy + 6 * px))
+
+    def overlaps(box):
+        return any(box[0] < q[2] and q[0] < box[2] and box[1] < q[3] and q[1] < box[3] for q in placed)
+
     for b, s in sorted(by_base.items(), key=lambda kv: state[kv[1]][0]):
         cost, iq = state[s]
+        dx, dy = ax.transData.transform((cost, iq))
+        w, h = len(b) * fs * 0.58 * px, fs * 1.25 * px
         frac = (math.log10(cost) - math.log10(xlo)) / (math.log10(xhi) - math.log10(xlo))
-        drop = drop - 13 if last_frac is not None and frac - last_frac < 0.22 else -14
-        last_frac = frac
-        left = frac > 0.25
-        ax.annotate(b, xy=(cost, iq), xytext=(-12 if left else 12, drop),
-                    textcoords="offset points", ha="right" if left else "left",
-                    fontsize=10.5, color=C["ink2"], zorder=6)
+        # Right of the dot is preferred: departed dots sit on the old frontier
+        # to the right of the advance, so a label on the left would cross the
+        # shaded push region or the new staircase. Near the right edge the
+        # label goes left instead. Slots step downwards on the preferred side,
+        # so neighbouring labels stack into a column, and only then switch sides.
+        sides = [True, False] if frac > 0.75 else [False, True]  # True: label sits left of the dot
+        slots = [(left, drop) for left in sides for drop in (-14, -28, -42, -56, -70)]
+        for left, drop in slots:
+            ox = -12 if left else 12
+            x0 = dx + ox * px - (w if left else 0)
+            y0 = dy + drop * px - h
+            box = (x0, y0, x0 + w, y0 + h)
+            if not overlaps(box):
+                break
+        placed.append(box)
+        ax.annotate(b, xy=(cost, iq), xytext=(ox, drop),
+                    textcoords="offset points", ha="right" if left else "left", va="top",
+                    fontsize=fs, color=C["ink2"], zorder=6,
+                    arrowprops=dict(arrowstyle="-", color=C["muted"], linewidth=0.8, shrinkA=4, shrinkB=3))
 
 
 def add_legend(ax, price_change: bool, removed: bool = False):
