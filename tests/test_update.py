@@ -654,6 +654,15 @@ def test_capability_feed_speaks_the_metric():
     assert f"New cost record for {cap['metric']} \u2265 80%" in t
 
 
+def test_release_date_override_moves_the_advance():
+    from llm_cost_frontier.update import apply_overrides
+    models = {"m": model("M", "2026-09-17", 50.0, 1.0, obs=[["2026-09-22", 1.0, 50.0]])}
+    apply_overrides(models, {"release_date": {"m": {"value": "2026-09-22", "note": "listed early"}}})
+    assert models["m"]["release_date"] == "2026-09-22"
+    advances = frontier_advances(models, [], tier_records(models, []))
+    assert [a["date"] for a in advances] == ["2026-09-22"]
+
+
 def test_check_live_set_guards():
     from llm_cost_frontier.update import check_live_set
     history = {"models": {f"m{i}": model(f"M{i}", "2026-01-01", 50.0, 1.0) for i in range(100)}}
