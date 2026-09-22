@@ -4,7 +4,7 @@
   <link href="https://llm-frontier.catalystneuro.com/science/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-science.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-science.xml</id>
-  <updated>2026-09-21T06:00:00Z</updated>
+  <updated>2026-09-22T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of GPQA Diamond, through a release or a price change.</subtitle>
   <entry>
@@ -117,7 +117,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/science/2026-07-30-gpt-5-6-luna.png" />
     <id>https://llm-frontier.catalystneuro.com/science/advance/2026-07-30/gpt-5-6-luna-low</id>
     <updated>2026-07-30T00:00:00Z</updated>
-    <summary>GPT-5.6 Luna (low): price moved from $0.044 to $0.0088 per task; now the cheapest way to reach GPQA Diamond 0.0% to 83.5%, taking it from MiMo-V2.5. New cost record for GPQA Diamond ≥ 80%. Proprietary.</summary>
+    <summary>GPT-5.6 Luna (low): price moved from $0.044 to $0.0088 per task; now the cheapest way to reach GPQA Diamond 0.0% to 83.5%, taking it from MiMo-V2.5. New cost record for GPQA Diamond ≥ 60%, GPQA Diamond ≥ 70%, and GPQA Diamond ≥ 80%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-07-06: Hy3 (new model, GPQA Diamond 89.7%)</title>
@@ -165,7 +165,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/science/2026-04-22-mimo-v2-5.png" />
     <id>https://llm-frontier.catalystneuro.com/science/advance/2026-04-22/mimo-v2-5-0424</id>
     <updated>2026-04-22T00:00:00Z</updated>
-    <summary>MiMo-V2.5: now the cheapest way to reach GPQA Diamond 0.0% to 84.9% at $0.010 per task, taking it from MiniMax-M2.7, GPT-5 mini, NVIDIA Nemotron 3 Nano 30B A3B, gpt-oss-120b, and Llama 4 Scout; GPT-5 mini, NVIDIA Nemotron 3 Nano 30B A3B, gpt-oss-120b, and Llama 4 Scout left the frontier. New cost record for GPQA Diamond ≥ 80%. Open weights.</summary>
+    <summary>MiMo-V2.5: now the cheapest way to reach GPQA Diamond 0.0% to 84.9% at $0.010 per task, taking it from MiniMax-M2.7, GPT-5 mini, NVIDIA Nemotron 3 Nano 30B A3B, gpt-oss-120b, and Llama 4 Scout; GPT-5 mini, NVIDIA Nemotron 3 Nano 30B A3B, gpt-oss-120b, and Llama 4 Scout left the frontier. New cost record for GPQA Diamond ≥ 60%, GPQA Diamond ≥ 70%, and GPQA Diamond ≥ 80%. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-03-18: MiniMax-M2.7 (new model, GPQA Diamond 87.4%)</title>
@@ -229,7 +229,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/science/2025-08-07-gpt-5-mini.png" />
     <id>https://llm-frontier.catalystneuro.com/science/advance/2025-08-07/gpt-5-mini</id>
     <updated>2025-08-07T00:00:00Z</updated>
-    <summary>GPT-5 mini (high): now the cheapest way to reach GPQA Diamond 68.8% to 82.8% at $0.036 per task, taking it from Gemini 2.5 Pro and Qwen3 235B A22B 2507; Qwen3 235B A22B 2507 left the frontier. New cost record for GPQA Diamond ≥ 80%. Proprietary.</summary>
+    <summary>GPT-5 mini (high): now the cheapest way to reach GPQA Diamond 68.8% to 82.8% at $0.036 per task, taking it from Gemini 2.5 Pro and Qwen3 235B A22B 2507; Qwen3 235B A22B 2507 left the frontier. New cost record for GPQA Diamond ≥ 70% and GPQA Diamond ≥ 80%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2025-08-05: gpt-oss-20b (high) (new model, GPQA Diamond 68.8%)</title>
@@ -261,7 +261,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/science/2025-06-05-gemini-2-5-pro.png" />
     <id>https://llm-frontier.catalystneuro.com/science/advance/2025-06-05/gemini-2-5-pro</id>
     <updated>2025-06-05T00:00:00Z</updated>
-    <summary>Gemini 2.5 Pro: pushed the GPQA Diamond ceiling from 70.8% to 84.4%, at $0.22 per task, taking it from DeepSeek R1, which left the frontier. New cost record for GPQA Diamond ≥ 80%. Proprietary.</summary>
+    <summary>Gemini 2.5 Pro: pushed the GPQA Diamond ceiling from 70.8% to 84.4%, at $0.22 per task, taking it from DeepSeek R1, which left the frontier. New cost record for GPQA Diamond ≥ 70% and GPQA Diamond ≥ 80%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2025-04-05: Llama 4 Maverick (new model, GPQA Diamond 67.1%)</title>
@@ -293,7 +293,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/science/2025-01-20-deepseek-r1.png" />
     <id>https://llm-frontier.catalystneuro.com/science/advance/2025-01-20/deepseek-r1-0120</id>
     <updated>2025-01-20T00:00:00Z</updated>
-    <summary>DeepSeek R1 (Jan '25): pushed the GPQA Diamond ceiling from 55.7% to 70.8%, at $0.32 per task. New cost record for GPQA Diamond ≥ 70%. Open weights.</summary>
+    <summary>DeepSeek R1 (Jan '25): pushed the GPQA Diamond ceiling from 55.7% to 70.8%, at $0.32 per task. New cost record for GPQA Diamond ≥ 60% and GPQA Diamond ≥ 70%. Open weights.</summary>
   </entry>
   <entry>
     <title>2024-12-26: DeepSeek V3 (Dec '24) (new model, GPQA Diamond 55.7%)</title>

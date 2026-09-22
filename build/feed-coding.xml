@@ -4,7 +4,7 @@
   <link href="https://llm-frontier.catalystneuro.com/coding/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-coding.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-coding.xml</id>
-  <updated>2026-09-21T06:00:00Z</updated>
+  <updated>2026-09-22T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of Terminal-Bench 2.1, through a release or a price change.</subtitle>
   <entry>
@@ -381,7 +381,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/coding/2026-02-19-gemini-3-1-pro-preview.png" />
     <id>https://llm-frontier.catalystneuro.com/coding/advance/2026-02-19/gemini-3-1-pro-preview</id>
     <updated>2026-02-19T00:00:00Z</updated>
-    <summary>Gemini 3.1 Pro Preview: pushed the Terminal-Bench 2.1 ceiling from 71.2% to 73.8%, at $0.33 per task, taking it from Claude Sonnet 4.6 and Claude 4.5 Sonnet, both of which left the frontier. New cost record for Terminal-Bench 2.1 ≥ 70%. Proprietary.</summary>
+    <summary>Gemini 3.1 Pro Preview: pushed the Terminal-Bench 2.1 ceiling from 71.2% to 73.8%, at $0.33 per task, taking it from Claude Sonnet 4.6 and Claude 4.5 Sonnet, both of which left the frontier. New cost record for Terminal-Bench 2.1 ≥ 60% and Terminal-Bench 2.1 ≥ 70%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-02-17: Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort) (new model, Terminal-Bench 2.1 71.2%)</title>
@@ -389,7 +389,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/coding/2026-02-17-claude-sonnet-4-6.png" />
     <id>https://llm-frontier.catalystneuro.com/coding/advance/2026-02-17/claude-sonnet-4-6-adaptive</id>
     <updated>2026-02-17T00:00:00Z</updated>
-    <summary>Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort): pushed the Terminal-Bench 2.1 ceiling from 55.8% to 71.2%, at $1.22 per task. New cost record for Terminal-Bench 2.1 ≥ 70%. Proprietary.</summary>
+    <summary>Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort): pushed the Terminal-Bench 2.1 ceiling from 55.8% to 71.2%, at $1.22 per task. New cost record for Terminal-Bench 2.1 ≥ 60% and Terminal-Bench 2.1 ≥ 70%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-01-27: Kimi K2.5 (Reasoning) (new model, Terminal-Bench 2.1 45.7%)</title>

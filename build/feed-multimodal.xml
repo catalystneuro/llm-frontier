@@ -4,7 +4,7 @@
   <link href="https://llm-frontier.catalystneuro.com/multimodal/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-multimodal.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-multimodal.xml</id>
-  <updated>2026-09-21T06:00:00Z</updated>
+  <updated>2026-09-22T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of MMMU-Pro, through a release or a price change.</subtitle>
   <entry>
@@ -93,7 +93,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-07-30-gpt-5-6-luna.png" />
     <id>https://llm-frontier.catalystneuro.com/multimodal/advance/2026-07-30/gpt-5-6-luna-low</id>
     <updated>2026-07-30T00:00:00Z</updated>
-    <summary>GPT-5.6 Luna (low): price moved from $0.044 to $0.0088 per task; now the cheapest way to reach MMMU-Pro 0.0% to 74.0%, taking it from MiMo-V2.5. New cost record for MMMU-Pro ≥ 70%. Proprietary.</summary>
+    <summary>GPT-5.6 Luna (low): price moved from $0.044 to $0.0088 per task; now the cheapest way to reach MMMU-Pro 0.0% to 74.0%, taking it from MiMo-V2.5. New cost record for MMMU-Pro ≥ 50%, MMMU-Pro ≥ 60%, and MMMU-Pro ≥ 70%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-07-24: Claude Opus 5 (Adaptive Reasoning, Max Effort) (new model, MMMU-Pro 84.7%)</title>
@@ -189,7 +189,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-04-22-mimo-v2-5.png" />
     <id>https://llm-frontier.catalystneuro.com/multimodal/advance/2026-04-22/mimo-v2-5-0424</id>
     <updated>2026-04-22T00:00:00Z</updated>
-    <summary>MiMo-V2.5: now the cheapest way to reach MMMU-Pro 0.0% to 75.4% at $0.010 per task, taking it from Gemini 3.1 Flash-Lite, GPT-5 mini, Llama 4 Maverick, and Llama 4 Scout; GPT-5 mini, Llama 4 Maverick, and Llama 4 Scout left the frontier. New cost record for MMMU-Pro ≥ 70%. Open weights.</summary>
+    <summary>MiMo-V2.5: now the cheapest way to reach MMMU-Pro 0.0% to 75.4% at $0.010 per task, taking it from Gemini 3.1 Flash-Lite, GPT-5 mini, Llama 4 Maverick, and Llama 4 Scout; GPT-5 mini, Llama 4 Maverick, and Llama 4 Scout left the frontier. New cost record for MMMU-Pro ≥ 50%, MMMU-Pro ≥ 60%, and MMMU-Pro ≥ 70%. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-03-03: Gemini 3.1 Flash-Lite (new model, MMMU-Pro 75.5%)</title>

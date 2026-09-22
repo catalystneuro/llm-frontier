@@ -4,9 +4,17 @@
   <link href="https://llm-frontier.catalystneuro.com/knowledge/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-knowledge.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-knowledge.xml</id>
-  <updated>2026-09-21T06:00:00Z</updated>
+  <updated>2026-09-22T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AA Omniscience, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-09-21: MiMo-V2.6-Pro (new model, AA Omniscience 8.4)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-21-mimo-v2-6-pro.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-21/mimo-v2-6-pro</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <summary>MiMo-V2.6-Pro: now the cheapest way to reach AA Omniscience 5.2 to 8.4 at $0.13 per task, taking it from Grok 4.3. Open weights.</summary>
+  </entry>
   <entry>
     <title>2026-09-03: GPT-6 Astra (high) (new model, AA Omniscience 43.7)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
@@ -221,7 +229,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-02-19-gemini-3-1-pro-preview.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-02-19/gemini-3-1-pro-preview</id>
     <updated>2026-02-19T00:00:00Z</updated>
-    <summary>Gemini 3.1 Pro Preview: pushed the AA Omniscience ceiling from 12.2 to 31.9, at $0.33 per task, taking it from Claude Sonnet 4.6, which left the frontier. New cost record for AA Omniscience ≥ 30. Proprietary.</summary>
+    <summary>Gemini 3.1 Pro Preview: pushed the AA Omniscience ceiling from 12.2 to 31.9, at $0.33 per task, taking it from Claude Sonnet 4.6, which left the frontier. New cost record for AA Omniscience ≥ 10, AA Omniscience ≥ 20, and AA Omniscience ≥ 30. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-02-17: Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort) (new model, AA Omniscience 12.2)</title>

@@ -4,9 +4,17 @@
   <link href="https://llm-frontier.catalystneuro.com/longcontext/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-longcontext.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-longcontext.xml</id>
-  <updated>2026-09-21T06:00:00Z</updated>
+  <updated>2026-09-22T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AA-LCR, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-09-21: MiMo-V2.6-Pro (new model, AA-LCR 86.3%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/longcontext/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/longcontext/2026-09-21-mimo-v2-6-pro.png" />
+    <id>https://llm-frontier.catalystneuro.com/longcontext/advance/2026-09-21/mimo-v2-6-pro</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <summary>MiMo-V2.6-Pro: now the cheapest way to reach AA-LCR 83.3% to 86.3% at $0.13 per task, taking it from Step 5 Preview, DeepSeek V4.1 Flash, and GPT-5.6 Luna; DeepSeek V4.1 Flash left the frontier. Open weights.</summary>
+  </entry>
   <entry>
     <title>2026-09-18: Step 5 Preview (new model, AA-LCR 88.3%)</title>
     <link href="https://llm-frontier.catalystneuro.com/longcontext/#advances" />
@@ -85,7 +93,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/longcontext/2026-07-30-gpt-5-6-luna.png" />
     <id>https://llm-frontier.catalystneuro.com/longcontext/advance/2026-07-30/gpt-5-6-luna-low</id>
     <updated>2026-07-30T00:00:00Z</updated>
-    <summary>GPT-5.6 Luna (low): price moved from $0.044 to $0.0088 per task; now the cheapest way to reach AA-LCR 0.0% to 70.0%, taking it from MiMo-V2.5. New cost record for AA-LCR ≥ 70%. Proprietary.</summary>
+    <summary>GPT-5.6 Luna (low): price moved from $0.044 to $0.0088 per task; now the cheapest way to reach AA-LCR 0.0% to 70.0%, taking it from MiMo-V2.5. New cost record for AA-LCR ≥ 50%, AA-LCR ≥ 60%, and AA-LCR ≥ 70%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-07-16: Kimi K3 (max) (new model, AA-LCR 88.7%)</title>
@@ -149,7 +157,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/longcontext/2026-04-22-mimo-v2-5.png" />
     <id>https://llm-frontier.catalystneuro.com/longcontext/advance/2026-04-22/mimo-v2-5-0424</id>
     <updated>2026-04-22T00:00:00Z</updated>
-    <summary>MiMo-V2.5: now the cheapest way to reach AA-LCR 0.0% to 73.0% at $0.010 per task, taking it from Gemini 3.1 Flash-Lite, GPT-5 mini, Llama 4 Maverick, gpt-oss-120b, and Llama 4 Scout; GPT-5 mini, Llama 4 Maverick, gpt-oss-120b, and Llama 4 Scout left the frontier. New cost record for AA-LCR ≥ 70%. Open weights.</summary>
+    <summary>MiMo-V2.5: now the cheapest way to reach AA-LCR 0.0% to 73.0% at $0.010 per task, taking it from Gemini 3.1 Flash-Lite, GPT-5 mini, Llama 4 Maverick, gpt-oss-120b, and Llama 4 Scout; GPT-5 mini, Llama 4 Maverick, gpt-oss-120b, and Llama 4 Scout left the frontier. New cost record for AA-LCR ≥ 50%, AA-LCR ≥ 60%, and AA-LCR ≥ 70%. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-03-18: MiniMax-M2.7 (new model, AA-LCR 78.3%)</title>
@@ -245,7 +253,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/longcontext/2025-08-07-gpt-5-mini.png" />
     <id>https://llm-frontier.catalystneuro.com/longcontext/advance/2025-08-07/gpt-5-mini</id>
     <updated>2025-08-07T00:00:00Z</updated>
-    <summary>GPT-5 mini (high): pushed the AA-LCR ceiling from 72.0% to 72.3%, at $0.036 per task, taking it from Qwen3 235B A22B 2507, which left the frontier. New cost record for AA-LCR ≥ 70%. Proprietary.</summary>
+    <summary>GPT-5 mini (high): pushed the AA-LCR ceiling from 72.0% to 72.3%, at $0.036 per task, taking it from Qwen3 235B A22B 2507, which left the frontier. New cost record for AA-LCR ≥ 60% and AA-LCR ≥ 70%. Proprietary.</summary>
   </entry>
   <entry>
     <title>2025-08-05: gpt-oss-120b (low) (new model, AA-LCR 46.0%)</title>
@@ -261,7 +269,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/longcontext/2025-07-25-qwen3-235b-a22b-2507.png" />
     <id>https://llm-frontier.catalystneuro.com/longcontext/advance/2025-07-25/qwen3-235b-a22b-instruct-2507-reasoning</id>
     <updated>2025-07-25T00:00:00Z</updated>
-    <summary>Qwen3 235B A22B 2507 (Reasoning): pushed the AA-LCR ceiling from 69.0% to 72.0%, at $0.064 per task, taking it from Gemini 2.5 Pro, which left the frontier. New cost record for AA-LCR ≥ 70%. Open weights.</summary>
+    <summary>Qwen3 235B A22B 2507 (Reasoning): pushed the AA-LCR ceiling from 69.0% to 72.0%, at $0.064 per task, taking it from Gemini 2.5 Pro, which left the frontier. New cost record for AA-LCR ≥ 60% and AA-LCR ≥ 70%. Open weights.</summary>
   </entry>
   <entry>
     <title>2025-06-05: Gemini 2.5 Pro (new model, AA-LCR 69.0%)</title>
