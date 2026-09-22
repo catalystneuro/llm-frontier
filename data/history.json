@@ -744,9 +744,9 @@
    "open_weights": false,
    "release_date": "2026-09-17",
    "retired": false,
-   "speed_tps": null,
-   "time_per_task": null,
-   "ttft": null
+   "speed_tps": 90.7,
+   "time_per_task": 244.35,
+   "ttft": 12.49
   },
   "claude-opus-5-5-low": {
    "capabilities": {
@@ -772,9 +772,9 @@
    "open_weights": false,
    "release_date": "2026-09-17",
    "retired": false,
-   "speed_tps": null,
-   "time_per_task": null,
-   "ttft": null
+   "speed_tps": 93.9,
+   "time_per_task": 69.76,
+   "ttft": 4.79
   },
   "claude-opus-5-5-medium": {
    "capabilities": {
@@ -800,9 +800,9 @@
    "open_weights": false,
    "release_date": "2026-09-17",
    "retired": false,
-   "speed_tps": null,
-   "time_per_task": null,
-   "ttft": null
+   "speed_tps": 76.3,
+   "time_per_task": 192.4,
+   "ttft": 22.17
   },
   "claude-opus-5-5-xhigh": {
    "capabilities": {
@@ -828,9 +828,9 @@
    "open_weights": false,
    "release_date": "2026-09-17",
    "retired": false,
-   "speed_tps": null,
-   "time_per_task": null,
-   "ttft": null
+   "speed_tps": 72.5,
+   "time_per_task": 576.74,
+   "ttft": 165.2
   },
   "claude-opus-5-high": {
    "capabilities": {
@@ -5657,6 +5657,342 @@
    "speed_tps": 54.5,
    "time_per_task": 308.67,
    "ttft": 188.2
+  },
+  "gpt-6-luna": {
+   "capabilities": {
+    "agentic": 53.2,
+    "knowledge": 0.7,
+    "knowledgework": 43.4,
+    "longcontext": 83.3,
+    "multimodal": 75.5
+   },
+   "cost_per_task": 0.068095,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 37.3,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Luna (max)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.068095,
+     37.3
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-luna-high": {
+   "capabilities": {
+    "agentic": 47.8,
+    "knowledge": -5.5,
+    "knowledgework": 39.5,
+    "longcontext": 79.3,
+    "multimodal": 74.4
+   },
+   "cost_per_task": 0.02862,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 32.1,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Luna (high)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.02862,
+     32.1
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-luna-low": {
+   "capabilities": {
+    "agentic": 12.0,
+    "knowledge": -9.2,
+    "knowledgework": 24.6,
+    "longcontext": 74.0,
+    "multimodal": 70.3
+   },
+   "cost_per_task": 0.004484,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 20.9,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Luna (low)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.004484,
+     20.9
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-luna-medium": {
+   "capabilities": {
+    "agentic": 40.5,
+    "knowledge": -5.0,
+    "knowledgework": 35.9,
+    "longcontext": 78.3,
+    "multimodal": 73.0
+   },
+   "cost_per_task": 0.017254,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 29.5,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Luna (medium)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.017254,
+     29.5
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-luna-non-reasoning": {
+   "capabilities": {
+    "agentic": 9.1,
+    "knowledge": -21.9,
+    "knowledgework": 26.7,
+    "longcontext": 39.7,
+    "multimodal": 53.2
+   },
+   "cost_per_task": 0.011124,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 18.3,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Luna (Non-reasoning)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.011124,
+     18.3
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-luna-xhigh": {
+   "capabilities": {
+    "agentic": 47.8,
+    "knowledge": -1.8,
+    "knowledgework": 39.8,
+    "longcontext": 80.0,
+    "multimodal": 75.3
+   },
+   "cost_per_task": 0.041709,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 33.9,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Luna (xhigh)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.041709,
+     33.9
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-sol": {
+   "capabilities": {
+    "agentic": 61.6,
+    "knowledge": 27.1,
+    "knowledgework": 49.3,
+    "longcontext": 83.7,
+    "multimodal": 83.3
+   },
+   "cost_per_task": 1.056424,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 47.5,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Sol (max)",
+   "observations": [
+    [
+     "2026-09-22",
+     1.056424,
+     47.5
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-sol-high": {
+   "capabilities": {
+    "agentic": 60.1,
+    "knowledge": 26.8,
+    "knowledgework": 43.8,
+    "longcontext": 83.7,
+    "multimodal": 81.2
+   },
+   "cost_per_task": 0.374633,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 42.8,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Sol (high)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.374633,
+     42.8
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-sol-low": {
+   "capabilities": {
+    "agentic": 53.9,
+    "knowledge": 26.5,
+    "knowledgework": 33.8,
+    "longcontext": 79.3,
+    "multimodal": 78.8
+   },
+   "cost_per_task": 0.132241,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 33.9,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Sol (low)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.132241,
+     33.9
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-sol-medium": {
+   "capabilities": {
+    "agentic": 58.0,
+    "knowledge": 27.0,
+    "knowledgework": 41.0,
+    "longcontext": 82.3,
+    "multimodal": 80.6
+   },
+   "cost_per_task": 0.248202,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 39.8,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Sol (medium)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.248202,
+     39.8
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-sol-non-reasoning": {
+   "capabilities": {
+    "agentic": 34.2,
+    "knowledge": -0.8,
+    "knowledgework": 36.3,
+    "longcontext": 64.0,
+    "multimodal": 68.2
+   },
+   "cost_per_task": 0.331445,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 28.1,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Sol (Non-reasoning)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.331445,
+     28.1
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "gpt-6-sol-xhigh": {
+   "capabilities": {
+    "agentic": 61.7,
+    "knowledge": 26.7,
+    "knowledgework": 46.8,
+    "longcontext": 81.3,
+    "multimodal": 82.4
+   },
+   "cost_per_task": 0.531896,
+   "creator": "OpenAI",
+   "first_seen": "2026-09-22",
+   "intelligence_index": 44.1,
+   "last_seen": "2026-09-22",
+   "name": "GPT-6 Sol (xhigh)",
+   "observations": [
+    [
+     "2026-09-22",
+     0.531896,
+     44.1
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-09-22",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
   },
   "gpt-oss-120b": {
    "capabilities": {
