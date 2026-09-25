@@ -3223,7 +3223,7 @@
     "knowledgework": 40.2,
     "longcontext": 72.7
    },
-   "cost_per_task": 3.663421,
+   "cost_per_task": 0.852217,
    "creator": "Z AI",
    "first_seen": "2026-09-24",
    "intelligence_index": 34.3,
@@ -3235,6 +3235,12 @@
      3.663421,
      34.3,
      404.33
+    ],
+    [
+     "2026-09-25",
+     0.852217,
+     34.3,
+     375.9
     ]
    ],
    "open_weights": true,
