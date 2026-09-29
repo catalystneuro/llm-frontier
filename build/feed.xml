@@ -8,6 +8,46 @@
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of the Artificial Analysis Intelligence Index, through a release or a price change.</subtitle>
   <entry>
+    <title>2026-09-29: GPT-6.1 Sol (max) (new model, index 51.8)</title>
+    <link href="https://llm-frontier.catalystneuro.com/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-09-29-gpt-6-1-sol.png" />
+    <id>https://llm-frontier.catalystneuro.com/advance/2026-09-29/gpt-6-1-sol</id>
+    <updated>2026-09-29T00:00:00Z</updated>
+    <summary>GPT-6.1 Sol (max): now the cheapest way to reach index 51.0 to 51.8 at $0.72 per task, taking it from Claude Opus 5.5. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-09-29: GPT-6.1 Sol (xhigh) (new model, index 51.0)</title>
+    <link href="https://llm-frontier.catalystneuro.com/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-09-29-gpt-6-1-sol.png" />
+    <id>https://llm-frontier.catalystneuro.com/advance/2026-09-29/gpt-6-1-sol-xhigh</id>
+    <updated>2026-09-29T00:00:00Z</updated>
+    <summary>GPT-6.1 Sol (xhigh): now the cheapest way to reach index 50.2 to 51.0 at $0.39 per task, taking it from Claude Opus 5.5. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-09-29: GPT-6.1 Sol (high) (new model, index 50.2)</title>
+    <link href="https://llm-frontier.catalystneuro.com/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-09-29-gpt-6-1-sol.png" />
+    <id>https://llm-frontier.catalystneuro.com/advance/2026-09-29/gpt-6-1-sol-high</id>
+    <updated>2026-09-29T00:00:00Z</updated>
+    <summary>GPT-6.1 Sol (high): now the cheapest way to reach index 47.8 to 50.2 at $0.32 per task, taking it from Claude Opus 5.5. New cost record for index ≥ 50. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-09-29: GPT-6.1 Sol (medium) (new model, index 47.8)</title>
+    <link href="https://llm-frontier.catalystneuro.com/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-09-29-gpt-6-1-sol.png" />
+    <id>https://llm-frontier.catalystneuro.com/advance/2026-09-29/gpt-6-1-sol-medium</id>
+    <updated>2026-09-29T00:00:00Z</updated>
+    <summary>GPT-6.1 Sol (medium): now the cheapest way to reach index 46.3 to 47.8 at $0.21 per task, taking it from Claude Opus 5.5 and GPT-6 Sol; GPT-6 Sol left the frontier. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-09-29: GPT-6.1 Sol (low) (new model, index 42.1)</title>
+    <link href="https://llm-frontier.catalystneuro.com/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-09-29-gpt-6-1-sol.png" />
+    <id>https://llm-frontier.catalystneuro.com/advance/2026-09-29/gpt-6-1-sol-low</id>
+    <updated>2026-09-29T00:00:00Z</updated>
+    <summary>GPT-6.1 Sol (low): now the cheapest way to reach index 37.9 to 42.1 at $0.13 per task, taking it from MiMo-V2.6-Pro. Proprietary.</summary>
+  </entry>
+  <entry>
     <title>2026-09-22: Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback) (new model, index 57.6)</title>
     <link href="https://llm-frontier.catalystneuro.com/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-09-22-claude-opus-5-5.png" />
@@ -446,45 +486,5 @@
     <id>https://llm-frontier.catalystneuro.com/advance/2026-05-19/gemini-3-5-flash</id>
     <updated>2026-05-19T00:00:00Z</updated>
     <summary>Gemini 3.5 Flash (high): now the cheapest way to reach index 51.4 to 52.0 at $0.69 per task, taking it from GPT-5.5. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2026-04-24: DeepSeek V4 Pro 0424 (Reasoning, Max Effort) (new model, index 45.3)</title>
-    <link href="https://llm-frontier.catalystneuro.com/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-04-24-deepseek-v4-pro-0424.png" />
-    <id>https://llm-frontier.catalystneuro.com/advance/2026-04-24/deepseek-v4-pro-0424</id>
-    <updated>2026-04-24T00:00:00Z</updated>
-    <summary>DeepSeek V4 Pro 0424 (Reasoning, Max Effort): now the cheapest way to reach index 43.7 to 45.3 at $0.047 per task, taking it from Gemini 3.1 Pro Preview and GPT-5.5. Open weights.</summary>
-  </entry>
-  <entry>
-    <title>2026-04-24: DeepSeek V4 Pro (Reasoning, High Effort) (new model, index 43.7)</title>
-    <link href="https://llm-frontier.catalystneuro.com/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-04-24-deepseek-v4-pro.png" />
-    <id>https://llm-frontier.catalystneuro.com/advance/2026-04-24/deepseek-v4-pro-0424-high</id>
-    <updated>2026-04-24T00:00:00Z</updated>
-    <summary>DeepSeek V4 Pro (Reasoning, High Effort): now the cheapest way to reach index 42.9 to 43.7 at $0.043 per task, taking it from GPT-5.5. Open weights.</summary>
-  </entry>
-  <entry>
-    <title>2026-04-23: GPT-5.5 (xhigh) (new model, index 56.3)</title>
-    <link href="https://llm-frontier.catalystneuro.com/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-04-23-gpt-5-5.png" />
-    <id>https://llm-frontier.catalystneuro.com/advance/2026-04-23/gpt-5-5</id>
-    <updated>2026-04-23T00:00:00Z</updated>
-    <summary>GPT-5.5 (xhigh): pushed the intelligence ceiling from 55.0 to 56.3, at $1.17 per task, taking it from Claude Opus 4.7, which left the frontier. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2026-04-23: GPT-5.5 (high) (new model, index 54.7)</title>
-    <link href="https://llm-frontier.catalystneuro.com/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-04-23-gpt-5-5.png" />
-    <id>https://llm-frontier.catalystneuro.com/advance/2026-04-23/gpt-5-5-high</id>
-    <updated>2026-04-23T00:00:00Z</updated>
-    <summary>GPT-5.5 (high): now the cheapest way to reach index 51.4 to 54.7 at $0.80 per task, taking it from Claude Opus 4.7 and GPT-5.4; GPT-5.4 left the frontier. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2026-04-23: GPT-5.5 (medium) (new model, index 51.4)</title>
-    <link href="https://llm-frontier.catalystneuro.com/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-04-23-gpt-5-5.png" />
-    <id>https://llm-frontier.catalystneuro.com/advance/2026-04-23/gpt-5-5-medium</id>
-    <updated>2026-04-23T00:00:00Z</updated>
-    <summary>GPT-5.5 (medium): now the cheapest way to reach index 47.7 to 51.4 at $0.50 per task, taking it from GPT-5.4. New cost record for index ≥ 50. Proprietary.</summary>
   </entry>
 </feed>
