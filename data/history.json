@@ -42,7 +42,7 @@
    "creator": "Apodex",
    "first_seen": "2026-08-31",
    "intelligence_index": 26.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Apodex 1.1",
    "observations": [
     [
@@ -81,7 +81,7 @@
    "creator": "Celeris",
    "first_seen": "2026-08-19",
    "intelligence_index": 6.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Celeris-1",
    "observations": [
     [
@@ -117,7 +117,7 @@
     ]
    ],
    "time_per_task": 3.16,
-   "ttft": 0.57
+   "ttft": 0.56
   },
   "claude-4-5-haiku-reasoning": {
    "capabilities": {
@@ -134,7 +134,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 16.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude 4.5 Haiku (Reasoning)",
    "observations": [
     [
@@ -180,7 +180,7 @@
    "open_weights": false,
    "release_date": "2025-10-15",
    "retired": false,
-   "speed_tps": 87.7,
+   "speed_tps": 89.3,
    "time_history": [
     [
      "2026-07-07",
@@ -219,8 +219,8 @@
      210.04
     ]
    ],
-   "time_per_task": 175.97,
-   "ttft": 15.75
+   "time_per_task": 167.98,
+   "ttft": 14.79
   },
   "claude-4-5-sonnet-thinking": {
    "capabilities": {
@@ -237,7 +237,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 20.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude 4.5 Sonnet (Reasoning)",
    "observations": [
     [
@@ -265,7 +265,7 @@
    "open_weights": false,
    "release_date": "2025-09-29",
    "retired": false,
-   "speed_tps": 39.7,
+   "speed_tps": 40.0,
    "time_history": [
     [
      "2026-07-07",
@@ -276,7 +276,7 @@
      325.29
     ]
    ],
-   "time_per_task": 355.75,
+   "time_per_task": 350.6,
    "ttft": 13.26
   },
   "claude-fable-5": {
@@ -293,7 +293,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 49.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Fable 5 (Adaptive Reasoning, Max Effort, Opus 4.8 Fallback)",
    "observations": [
     [
@@ -332,7 +332,7 @@
      346.08
     ]
    ],
-   "time_per_task": 634.06,
+   "time_per_task": 627.75,
    "ttft": 91.5
   },
   "claude-fable-5-1": {
@@ -348,7 +348,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-01",
    "intelligence_index": 53.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Fable 5.1 (Adaptive Reasoning, Max Effort, Default Fallback)",
    "observations": [
     [
@@ -370,14 +370,14 @@
    "open_weights": false,
    "release_date": "2026-09-01",
    "retired": false,
-   "speed_tps": 67.9,
+   "speed_tps": 69.3,
    "time_history": [
     [
      "2026-09-02",
      441.35
     ]
    ],
-   "time_per_task": 734.68,
+   "time_per_task": 722.62,
    "ttft": 276.36
   },
   "claude-fable-5-1-high": {
@@ -393,7 +393,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-01",
    "intelligence_index": 51.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Fable 5.1 (Adaptive Reasoning, High Effort, Default Fallback)",
    "observations": [
     [
@@ -423,7 +423,7 @@
     ]
    ],
    "time_per_task": 449.72,
-   "ttft": 26.17
+   "ttft": 27.4
   },
   "claude-fable-5-1-low": {
    "capabilities": {
@@ -438,7 +438,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-01",
    "intelligence_index": 46.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Fable 5.1 (Adaptive Reasoning, Low Effort, Default Fallback)",
    "observations": [
     [
@@ -466,15 +466,15 @@
    "open_weights": false,
    "release_date": "2026-09-01",
    "retired": false,
-   "speed_tps": 48.4,
+   "speed_tps": 47.7,
    "time_history": [
     [
      "2026-09-02",
      76.47
     ]
    ],
-   "time_per_task": 267.01,
-   "ttft": 4.69
+   "time_per_task": 275.46,
+   "ttft": 4.55
   },
   "claude-fable-5-1-medium": {
    "capabilities": {
@@ -489,7 +489,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-01",
    "intelligence_index": 48.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Fable 5.1 (Adaptive Reasoning, Medium Effort, Default Fallback)",
    "observations": [
     [
@@ -540,7 +540,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-01",
    "intelligence_index": 53.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Fable 5.1 (Adaptive Reasoning, Xhigh Effort, Default Fallback)",
    "observations": [
     [
@@ -562,14 +562,14 @@
    "open_weights": false,
    "release_date": "2026-09-01",
    "retired": false,
-   "speed_tps": 57.4,
+   "speed_tps": 58.8,
    "time_history": [
     [
      "2026-09-02",
      303.49
     ]
    ],
-   "time_per_task": 648.1,
+   "time_per_task": 630.55,
    "ttft": 102.13
   },
   "claude-opus-4-7": {
@@ -624,7 +624,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 41.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 4.8 (Adaptive Reasoning, Max Effort)",
    "observations": [
     [
@@ -652,7 +652,7 @@
    "open_weights": false,
    "release_date": "2026-05-28",
    "retired": false,
-   "speed_tps": 53.4,
+   "speed_tps": 56.3,
    "time_history": [
     [
      "2026-07-07",
@@ -663,7 +663,7 @@
      502.92
     ]
    ],
-   "time_per_task": 843.91,
+   "time_per_task": 792.78,
    "ttft": 49.77
   },
   "claude-opus-5": {
@@ -680,7 +680,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 50.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 5 (Adaptive Reasoning, Max Effort)",
    "observations": [
     [
@@ -708,15 +708,15 @@
    "open_weights": false,
    "release_date": "2026-07-24",
    "retired": false,
-   "speed_tps": 57.4,
+   "speed_tps": 56.4,
    "time_history": [
     [
      "2026-07-25",
      419.1
     ]
    ],
-   "time_per_task": 797.59,
-   "ttft": 58.52
+   "time_per_task": 807.33,
+   "ttft": 65.28
   },
   "claude-opus-5-5": {
    "capabilities": {
@@ -730,7 +730,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-22",
    "intelligence_index": 57.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)",
    "observations": [
     [
@@ -743,7 +743,7 @@
    "release_date": "2026-09-22",
    "retired": false,
    "speed_tps": 92.2,
-   "time_per_task": 807.55,
+   "time_per_task": 819.48,
    "ttft": 685.45
   },
   "claude-opus-5-5-high": {
@@ -758,7 +758,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-22",
    "intelligence_index": 53.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 5.5 (Adaptive Reasoning, High Effort, Default Fallback)",
    "observations": [
     [
@@ -770,9 +770,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 74.4,
-   "time_per_task": 292.99,
-   "ttft": 43.34
+   "speed_tps": 73.8,
+   "time_per_task": 295.69,
+   "ttft": 33.2
   },
   "claude-opus-5-5-low": {
    "capabilities": {
@@ -786,7 +786,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-22",
    "intelligence_index": 42.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 5.5 (Adaptive Reasoning, Low Effort, Default Fallback)",
    "observations": [
     [
@@ -798,9 +798,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 73.6,
-   "time_per_task": 86.17,
-   "ttft": 12.49
+   "speed_tps": 72.6,
+   "time_per_task": 87.08,
+   "ttft": 14.25
   },
   "claude-opus-5-5-medium": {
    "capabilities": {
@@ -814,7 +814,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-22",
    "intelligence_index": 51.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 5.5 (Adaptive Reasoning, Medium Effort, Default Fallback)",
    "observations": [
     [
@@ -826,9 +826,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 74.5,
-   "time_per_task": 215.87,
-   "ttft": 21.87
+   "speed_tps": 74.0,
+   "time_per_task": 217.95,
+   "ttft": 23.21
   },
   "claude-opus-5-5-xhigh": {
    "capabilities": {
@@ -842,7 +842,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-22",
    "intelligence_index": 56.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 5.5 (Adaptive Reasoning, Xhigh Effort, Default Fallback)",
    "observations": [
     [
@@ -856,7 +856,7 @@
    "retired": false,
    "speed_tps": 79.5,
    "time_per_task": 506.09,
-   "ttft": 138.95
+   "ttft": 125.47
   },
   "claude-opus-5-high": {
    "capabilities": {
@@ -872,7 +872,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 48.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 5 (Adaptive Reasoning, High Effort)",
    "observations": [
     [
@@ -912,7 +912,7 @@
     ]
    ],
    "time_per_task": 524.47,
-   "ttft": 21.5
+   "ttft": 22.93
   },
   "claude-opus-5-low": {
    "capabilities": {
@@ -928,7 +928,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 39.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 5 (Adaptive Reasoning, Low Effort)",
    "observations": [
     [
@@ -956,15 +956,15 @@
    "open_weights": false,
    "release_date": "2026-07-24",
    "retired": false,
-   "speed_tps": 51.3,
+   "speed_tps": 50.2,
    "time_history": [
     [
      "2026-07-25",
      70.13
     ]
    ],
-   "time_per_task": 173.62,
-   "ttft": 3.01
+   "time_per_task": 178.93,
+   "ttft": 3.09
   },
   "claude-opus-5-medium": {
    "capabilities": {
@@ -980,7 +980,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 44.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 5 (Adaptive Reasoning, Medium Effort)",
    "observations": [
     [
@@ -1008,15 +1008,15 @@
    "open_weights": false,
    "release_date": "2026-07-24",
    "retired": false,
-   "speed_tps": 53.3,
+   "speed_tps": 52.5,
    "time_history": [
     [
      "2026-07-25",
      143.9
     ]
    ],
-   "time_per_task": 341.23,
-   "ttft": 5.81
+   "time_per_task": 341.76,
+   "ttft": 5.41
   },
   "claude-opus-5-xhigh": {
    "capabilities": {
@@ -1032,7 +1032,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 49.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Opus 5 (Adaptive Reasoning, Xhigh Effort)",
    "observations": [
     [
@@ -1079,7 +1079,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 30.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort)",
    "observations": [
     [
@@ -1126,7 +1126,7 @@
    "open_weights": false,
    "release_date": "2026-02-17",
    "retired": false,
-   "speed_tps": 47.6,
+   "speed_tps": 48.9,
    "time_history": [
     [
      "2026-07-07",
@@ -1181,8 +1181,8 @@
      907.61
     ]
    ],
-   "time_per_task": 1337.87,
-   "ttft": 120.66
+   "time_per_task": 1332.2,
+   "ttft": 109.53
   },
   "claude-sonnet-5": {
    "capabilities": {
@@ -1198,7 +1198,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-08-19",
    "intelligence_index": 38.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Sonnet 5 (Adaptive Reasoning, Max Effort)",
    "observations": [
     [
@@ -1226,7 +1226,7 @@
    "open_weights": false,
    "release_date": "2026-06-30",
    "retired": false,
-   "speed_tps": 74.6,
+   "speed_tps": 78.7,
    "time_history": [
     [
      "2026-07-07",
@@ -1245,8 +1245,8 @@
      622.58
     ]
    ],
-   "time_per_task": 953.54,
-   "ttft": 196.86
+   "time_per_task": 910.44,
+   "ttft": 202.68
   },
   "claude-sonnet-5-5": {
    "capabilities": {
@@ -1259,7 +1259,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-28",
    "intelligence_index": 56.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Sonnet 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)",
    "observations": [
     [
@@ -1272,9 +1272,9 @@
    "open_weights": false,
    "release_date": "2026-09-28",
    "retired": false,
-   "speed_tps": 136.5,
-   "time_per_task": 861.54,
-   "ttft": 378.78
+   "speed_tps": 138.7,
+   "time_per_task": 858.75,
+   "ttft": 435.69
   },
   "claude-sonnet-5-5-high": {
    "capabilities": {
@@ -1287,7 +1287,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-28",
    "intelligence_index": 46.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Sonnet 5.5 (Adaptive Reasoning, High Effort, Default Fallback)",
    "observations": [
     [
@@ -1300,8 +1300,8 @@
    "open_weights": false,
    "release_date": "2026-09-28",
    "retired": false,
-   "speed_tps": 89.5,
-   "time_per_task": 231.13,
+   "speed_tps": 89.8,
+   "time_per_task": 225.67,
    "ttft": 15.88
   },
   "claude-sonnet-5-5-low": {
@@ -1343,7 +1343,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-28",
    "intelligence_index": 40.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Sonnet 5.5 (Adaptive Reasoning, Medium Effort, Default Fallback)",
    "observations": [
     [
@@ -1363,7 +1363,7 @@
    "release_date": "2026-09-28",
    "retired": false,
    "speed_tps": 91.4,
-   "time_per_task": 138.84,
+   "time_per_task": 137.21,
    "ttft": 1.34
   },
   "claude-sonnet-5-5-xhigh": {
@@ -1377,7 +1377,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-28",
    "intelligence_index": 51.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Sonnet 5.5 (Adaptive Reasoning, Xhigh Effort, Default Fallback)",
    "observations": [
     [
@@ -1398,7 +1398,7 @@
    "retired": false,
    "speed_tps": 104.9,
    "time_per_task": 443.11,
-   "ttft": 34.36
+   "ttft": 32.63
   },
   "claude-sonnet-5-high": {
    "capabilities": {
@@ -1411,7 +1411,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-10",
    "intelligence_index": 31.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Sonnet 5 (Adaptive Reasoning, High Effort)",
    "observations": [
     [
@@ -1429,9 +1429,9 @@
    "open_weights": false,
    "release_date": "2026-06-30",
    "retired": false,
-   "speed_tps": 64.9,
-   "time_per_task": 419.56,
-   "ttft": 12.61
+   "speed_tps": 64.3,
+   "time_per_task": 418.55,
+   "ttft": 11.01
   },
   "claude-sonnet-5-low": {
    "capabilities": {
@@ -1444,7 +1444,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-07",
    "intelligence_index": 24.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Sonnet 5 (Adaptive Reasoning, Low Effort)",
    "observations": [
     [
@@ -1462,9 +1462,9 @@
    "open_weights": false,
    "release_date": "2026-06-30",
    "retired": false,
-   "speed_tps": 58.4,
-   "time_per_task": 155.06,
-   "ttft": 1.19
+   "speed_tps": 57.6,
+   "time_per_task": 156.19,
+   "ttft": 1.21
   },
   "claude-sonnet-5-medium": {
    "capabilities": {
@@ -1477,7 +1477,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-07",
    "intelligence_index": 28.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Sonnet 5 (Adaptive Reasoning, Medium Effort)",
    "observations": [
     [
@@ -1496,8 +1496,8 @@
    "release_date": "2026-06-30",
    "retired": false,
    "speed_tps": 57.2,
-   "time_per_task": 278.78,
-   "ttft": 1.14
+   "time_per_task": 276.84,
+   "ttft": 1.23
   },
   "claude-sonnet-5-non-reasoning": {
    "capabilities": {
@@ -1543,7 +1543,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-11",
    "intelligence_index": 34.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Claude Sonnet 5 (Adaptive Reasoning, Xhigh Effort)",
    "observations": [
     [
@@ -1562,8 +1562,8 @@
    "open_weights": false,
    "release_date": "2026-06-30",
    "retired": false,
-   "speed_tps": 63.9,
-   "time_per_task": 623.47,
+   "speed_tps": 63.4,
+   "time_per_task": 611.55,
    "ttft": 16.42
   },
   "deepseek-r1-0120": {
@@ -1580,7 +1580,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-08-19",
    "intelligence_index": 11.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "DeepSeek R1 (Jan '25)",
    "observations": [
     [
@@ -1615,7 +1615,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-08-19",
    "intelligence_index": 8.5,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "DeepSeek V3 (Dec '24)",
    "observations": [
     [
@@ -1655,7 +1655,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-08-19",
    "intelligence_index": 9.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "DeepSeek V3 0324",
    "observations": [
     [
@@ -1693,7 +1693,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-09-10",
    "intelligence_index": 39.5,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "DeepSeek V4.1 Flash (Reasoning, Max Effort)",
    "observations": [
     [
@@ -1705,8 +1705,8 @@
    "open_weights": true,
    "release_date": "2026-09-10",
    "retired": false,
-   "speed_tps": 211.7,
-   "time_per_task": 329.71,
+   "speed_tps": 209.4,
+   "time_per_task": 319.01,
    "ttft": 0.94
   },
   "deepseek-v4-1-flash-non-reasoning": {
@@ -1721,7 +1721,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-09-24",
    "intelligence_index": 24.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "DeepSeek V4.1 Flash (Non-Reasoning)",
    "observations": [
     [
@@ -1741,8 +1741,8 @@
    "release_date": "2026-09-10",
    "retired": false,
    "speed_tps": 207.3,
-   "time_per_task": 162.79,
-   "ttft": 1.11
+   "time_per_task": 164.16,
+   "ttft": 0.99
   },
   "deepseek-v4-flash": {
    "capabilities": {
@@ -1757,7 +1757,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-08-19",
    "intelligence_index": 34.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "DeepSeek V4 Flash 0731 (Reasoning, Max Effort)",
    "observations": [
     [
@@ -1818,8 +1818,8 @@
      224.67
     ]
    ],
-   "time_per_task": 216.18,
-   "ttft": 1.04
+   "time_per_task": 215.71,
+   "ttft": 1.06
   },
   "deepseek-v4-flash-0420": {
    "capabilities": {
@@ -1835,7 +1835,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-08-19",
    "intelligence_index": 24.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "DeepSeek V4 Flash 0420 (Reasoning, Max Effort)",
    "observations": [
     [
@@ -1885,17 +1885,18 @@
   "deepseek-v4-flash-0420-high": {
    "capabilities": {
     "agentic": 28.5,
+    "coding": 56.9,
     "instruction": 73.5,
     "knowledge": -23.1,
-    "knowledgework": 29.1,
+    "knowledgework": 24.7,
     "longcontext": 72.0,
     "science": 86.7
    },
-   "cost_per_task": 0.192833,
+   "cost_per_task": 0.127117,
    "creator": "DeepSeek",
    "first_seen": "2026-08-19",
-   "intelligence_index": 24.8,
-   "last_seen": "2026-09-19",
+   "intelligence_index": 24.4,
+   "last_seen": "2026-09-30",
    "name": "DeepSeek V4 Flash 0420 (Reasoning, High Effort)",
    "observations": [
     [
@@ -1922,11 +1923,16 @@
      "2026-09-07",
      0.192833,
      24.8
+    ],
+    [
+     "2026-09-30",
+     0.127117,
+     24.4
     ]
    ],
    "open_weights": true,
    "release_date": "2026-04-24",
-   "retired": true,
+   "retired": false,
    "speed_tps": null,
    "time_per_task": null,
    "ttft": null
@@ -1945,7 +1951,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-08-25",
    "intelligence_index": 34.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "DeepSeek V4 Flash Vision (Reasoning, Max Effort)",
    "observations": [
     [
@@ -1986,9 +1992,9 @@
    "open_weights": false,
    "release_date": "2026-08-21",
    "retired": false,
-   "speed_tps": 226.7,
+   "speed_tps": 222.4,
    "time_per_task": 237.97,
-   "ttft": 1.07
+   "ttft": 0.98
   },
   "deepseek-v4-pro": {
    "capabilities": {
@@ -2003,7 +2009,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-08-19",
    "intelligence_index": 36.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "DeepSeek V4 Pro 0813 (Reasoning, Max Effort)",
    "observations": [
     [
@@ -2101,7 +2107,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-08-19",
    "intelligence_index": 30.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "DeepSeek V4 Pro 0424 (Reasoning, Max Effort)",
    "observations": [
     [
@@ -2173,7 +2179,7 @@
      496.79
     ]
    ],
-   "time_per_task": 469.91,
+   "time_per_task": 469.36,
    "ttft": 1.52
   },
   "deepseek-v4-pro-0424-high": {
@@ -2221,6 +2227,34 @@
     ]
    ]
   },
+  "deepseek-v4-pro-non-reasoning": {
+   "capabilities": {
+    "agentic": 34.9,
+    "knowledge": -12.4,
+    "knowledgework": 27.6,
+    "longcontext": 50.7
+   },
+   "cost_per_task": 0.477424,
+   "creator": "DeepSeek",
+   "first_seen": "2026-09-30",
+   "intelligence_index": 20.4,
+   "last_seen": "2026-09-30",
+   "name": "DeepSeek V4 Pro 0813 (Non-reasoning)",
+   "observations": [
+    [
+     "2026-09-30",
+     0.477424,
+     20.4,
+     137.84
+    ]
+   ],
+   "open_weights": true,
+   "release_date": "2026-08-13",
+   "retired": false,
+   "speed_tps": 211.5,
+   "time_per_task": 137.84,
+   "ttft": 2.18
+  },
   "gemini-2-5-pro": {
    "capabilities": {
     "agentic": 2.2,
@@ -2236,7 +2270,7 @@
    "creator": "Google",
    "first_seen": "2026-08-19",
    "intelligence_index": 16.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Gemini 2.5 Pro",
    "observations": [
     [
@@ -2259,7 +2293,7 @@
    "open_weights": false,
    "release_date": "2025-06-05",
    "retired": false,
-   "speed_tps": 123.9,
+   "speed_tps": 121.7,
    "time_history": [
     [
      "2026-07-07",
@@ -2270,7 +2304,7 @@
      97.84
     ]
    ],
-   "time_per_task": 80.59,
+   "time_per_task": 83.23,
    "ttft": 22.31
   },
   "gemini-3-1-flash-lite-preview": {
@@ -2288,7 +2322,7 @@
    "creator": "Google",
    "first_seen": "2026-08-19",
    "intelligence_index": 15.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Gemini 3.1 Flash-Lite",
    "observations": [
     [
@@ -2311,12 +2345,18 @@
      0.039407,
      15.6,
      36.92
+    ],
+    [
+     "2026-09-30",
+     0.039407,
+     15.6,
+     46.79
     ]
    ],
    "open_weights": false,
    "release_date": "2026-03-03",
    "retired": false,
-   "speed_tps": 265.5,
+   "speed_tps": 249.5,
    "time_history": [
     [
      "2026-07-07",
@@ -2331,7 +2371,7 @@
      61.45
     ]
    ],
-   "time_per_task": 42.92,
+   "time_per_task": 46.79,
    "ttft": 5.8
   },
   "gemini-3-1-pro-preview": {
@@ -2349,7 +2389,7 @@
    "creator": "Google",
    "first_seen": "2026-08-19",
    "intelligence_index": 29.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Gemini 3.1 Pro Preview",
    "observations": [
     [
@@ -2377,7 +2417,7 @@
    "open_weights": false,
    "release_date": "2026-02-19",
    "retired": false,
-   "speed_tps": 113.2,
+   "speed_tps": 113.9,
    "time_history": [
     [
      "2026-07-07",
@@ -2400,7 +2440,7 @@
      117.49
     ]
    ],
-   "time_per_task": 158.06,
+   "time_per_task": 157.4,
    "ttft": 25.87
   },
   "gemini-3-5-flash": {
@@ -2418,7 +2458,7 @@
    "creator": "Google",
    "first_seen": "2026-08-19",
    "intelligence_index": 32.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Gemini 3.5 Flash (high)",
    "observations": [
     [
@@ -2446,7 +2486,7 @@
    "open_weights": false,
    "release_date": "2026-05-19",
    "retired": false,
-   "speed_tps": 195.0,
+   "speed_tps": 191.5,
    "time_history": [
     [
      "2026-07-07",
@@ -2465,8 +2505,8 @@
      160.89
     ]
    ],
-   "time_per_task": 276.27,
-   "ttft": 17.4
+   "time_per_task": 282.38,
+   "ttft": 16.86
   },
   "gemini-3-5-flash-lite": {
    "capabilities": {
@@ -2482,7 +2522,7 @@
    "creator": "Google",
    "first_seen": "2026-08-19",
    "intelligence_index": 22.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Gemini 3.5 Flash-Lite",
    "observations": [
     [
@@ -2516,7 +2556,7 @@
    "open_weights": false,
    "release_date": "2026-07-21",
    "retired": false,
-   "speed_tps": 320.0,
+   "speed_tps": 312.8,
    "time_history": [
     [
      "2026-07-21",
@@ -2531,7 +2571,7 @@
      42.77
     ]
    ],
-   "time_per_task": 55.98,
+   "time_per_task": 56.56,
    "ttft": 8.76
   },
   "gemini-3-6-flash": {
@@ -2548,7 +2588,7 @@
    "creator": "Google",
    "first_seen": "2026-08-19",
    "intelligence_index": 34.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Gemini 3.6 Flash (high)",
    "observations": [
     [
@@ -2582,7 +2622,7 @@
    "open_weights": false,
    "release_date": "2026-07-21",
    "retired": false,
-   "speed_tps": 183.9,
+   "speed_tps": 181.2,
    "time_history": [
     [
      "2026-07-21",
@@ -2601,8 +2641,8 @@
      141.18
     ]
    ],
-   "time_per_task": 224.06,
-   "ttft": 18.36
+   "time_per_task": 225.7,
+   "ttft": 17.65
   },
   "gemini-3-7-flash": {
    "capabilities": {
@@ -2618,7 +2658,7 @@
    "creator": "Google",
    "first_seen": "2026-08-19",
    "intelligence_index": 39.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Gemini 3.7 Flash (high)",
    "observations": [
     [
@@ -2657,8 +2697,8 @@
      129.2
     ]
    ],
-   "time_per_task": 198.27,
-   "ttft": 14.99
+   "time_per_task": 199.64,
+   "ttft": 15.77
   },
   "gemini-3-7-flash-low": {
    "capabilities": {
@@ -2756,7 +2796,7 @@
    "creator": "Google",
    "first_seen": "2026-09-02",
    "intelligence_index": 40.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Gemini 3.8 Flash (high)",
    "observations": [
     [
@@ -2791,9 +2831,9 @@
    "open_weights": false,
    "release_date": "2026-09-02",
    "retired": false,
-   "speed_tps": 242.2,
-   "time_per_task": 287.79,
-   "ttft": 19.31
+   "speed_tps": 238.7,
+   "time_per_task": 293.42,
+   "ttft": 20.76
   },
   "gemini-3-8-flash-low": {
    "capabilities": {
@@ -2837,7 +2877,7 @@
    "creator": "Google",
    "first_seen": "2026-09-02",
    "intelligence_index": 39.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Gemini 3.8 Flash (medium)",
    "observations": [
     [
@@ -3092,7 +3132,7 @@
    "creator": "Z AI",
    "first_seen": "2026-08-19",
    "intelligence_index": 26.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GLM-5.1 (Reasoning)",
    "observations": [
     [
@@ -3161,7 +3201,7 @@
    "open_weights": true,
    "release_date": "2026-04-07",
    "retired": false,
-   "speed_tps": 65.3,
+   "speed_tps": 60.8,
    "time_history": [
     [
      "2026-07-07",
@@ -3196,7 +3236,7 @@
      487.01
     ]
    ],
-   "time_per_task": 605.19,
+   "time_per_task": 627.5,
    "ttft": 1.72
   },
   "glm-5-2": {
@@ -3213,7 +3253,7 @@
    "creator": "Z AI",
    "first_seen": "2026-08-19",
    "intelligence_index": 33.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GLM-5.2 (max)",
    "observations": [
     [
@@ -3300,8 +3340,8 @@
      630.85
     ]
    ],
-   "time_per_task": 752.2,
-   "ttft": 3.09
+   "time_per_task": 790.2,
+   "ttft": 3.12
   },
   "glm-5-3": {
    "capabilities": {
@@ -3316,7 +3356,7 @@
    "creator": "Z AI",
    "first_seen": "2026-08-19",
    "intelligence_index": 44.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GLM-5.3 (max)",
    "observations": [
     [
@@ -3377,7 +3417,7 @@
      527.97
     ]
    ],
-   "time_per_task": 650.62,
+   "time_per_task": 644.31,
    "ttft": 2.85
   },
   "glm-5-3-flash": {
@@ -3393,7 +3433,7 @@
    "creator": "Z AI",
    "first_seen": "2026-08-26",
    "intelligence_index": 41.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GLM 5.3 Flash",
    "observations": [
     [
@@ -3467,7 +3507,7 @@
    "creator": "Z AI",
    "first_seen": "2026-09-24",
    "intelligence_index": 34.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GLM-5.3 (low)",
    "observations": [
     [
@@ -3486,9 +3526,9 @@
    "open_weights": true,
    "release_date": "2026-08-18",
    "retired": false,
-   "speed_tps": 69.5,
-   "time_per_task": 424.84,
-   "ttft": 3.1
+   "speed_tps": 68.9,
+   "time_per_task": 430.22,
+   "ttft": 3.15
   },
   "gpt-4-1-mini": {
    "capabilities": {
@@ -3794,7 +3834,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 24.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.4 mini (xhigh)",
    "observations": [
     [
@@ -3828,15 +3868,15 @@
    "open_weights": false,
    "release_date": "2026-03-17",
    "retired": false,
-   "speed_tps": 224.4,
+   "speed_tps": 223.6,
    "time_history": [
     [
      "2026-07-07",
      428.93
     ]
    ],
-   "time_per_task": 224.36,
-   "ttft": 128.04
+   "time_per_task": 230.01,
+   "ttft": 133.8
   },
   "gpt-5-4-nano": {
    "capabilities": {
@@ -3853,7 +3893,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 20.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.4 nano (xhigh)",
    "observations": [
     [
@@ -3881,14 +3921,14 @@
    "open_weights": false,
    "release_date": "2026-03-17",
    "retired": false,
-   "speed_tps": 164.2,
+   "speed_tps": 163.5,
    "time_history": [
     [
      "2026-07-07",
      458.93
     ]
    ],
-   "time_per_task": 394.14,
+   "time_per_task": 405.22,
    "ttft": 82.81
   },
   "gpt-5-5": {
@@ -3906,7 +3946,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 38.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.5 (xhigh)",
    "observations": [
     [
@@ -3934,7 +3974,7 @@
    "open_weights": false,
    "release_date": "2026-04-23",
    "retired": false,
-   "speed_tps": 93.6,
+   "speed_tps": 93.1,
    "time_history": [
     [
      "2026-07-07",
@@ -3961,8 +4001,8 @@
      215.44
     ]
    ],
-   "time_per_task": 251.06,
-   "ttft": 43.65
+   "time_per_task": 253.89,
+   "ttft": 37.11
   },
   "gpt-5-5-high": {
    "capabilities": {
@@ -3979,7 +4019,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 37.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.5 (high)",
    "observations": [
     [
@@ -4007,7 +4047,7 @@
    "open_weights": false,
    "release_date": "2026-04-23",
    "retired": false,
-   "speed_tps": 90.9,
+   "speed_tps": 89.0,
    "time_history": [
     [
      "2026-07-07",
@@ -4026,7 +4066,7 @@
      134.91
     ]
    ],
-   "time_per_task": 171.44,
+   "time_per_task": 173.95,
    "ttft": 13.89
   },
   "gpt-5-5-instant-06-26": {
@@ -4042,7 +4082,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 26.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.5 Instant (June 2026)",
    "observations": [
     [
@@ -4082,15 +4122,15 @@
    "open_weights": false,
    "release_date": "2026-06-25",
    "retired": false,
-   "speed_tps": 112.9,
+   "speed_tps": 111.6,
    "time_history": [
     [
      "2026-07-12",
      18.85
     ]
    ],
-   "time_per_task": 43.57,
-   "ttft": 1.11
+   "time_per_task": 44.28,
+   "ttft": 1.03
   },
   "gpt-5-5-low": {
    "capabilities": {
@@ -4166,7 +4206,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 33.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.5 (medium)",
    "observations": [
     [
@@ -4211,7 +4251,7 @@
    "open_weights": false,
    "release_date": "2026-04-23",
    "retired": false,
-   "speed_tps": 85.5,
+   "speed_tps": 83.9,
    "time_history": [
     [
      "2026-07-07",
@@ -4230,7 +4270,7 @@
      81.27
     ]
    ],
-   "time_per_task": 100.18,
+   "time_per_task": 100.54,
    "ttft": 5.54
   },
   "gpt-5-5-non-reasoning": {
@@ -4301,7 +4341,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 37.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Luna (max)",
    "observations": [
     [
@@ -4365,7 +4405,7 @@
     ]
    ],
    "time_per_task": 337.13,
-   "ttft": 103.91
+   "ttft": 106.56
   },
   "gpt-5-6-luna-high": {
    "capabilities": {
@@ -4381,7 +4421,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 32.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Luna (high)",
    "observations": [
     [
@@ -4416,7 +4456,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 109.6,
+   "speed_tps": 111.2,
    "time_history": [
     [
      "2026-07-10",
@@ -4443,7 +4483,7 @@
      54.83
     ]
    ],
-   "time_per_task": 125.59,
+   "time_per_task": 125.05,
    "ttft": 14.13
   },
   "gpt-5-6-luna-low": {
@@ -4460,7 +4500,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 21.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Luna (low)",
    "observations": [
     [
@@ -4495,7 +4535,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 115.7,
+   "speed_tps": 114.6,
    "time_history": [
     [
      "2026-07-10",
@@ -4522,8 +4562,8 @@
      18.09
     ]
    ],
-   "time_per_task": 21.65,
-   "ttft": 1.56
+   "time_per_task": 21.81,
+   "ttft": 1.54
   },
   "gpt-5-6-luna-medium": {
    "capabilities": {
@@ -4539,7 +4579,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 25.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Luna (medium)",
    "observations": [
     [
@@ -4574,7 +4614,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 114.3,
+   "speed_tps": 111.3,
    "time_history": [
     [
      "2026-07-10",
@@ -4597,7 +4637,7 @@
      27.97
     ]
    ],
-   "time_per_task": 39.28,
+   "time_per_task": 40.12,
    "ttft": 2.28
   },
   "gpt-5-6-luna-non-reasoning": {
@@ -4614,7 +4654,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 15.5,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Luna (Non-reasoning)",
    "observations": [
     [
@@ -4633,12 +4673,18 @@
      0.010092,
      15.5,
      15.24
+    ],
+    [
+     "2026-09-30",
+     0.010092,
+     15.5,
+     18.51
     ]
    ],
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 110.7,
+   "speed_tps": 109.2,
    "time_history": [
     [
      "2026-07-10",
@@ -4669,7 +4715,7 @@
      20.13
     ]
    ],
-   "time_per_task": 18.27,
+   "time_per_task": 18.51,
    "ttft": 0.68
   },
   "gpt-5-6-luna-xhigh": {
@@ -4686,7 +4732,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 34.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Luna (xhigh)",
    "observations": [
     [
@@ -4725,7 +4771,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 115.1,
+   "speed_tps": 112.8,
    "time_history": [
     [
      "2026-07-10",
@@ -4740,8 +4786,8 @@
      101.52
     ]
    ],
-   "time_per_task": 204.83,
-   "ttft": 43.42
+   "time_per_task": 208.3,
+   "ttft": 41.69
   },
   "gpt-5-6-sol": {
    "capabilities": {
@@ -4758,7 +4804,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 47.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Sol (max)",
    "observations": [
     [
@@ -4819,7 +4865,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 81.8,
+   "speed_tps": 80.5,
    "time_history": [
     [
      "2026-07-11",
@@ -4846,8 +4892,8 @@
      253.07
     ]
    ],
-   "time_per_task": 360.99,
-   "ttft": 98.74
+   "time_per_task": 362.22,
+   "ttft": 106.1
   },
   "gpt-5-6-sol-high": {
    "capabilities": {
@@ -4864,7 +4910,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 42.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Sol (high)",
    "observations": [
     [
@@ -4937,7 +4983,7 @@
     ]
    ],
    "time_per_task": 176.91,
-   "ttft": 9.4
+   "ttft": 11.65
   },
   "gpt-5-6-sol-low": {
    "capabilities": {
@@ -4954,7 +5000,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 33.5,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Sol (low)",
    "observations": [
     [
@@ -5052,7 +5098,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 39.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Sol (medium)",
    "observations": [
     [
@@ -5101,7 +5147,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 72.3,
+   "speed_tps": 72.2,
    "time_history": [
     [
      "2026-07-11",
@@ -5120,8 +5166,8 @@
      78.34
     ]
    ],
-   "time_per_task": 107.69,
-   "ttft": 5.96
+   "time_per_task": 107.32,
+   "ttft": 5.55
   },
   "gpt-5-6-sol-non-reasoning": {
    "capabilities": {
@@ -5205,7 +5251,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 44.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Sol (xhigh)",
    "observations": [
     [
@@ -5299,7 +5345,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 42.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Terra (max)",
    "observations": [
     [
@@ -5332,7 +5378,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 95.2,
+   "speed_tps": 92.7,
    "time_history": [
     [
      "2026-07-10",
@@ -5355,8 +5401,8 @@
      196.09
     ]
    ],
-   "time_per_task": 403.49,
-   "ttft": 163.71
+   "time_per_task": 406.45,
+   "ttft": 171.9
   },
   "gpt-5-6-terra-high": {
    "capabilities": {
@@ -5373,7 +5419,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 34.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Terra (high)",
    "observations": [
     [
@@ -5406,7 +5452,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 85.6,
+   "speed_tps": 79.4,
    "time_history": [
     [
      "2026-07-10",
@@ -5433,8 +5479,8 @@
      100.05
     ]
    ],
-   "time_per_task": 130.77,
-   "ttft": 2.68
+   "time_per_task": 140.75,
+   "ttft": 2.42
   },
   "gpt-5-6-terra-low": {
    "capabilities": {
@@ -5451,7 +5497,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 27.5,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Terra (low)",
    "observations": [
     [
@@ -5479,7 +5525,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 77.5,
+   "speed_tps": 76.9,
    "time_history": [
     [
      "2026-07-10",
@@ -5522,8 +5568,8 @@
      27.0
     ]
    ],
-   "time_per_task": 48.9,
-   "ttft": 1.81
+   "time_per_task": 49.19,
+   "ttft": 1.82
   },
   "gpt-5-6-terra-medium": {
    "capabilities": {
@@ -5540,7 +5586,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 30.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Terra (medium)",
    "observations": [
     [
@@ -5569,7 +5615,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 80.1,
+   "speed_tps": 76.7,
    "time_history": [
     [
      "2026-07-10",
@@ -5608,8 +5654,8 @@
      36.47
     ]
    ],
-   "time_per_task": 67.75,
-   "ttft": 1.74
+   "time_per_task": 71.36,
+   "ttft": 1.84
   },
   "gpt-5-6-terra-non-reasoning": {
    "capabilities": {
@@ -5625,7 +5671,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 20.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Terra (Non-reasoning)",
    "observations": [
     [
@@ -5655,7 +5701,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 85.0,
+   "speed_tps": 84.0,
    "time_history": [
     [
      "2026-07-10",
@@ -5674,8 +5720,8 @@
      28.82
     ]
    ],
-   "time_per_task": 36.68,
-   "ttft": 0.78
+   "time_per_task": 37.14,
+   "ttft": 0.79
   },
   "gpt-5-6-terra-xhigh": {
    "capabilities": {
@@ -5692,7 +5738,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 38.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5.6 Terra (xhigh)",
    "observations": [
     [
@@ -5777,7 +5823,7 @@
     ]
    ],
    "time_per_task": 245.13,
-   "ttft": 26.22
+   "ttft": 25.35
   },
   "gpt-5-mini": {
    "capabilities": {
@@ -5794,7 +5840,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 16.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-5 mini (high)",
    "observations": [
     [
@@ -5828,7 +5874,7 @@
    "open_weights": false,
    "release_date": "2025-08-07",
    "retired": false,
-   "speed_tps": 113.0,
+   "speed_tps": 112.0,
    "time_history": [
     [
      "2026-07-07",
@@ -5855,8 +5901,8 @@
      149.75
     ]
    ],
-   "time_per_task": 140.15,
-   "ttft": 54.34
+   "time_per_task": 142.23,
+   "ttft": 56.07
   },
   "gpt-6-1-sol": {
    "capabilities": {
@@ -5870,7 +5916,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-29",
    "intelligence_index": 51.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6.1 Sol (max)",
    "observations": [
     [
@@ -5883,9 +5929,9 @@
    "open_weights": false,
    "release_date": "2026-09-29",
    "retired": false,
-   "speed_tps": 66.8,
-   "time_per_task": 568.66,
-   "ttft": 267.64
+   "speed_tps": 67.8,
+   "time_per_task": 560.89,
+   "ttft": 247.84
   },
   "gpt-6-1-sol-high": {
    "capabilities": {
@@ -5899,7 +5945,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-29",
    "intelligence_index": 50.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6.1 Sol (high)",
    "observations": [
     [
@@ -5928,7 +5974,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-29",
    "intelligence_index": 42.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6.1 Sol (low)",
    "observations": [
     [
@@ -5941,8 +5987,8 @@
    "open_weights": false,
    "release_date": "2026-09-29",
    "retired": false,
-   "speed_tps": 71.2,
-   "time_per_task": 56.18,
+   "speed_tps": 69.4,
+   "time_per_task": 57.75,
    "ttft": 1.96
   },
   "gpt-6-1-sol-medium": {
@@ -5957,7 +6003,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-29",
    "intelligence_index": 47.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6.1 Sol (medium)",
    "observations": [
     [
@@ -5986,7 +6032,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-29",
    "intelligence_index": 51.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6.1 Sol (xhigh)",
    "observations": [
     [
@@ -6000,8 +6046,8 @@
    "release_date": "2026-09-29",
    "retired": false,
    "speed_tps": 63.6,
-   "time_per_task": 271.1,
-   "ttft": 68.65
+   "time_per_task": 274.51,
+   "ttft": 69.16
   },
   "gpt-6-astra": {
    "capabilities": {
@@ -6017,7 +6063,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-04",
    "intelligence_index": 52.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Astra (max)",
    "observations": [
     [
@@ -6045,9 +6091,9 @@
    "open_weights": false,
    "release_date": "2026-09-03",
    "retired": false,
-   "speed_tps": 57.0,
-   "time_per_task": 471.5,
-   "ttft": 305.56
+   "speed_tps": 55.7,
+   "time_per_task": 471.55,
+   "ttft": 290.98
   },
   "gpt-6-astra-high": {
    "capabilities": {
@@ -6063,7 +6109,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-04",
    "intelligence_index": 50.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Astra (high)",
    "observations": [
     [
@@ -6091,8 +6137,8 @@
    "open_weights": false,
    "release_date": "2026-09-03",
    "retired": false,
-   "speed_tps": 48.4,
-   "time_per_task": 242.81,
+   "speed_tps": 47.1,
+   "time_per_task": 247.11,
    "ttft": 41.74
   },
   "gpt-6-astra-low": {
@@ -6109,7 +6155,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-04",
    "intelligence_index": 45.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Astra (low)",
    "observations": [
     [
@@ -6143,9 +6189,9 @@
    "open_weights": false,
    "release_date": "2026-09-03",
    "retired": false,
-   "speed_tps": 48.7,
-   "time_per_task": 91.73,
-   "ttft": 2.81
+   "speed_tps": 47.2,
+   "time_per_task": 95.7,
+   "ttft": 2.83
   },
   "gpt-6-astra-medium": {
    "capabilities": {
@@ -6161,7 +6207,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-04",
    "intelligence_index": 49.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Astra (medium)",
    "observations": [
     [
@@ -6189,8 +6235,8 @@
    "open_weights": false,
    "release_date": "2026-09-03",
    "retired": false,
-   "speed_tps": 46.7,
-   "time_per_task": 207.6,
+   "speed_tps": 46.3,
+   "time_per_task": 208.72,
    "ttft": 5.35
   },
   "gpt-6-astra-non-reasoning": {
@@ -6244,7 +6290,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-04",
    "intelligence_index": 52.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Astra (xhigh)",
    "observations": [
     [
@@ -6272,9 +6318,9 @@
    "open_weights": false,
    "release_date": "2026-09-03",
    "retired": false,
-   "speed_tps": 49.3,
-   "time_per_task": 340.29,
-   "ttft": 148.93
+   "speed_tps": 49.4,
+   "time_per_task": 340.66,
+   "ttft": 126.25
   },
   "gpt-6-luna": {
    "capabilities": {
@@ -6288,7 +6334,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 37.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Luna (max)",
    "observations": [
     [
@@ -6306,9 +6352,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 148.5,
-   "time_per_task": 335.23,
-   "ttft": 96.96
+   "speed_tps": 145.2,
+   "time_per_task": 345.76,
+   "ttft": 110.48
   },
   "gpt-6-luna-high": {
    "capabilities": {
@@ -6322,7 +6368,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 32.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Luna (high)",
    "observations": [
     [
@@ -6340,9 +6386,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 129.2,
-   "time_per_task": 152.87,
-   "ttft": 12.83
+   "speed_tps": 125.1,
+   "time_per_task": 157.21,
+   "ttft": 12.96
   },
   "gpt-6-luna-low": {
    "capabilities": {
@@ -6356,7 +6402,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 20.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Luna (low)",
    "observations": [
     [
@@ -6376,7 +6422,7 @@
    "retired": false,
    "speed_tps": 124.4,
    "time_per_task": 16.57,
-   "ttft": 2.18
+   "ttft": 2.0
   },
   "gpt-6-luna-medium": {
    "capabilities": {
@@ -6390,7 +6436,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 29.5,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Luna (medium)",
    "observations": [
     [
@@ -6423,7 +6469,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 18.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Luna (Non-reasoning)",
    "observations": [
     [
@@ -6457,7 +6503,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 33.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Luna (xhigh)",
    "observations": [
     [
@@ -6475,8 +6521,8 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 131.3,
-   "time_per_task": 203.87,
+   "speed_tps": 131.2,
+   "time_per_task": 206.11,
    "ttft": 18.33
   },
   "gpt-6-sol": {
@@ -6491,7 +6537,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 47.5,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Sol (max)",
    "observations": [
     [
@@ -6511,7 +6557,7 @@
    "retired": false,
    "speed_tps": 76.0,
    "time_per_task": 408.07,
-   "ttft": 197.15
+   "ttft": 185.67
   },
   "gpt-6-sol-high": {
    "capabilities": {
@@ -6525,7 +6571,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 42.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Sol (high)",
    "observations": [
     [
@@ -6545,7 +6591,7 @@
    "retired": false,
    "speed_tps": 65.9,
    "time_per_task": 150.46,
-   "ttft": 14.72
+   "ttft": 16.37
   },
   "gpt-6-sol-low": {
    "capabilities": {
@@ -6559,7 +6605,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 33.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Sol (low)",
    "observations": [
     [
@@ -6577,9 +6623,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 68.9,
-   "time_per_task": 48.57,
-   "ttft": 2.03
+   "speed_tps": 68.4,
+   "time_per_task": 50.47,
+   "ttft": 2.26
   },
   "gpt-6-sol-medium": {
    "capabilities": {
@@ -6593,7 +6639,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 39.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Sol (medium)",
    "observations": [
     [
@@ -6626,7 +6672,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 28.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Sol (Non-reasoning)",
    "observations": [
     [
@@ -6646,7 +6692,7 @@
    "retired": false,
    "speed_tps": 67.6,
    "time_per_task": 73.4,
-   "ttft": 1.11
+   "ttft": 0.98
   },
   "gpt-6-sol-xhigh": {
    "capabilities": {
@@ -6660,7 +6706,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 44.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "GPT-6 Sol (xhigh)",
    "observations": [
     [
@@ -6680,7 +6726,7 @@
    "retired": false,
    "speed_tps": 70.3,
    "time_per_task": 221.34,
-   "ttft": 48.15
+   "ttft": 45.64
   },
   "gpt-oss-120b": {
    "capabilities": {
@@ -6696,7 +6742,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 11.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "gpt-oss-120b (high)",
    "observations": [
     [
@@ -6730,7 +6776,7 @@
    "open_weights": true,
    "release_date": "2025-08-05",
    "retired": false,
-   "speed_tps": 221.6,
+   "speed_tps": 217.3,
    "time_history": [
     [
      "2026-07-07",
@@ -6765,8 +6811,8 @@
      196.63
     ]
    ],
-   "time_per_task": 115.15,
-   "ttft": 0.88
+   "time_per_task": 118.51,
+   "ttft": 0.87
   },
   "gpt-oss-120b-low": {
    "capabilities": {
@@ -6868,7 +6914,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 9.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "gpt-oss-20b (high)",
    "observations": [
     [
@@ -6914,7 +6960,7 @@
    "open_weights": true,
    "release_date": "2025-08-05",
    "retired": false,
-   "speed_tps": 166.0,
+   "speed_tps": 167.6,
    "time_history": [
     [
      "2026-07-07",
@@ -6953,8 +6999,8 @@
      222.91
     ]
    ],
-   "time_per_task": 94.24,
-   "ttft": 0.8
+   "time_per_task": 97.27,
+   "ttft": 0.81
   },
   "granite-4-2-30b": {
    "capabilities": {
@@ -7001,7 +7047,7 @@
    "creator": "IBM",
    "first_seen": "2026-08-26",
    "intelligence_index": 9.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Granite 4.2 3B",
    "observations": [
     [
@@ -7035,14 +7081,14 @@
    "open_weights": true,
    "release_date": "2026-08-25",
    "retired": false,
-   "speed_tps": 223.4,
+   "speed_tps": 224.2,
    "time_history": [
     [
      "2026-08-30",
      50.21
     ]
    ],
-   "time_per_task": 79.6,
+   "time_per_task": 79.51,
    "ttft": 0.51
   },
   "granite-4-2-8b": {
@@ -7058,7 +7104,7 @@
    "creator": "IBM",
    "first_seen": "2026-08-26",
    "intelligence_index": 11.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Granite 4.2 8B",
    "observations": [
     [
@@ -7098,15 +7144,15 @@
    "open_weights": true,
    "release_date": "2026-08-25",
    "retired": false,
-   "speed_tps": 66.4,
+   "speed_tps": 64.5,
    "time_history": [
     [
      "2026-08-30",
      152.98
     ]
    ],
-   "time_per_task": 479.21,
-   "ttft": 0.9
+   "time_per_task": 497.04,
+   "ttft": 0.77
   },
   "grok-4-3": {
    "capabilities": {
@@ -7123,7 +7169,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 24.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Grok 4.3 (high)",
    "observations": [
     [
@@ -7157,7 +7203,7 @@
    "open_weights": false,
    "release_date": "2026-04-30",
    "retired": false,
-   "speed_tps": 110.9,
+   "speed_tps": 112.4,
    "time_history": [
     [
      "2026-07-07",
@@ -7176,8 +7222,8 @@
      119.84
     ]
    ],
-   "time_per_task": 163.57,
-   "ttft": 29.66
+   "time_per_task": 161.51,
+   "ttft": 28.69
   },
   "grok-4-3-non-reasoning": {
    "capabilities": {
@@ -7194,7 +7240,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 14.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Grok 4.3 (Non-reasoning)",
    "observations": [
     [
@@ -7223,7 +7269,7 @@
    "open_weights": false,
    "release_date": "2026-04-30",
    "retired": false,
-   "speed_tps": 106.1,
+   "speed_tps": 109.1,
    "time_history": [
     [
      "2026-07-07",
@@ -7242,8 +7288,8 @@
      86.77
     ]
    ],
-   "time_per_task": 90.39,
-   "ttft": 0.82
+   "time_per_task": 87.41,
+   "ttft": 0.77
   },
   "grok-4-5": {
    "capabilities": {
@@ -7259,7 +7305,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 38.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Grok 4.5 (high)",
    "observations": [
     [
@@ -7335,8 +7381,8 @@
      320.67
     ]
    ],
-   "time_per_task": 465.61,
-   "ttft": 7.11
+   "time_per_task": 474.62,
+   "ttft": 7.88
   },
   "grok-4-6": {
    "capabilities": {
@@ -7351,7 +7397,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 44.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Grok 4.6 (high)",
    "observations": [
     [
@@ -7384,7 +7430,7 @@
    "open_weights": false,
    "release_date": "2026-08-12",
    "retired": false,
-   "speed_tps": 67.0,
+   "speed_tps": 71.8,
    "time_history": [
     [
      "2026-08-12",
@@ -7395,8 +7441,8 @@
      350.92
     ]
    ],
-   "time_per_task": 546.44,
-   "ttft": 34.72
+   "time_per_task": 492.73,
+   "ttft": 31.9
   },
   "grok-4-6-low": {
    "capabilities": {
@@ -7411,7 +7457,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-08-22",
    "intelligence_index": 35.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Grok 4.6 (low)",
    "observations": [
     [
@@ -7445,14 +7491,14 @@
    "open_weights": false,
    "release_date": "2026-08-12",
    "retired": false,
-   "speed_tps": 62.3,
+   "speed_tps": 68.7,
    "time_history": [
     [
      "2026-09-01",
      105.47
     ]
    ],
-   "time_per_task": 168.61,
+   "time_per_task": 152.62,
    "ttft": 7.64
   },
   "grok-4-6-medium": {
@@ -7468,7 +7514,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-08-22",
    "intelligence_index": 42.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Grok 4.6 (medium)",
    "observations": [
     [
@@ -7508,9 +7554,9 @@
    "open_weights": false,
    "release_date": "2026-08-12",
    "retired": false,
-   "speed_tps": 67.1,
-   "time_per_task": 429.64,
-   "ttft": 24.81
+   "speed_tps": 72.7,
+   "time_per_task": 399.66,
+   "ttft": 23.98
   },
   "grok-4-6-xhigh": {
    "capabilities": {
@@ -7525,7 +7571,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-08-22",
    "intelligence_index": 44.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Grok 4.6 (xhigh)",
    "observations": [
     [
@@ -7565,9 +7611,9 @@
    "open_weights": false,
    "release_date": "2026-08-12",
    "retired": false,
-   "speed_tps": 64.5,
-   "time_per_task": 591.08,
-   "ttft": 33.22
+   "speed_tps": 67.6,
+   "time_per_task": 557.27,
+   "ttft": 30.64
   },
   "grok-4-7": {
    "capabilities": {
@@ -7580,7 +7626,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-09-21",
    "intelligence_index": 46.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Grok 4.7 (xhigh)",
    "observations": [
     [
@@ -7593,9 +7639,9 @@
    "open_weights": false,
    "release_date": "2026-09-21",
    "retired": false,
-   "speed_tps": 73.5,
+   "speed_tps": 73.6,
    "time_per_task": 1113.33,
-   "ttft": 54.96
+   "ttft": 71.16
   },
   "grok-4-7-high": {
    "capabilities": {
@@ -7608,7 +7654,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-09-21",
    "intelligence_index": 46.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Grok 4.7 (high)",
    "observations": [
     [
@@ -7647,7 +7693,7 @@
    "retired": false,
    "speed_tps": 76.7,
    "time_per_task": 874.8,
-   "ttft": 40.18
+   "ttft": 30.66
   },
   "grok-build-0-1-06-16": {
    "capabilities": {
@@ -7719,7 +7765,7 @@
    "creator": "Tencent",
    "first_seen": "2026-08-19",
    "intelligence_index": 25.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Hy3",
    "observations": [
     [
@@ -7759,7 +7805,7 @@
    "open_weights": true,
    "release_date": "2026-07-06",
    "retired": false,
-   "speed_tps": 89.6,
+   "speed_tps": 87.9,
    "time_history": [
     [
      "2026-07-12",
@@ -7770,8 +7816,8 @@
      294.62
     ]
    ],
-   "time_per_task": 486.62,
-   "ttft": 3.03
+   "time_per_task": 501.1,
+   "ttft": 3.04
   },
   "hypernova-60b": {
    "capabilities": {
@@ -7905,8 +7951,9 @@
   "inkling-small": {
    "capabilities": {
     "agentic": 4.8,
+    "coding": 55.1,
     "knowledge": -8.9,
-    "knowledgework": 34.6,
+    "knowledgework": 30.4,
     "longcontext": 75.7,
     "multimodal": 74.0,
     "science": 89.5
@@ -7914,8 +7961,8 @@
    "cost_per_task": 0.089465,
    "creator": "Thinking Machines",
    "first_seen": "2026-08-19",
-   "intelligence_index": 26.1,
-   "last_seen": "2026-09-19",
+   "intelligence_index": 25.7,
+   "last_seen": "2026-09-30",
    "name": "Inkling Small",
    "observations": [
     [
@@ -7932,12 +7979,18 @@
      "2026-09-07",
      0.089465,
      26.1
+    ],
+    [
+     "2026-09-30",
+     0.089465,
+     25.7,
+     129.34
     ]
    ],
    "open_weights": true,
    "release_date": "2026-07-30",
-   "retired": true,
-   "speed_tps": 173.9,
+   "retired": false,
+   "speed_tps": 201.2,
    "time_history": [
     [
      "2026-07-30",
@@ -7988,7 +8041,7 @@
      209.93
     ]
    ],
-   "time_per_task": 163.07,
+   "time_per_task": 129.34,
    "ttft": 2.05
   },
   "kimi-k2-5": {
@@ -8056,7 +8109,7 @@
    "creator": "Kimi",
    "first_seen": "2026-08-19",
    "intelligence_index": 27.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Kimi K2.6",
    "observations": [
     [
@@ -8146,8 +8199,8 @@
      1005.77
     ]
    ],
-   "time_per_task": 605.66,
-   "ttft": 3.01
+   "time_per_task": 609.6,
+   "ttft": 2.63
   },
   "kimi-k2-7-code": {
    "capabilities": {
@@ -8163,7 +8216,7 @@
    "creator": "Kimi",
    "first_seen": "2026-08-19",
    "intelligence_index": 25.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Kimi K2.7 Code",
    "observations": [
     [
@@ -8197,7 +8250,7 @@
    "open_weights": true,
    "release_date": "2026-06-12",
    "retired": false,
-   "speed_tps": 81.3,
+   "speed_tps": 75.1,
    "time_history": [
     [
      "2026-07-07",
@@ -8228,8 +8281,8 @@
      428.76
     ]
    ],
-   "time_per_task": 361.0,
-   "ttft": 2.69
+   "time_per_task": 381.34,
+   "ttft": 2.71
   },
   "kimi-k3": {
    "capabilities": {
@@ -8245,7 +8298,7 @@
    "creator": "Kimi",
    "first_seen": "2026-08-19",
    "intelligence_index": 43.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Kimi K3 (max)",
    "observations": [
     [
@@ -8307,13 +8360,14 @@
     ]
    ],
    "time_per_task": 1158.53,
-   "ttft": 3.0
+   "ttft": 3.54
   },
   "kimi-k3-low": {
    "capabilities": {
     "agentic": 49.3,
+    "coding": 82.4,
     "knowledge": 3.9,
-    "knowledgework": 34.3,
+    "knowledgework": 30.9,
     "longcontext": 79.3,
     "multimodal": 78.5,
     "science": 84.2
@@ -8321,8 +8375,8 @@
    "cost_per_task": 1.146306,
    "creator": "Kimi",
    "first_seen": "2026-08-19",
-   "intelligence_index": 30.5,
-   "last_seen": "2026-09-19",
+   "intelligence_index": 30.1,
+   "last_seen": "2026-09-30",
    "name": "Kimi K3 (low)",
    "observations": [
     [
@@ -8340,12 +8394,18 @@
      1.146306,
      30.5,
      299.67
+    ],
+    [
+     "2026-09-30",
+     1.146306,
+     30.1,
+     295.08
     ]
    ],
    "open_weights": true,
    "release_date": "2026-07-16",
-   "retired": true,
-   "speed_tps": 36.2,
+   "retired": false,
+   "speed_tps": 40.9,
    "time_history": [
     [
      "2026-07-31",
@@ -8360,8 +8420,8 @@
      110.71
     ]
    ],
-   "time_per_task": 327.2,
-   "ttft": 3.96
+   "time_per_task": 295.08,
+   "ttft": 5.66
   },
   "ling-3-0-flash": {
    "capabilities": {
@@ -8573,7 +8633,7 @@
    "creator": "LongCat",
    "first_seen": "2026-08-19",
    "intelligence_index": 19.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "LongCat 2.0",
    "observations": [
     [
@@ -8800,7 +8860,7 @@
    "creator": "Inception",
    "first_seen": "2026-09-23",
    "intelligence_index": 12.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Mercury 2.5",
    "observations": [
     [
@@ -8819,9 +8879,9 @@
    "open_weights": false,
    "release_date": "2026-09-08",
    "retired": false,
-   "speed_tps": 697.7,
-   "time_per_task": 13.2,
-   "ttft": 3.45
+   "speed_tps": 636.9,
+   "time_per_task": 13.77,
+   "ttft": 3.53
   },
   "mimo-v2-5-0424": {
    "capabilities": {
@@ -8911,7 +8971,7 @@
    "creator": "Xiaomi",
    "first_seen": "2026-08-19",
    "intelligence_index": 26.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "MiMo-V2.5-Pro",
    "observations": [
     [
@@ -8951,7 +9011,7 @@
    "open_weights": true,
    "release_date": "2026-04-22",
    "retired": false,
-   "speed_tps": 32.0,
+   "speed_tps": 31.4,
    "time_history": [
     [
      "2026-07-07",
@@ -9002,8 +9062,8 @@
      597.77
     ]
    ],
-   "time_per_task": 866.87,
-   "ttft": 2.45
+   "time_per_task": 889.37,
+   "ttft": 2.54
   },
   "mimo-v2-6-flash": {
    "capabilities": {
@@ -9017,7 +9077,7 @@
    "creator": "Xiaomi",
    "first_seen": "2026-09-27",
    "intelligence_index": 37.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "MiMo-V2.6-Flash",
    "observations": [
     [
@@ -9030,8 +9090,8 @@
    "open_weights": true,
    "release_date": "2026-09-21",
    "retired": false,
-   "speed_tps": 55.4,
-   "time_per_task": 1332.13,
+   "speed_tps": 56.6,
+   "time_per_task": 1272.62,
    "ttft": 4.25
   },
   "mimo-v2-6-pro": {
@@ -9045,7 +9105,7 @@
    "creator": "Xiaomi",
    "first_seen": "2026-09-21",
    "intelligence_index": 46.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "MiMo-V2.6-Pro",
    "observations": [
     [
@@ -9084,7 +9144,7 @@
    "retired": false,
    "speed_tps": 40.8,
    "time_per_task": 1535.49,
-   "ttft": 4.16
+   "ttft": 4.2
   },
   "minimax-m2-7": {
    "capabilities": {
@@ -9166,7 +9226,7 @@
    "creator": "MiniMax",
    "first_seen": "2026-08-19",
    "intelligence_index": 29.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "MiniMax-M3",
    "observations": [
     [
@@ -9262,7 +9322,7 @@
     ]
    ],
    "time_per_task": 462.79,
-   "ttft": 1.49
+   "ttft": 1.47
   },
   "ministral-3-14b": {
    "capabilities": {
@@ -9279,7 +9339,7 @@
    "creator": "Mistral",
    "first_seen": "2026-08-19",
    "intelligence_index": 6.0,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Ministral 3 14B",
    "observations": [
     [
@@ -9302,7 +9362,7 @@
    "open_weights": true,
    "release_date": "2025-12-02",
    "retired": false,
-   "speed_tps": 79.0,
+   "speed_tps": 77.1,
    "time_history": [
     [
      "2026-07-07",
@@ -9329,8 +9389,8 @@
      118.01
     ]
    ],
-   "time_per_task": 73.27,
-   "ttft": 0.94
+   "time_per_task": 75.91,
+   "ttft": 0.96
   },
   "ministral-3-3b": {
    "capabilities": {
@@ -9347,7 +9407,7 @@
    "creator": "Mistral",
    "first_seen": "2026-08-19",
    "intelligence_index": 4.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Ministral 3 3B",
    "observations": [
     [
@@ -9400,7 +9460,7 @@
     ]
    ],
    "time_per_task": 64.5,
-   "ttft": 0.72
+   "ttft": 0.77
   },
   "ministral-3-8b": {
    "capabilities": {
@@ -9417,7 +9477,7 @@
    "creator": "Mistral",
    "first_seen": "2026-08-19",
    "intelligence_index": 5.5,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Ministral 3 8B",
    "observations": [
     [
@@ -9472,7 +9532,7 @@
     ]
    ],
    "time_per_task": 72.63,
-   "ttft": 0.79
+   "ttft": 0.76
   },
   "mistral-large-3": {
    "capabilities": {
@@ -9489,7 +9549,7 @@
    "creator": "Mistral",
    "first_seen": "2026-08-19",
    "intelligence_index": 9.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Mistral Large 3",
    "observations": [
     [
@@ -9557,7 +9617,7 @@
     ]
    ],
    "time_per_task": 69.8,
-   "ttft": 1.04
+   "ttft": 1.05
   },
   "mistral-medium-3-1": {
    "capabilities": {
@@ -9627,7 +9687,7 @@
    "creator": "Mistral",
    "first_seen": "2026-08-19",
    "intelligence_index": 14.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Mistral Medium 3.5",
    "observations": [
     [
@@ -9744,7 +9804,7 @@
      175.48
     ]
    ],
-   "time_per_task": 153.89,
+   "time_per_task": 150.81,
    "ttft": 2.3
   },
   "mistral-small-3-1": {
@@ -9761,7 +9821,7 @@
    "creator": "Mistral",
    "first_seen": "2026-08-19",
    "intelligence_index": 7.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Mistral Small 3.1",
    "observations": [
     [
@@ -9874,7 +9934,7 @@
    "creator": "Mistral",
    "first_seen": "2026-08-19",
    "intelligence_index": 11.3,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Mistral Small 4 (Reasoning)",
    "observations": [
     [
@@ -9903,7 +9963,7 @@
    "open_weights": true,
    "release_date": "2026-03-16",
    "retired": false,
-   "speed_tps": 179.3,
+   "speed_tps": 183.5,
    "time_history": [
     [
      "2026-07-12",
@@ -9918,7 +9978,7 @@
      99.4
     ]
    ],
-   "time_per_task": 84.79,
+   "time_per_task": 86.03,
    "ttft": 0.78
   },
   "muse-glimmer": {
@@ -9935,7 +9995,7 @@
    "creator": "Meta",
    "first_seen": "2026-08-19",
    "intelligence_index": 17.5,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Muse Glimmer (high)",
    "observations": [
     [
@@ -9985,15 +10045,15 @@
    "open_weights": true,
    "release_date": "2026-08-10",
    "retired": false,
-   "speed_tps": 143.8,
+   "speed_tps": 144.6,
    "time_history": [
     [
      "2026-08-12",
      122.56
     ]
    ],
-   "time_per_task": 97.92,
-   "ttft": 1.37
+   "time_per_task": 99.09,
+   "ttft": 1.35
   },
   "muse-spark-1-1": {
    "capabilities": {
@@ -10008,7 +10068,7 @@
    "creator": "Meta",
    "first_seen": "2026-08-19",
    "intelligence_index": 33.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Muse Spark 1.1 (xhigh)",
    "observations": [
     [
@@ -10090,7 +10150,7 @@
    "creator": "Meta",
    "first_seen": "2026-08-19",
    "intelligence_index": 39.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Muse Spark 1.2 (xhigh)",
    "observations": [
     [
@@ -10142,7 +10202,7 @@
    "open_weights": false,
    "release_date": "2026-08-05",
    "retired": false,
-   "speed_tps": 225.8,
+   "speed_tps": 226.2,
    "time_history": [
     [
      "2026-09-01",
@@ -10157,15 +10217,15 @@
      141.52
     ]
    ],
-   "time_per_task": 212.18,
-   "ttft": 11.46
+   "time_per_task": 210.88,
+   "ttft": 11.94
   },
   "muse-spark-1-3": {
    "capabilities": {
     "agentic": 57.9,
     "coding": 84.3,
     "knowledge": 25.0,
-    "knowledgework": 58.7,
+    "knowledgework": 58.6,
     "longcontext": 83.0,
     "science": 93.5
    },
@@ -10173,7 +10233,7 @@
    "creator": "Meta",
    "first_seen": "2026-09-05",
    "intelligence_index": 48.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Muse Spark 1.3 (max)",
    "observations": [
     [
@@ -10196,9 +10256,9 @@
    "open_weights": false,
    "release_date": "2026-09-02",
    "retired": false,
-   "speed_tps": 168.3,
-   "time_per_task": 356.39,
-   "ttft": 29.14
+   "speed_tps": 177.3,
+   "time_per_task": 340.94,
+   "ttft": 33.57
   },
   "muse-spark-1-3-xhigh": {
    "capabilities": {
@@ -10214,7 +10274,7 @@
    "creator": "Meta",
    "first_seen": "2026-09-02",
    "intelligence_index": 45.1,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Muse Spark 1.3 (xhigh)",
    "observations": [
     [
@@ -10256,7 +10316,7 @@
     ]
    ],
    "time_per_task": 364.4,
-   "ttft": 33.78
+   "ttft": 36.31
   },
   "nemotron-3-5-lightning": {
    "capabilities": {
@@ -10271,7 +10331,7 @@
    "creator": "NVIDIA",
    "first_seen": "2026-08-19",
    "intelligence_index": 12.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Nemotron 3.5 Lightning",
    "observations": [
     [
@@ -10311,14 +10371,14 @@
    "open_weights": true,
    "release_date": "2026-08-11",
    "retired": false,
-   "speed_tps": 286.1,
+   "speed_tps": 291.5,
    "time_history": [
     [
      "2026-08-12",
      94.72
     ]
    ],
-   "time_per_task": 120.28,
+   "time_per_task": 118.77,
    "ttft": 0.62
   },
   "nvidia-nemotron-3-nano-30b-a3b-reasoning": {
@@ -10335,7 +10395,7 @@
    "creator": "NVIDIA",
    "first_seen": "2026-08-19",
    "intelligence_index": 8.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "NVIDIA Nemotron 3 Nano 30B A3B (Reasoning)",
    "observations": [
     [
@@ -10442,7 +10502,7 @@
    "creator": "NVIDIA",
    "first_seen": "2026-08-19",
    "intelligence_index": 12.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Nemotron 3 Super 120B A12B (Reasoning)",
    "observations": [
     [
@@ -10501,7 +10561,7 @@
    "open_weights": true,
    "release_date": "2026-03-11",
    "retired": false,
-   "speed_tps": 164.6,
+   "speed_tps": 164.8,
    "time_history": [
     [
      "2026-07-07",
@@ -10540,7 +10600,7 @@
      180.7
     ]
    ],
-   "time_per_task": 640.46,
+   "time_per_task": 650.98,
    "ttft": 1.3
   },
   "nvidia-nemotron-3-ultra-550b-a55b": {
@@ -10557,7 +10617,7 @@
    "creator": "NVIDIA",
    "first_seen": "2026-08-19",
    "intelligence_index": 22.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Nemotron 3 Ultra 550B A55B (Reasoning)",
    "observations": [
     [
@@ -10626,7 +10686,7 @@
    "open_weights": true,
    "release_date": "2026-06-04",
    "retired": false,
-   "speed_tps": 214.2,
+   "speed_tps": 210.2,
    "time_history": [
     [
      "2026-07-07",
@@ -10693,7 +10753,7 @@
      193.71
     ]
    ],
-   "time_per_task": 129.04,
+   "time_per_task": 129.94,
    "ttft": 1.05
   },
   "quasar-438b": {
@@ -10709,7 +10769,7 @@
    "creator": "Multiverse Computing",
    "first_seen": "2026-09-01",
    "intelligence_index": 26.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Quasar 438B (max, based on GLM-5.2)",
    "observations": [
     [
@@ -10744,8 +10804,8 @@
    "open_weights": false,
    "release_date": "2026-08-10",
    "retired": false,
-   "speed_tps": 146.3,
-   "time_per_task": 478.84,
+   "speed_tps": 141.1,
+   "time_per_task": 496.93,
    "ttft": 1.19
   },
   "qwen3-235b-a22b-instruct-2507-reasoning": {
@@ -10762,7 +10822,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 12.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3 235B A22B 2507 (Reasoning)",
    "observations": [
     [
@@ -10779,7 +10839,7 @@
    "open_weights": true,
    "release_date": "2025-07-25",
    "retired": false,
-   "speed_tps": 73.1,
+   "speed_tps": 72.6,
    "time_history": [
     [
      "2026-07-12",
@@ -10810,8 +10870,8 @@
      277.66
     ]
    ],
-   "time_per_task": 325.32,
-   "ttft": 2.76
+   "time_per_task": 332.61,
+   "ttft": 2.78
   },
   "qwen3-30b-a3b-2507-reasoning": {
    "capabilities": {
@@ -10827,7 +10887,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 9.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3 30B A3B 2507 (Reasoning)",
    "observations": [
     [
@@ -10945,7 +11005,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 15.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.5 122B A10B (Reasoning)",
    "observations": [
     [
@@ -10968,7 +11028,7 @@
    "open_weights": true,
    "release_date": "2026-02-24",
    "retired": false,
-   "speed_tps": 125.5,
+   "speed_tps": 124.5,
    "time_history": [
     [
      "2026-07-07",
@@ -11081,7 +11141,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 18.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.5 397B A17B (Reasoning)",
    "observations": [
     [
@@ -11104,7 +11164,7 @@
    "open_weights": true,
    "release_date": "2026-02-16",
    "retired": false,
-   "speed_tps": 89.4,
+   "speed_tps": 86.6,
    "time_history": [
     [
      "2026-07-07",
@@ -11132,7 +11192,7 @@
     ]
    ],
    "time_per_task": 195.24,
-   "ttft": 2.3
+   "ttft": 2.28
   },
   "qwen3-5-9b": {
    "capabilities": {
@@ -11149,7 +11209,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 11.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.5 9B (Reasoning)",
    "observations": [
     [
@@ -11167,7 +11227,7 @@
    "open_weights": true,
    "release_date": "2026-03-02",
    "retired": false,
-   "speed_tps": 34.8,
+   "speed_tps": 35.9,
    "time_history": [
     [
      "2026-07-07",
@@ -11186,8 +11246,8 @@
      383.27
     ]
    ],
-   "time_per_task": 849.08,
-   "ttft": 2.44
+   "time_per_task": 804.38,
+   "ttft": 2.45
   },
   "qwen3-6-27b": {
    "capabilities": {
@@ -11204,7 +11264,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 21.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.6 27B (Reasoning)",
    "observations": [
     [
@@ -11238,8 +11298,8 @@
      468.01
     ]
    ],
-   "time_per_task": 516.75,
-   "ttft": 3.68
+   "time_per_task": 517.29,
+   "ttft": 3.69
   },
   "qwen3-6-27b-non-reasoning": {
    "capabilities": {
@@ -11294,7 +11354,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 18.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.6 35B A3B (Reasoning)",
    "observations": [
     [
@@ -11355,7 +11415,7 @@
     ]
    ],
    "time_per_task": 271.05,
-   "ttft": 2.13
+   "ttft": 2.11
   },
   "qwen3-6-35b-a3b-non-reasoning": {
    "capabilities": {
@@ -11455,7 +11515,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 29.5,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.7 Max",
    "observations": [
     [
@@ -11488,14 +11548,14 @@
    "open_weights": false,
    "release_date": "2026-05-19",
    "retired": false,
-   "speed_tps": 201.5,
+   "speed_tps": 203.2,
    "time_history": [
     [
      "2026-07-07",
      91.71
     ]
    ],
-   "time_per_task": 138.98,
+   "time_per_task": 137.02,
    "ttft": 2.28
   },
   "qwen3-7-plus": {
@@ -11513,7 +11573,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 25.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.7 Plus",
    "observations": [
     [
@@ -11564,15 +11624,15 @@
    "open_weights": false,
    "release_date": "2026-06-01",
    "retired": false,
-   "speed_tps": 56.8,
+   "speed_tps": 56.7,
    "time_history": [
     [
      "2026-07-07",
      398.37
     ]
    ],
-   "time_per_task": 616.21,
-   "ttft": 2.13
+   "time_per_task": 616.23,
+   "ttft": 2.22
   },
   "qwen3-8-2-4t-a95b": {
    "capabilities": {
@@ -11587,7 +11647,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 39.9,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.8 2.4T A95B",
    "observations": [
     [
@@ -11620,7 +11680,7 @@
    "open_weights": true,
    "release_date": "2026-08-12",
    "retired": false,
-   "speed_tps": 39.2,
+   "speed_tps": 39.9,
    "time_history": [
     [
      "2026-08-14",
@@ -11652,7 +11712,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-21",
    "intelligence_index": 33.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.8 27B (xhigh)",
    "observations": [
     [
@@ -11743,7 +11803,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-22",
    "intelligence_index": 26.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.8 27B (low)",
    "observations": [
     [
@@ -11812,7 +11872,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-22",
    "intelligence_index": 27.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.8 27B (medium)",
    "observations": [
     [
@@ -11876,7 +11936,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-25",
    "intelligence_index": 20.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.8 27B (Non-reasoning)",
    "observations": [
     [
@@ -11914,7 +11974,7 @@
     ]
    ],
    "time_per_task": 569.44,
-   "ttft": 3.88
+   "ttft": 3.86
   },
   "qwen3-8-flash-next": {
    "capabilities": {
@@ -11930,7 +11990,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-28",
    "intelligence_index": 39.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.8-Flash-Next",
    "observations": [
     [
@@ -11953,14 +12013,14 @@
    "open_weights": true,
    "release_date": "2026-08-26",
    "retired": false,
-   "speed_tps": 57.6,
+   "speed_tps": 58.4,
    "time_history": [
     [
      "2026-08-27",
      603.37
     ]
    ],
-   "time_per_task": 1565.65,
+   "time_per_task": 1547.5,
    "ttft": 2.5
   },
   "qwen3-8-max": {
@@ -11977,7 +12037,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 45.4,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.8 Max (0902)",
    "observations": [
     [
@@ -12010,7 +12070,7 @@
    "open_weights": false,
    "release_date": "2026-09-02",
    "retired": false,
-   "speed_tps": 38.8,
+   "speed_tps": 39.0,
    "time_history": [
     [
      "2026-08-06",
@@ -12037,7 +12097,7 @@
      819.66
     ]
    ],
-   "time_per_task": 2301.37,
+   "time_per_task": 2225.19,
    "ttft": 3.0
   },
   "qwen3-8-max-0803": {
@@ -12054,7 +12114,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-09-15",
    "intelligence_index": 40.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3.8 Max",
    "observations": [
     [
@@ -12073,8 +12133,8 @@
    "open_weights": false,
    "release_date": "2026-08-03",
    "retired": false,
-   "speed_tps": 37.5,
-   "time_per_task": 1337.39,
+   "speed_tps": 38.6,
+   "time_per_task": 1289.41,
    "ttft": 2.95
   },
   "qwen3-coder-next": {
@@ -12091,7 +12151,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 9.2,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Qwen3 Coder Next",
    "observations": [
     [
@@ -12119,7 +12179,7 @@
    "open_weights": true,
    "release_date": "2026-02-03",
    "retired": false,
-   "speed_tps": 101.9,
+   "speed_tps": 112.4,
    "time_history": [
     [
      "2026-07-07",
@@ -12146,7 +12206,7 @@
      107.64
     ]
    ],
-   "time_per_task": 142.73,
+   "time_per_task": 130.1,
    "ttft": 1.23
   },
   "qwen3-next-80b-a3b-reasoning": {
@@ -12208,7 +12268,7 @@
    "creator": "InclusionAI",
    "first_seen": "2026-08-19",
    "intelligence_index": 16.6,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Ring-2.6-1T",
    "observations": [
     [
@@ -12231,7 +12291,7 @@
    "open_weights": true,
    "release_date": "2026-05-08",
    "retired": false,
-   "speed_tps": 117.6,
+   "speed_tps": 115.6,
    "time_history": [
     [
      "2026-07-07",
@@ -12255,7 +12315,7 @@
    "creator": "Upstage",
    "first_seen": "2026-08-19",
    "intelligence_index": 7.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Solar Pro 3",
    "observations": [
     [
@@ -12288,7 +12348,7 @@
    "open_weights": false,
    "release_date": "2026-04-06",
    "retired": false,
-   "speed_tps": 141.4,
+   "speed_tps": 146.9,
    "time_history": [
     [
      "2026-07-12",
@@ -12311,7 +12371,7 @@
      415.37
     ]
    ],
-   "time_per_task": 302.4,
+   "time_per_task": 297.07,
    "ttft": 1.29
   },
   "solar-pro4": {
@@ -12433,7 +12493,7 @@
    "creator": "StepFun",
    "first_seen": "2026-09-19",
    "intelligence_index": 43.7,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Step 5 Preview",
    "observations": [
     [
@@ -12464,9 +12524,9 @@
    "open_weights": false,
    "release_date": "2026-09-18",
    "retired": false,
-   "speed_tps": 84.8,
+   "speed_tps": 85.4,
    "time_per_task": 644.18,
-   "ttft": 3.01
+   "ttft": 3.03
   },
   "trinity-large-thinking": {
    "capabilities": {
@@ -12482,7 +12542,7 @@
    "creator": "Arcee AI",
    "first_seen": "2026-08-19",
    "intelligence_index": 10.8,
-   "last_seen": "2026-09-29",
+   "last_seen": "2026-09-30",
    "name": "Trinity Large Thinking",
    "observations": [
     [
@@ -12541,8 +12601,8 @@
     ]
    ],
    "time_per_task": 132.35,
-   "ttft": 1.32
+   "ttft": 1.28
   }
  },
- "updated": "2026-09-29"
+ "updated": "2026-09-30"
 }
