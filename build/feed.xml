@@ -8,6 +8,14 @@
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of the Artificial Analysis Intelligence Index, through a release or a price change.</subtitle>
   <entry>
+    <title>2026-10-07: Claude Haiku 5.5 (Xhigh, Default Fallback) (new model, index 41.2)</title>
+    <link href="https://llm-frontier.catalystneuro.com/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-10-07-claude-haiku-5-5.png" />
+    <id>https://llm-frontier.catalystneuro.com/advance/2026-10-07/claude-haiku-5-5-xhigh</id>
+    <updated>2026-10-07T00:00:00Z</updated>
+    <summary>Claude Haiku 5.5 (Xhigh, Default Fallback): now the cheapest way to reach index 38.1 to 41.2 at $0.12 per task, taking it from GPT-6.1 Sol. Proprietary.</summary>
+  </entry>
+  <entry>
     <title>2026-10-01: GPT-6 Luna (Max) (price change, index 38.1)</title>
     <link href="https://llm-frontier.catalystneuro.com/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-10-01-gpt-6-luna.png" />
@@ -478,13 +486,5 @@
     <id>https://llm-frontier.catalystneuro.com/advance/2026-06-01/minimax-m3</id>
     <updated>2026-06-01T00:00:00Z</updated>
     <summary>MiniMax-M3: now the cheapest way to reach index 45.3 to 45.4 at $0.14 per task, taking it from Gemini 3.1 Pro Preview. Open weights.</summary>
-  </entry>
-  <entry>
-    <title>2026-05-28: Claude Opus 4.8 (Max) (new model, index 57.3)</title>
-    <link href="https://llm-frontier.catalystneuro.com/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-05-28-claude-opus-4-8.png" />
-    <id>https://llm-frontier.catalystneuro.com/advance/2026-05-28/claude-opus-4-8</id>
-    <updated>2026-05-28T00:00:00Z</updated>
-    <summary>Claude Opus 4.8 (Max): pushed the intelligence ceiling from 56.3 to 57.3, at $2.03 per task. Proprietary.</summary>
   </entry>
 </feed>
