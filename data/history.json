@@ -115,14 +115,14 @@
    "open_weights": false,
    "release_date": "2026-07-24",
    "retired": false,
-   "speed_tps": 1508.5,
+   "speed_tps": 1491.3,
    "time_history": [
     [
      "2026-08-01",
      9.54
     ]
    ],
-   "time_per_task": 2.78,
+   "time_per_task": 2.82,
    "ttft": 0.56
   },
   "claude-4-5-haiku-reasoning": {
@@ -352,7 +352,7 @@
     "agentic": 59.4,
     "coding": 91.4,
     "knowledge": 43.5,
-    "knowledgework": 62.9,
+    "knowledgework": 62.8,
     "longcontext": 85.3,
     "science": 93.7
    },
@@ -382,15 +382,15 @@
    "open_weights": false,
    "release_date": "2026-09-01",
    "retired": false,
-   "speed_tps": 66.3,
+   "speed_tps": 67.8,
    "time_history": [
     [
      "2026-09-02",
      441.35
     ]
    ],
-   "time_per_task": 732.06,
-   "ttft": 295.21
+   "time_per_task": 712.5,
+   "ttft": 293.59
   },
   "claude-fable-5-1-high": {
    "capabilities": {
@@ -435,7 +435,7 @@
     ]
    ],
    "time_per_task": 407.71,
-   "ttft": 22.67
+   "ttft": 21.6
   },
   "claude-fable-5-1-low": {
    "capabilities": {
@@ -478,15 +478,15 @@
    "open_weights": false,
    "release_date": "2026-09-01",
    "retired": false,
-   "speed_tps": 54.5,
+   "speed_tps": 53.1,
    "time_history": [
     [
      "2026-09-02",
      76.47
     ]
    ],
-   "time_per_task": 250.62,
-   "ttft": 3.67
+   "time_per_task": 252.48,
+   "ttft": 3.62
   },
   "claude-fable-5-1-medium": {
    "capabilities": {
@@ -529,15 +529,15 @@
    "open_weights": false,
    "release_date": "2026-09-01",
    "retired": false,
-   "speed_tps": 54.3,
+   "speed_tps": 53.2,
    "time_history": [
     [
      "2026-09-02",
      122.23
     ]
    ],
-   "time_per_task": 318.36,
-   "ttft": 7.6
+   "time_per_task": 320.17,
+   "ttft": 6.65
   },
   "claude-fable-5-1-xhigh": {
    "capabilities": {
@@ -574,15 +574,15 @@
    "open_weights": false,
    "release_date": "2026-09-01",
    "retired": false,
-   "speed_tps": 58.3,
+   "speed_tps": 60.4,
    "time_history": [
     [
      "2026-09-02",
      303.49
     ]
    ],
-   "time_per_task": 635.1,
-   "ttft": 82.61
+   "time_per_task": 607.36,
+   "ttft": 85.17
   },
   "claude-haiku-5-5": {
    "capabilities": {
@@ -609,8 +609,8 @@
    "release_date": "2026-10-07",
    "retired": false,
    "speed_tps": 243.4,
-   "time_per_task": 424.6,
-   "ttft": 415.3
+   "time_per_task": 422.76,
+   "ttft": 323.26
   },
   "claude-haiku-5-5-high": {
    "capabilities": {
@@ -666,7 +666,7 @@
    "retired": false,
    "speed_tps": 181.2,
    "time_per_task": 61.83,
-   "ttft": 13.58
+   "ttft": 11.99
   },
   "claude-haiku-5-5-medium": {
    "capabilities": {
@@ -694,7 +694,7 @@
    "retired": false,
    "speed_tps": 137.3,
    "time_per_task": 134.41,
-   "ttft": 14.18
+   "ttft": 12.63
   },
   "claude-haiku-5-5-xhigh": {
    "capabilities": {
@@ -722,7 +722,7 @@
    "retired": false,
    "speed_tps": 188.3,
    "time_per_task": 291.49,
-   "ttft": 86.79
+   "ttft": 70.88
   },
   "claude-opus-4-7": {
    "capabilities": {
@@ -815,7 +815,7 @@
      502.92
     ]
    ],
-   "time_per_task": 707.41,
+   "time_per_task": 713.38,
    "ttft": 41.41
   },
   "claude-opus-5": {
@@ -860,15 +860,15 @@
    "open_weights": false,
    "release_date": "2026-07-24",
    "retired": false,
-   "speed_tps": 51.7,
+   "speed_tps": 50.5,
    "time_history": [
     [
      "2026-07-25",
      419.1
     ]
    ],
-   "time_per_task": 865.38,
-   "ttft": 67.19
+   "time_per_task": 873.78,
+   "ttft": 64.89
   },
   "claude-opus-5-5": {
    "capabilities": {
@@ -894,9 +894,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 95.3,
-   "time_per_task": 784.23,
-   "ttft": 717.22
+   "speed_tps": 95.5,
+   "time_per_task": 783.19,
+   "ttft": 723.65
   },
   "claude-opus-5-5-high": {
    "capabilities": {
@@ -980,7 +980,7 @@
    "retired": false,
    "speed_tps": 76.5,
    "time_per_task": 204.82,
-   "ttft": 22.0
+   "ttft": 21.32
   },
   "claude-opus-5-5-xhigh": {
    "capabilities": {
@@ -1006,9 +1006,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 79.7,
-   "time_per_task": 513.68,
-   "ttft": 131.98
+   "speed_tps": 79.9,
+   "time_per_task": 513.29,
+   "ttft": 134.12
   },
   "claude-opus-5-high": {
    "capabilities": {
@@ -1052,7 +1052,7 @@
    "open_weights": false,
    "release_date": "2026-07-24",
    "retired": false,
-   "speed_tps": 53.6,
+   "speed_tps": 52.5,
    "time_history": [
     [
      "2026-07-25",
@@ -1063,7 +1063,7 @@
      259.09
     ]
    ],
-   "time_per_task": 531.62,
+   "time_per_task": 545.71,
    "ttft": 16.6
   },
   "claude-opus-5-low": {
@@ -1108,15 +1108,15 @@
    "open_weights": false,
    "release_date": "2026-07-24",
    "retired": false,
-   "speed_tps": 54.1,
+   "speed_tps": 50.9,
    "time_history": [
     [
      "2026-07-25",
      70.13
     ]
    ],
-   "time_per_task": 162.87,
-   "ttft": 2.72
+   "time_per_task": 172.61,
+   "ttft": 2.94
   },
   "claude-opus-5-medium": {
    "capabilities": {
@@ -1160,15 +1160,15 @@
    "open_weights": false,
    "release_date": "2026-07-24",
    "retired": false,
-   "speed_tps": 52.3,
+   "speed_tps": 52.2,
    "time_history": [
     [
      "2026-07-25",
      143.9
     ]
    ],
-   "time_per_task": 328.34,
-   "ttft": 4.53
+   "time_per_task": 333.38,
+   "ttft": 4.13
   },
   "claude-opus-5-xhigh": {
    "capabilities": {
@@ -1206,15 +1206,15 @@
    "open_weights": false,
    "release_date": "2026-07-24",
    "retired": false,
-   "speed_tps": 52.3,
+   "speed_tps": 50.5,
    "time_history": [
     [
      "2026-07-25",
      349.22
     ]
    ],
-   "time_per_task": 699.93,
-   "ttft": 38.69
+   "time_per_task": 729.04,
+   "ttft": 37.08
   },
   "claude-sonnet-4-6-adaptive": {
    "capabilities": {
@@ -1284,7 +1284,7 @@
    "open_weights": false,
    "release_date": "2026-02-17",
    "retired": false,
-   "speed_tps": 48.2,
+   "speed_tps": 49.5,
    "time_history": [
     [
      "2026-07-07",
@@ -1339,8 +1339,8 @@
      907.61
     ]
    ],
-   "time_per_task": 1354.36,
-   "ttft": 118.62
+   "time_per_task": 1285.67,
+   "ttft": 117.15
   },
   "claude-sonnet-5": {
    "capabilities": {
@@ -1384,7 +1384,7 @@
    "open_weights": false,
    "release_date": "2026-06-30",
    "retired": false,
-   "speed_tps": 79.4,
+   "speed_tps": 79.3,
    "time_history": [
     [
      "2026-07-07",
@@ -1403,8 +1403,8 @@
      622.58
     ]
    ],
-   "time_per_task": 882.72,
-   "ttft": 227.51
+   "time_per_task": 883.41,
+   "ttft": 208.59
   },
   "claude-sonnet-5-5": {
    "capabilities": {
@@ -1448,9 +1448,9 @@
    "open_weights": false,
    "release_date": "2026-09-28",
    "retired": false,
-   "speed_tps": 129.1,
-   "time_per_task": 968.33,
-   "ttft": 460.74
+   "speed_tps": 136.2,
+   "time_per_task": 921.42,
+   "ttft": 485.42
   },
   "claude-sonnet-5-5-high": {
    "capabilities": {
@@ -1490,7 +1490,7 @@
    "retired": false,
    "speed_tps": 103.6,
    "time_per_task": 217.35,
-   "ttft": 13.04
+   "ttft": 12.7
   },
   "claude-sonnet-5-5-low": {
    "capabilities": {
@@ -1528,9 +1528,9 @@
    "open_weights": false,
    "release_date": "2026-09-28",
    "retired": false,
-   "speed_tps": 102.8,
-   "time_per_task": 88.03,
-   "ttft": 1.11
+   "speed_tps": 100.6,
+   "time_per_task": 89.61,
+   "ttft": 1.05
   },
   "claude-sonnet-5-5-medium": {
    "capabilities": {
@@ -1621,8 +1621,8 @@
    "release_date": "2026-09-28",
    "retired": false,
    "speed_tps": 107.3,
-   "time_per_task": 428.17,
-   "ttft": 35.0
+   "time_per_task": 430.69,
+   "ttft": 33.54
   },
   "claude-sonnet-5-high": {
    "capabilities": {
@@ -1653,8 +1653,8 @@
    "open_weights": false,
    "release_date": "2026-06-30",
    "retired": false,
-   "speed_tps": 64.9,
-   "time_per_task": 398.74,
+   "speed_tps": 64.2,
+   "time_per_task": 402.23,
    "ttft": 10.56
   },
   "claude-sonnet-5-low": {
@@ -1686,9 +1686,9 @@
    "open_weights": false,
    "release_date": "2026-06-30",
    "retired": false,
-   "speed_tps": 62.7,
-   "time_per_task": 146.99,
-   "ttft": 1.22
+   "speed_tps": 60.4,
+   "time_per_task": 148.0,
+   "ttft": 0.99
   },
   "claude-sonnet-5-medium": {
    "capabilities": {
@@ -1719,9 +1719,9 @@
    "open_weights": false,
    "release_date": "2026-06-30",
    "retired": false,
-   "speed_tps": 62.3,
-   "time_per_task": 257.24,
-   "ttft": 1.5
+   "speed_tps": 61.9,
+   "time_per_task": 260.89,
+   "ttft": 1.49
   },
   "claude-sonnet-5-non-reasoning": {
    "capabilities": {
@@ -1786,9 +1786,9 @@
    "open_weights": false,
    "release_date": "2026-06-30",
    "retired": false,
-   "speed_tps": 69.7,
-   "time_per_task": 585.77,
-   "ttft": 29.0
+   "speed_tps": 64.7,
+   "time_per_task": 589.29,
+   "ttft": 25.33
   },
   "deepseek-r1-0120": {
    "capabilities": {
@@ -1969,9 +1969,9 @@
    "open_weights": true,
    "release_date": "2026-09-10",
    "retired": false,
-   "speed_tps": 218.6,
-   "time_per_task": 155.52,
-   "ttft": 1.06
+   "speed_tps": 211.4,
+   "time_per_task": 160.43,
+   "ttft": 1.08
   },
   "deepseek-v4-flash": {
    "capabilities": {
@@ -2054,7 +2054,7 @@
     ]
    ],
    "time_per_task": 196.83,
-   "ttft": 0.89
+   "ttft": 0.9
   },
   "deepseek-v4-flash-0420": {
    "capabilities": {
@@ -2234,7 +2234,7 @@
    "retired": false,
    "speed_tps": 220.3,
    "time_per_task": 250.19,
-   "ttft": 1.05
+   "ttft": 1.1
   },
   "deepseek-v4-pro": {
    "capabilities": {
@@ -2311,7 +2311,7 @@
    "open_weights": true,
    "release_date": "2026-08-13",
    "retired": false,
-   "speed_tps": 99.8,
+   "speed_tps": 97.5,
    "time_history": [
     [
      "2026-08-13",
@@ -2331,7 +2331,7 @@
     ]
    ],
    "time_per_task": 443.86,
-   "ttft": 1.65
+   "ttft": 1.6
   },
   "deepseek-v4-pro-0424": {
    "capabilities": {
@@ -2392,7 +2392,7 @@
    "open_weights": true,
    "release_date": "2026-04-24",
    "retired": false,
-   "speed_tps": 97.8,
+   "speed_tps": 97.2,
    "time_history": [
     [
      "2026-07-12",
@@ -2419,8 +2419,8 @@
      496.79
     ]
    ],
-   "time_per_task": 419.13,
-   "ttft": 1.7
+   "time_per_task": 435.9,
+   "ttft": 1.69
   },
   "deepseek-v4-pro-0424-high": {
    "capabilities": {
@@ -2528,13 +2528,19 @@
      0.455253,
      20.4,
      244.49
+    ],
+    [
+     "2026-10-08",
+     0.455253,
+     20.4,
+     310.8
     ]
    ],
    "open_weights": true,
    "release_date": "2026-08-13",
    "retired": false,
-   "speed_tps": 107.3,
-   "time_per_task": 272.28,
+   "speed_tps": 94.6,
+   "time_per_task": 310.8,
    "ttft": 1.58
   },
   "gemini-2-5-pro": {
@@ -2581,7 +2587,7 @@
    "open_weights": false,
    "release_date": "2025-06-05",
    "retired": false,
-   "speed_tps": 121.4,
+   "speed_tps": 118.9,
    "time_history": [
     [
      "2026-07-07",
@@ -2592,7 +2598,7 @@
      97.84
     ]
    ],
-   "time_per_task": 81.98,
+   "time_per_task": 86.68,
    "ttft": 21.79
   },
   "gemini-3-1-flash-lite-preview": {
@@ -2662,7 +2668,7 @@
    "open_weights": false,
    "release_date": "2026-03-03",
    "retired": false,
-   "speed_tps": 282.7,
+   "speed_tps": 277.6,
    "time_history": [
     [
      "2026-07-07",
@@ -2677,7 +2683,7 @@
      61.45
     ]
    ],
-   "time_per_task": 42.44,
+   "time_per_task": 42.62,
    "ttft": 5.5
   },
   "gemini-3-1-pro-preview": {
@@ -2729,7 +2735,7 @@
    "open_weights": false,
    "release_date": "2026-02-19",
    "retired": false,
-   "speed_tps": 121.2,
+   "speed_tps": 116.4,
    "time_history": [
     [
      "2026-07-07",
@@ -2752,8 +2758,8 @@
      117.49
     ]
    ],
-   "time_per_task": 149.18,
-   "ttft": 23.15
+   "time_per_task": 151.07,
+   "ttft": 22.54
   },
   "gemini-3-5-flash": {
    "capabilities": {
@@ -2804,7 +2810,7 @@
    "open_weights": false,
    "release_date": "2026-05-19",
    "retired": false,
-   "speed_tps": 199.1,
+   "speed_tps": 197.4,
    "time_history": [
     [
      "2026-07-07",
@@ -2824,7 +2830,7 @@
     ]
    ],
    "time_per_task": 266.32,
-   "ttft": 16.67
+   "ttft": 16.52
   },
   "gemini-3-5-flash-lite": {
    "capabilities": {
@@ -2880,7 +2886,7 @@
    "open_weights": false,
    "release_date": "2026-07-21",
    "retired": false,
-   "speed_tps": 345.6,
+   "speed_tps": 348.6,
    "time_history": [
     [
      "2026-07-21",
@@ -2895,8 +2901,8 @@
      42.77
     ]
    ],
-   "time_per_task": 47.66,
-   "ttft": 8.75
+   "time_per_task": 46.17,
+   "ttft": 8.62
   },
   "gemini-3-6-flash": {
    "capabilities": {
@@ -2952,7 +2958,7 @@
    "open_weights": false,
    "release_date": "2026-07-21",
    "retired": false,
-   "speed_tps": 191.5,
+   "speed_tps": 189.2,
    "time_history": [
     [
      "2026-07-21",
@@ -2972,7 +2978,7 @@
     ]
    ],
    "time_per_task": 209.61,
-   "ttft": 15.21
+   "ttft": 14.68
   },
   "gemini-3-7-flash": {
    "capabilities": {
@@ -3022,7 +3028,7 @@
    "open_weights": false,
    "release_date": "2026-08-13",
    "retired": false,
-   "speed_tps": 273.0,
+   "speed_tps": 277.1,
    "time_history": [
     [
      "2026-08-14",
@@ -3033,8 +3039,8 @@
      129.2
     ]
    ],
-   "time_per_task": 212.26,
-   "ttft": 11.85
+   "time_per_task": 206.97,
+   "ttft": 11.49
   },
   "gemini-3-7-flash-low": {
    "capabilities": {
@@ -3179,8 +3185,8 @@
    "open_weights": false,
    "release_date": "2026-09-02",
    "retired": false,
-   "speed_tps": 125.2,
-   "time_per_task": 536.82,
+   "speed_tps": 122.7,
+   "time_per_task": 561.6,
    "ttft": 28.53
   },
   "gemini-3-8-flash-low": {
@@ -3588,7 +3594,7 @@
    "open_weights": true,
    "release_date": "2026-04-07",
    "retired": false,
-   "speed_tps": 57.3,
+   "speed_tps": 56.6,
    "time_history": [
     [
      "2026-07-07",
@@ -3623,8 +3629,8 @@
      487.01
     ]
    ],
-   "time_per_task": 675.72,
-   "ttft": 1.74
+   "time_per_task": 653.62,
+   "ttft": 1.75
   },
   "glm-5-2": {
    "capabilities": {
@@ -3676,7 +3682,7 @@
    "open_weights": true,
    "release_date": "2026-06-16",
    "retired": false,
-   "speed_tps": 89.3,
+   "speed_tps": 86.8,
    "time_history": [
     [
      "2026-07-07",
@@ -3727,15 +3733,15 @@
      630.85
     ]
    ],
-   "time_per_task": 645.83,
-   "ttft": 3.15
+   "time_per_task": 654.78,
+   "ttft": 3.25
   },
   "glm-5-3": {
    "capabilities": {
     "agentic": 62.2,
     "coding": 83.9,
     "knowledge": 14.3,
-    "knowledgework": 57.6,
+    "knowledgework": 57.5,
     "longcontext": 79.7,
     "science": 91.7
    },
@@ -3799,7 +3805,7 @@
    "open_weights": true,
    "release_date": "2026-08-18",
    "retired": false,
-   "speed_tps": 82.5,
+   "speed_tps": 83.0,
    "time_history": [
     [
      "2026-08-20",
@@ -3810,8 +3816,8 @@
      527.97
     ]
    ],
-   "time_per_task": 746.24,
-   "ttft": 2.7
+   "time_per_task": 728.19,
+   "ttft": 2.65
   },
   "glm-5-3-flash": {
    "capabilities": {
@@ -3827,7 +3833,7 @@
    "first_seen": "2026-08-26",
    "intelligence_index": 41.8,
    "last_seen": "2026-10-08",
-   "name": "GLM 5.3 Flash",
+   "name": "GLM-5.3-Flash",
    "observations": [
     [
      "2026-08-26",
@@ -3887,7 +3893,7 @@
    "retired": false,
    "speed_tps": 51.4,
    "time_per_task": 1035.45,
-   "ttft": 3.22
+   "ttft": 3.23
   },
   "glm-5-3-low": {
    "capabilities": {
@@ -3931,8 +3937,8 @@
    "open_weights": true,
    "release_date": "2026-08-18",
    "retired": false,
-   "speed_tps": 79.7,
-   "time_per_task": 372.17,
+   "speed_tps": 78.2,
+   "time_per_task": 376.71,
    "ttft": 2.93
   },
   "gpt-4-1-mini": {
@@ -4273,14 +4279,14 @@
    "open_weights": false,
    "release_date": "2026-03-17",
    "retired": false,
-   "speed_tps": 273.5,
+   "speed_tps": 270.5,
    "time_history": [
     [
      "2026-07-07",
      428.93
     ]
    ],
-   "time_per_task": 188.41,
+   "time_per_task": 191.18,
    "ttft": 101.85
   },
   "gpt-5-4-nano": {
@@ -4326,15 +4332,15 @@
    "open_weights": false,
    "release_date": "2026-03-17",
    "retired": false,
-   "speed_tps": 164.1,
+   "speed_tps": 164.5,
    "time_history": [
     [
      "2026-07-07",
      458.93
     ]
    ],
-   "time_per_task": 408.39,
-   "ttft": 69.49
+   "time_per_task": 405.67,
+   "ttft": 72.12
   },
   "gpt-5-5": {
    "capabilities": {
@@ -4406,7 +4412,7 @@
      215.44
     ]
    ],
-   "time_per_task": 257.32,
+   "time_per_task": 259.19,
    "ttft": 57.8
   },
   "gpt-5-5-high": {
@@ -4452,7 +4458,7 @@
    "open_weights": false,
    "release_date": "2026-04-23",
    "retired": false,
-   "speed_tps": 82.1,
+   "speed_tps": 82.0,
    "time_history": [
     [
      "2026-07-07",
@@ -4471,8 +4477,8 @@
      134.91
     ]
    ],
-   "time_per_task": 187.52,
-   "ttft": 30.93
+   "time_per_task": 191.23,
+   "ttft": 24.68
   },
   "gpt-5-5-instant-06-26": {
    "capabilities": {
@@ -4534,7 +4540,7 @@
      18.85
     ]
    ],
-   "time_per_task": 39.49,
+   "time_per_task": 38.79,
    "ttft": 0.96
   },
   "gpt-5-5-low": {
@@ -4656,7 +4662,7 @@
    "open_weights": false,
    "release_date": "2026-04-23",
    "retired": false,
-   "speed_tps": 82.6,
+   "speed_tps": 82.0,
    "time_history": [
     [
      "2026-07-07",
@@ -4675,7 +4681,7 @@
      81.27
     ]
    ],
-   "time_per_task": 103.11,
+   "time_per_task": 105.31,
    "ttft": 8.18
   },
   "gpt-5-5-non-reasoning": {
@@ -4816,7 +4822,7 @@
     ]
    ],
    "time_per_task": 348.92,
-   "ttft": 128.98
+   "ttft": 123.85
   },
   "gpt-5-6-luna-high": {
    "capabilities": {
@@ -4867,7 +4873,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 114.4,
+   "speed_tps": 113.0,
    "time_history": [
     [
      "2026-07-10",
@@ -4894,7 +4900,7 @@
      54.83
     ]
    ],
-   "time_per_task": 122.38,
+   "time_per_task": 123.0,
    "ttft": 9.06
   },
   "gpt-5-6-luna-low": {
@@ -4973,8 +4979,8 @@
      18.09
     ]
    ],
-   "time_per_task": 22.62,
-   "ttft": 1.5
+   "time_per_task": 22.24,
+   "ttft": 1.51
   },
   "gpt-5-6-luna-medium": {
    "capabilities": {
@@ -5049,7 +5055,7 @@
     ]
    ],
    "time_per_task": 40.27,
-   "ttft": 2.26
+   "ttft": 2.15
   },
   "gpt-5-6-luna-non-reasoning": {
    "capabilities": {
@@ -5182,7 +5188,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 112.8,
+   "speed_tps": 111.2,
    "time_history": [
     [
      "2026-07-10",
@@ -5197,8 +5203,8 @@
      101.52
     ]
    ],
-   "time_per_task": 209.7,
-   "ttft": 62.33
+   "time_per_task": 210.64,
+   "ttft": 59.57
   },
   "gpt-5-6-sol": {
    "capabilities": {
@@ -5303,8 +5309,8 @@
      253.07
     ]
    ],
-   "time_per_task": 378.38,
-   "ttft": 134.89
+   "time_per_task": 386.88,
+   "ttft": 122.13
   },
   "gpt-5-6-sol-high": {
    "capabilities": {
@@ -5394,7 +5400,7 @@
     ]
    ],
    "time_per_task": 178.96,
-   "ttft": 12.84
+   "ttft": 11.26
   },
   "gpt-5-6-sol-low": {
    "capabilities": {
@@ -5564,7 +5570,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 69.4,
+   "speed_tps": 69.8,
    "time_history": [
     [
      "2026-07-11",
@@ -5583,7 +5589,7 @@
      78.34
     ]
    ],
-   "time_per_task": 111.51,
+   "time_per_task": 110.72,
    "ttft": 4.97
   },
   "gpt-5-6-sol-non-reasoning": {
@@ -5717,7 +5723,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 75.4,
+   "speed_tps": 74.3,
    "time_history": [
     [
      "2026-07-11",
@@ -5744,8 +5750,8 @@
      167.83
     ]
    ],
-   "time_per_task": 258.87,
-   "ttft": 42.67
+   "time_per_task": 265.98,
+   "ttft": 40.8
   },
   "gpt-5-6-terra": {
    "capabilities": {
@@ -5887,7 +5893,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 90.5,
+   "speed_tps": 85.3,
    "time_history": [
     [
      "2026-07-10",
@@ -5914,8 +5920,8 @@
      100.05
     ]
    ],
-   "time_per_task": 123.52,
-   "ttft": 3.87
+   "time_per_task": 129.25,
+   "ttft": 2.93
   },
   "gpt-5-6-terra-low": {
    "capabilities": {
@@ -5966,7 +5972,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 90.3,
+   "speed_tps": 84.4,
    "time_history": [
     [
      "2026-07-10",
@@ -6009,8 +6015,8 @@
      27.0
     ]
    ],
-   "time_per_task": 43.42,
-   "ttft": 1.44
+   "time_per_task": 44.67,
+   "ttft": 1.4
   },
   "gpt-5-6-terra-medium": {
    "capabilities": {
@@ -6102,7 +6108,7 @@
     ]
    ],
    "time_per_task": 59.0,
-   "ttft": 1.75
+   "ttft": 1.73
   },
   "gpt-5-6-terra-non-reasoning": {
    "capabilities": {
@@ -6148,7 +6154,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 92.1,
+   "speed_tps": 91.9,
    "time_history": [
     [
      "2026-07-10",
@@ -6236,7 +6242,7 @@
    "open_weights": false,
    "release_date": "2026-07-09",
    "retired": false,
-   "speed_tps": 100.1,
+   "speed_tps": 99.2,
    "time_history": [
     [
      "2026-07-10",
@@ -6275,7 +6281,7 @@
      127.21
     ]
    ],
-   "time_per_task": 203.66,
+   "time_per_task": 209.4,
    "ttft": 34.69
   },
   "gpt-5-mini": {
@@ -6333,7 +6339,7 @@
    "open_weights": false,
    "release_date": "2025-08-07",
    "retired": false,
-   "speed_tps": 125.4,
+   "speed_tps": 126.8,
    "time_history": [
     [
      "2026-07-07",
@@ -6360,7 +6366,7 @@
      149.75
     ]
    ],
-   "time_per_task": 131.06,
+   "time_per_task": 128.95,
    "ttft": 59.66
   },
   "gpt-6-1-sol": {
@@ -6394,9 +6400,9 @@
    "open_weights": false,
    "release_date": "2026-09-29",
    "retired": false,
-   "speed_tps": 55.2,
-   "time_per_task": 685.18,
-   "ttft": 329.91
+   "speed_tps": 54.9,
+   "time_per_task": 686.1,
+   "ttft": 331.97
   },
   "gpt-6-1-sol-high": {
    "capabilities": {
@@ -6429,8 +6435,8 @@
    "open_weights": false,
    "release_date": "2026-09-29",
    "retired": false,
-   "speed_tps": 50.7,
-   "time_per_task": 257.6,
+   "speed_tps": 49.9,
+   "time_per_task": 262.97,
    "ttft": 60.71
   },
   "gpt-6-1-sol-low": {
@@ -6470,9 +6476,9 @@
    "open_weights": false,
    "release_date": "2026-09-29",
    "retired": false,
-   "speed_tps": 50.3,
-   "time_per_task": 79.01,
-   "ttft": 3.19
+   "speed_tps": 48.8,
+   "time_per_task": 79.48,
+   "ttft": 3.11
   },
   "gpt-6-1-sol-medium": {
    "capabilities": {
@@ -6505,9 +6511,9 @@
    "open_weights": false,
    "release_date": "2026-09-29",
    "retired": false,
-   "speed_tps": 50.8,
-   "time_per_task": 156.78,
-   "ttft": 6.97
+   "speed_tps": 49.6,
+   "time_per_task": 162.98,
+   "ttft": 6.43
   },
   "gpt-6-1-sol-xhigh": {
    "capabilities": {
@@ -6541,7 +6547,7 @@
    "release_date": "2026-09-29",
    "retired": false,
    "speed_tps": 53.3,
-   "time_per_task": 329.86,
+   "time_per_task": 333.81,
    "ttft": 148.3
   },
   "gpt-6-astra": {
@@ -6592,9 +6598,9 @@
    "open_weights": false,
    "release_date": "2026-09-03",
    "retired": false,
-   "speed_tps": 47.3,
-   "time_per_task": 574.33,
-   "ttft": 410.56
+   "speed_tps": 45.9,
+   "time_per_task": 585.68,
+   "ttft": 376.98
   },
   "gpt-6-astra-high": {
    "capabilities": {
@@ -6650,9 +6656,9 @@
    "open_weights": false,
    "release_date": "2026-09-03",
    "retired": false,
-   "speed_tps": 46.7,
-   "time_per_task": 255.76,
-   "ttft": 107.2
+   "speed_tps": 46.4,
+   "time_per_task": 258.29,
+   "ttft": 94.2
   },
   "gpt-6-astra-low": {
    "capabilities": {
@@ -6714,9 +6720,9 @@
    "open_weights": false,
    "release_date": "2026-09-03",
    "retired": false,
-   "speed_tps": 44.2,
-   "time_per_task": 99.44,
-   "ttft": 2.88
+   "speed_tps": 43.6,
+   "time_per_task": 102.82,
+   "ttft": 2.65
   },
   "gpt-6-astra-medium": {
    "capabilities": {
@@ -6755,13 +6761,19 @@
      1.540649,
      49.6,
      179.44
+    ],
+    [
+     "2026-10-08",
+     1.540649,
+     49.6,
+     220.08
     ]
    ],
    "open_weights": false,
    "release_date": "2026-09-03",
    "retired": false,
-   "speed_tps": 45.0,
-   "time_per_task": 209.24,
+   "speed_tps": 43.1,
+   "time_per_task": 220.08,
    "ttft": 5.61
   },
   "gpt-6-astra-non-reasoning": {
@@ -6838,14 +6850,20 @@
      2.308796,
      52.4,
      312.93
+    ],
+    [
+     "2026-10-08",
+     2.308796,
+     52.4,
+     380.75
     ]
    ],
    "open_weights": false,
    "release_date": "2026-09-03",
    "retired": false,
-   "speed_tps": 45.7,
-   "time_per_task": 364.55,
-   "ttft": 226.6
+   "speed_tps": 44.7,
+   "time_per_task": 380.75,
+   "ttft": 216.48
   },
   "gpt-6-luna": {
    "capabilities": {
@@ -6889,9 +6907,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 128.2,
-   "time_per_task": 389.64,
-   "ttft": 111.31
+   "speed_tps": 126.9,
+   "time_per_task": 393.6,
+   "ttft": 108.6
   },
   "gpt-6-luna-high": {
    "capabilities": {
@@ -6937,7 +6955,7 @@
    "retired": false,
    "speed_tps": 112.1,
    "time_per_task": 172.8,
-   "ttft": 20.07
+   "ttft": 19.29
   },
   "gpt-6-luna-low": {
    "capabilities": {
@@ -6981,9 +6999,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 128.4,
-   "time_per_task": 16.89,
-   "ttft": 3.05
+   "speed_tps": 124.4,
+   "time_per_task": 17.18,
+   "ttft": 3.23
   },
   "gpt-6-luna-medium": {
    "capabilities": {
@@ -7065,9 +7083,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 120.0,
-   "time_per_task": 31.25,
-   "ttft": 0.76
+   "speed_tps": 119.1,
+   "time_per_task": 31.49,
+   "ttft": 0.87
   },
   "gpt-6-luna-xhigh": {
    "capabilities": {
@@ -7107,13 +7125,13 @@
    "retired": false,
    "speed_tps": 115.4,
    "time_per_task": 241.52,
-   "ttft": 27.79
+   "ttft": 27.33
   },
   "gpt-6-sol": {
    "capabilities": {
     "agentic": 61.6,
     "knowledge": 27.1,
-    "knowledgework": 50.5,
+    "knowledgework": 50.4,
     "longcontext": 83.7,
     "multimodal": 82.9
    },
@@ -7151,9 +7169,9 @@
    "open_weights": false,
    "release_date": "2026-09-22",
    "retired": false,
-   "speed_tps": 87.9,
-   "time_per_task": 348.37,
-   "ttft": 127.24
+   "speed_tps": 85.3,
+   "time_per_task": 352.1,
+   "ttft": 137.69
   },
   "gpt-6-sol-high": {
    "capabilities": {
@@ -7263,7 +7281,7 @@
    "retired": false,
    "speed_tps": 89.5,
    "time_per_task": 37.88,
-   "ttft": 1.88
+   "ttft": 1.71
   },
   "gpt-6-sol-medium": {
    "capabilities": {
@@ -7484,8 +7502,8 @@
      196.63
     ]
    ],
-   "time_per_task": 143.22,
-   "ttft": 0.88
+   "time_per_task": 141.35,
+   "ttft": 0.89
   },
   "gpt-oss-120b-low": {
    "capabilities": {
@@ -7639,7 +7657,7 @@
    "open_weights": true,
    "release_date": "2025-08-05",
    "retired": false,
-   "speed_tps": 185.7,
+   "speed_tps": 185.5,
    "time_history": [
     [
      "2026-07-07",
@@ -7678,8 +7696,8 @@
      222.91
     ]
    ],
-   "time_per_task": 86.69,
-   "ttft": 0.81
+   "time_per_task": 93.4,
+   "ttft": 0.8
   },
   "granite-4-2-30b": {
    "capabilities": {
@@ -7766,15 +7784,15 @@
    "open_weights": true,
    "release_date": "2026-08-25",
    "retired": false,
-   "speed_tps": 213.8,
+   "speed_tps": 214.0,
    "time_history": [
     [
      "2026-08-30",
      50.21
     ]
    ],
-   "time_per_task": 83.03,
-   "ttft": 0.54
+   "time_per_task": 81.59,
+   "ttft": 0.53
   },
   "granite-4-2-8b": {
    "capabilities": {
@@ -7900,7 +7918,7 @@
    "open_weights": false,
    "release_date": "2026-04-30",
    "retired": false,
-   "speed_tps": 138.6,
+   "speed_tps": 127.4,
    "time_history": [
     [
      "2026-07-07",
@@ -7919,8 +7937,8 @@
      119.84
     ]
    ],
-   "time_per_task": 130.46,
-   "ttft": 18.48
+   "time_per_task": 141.0,
+   "ttft": 17.35
   },
   "grok-4-3-non-reasoning": {
    "capabilities": {
@@ -7972,7 +7990,7 @@
    "open_weights": false,
    "release_date": "2026-04-30",
    "retired": false,
-   "speed_tps": 110.2,
+   "speed_tps": 105.6,
    "time_history": [
     [
      "2026-07-07",
@@ -7991,7 +8009,7 @@
      86.77
     ]
    ],
-   "time_per_task": 86.86,
+   "time_per_task": 89.11,
    "ttft": 0.81
   },
   "grok-4-5": {
@@ -8053,7 +8071,7 @@
    "open_weights": false,
    "release_date": "2026-07-08",
    "retired": false,
-   "speed_tps": 53.5,
+   "speed_tps": 52.3,
    "time_history": [
     [
      "2026-07-08",
@@ -8096,7 +8114,7 @@
      320.67
     ]
    ],
-   "time_per_task": 511.54,
+   "time_per_task": 532.79,
    "ttft": 16.29
   },
   "grok-4-6": {
@@ -8152,12 +8170,18 @@
      1.484845,
      44.3,
      485.49
+    ],
+    [
+     "2026-10-08",
+     1.484845,
+     44.3,
+     636.79
     ]
    ],
    "open_weights": false,
    "release_date": "2026-08-12",
    "retired": false,
-   "speed_tps": 61.8,
+   "speed_tps": 58.3,
    "time_history": [
     [
      "2026-08-12",
@@ -8168,7 +8192,7 @@
      350.92
     ]
    ],
-   "time_per_task": 564.5,
+   "time_per_task": 636.79,
    "ttft": 37.63
   },
   "grok-4-6-low": {
@@ -8230,15 +8254,15 @@
    "open_weights": false,
    "release_date": "2026-08-12",
    "retired": false,
-   "speed_tps": 61.4,
+   "speed_tps": 58.8,
    "time_history": [
     [
      "2026-09-01",
      105.47
     ]
    ],
-   "time_per_task": 166.62,
-   "ttft": 7.43
+   "time_per_task": 171.71,
+   "ttft": 7.45
   },
   "grok-4-6-medium": {
    "capabilities": {
@@ -8294,13 +8318,19 @@
      1.143817,
      42.8,
      373.95
+    ],
+    [
+     "2026-10-08",
+     1.143817,
+     42.8,
+     487.14
     ]
    ],
    "open_weights": false,
    "release_date": "2026-08-12",
    "retired": false,
-   "speed_tps": 62.8,
-   "time_per_task": 440.92,
+   "speed_tps": 57.6,
+   "time_per_task": 487.14,
    "ttft": 31.47
   },
   "grok-4-6-xhigh": {
@@ -8357,20 +8387,26 @@
      1.752315,
      44.2,
      533.55
+    ],
+    [
+     "2026-10-08",
+     1.752315,
+     44.2,
+     651.47
     ]
    ],
    "open_weights": false,
    "release_date": "2026-08-12",
    "retired": false,
-   "speed_tps": 62.5,
-   "time_per_task": 608.41,
+   "speed_tps": 58.8,
+   "time_per_task": 651.47,
    "ttft": 38.7
   },
   "grok-4-7": {
    "capabilities": {
     "agentic": 65.6,
     "knowledge": 32.0,
-    "knowledgework": 60.8,
+    "knowledgework": 60.6,
     "longcontext": 76.7
    },
    "cost_per_task": 3.738326,
@@ -8390,8 +8426,8 @@
    "open_weights": false,
    "release_date": "2026-09-21",
    "retired": false,
-   "speed_tps": 72.6,
-   "time_per_task": 1126.41,
+   "speed_tps": 67.7,
+   "time_per_task": 1161.14,
    "ttft": 73.93
   },
   "grok-4-7-high": {
@@ -8454,9 +8490,9 @@
    "open_weights": false,
    "release_date": "2026-09-21",
    "retired": false,
-   "speed_tps": 78.5,
-   "time_per_task": 862.54,
-   "ttft": 87.05
+   "speed_tps": 65.9,
+   "time_per_task": 937.99,
+   "ttft": 66.86
   },
   "grok-4-7-low": {
    "capabilities": {
@@ -8483,9 +8519,9 @@
    "open_weights": false,
    "release_date": "2026-09-21",
    "retired": false,
-   "speed_tps": 69.0,
-   "time_per_task": 404.23,
-   "ttft": 5.57
+   "speed_tps": 64.7,
+   "time_per_task": 424.34,
+   "ttft": 6.14
   },
   "grok-build-0-1-06-16": {
    "capabilities": {
@@ -8597,7 +8633,7 @@
    "open_weights": true,
    "release_date": "2026-07-06",
    "retired": false,
-   "speed_tps": 84.3,
+   "speed_tps": 82.1,
    "time_history": [
     [
      "2026-07-12",
@@ -8608,8 +8644,8 @@
      294.62
     ]
    ],
-   "time_per_task": 513.35,
-   "ttft": 3.1
+   "time_per_task": 522.32,
+   "ttft": 3.08
   },
   "hypernova-60b": {
    "capabilities": {
@@ -8794,7 +8830,7 @@
    "open_weights": true,
    "release_date": "2026-07-30",
    "retired": false,
-   "speed_tps": 208.2,
+   "speed_tps": 200.9,
    "time_history": [
     [
      "2026-07-30",
@@ -8845,7 +8881,7 @@
      209.93
     ]
    ],
-   "time_per_task": 134.81,
+   "time_per_task": 140.47,
    "ttft": 2.2
   },
   "kimi-k2-5": {
@@ -8972,7 +9008,7 @@
    "open_weights": true,
    "release_date": "2026-04-20",
    "retired": false,
-   "speed_tps": 67.8,
+   "speed_tps": 65.9,
    "time_history": [
     [
      "2026-07-07",
@@ -9015,8 +9051,8 @@
      1005.77
     ]
    ],
-   "time_per_task": 659.87,
-   "ttft": 2.68
+   "time_per_task": 682.66,
+   "ttft": 2.72
   },
   "kimi-k2-7-code": {
    "capabilities": {
@@ -9078,7 +9114,7 @@
    "open_weights": true,
    "release_date": "2026-06-12",
    "retired": false,
-   "speed_tps": 83.0,
+   "speed_tps": 81.1,
    "time_history": [
     [
      "2026-07-07",
@@ -9109,15 +9145,15 @@
      428.76
     ]
    ],
-   "time_per_task": 347.89,
-   "ttft": 2.89
+   "time_per_task": 349.99,
+   "ttft": 2.9
   },
   "kimi-k3": {
    "capabilities": {
     "agentic": 58.3,
     "coding": 85.0,
     "knowledge": 19.7,
-    "knowledgework": 51.8,
+    "knowledgework": 51.7,
     "longcontext": 88.7,
     "multimodal": 80.5,
     "science": 93.5
@@ -9178,7 +9214,7 @@
    "open_weights": true,
    "release_date": "2026-07-16",
    "retired": false,
-   "speed_tps": 42.2,
+   "speed_tps": 41.7,
    "time_history": [
     [
      "2026-07-16",
@@ -9205,8 +9241,8 @@
      608.57
     ]
    ],
-   "time_per_task": 1077.58,
-   "ttft": 3.56
+   "time_per_task": 1116.68,
+   "ttft": 3.52
   },
   "kimi-k3-low": {
    "capabilities": {
@@ -9263,7 +9299,7 @@
    "open_weights": true,
    "release_date": "2026-07-16",
    "retired": false,
-   "speed_tps": 40.9,
+   "speed_tps": 40.4,
    "time_history": [
     [
      "2026-07-31",
@@ -9363,9 +9399,9 @@
    "open_weights": false,
    "release_date": "2026-10-01",
    "retired": false,
-   "speed_tps": 213.5,
-   "time_per_task": 360.38,
-   "ttft": 1.79
+   "speed_tps": 211.4,
+   "time_per_task": 361.23,
+   "ttft": 1.8
   },
   "llama-4-maverick": {
    "capabilities": {
@@ -9782,9 +9818,9 @@
    "open_weights": false,
    "release_date": "2026-09-08",
    "retired": false,
-   "speed_tps": 617.6,
+   "speed_tps": 599.9,
    "time_per_task": 12.58,
-   "ttft": 3.21
+   "ttft": 2.98
   },
   "mimo-v2-5-0424": {
    "capabilities": {
@@ -9926,7 +9962,7 @@
    "open_weights": true,
    "release_date": "2026-04-22",
    "retired": false,
-   "speed_tps": 35.9,
+   "speed_tps": 32.4,
    "time_history": [
     [
      "2026-07-07",
@@ -9977,8 +10013,8 @@
      597.77
     ]
    ],
-   "time_per_task": 812.44,
-   "ttft": 2.21
+   "time_per_task": 870.35,
+   "ttft": 2.28
   },
   "mimo-v2-6-flash": {
    "capabilities": {
@@ -10017,15 +10053,15 @@
    "open_weights": true,
    "release_date": "2026-09-21",
    "retired": false,
-   "speed_tps": 57.5,
-   "time_per_task": 1237.27,
-   "ttft": 5.2
+   "speed_tps": 56.7,
+   "time_per_task": 1320.08,
+   "ttft": 4.81
   },
   "mimo-v2-6-pro": {
    "capabilities": {
     "agentic": 58.6,
     "knowledge": 8.4,
-    "knowledgework": 59.3,
+    "knowledgework": 59.2,
     "longcontext": 86.3
    },
    "cost_per_task": 0.133223,
@@ -10089,7 +10125,7 @@
    "retired": false,
    "speed_tps": 39.7,
    "time_per_task": 1579.98,
-   "ttft": 4.48
+   "ttft": 4.49
   },
   "minimax-m2-7": {
    "capabilities": {
@@ -10162,7 +10198,7 @@
     "coding": 65.2,
     "instruction": 82.9,
     "knowledge": 1.4,
-    "knowledgework": 37.3,
+    "knowledgework": 37.1,
     "longcontext": 83.0,
     "multimodal": 78.6,
     "science": 92.9
@@ -10241,7 +10277,7 @@
    "open_weights": true,
    "release_date": "2026-06-01",
    "retired": false,
-   "speed_tps": 92.5,
+   "speed_tps": 91.7,
    "time_history": [
     [
      "2026-07-07",
@@ -10284,7 +10320,7 @@
      254.49
     ]
    ],
-   "time_per_task": 552.32,
+   "time_per_task": 553.1,
    "ttft": 2.16
   },
   "ministral-3-14b": {
@@ -10337,7 +10373,7 @@
    "open_weights": true,
    "release_date": "2025-12-02",
    "retired": false,
-   "speed_tps": 77.2,
+   "speed_tps": 75.9,
    "time_history": [
     [
      "2026-07-07",
@@ -10364,7 +10400,7 @@
      118.01
     ]
    ],
-   "time_per_task": 71.0,
+   "time_per_task": 72.65,
    "ttft": 1.21
   },
   "ministral-3-3b": {
@@ -10411,7 +10447,7 @@
    "open_weights": true,
    "release_date": "2025-12-02",
    "retired": false,
-   "speed_tps": 221.1,
+   "speed_tps": 222.6,
    "time_history": [
     [
      "2026-07-07",
@@ -10434,7 +10470,7 @@
      102.45
     ]
    ],
-   "time_per_task": 55.97,
+   "time_per_task": 55.62,
    "ttft": 0.64
   },
   "ministral-3-8b": {
@@ -10481,7 +10517,7 @@
    "open_weights": true,
    "release_date": "2025-12-02",
    "retired": false,
-   "speed_tps": 100.9,
+   "speed_tps": 105.2,
    "time_history": [
     [
      "2026-07-07",
@@ -10512,7 +10548,7 @@
      123.82
     ]
    ],
-   "time_per_task": 71.83,
+   "time_per_task": 69.12,
    "ttft": 0.72
   },
   "mistral-large-3": {
@@ -10598,7 +10634,7 @@
     ]
    ],
    "time_per_task": 67.78,
-   "ttft": 1.03
+   "ttft": 1.05
   },
   "mistral-large-4": {
    "capabilities": {
@@ -10731,7 +10767,7 @@
    "open_weights": true,
    "release_date": "2026-04-29",
    "retired": false,
-   "speed_tps": 164.9,
+   "speed_tps": 161.9,
    "time_history": [
     [
      "2026-07-07",
@@ -10814,7 +10850,7 @@
      175.48
     ]
    ],
-   "time_per_task": 152.14,
+   "time_per_task": 153.47,
    "ttft": 2.21
   },
   "mistral-small-3-1": {
@@ -10988,8 +11024,8 @@
      99.4
     ]
    ],
-   "time_per_task": 91.71,
-   "ttft": 0.72
+   "time_per_task": 91.86,
+   "ttft": 0.73
   },
   "muse-glimmer": {
    "capabilities": {
@@ -11067,15 +11103,15 @@
    "open_weights": true,
    "release_date": "2026-08-10",
    "retired": false,
-   "speed_tps": 87.7,
+   "speed_tps": 90.9,
    "time_history": [
     [
      "2026-08-12",
      122.56
     ]
    ],
-   "time_per_task": 157.91,
-   "ttft": 1.64
+   "time_per_task": 150.53,
+   "ttft": 1.6
   },
   "muse-spark-1-1": {
    "capabilities": {
@@ -11245,8 +11281,8 @@
      141.52
     ]
    ],
-   "time_per_task": 159.15,
-   "ttft": 15.17
+   "time_per_task": 161.19,
+   "ttft": 13.96
   },
   "muse-spark-1-3": {
    "capabilities": {
@@ -11302,8 +11338,8 @@
    "open_weights": false,
    "release_date": "2026-09-02",
    "retired": false,
-   "speed_tps": 210.6,
-   "time_per_task": 282.14,
+   "speed_tps": 187.8,
+   "time_per_task": 318.94,
    "ttft": 57.13
   },
   "muse-spark-1-3-xhigh": {
@@ -11441,15 +11477,15 @@
    "open_weights": true,
    "release_date": "2026-08-11",
    "retired": false,
-   "speed_tps": 302.1,
+   "speed_tps": 298.9,
    "time_history": [
     [
      "2026-08-12",
      94.72
     ]
    ],
-   "time_per_task": 111.84,
-   "ttft": 0.55
+   "time_per_task": 113.57,
+   "ttft": 0.54
   },
   "nvidia-nemotron-3-nano-30b-a3b-reasoning": {
    "capabilities": {
@@ -11500,7 +11536,7 @@
    "open_weights": true,
    "release_date": "2025-12-15",
    "retired": false,
-   "speed_tps": 195.6,
+   "speed_tps": 199.5,
    "time_history": [
     [
      "2026-07-07",
@@ -11567,8 +11603,8 @@
      112.07
     ]
    ],
-   "time_per_task": 121.41,
-   "ttft": 1.04
+   "time_per_task": 113.52,
+   "ttft": 1.01
   },
   "nvidia-nemotron-3-super-120b-a12b": {
    "capabilities": {
@@ -11643,7 +11679,7 @@
    "open_weights": true,
    "release_date": "2026-03-11",
    "retired": false,
-   "speed_tps": 150.8,
+   "speed_tps": 149.5,
    "time_history": [
     [
      "2026-07-07",
@@ -11682,8 +11718,8 @@
      180.7
     ]
    ],
-   "time_per_task": 718.81,
-   "ttft": 1.34
+   "time_per_task": 725.33,
+   "ttft": 1.37
   },
   "nvidia-nemotron-3-ultra-550b-a55b": {
    "capabilities": {
@@ -11775,12 +11811,18 @@
      0.597598,
      22.9,
      143.4
+    ],
+    [
+     "2026-10-08",
+     0.597598,
+     22.9,
+     183.82
     ]
    ],
    "open_weights": true,
    "release_date": "2026-06-04",
    "retired": false,
-   "speed_tps": 153.2,
+   "speed_tps": 148.0,
    "time_history": [
     [
      "2026-07-07",
@@ -11847,7 +11889,7 @@
      193.71
     ]
    ],
-   "time_per_task": 167.29,
+   "time_per_task": 183.82,
    "ttft": 1.36
   },
   "quasar-438b": {
@@ -11898,9 +11940,9 @@
    "open_weights": false,
    "release_date": "2026-08-10",
    "retired": false,
-   "speed_tps": 125.9,
-   "time_per_task": 553.43,
-   "ttft": 1.35
+   "speed_tps": 122.2,
+   "time_per_task": 567.33,
+   "ttft": 1.38
   },
   "qwen3-235b-a22b-instruct-2507-reasoning": {
    "capabilities": {
@@ -11933,7 +11975,7 @@
    "open_weights": true,
    "release_date": "2025-07-25",
    "retired": false,
-   "speed_tps": 67.9,
+   "speed_tps": 61.0,
    "time_history": [
     [
      "2026-07-12",
@@ -11964,7 +12006,7 @@
      277.66
     ]
    ],
-   "time_per_task": 354.48,
+   "time_per_task": 403.71,
    "ttft": 2.82
   },
   "qwen3-30b-a3b-2507-reasoning": {
@@ -12016,7 +12058,7 @@
    "open_weights": true,
    "release_date": "2025-07-30",
    "retired": false,
-   "speed_tps": 151.2,
+   "speed_tps": 149.8,
    "time_history": [
     [
      "2026-07-07",
@@ -12088,7 +12130,7 @@
     ]
    ],
    "time_per_task": 113.45,
-   "ttft": 2.41
+   "ttft": 2.42
   },
   "qwen3-5-122b-a10b": {
    "capabilities": {
@@ -12140,7 +12182,7 @@
     ]
    ],
    "time_per_task": 125.76,
-   "ttft": 2.34
+   "ttft": 2.31
   },
   "qwen3-5-122b-a10b-non-reasoning": {
    "capabilities": {
@@ -12291,7 +12333,7 @@
      184.17
     ]
    ],
-   "time_per_task": 184.94,
+   "time_per_task": 188.5,
    "ttft": 2.22
   },
   "qwen3-5-9b": {
@@ -12358,8 +12400,8 @@
      383.27
     ]
    ],
-   "time_per_task": 476.19,
-   "ttft": 1.91
+   "time_per_task": 503.26,
+   "ttft": 1.73
   },
   "qwen3-6-27b": {
    "capabilities": {
@@ -12399,7 +12441,7 @@
    "open_weights": true,
    "release_date": "2026-04-22",
    "retired": false,
-   "speed_tps": 57.0,
+   "speed_tps": 56.4,
    "time_history": [
     [
      "2026-07-07",
@@ -12411,7 +12453,7 @@
     ]
    ],
    "time_per_task": 498.14,
-   "ttft": 3.68
+   "ttft": 3.63
   },
   "qwen3-6-27b-non-reasoning": {
    "capabilities": {
@@ -12495,7 +12537,7 @@
    "open_weights": true,
    "release_date": "2026-04-16",
    "retired": false,
-   "speed_tps": 131.4,
+   "speed_tps": 124.3,
    "time_history": [
     [
      "2026-07-07",
@@ -12527,7 +12569,7 @@
     ]
    ],
    "time_per_task": 242.16,
-   "ttft": 1.98
+   "ttft": 1.97
   },
   "qwen3-6-35b-a3b-non-reasoning": {
    "capabilities": {
@@ -12743,8 +12785,8 @@
      398.37
     ]
    ],
-   "time_per_task": 616.73,
-   "ttft": 2.25
+   "time_per_task": 616.91,
+   "ttft": 2.24
   },
   "qwen3-8-2-4t-a95b": {
    "capabilities": {
@@ -12792,7 +12834,7 @@
    "open_weights": true,
    "release_date": "2026-08-12",
    "retired": false,
-   "speed_tps": 36.8,
+   "speed_tps": 36.5,
    "time_history": [
     [
      "2026-08-14",
@@ -12807,8 +12849,8 @@
      770.82
     ]
    ],
-   "time_per_task": 1456.76,
-   "ttft": 2.85
+   "time_per_task": 1481.17,
+   "ttft": 2.91
   },
   "qwen3-8-27b": {
    "capabilities": {
@@ -12891,7 +12933,7 @@
    "open_weights": true,
    "release_date": "2026-08-14",
    "retired": false,
-   "speed_tps": 47.1,
+   "speed_tps": 46.7,
    "time_history": [
     [
      "2026-08-30",
@@ -12960,15 +13002,15 @@
    "open_weights": true,
    "release_date": "2026-08-14",
    "retired": false,
-   "speed_tps": 53.5,
+   "speed_tps": 51.1,
    "time_history": [
     [
      "2026-09-01",
      504.06
     ]
    ],
-   "time_per_task": 796.9,
-   "ttft": 3.75
+   "time_per_task": 810.05,
+   "ttft": 3.77
   },
   "qwen3-8-27b-medium": {
    "capabilities": {
@@ -13024,7 +13066,7 @@
    "open_weights": true,
    "release_date": "2026-08-14",
    "retired": false,
-   "speed_tps": 54.7,
+   "speed_tps": 54.1,
    "time_history": [
     [
      "2026-09-01",
@@ -13032,7 +13074,7 @@
     ]
    ],
    "time_per_task": 910.05,
-   "ttft": 3.77
+   "ttft": 3.76
   },
   "qwen3-8-27b-non-reasoning": {
    "capabilities": {
@@ -13078,7 +13120,7 @@
    "open_weights": true,
    "release_date": "2026-08-14",
    "retired": false,
-   "speed_tps": 53.7,
+   "speed_tps": 53.5,
    "time_history": [
     [
      "2026-08-28",
@@ -13245,7 +13287,7 @@
    "open_weights": false,
    "release_date": "2026-08-03",
    "retired": false,
-   "speed_tps": 37.2,
+   "speed_tps": 37.0,
    "time_per_task": 1340.38,
    "ttft": 2.59
   },
@@ -13309,7 +13351,7 @@
    "open_weights": true,
    "release_date": "2026-02-03",
    "retired": false,
-   "speed_tps": 94.7,
+   "speed_tps": 96.4,
    "time_history": [
     [
      "2026-07-07",
@@ -13336,7 +13378,7 @@
      107.64
     ]
    ],
-   "time_per_task": 143.64,
+   "time_per_task": 141.99,
    "ttft": 1.64
   },
   "qwen3-next-80b-a3b-reasoning": {
@@ -13524,7 +13566,7 @@
    "open_weights": false,
    "release_date": "2026-04-06",
    "retired": false,
-   "speed_tps": 157.7,
+   "speed_tps": 157.8,
    "time_history": [
     [
      "2026-07-12",
@@ -13547,8 +13589,8 @@
      415.37
     ]
    ],
-   "time_per_task": 275.51,
-   "ttft": 1.38
+   "time_per_task": 274.75,
+   "ttft": 1.42
   },
   "solar-pro4": {
    "capabilities": {
@@ -13665,7 +13707,7 @@
     "longcontext": 88.3,
     "multimodal": 76.4
    },
-   "cost_per_task": 0.71749,
+   "cost_per_task": 1.026407,
    "creator": "StepFun",
    "first_seen": "2026-09-19",
    "intelligence_index": 43.7,
@@ -13701,13 +13743,19 @@
      0.71749,
      43.7,
      581.24
+    ],
+    [
+     "2026-10-08",
+     1.026407,
+     43.7,
+     607.8
     ]
    ],
    "open_weights": false,
    "release_date": "2026-09-18",
    "retired": false,
-   "speed_tps": 88.5,
-   "time_per_task": 595.72,
+   "speed_tps": 87.6,
+   "time_per_task": 607.8,
    "ttft": 2.87
   },
   "trinity-large-thinking": {
@@ -13763,7 +13811,7 @@
    "open_weights": true,
    "release_date": "2026-04-01",
    "retired": false,
-   "speed_tps": 336.6,
+   "speed_tps": 329.0,
    "time_history": [
     [
      "2026-07-12",
@@ -13782,7 +13830,7 @@
      134.18
     ]
    ],
-   "time_per_task": 131.07,
+   "time_per_task": 131.75,
    "ttft": 1.21
   }
  },

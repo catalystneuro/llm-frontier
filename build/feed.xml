@@ -141,7 +141,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-09-21-mimo-v2-6-pro.png" />
     <id>https://llm-frontier.catalystneuro.com/advance/2026-09-21/mimo-v2-6-pro</id>
     <updated>2026-09-21T00:00:00Z</updated>
-    <summary>MiMo-V2.6-Pro: now the cheapest way to reach index 37.9 to 46.3 at $0.13 per task, taking it from GPT-6 Astra, Step 5 Preview, and GLM 5.3 Flash; Step 5 Preview and GLM 5.3 Flash left the frontier. Open weights.</summary>
+    <summary>MiMo-V2.6-Pro: now the cheapest way to reach index 37.9 to 46.3 at $0.13 per task, taking it from GPT-6 Astra, Step 5 Preview, and GLM-5.3-Flash; Step 5 Preview and GLM-5.3-Flash left the frontier. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-09-21: MiMo-V2.6-Flash (new model, index 37.9)</title>
@@ -149,7 +149,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-09-21-mimo-v2-6-flash.png" />
     <id>https://llm-frontier.catalystneuro.com/advance/2026-09-21/mimo-v2-6-flash</id>
     <updated>2026-09-21T00:00:00Z</updated>
-    <summary>MiMo-V2.6-Flash: now the cheapest way to reach index 32.1 to 37.9 at $0.062 per task, taking it from GLM 5.3 Flash and GPT-5.6 Luna. Open weights.</summary>
+    <summary>MiMo-V2.6-Flash: now the cheapest way to reach index 32.1 to 37.9 at $0.062 per task, taking it from GLM-5.3-Flash and GPT-5.6 Luna. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-09-18: Step 5 Preview (new model, index 43.6)</title>
@@ -208,12 +208,12 @@
     <summary>GPT-5.6 Sol (Xhigh): price moved from $0.671 to $0.63 per task; now the cheapest way to reach index 57.5 to 59.0. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-08-26: GLM 5.3 Flash (new model, index 57.5)</title>
+    <title>2026-08-26: GLM-5.3-Flash (new model, index 57.5)</title>
     <link href="https://llm-frontier.catalystneuro.com/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-08-26-glm-5-3-flash.png" />
     <id>https://llm-frontier.catalystneuro.com/advance/2026-08-26/glm-5-3-flash</id>
     <updated>2026-08-26T00:00:00Z</updated>
-    <summary>GLM 5.3 Flash: now the cheapest way to reach index 52.3 to 57.5 at $0.087 per task, taking it from GPT-5.6 Sol, Muse Spark 1.2, Grok 4.5, Gemini 3.7 Flash, and DeepSeek V4 Pro 0813; Muse Spark 1.2, Grok 4.5, Gemini 3.7 Flash, and DeepSeek V4 Pro 0813 left the frontier. Open weights.</summary>
+    <summary>GLM-5.3-Flash: now the cheapest way to reach index 52.3 to 57.5 at $0.087 per task, taking it from GPT-5.6 Sol, Muse Spark 1.2, Grok 4.5, Gemini 3.7 Flash, and DeepSeek V4 Pro 0813; Muse Spark 1.2, Grok 4.5, Gemini 3.7 Flash, and DeepSeek V4 Pro 0813 left the frontier. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-08-26: Agnes 2.5 Pro Beta (new model, index 49.1)</title>
