@@ -4,16 +4,16 @@
   <link href="https://llm-frontier.catalystneuro.com/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed.xml</id>
-  <updated>2026-10-07T06:00:00Z</updated>
+  <updated>2026-10-08T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of the Artificial Analysis Intelligence Index, through a release or a price change.</subtitle>
   <entry>
-    <title>2026-10-07: Claude Haiku 5.5 (Xhigh, Default Fallback) (new model, index 41.2)</title>
+    <title>2026-10-07: Claude Haiku 5.5 (Xhigh) (new model, index 41.2)</title>
     <link href="https://llm-frontier.catalystneuro.com/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-10-07-claude-haiku-5-5.png" />
     <id>https://llm-frontier.catalystneuro.com/advance/2026-10-07/claude-haiku-5-5-xhigh</id>
     <updated>2026-10-07T00:00:00Z</updated>
-    <summary>Claude Haiku 5.5 (Xhigh, Default Fallback): now the cheapest way to reach index 38.1 to 41.2 at $0.12 per task, taking it from GPT-6.1 Sol. Proprietary.</summary>
+    <summary>Claude Haiku 5.5 (Xhigh): now the cheapest way to reach index 38.1 to 41.2 at $0.12 per task, taking it from GPT-6.1 Sol. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-10-01: GPT-6 Luna (Max) (price change, index 38.1)</title>
