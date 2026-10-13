@@ -78,10 +78,21 @@ a.site-title, .site-title a { color: var(--navy); text-decoration: none; }
 .pfc-tt-val { font-weight: 600; color: var(--navy); }
 .pfc-tt-row { display: flex; align-items: center; gap: 0.45rem; }
 .pfc-tt-key { width: 12px; border-top: 2.5px solid; border-radius: 2px; flex: none; display: inline-block; }
-.pfc-controls { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-top: 0.4rem; }
-.pfc-stage { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
-.pfc-btn { font: inherit; font-size: 0.78rem; font-weight: 600; padding: 0.28rem 0.8rem; border: 1px solid var(--card-border); border-radius: 7px; background: var(--surface); color: var(--navy); cursor: pointer; min-width: 4.2rem; transition: border-color 120ms ease, box-shadow 120ms ease; }
-.pfc-btn:hover { border-color: var(--blue-600); box-shadow: 0 1px 6px rgba(16, 22, 66, 0.1); }
+.pfc-time { margin-top: 0.5rem; }
+.pfc-stage { font-size: 0.82rem; font-weight: 600; color: var(--navy); font-variant-numeric: tabular-nums; }
+.pfc-slider-track { position: relative; margin-top: 0.3rem; }
+.pfc-slider { display: block; width: 100%; margin: 0; accent-color: var(--navy); cursor: pointer; }
+.pfc-slider:focus-visible { outline: 2px solid var(--blue-600); outline-offset: 2px; border-radius: 4px; }
+.pfc-ticks { position: relative; height: 12px; }
+.pfc-tick { position: absolute; top: 0; width: 12px; height: 12px; margin-left: -6px; padding: 0; border: 0; background: none; cursor: pointer; }
+.pfc-tick::before { content: ""; position: absolute; left: 5.5px; top: 1px; width: 1px; height: 7px; background: #a9b2c4; }
+.pfc-tick:hover::before { background: var(--navy); }
+.pfc-slider-ends { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--ink-soft); }
+.pfc-lk-btn { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+.pfc-lk-btn:hover span:last-child { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+.pfc-lk-btn[aria-pressed="true"] span:last-child { color: var(--navy); font-weight: 600; }
+.pfc-legend-side .pfc-lk-gap { margin-top: 0.35rem; }
+@media (max-width: 700px) { .pfc-legend-side .pfc-lk-gap { margin-top: 0; } }
 .pfc-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.9rem; }
 a.pfc-tab { text-decoration: none; }
 .pfc-tab { display: inline-block; font: inherit; font-size: 0.82rem; font-weight: 500; padding: 0.32rem 0.85rem; border: 1px solid var(--card-border); border-radius: 999px; background: var(--surface); color: var(--ink-muted); cursor: pointer; transition: border-color 120ms ease, color 120ms ease, box-shadow 120ms ease; }

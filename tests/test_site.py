@@ -205,6 +205,33 @@ def test_archive_time_axis_when_backfilled(browser, site_url):
         ctx.close()
 
 
+def test_time_slider(browser, site_url):
+    ctx, page, errors = open_page(browser, site_url)
+    try:
+        dots = "#pfc-frontier svg circle"
+        today = page.locator(dots).count()
+        past = page.locator("#pfc-frontier svg .pfc-past").count()
+        assert past > 0
+        assert page.locator("#pfc-frontier .pfc-tick").count() == past
+        # Clicking the first tick moves the chart back to that date: later
+        # models disappear, along with every earlier frontier but none.
+        page.locator("#pfc-frontier .pfc-tick").first.click()
+        assert "today" not in page.locator("#pfc-frontier-stage").inner_text()
+        assert page.locator(dots).count() < today
+        assert page.locator("#pfc-frontier svg .pfc-past").count() == 0
+        assert page.locator("#pfc-frontier svg path[data-current='1']").count() == 1
+        # Arrow keys step forward to the next change; the end is today again.
+        before = page.locator("#pfc-frontier-stage").inner_text()
+        page.locator("#pfc-frontier-slider").press("ArrowRight")
+        assert page.locator("#pfc-frontier-stage").inner_text() != before
+        page.locator("#pfc-frontier-slider").press("End")
+        page.wait_for_selector("#pfc-frontier-stage:text('today')")
+        assert page.locator(dots).count() == today
+        assert errors == []
+    finally:
+        ctx.close()
+
+
 def test_clicking_a_point_selects_the_model(browser, site_url):
     ctx, page, errors = open_page(browser, site_url)
     try:
