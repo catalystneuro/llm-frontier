@@ -271,6 +271,34 @@
     var p = iso.split('-'), MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return MON[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0];
   }
+  // The provider key shared by both charts: one button per colored lab
+  // among the given creators, which highlights that lab's models, and a gray
+  // "Other" entry if any remaining lab is present.
+  function appendProviderLegend(legend, creatorList) {
+    legend.append(el('span', 'pfc-legend-title', 'Provider'));
+    var hasOther = false;
+    PROVIDER_COLORS.forEach(function (pc) {
+      if (creatorList.indexOf(pc[0]) < 0) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pfc-lk pfc-lk-btn';
+      b.setAttribute('aria-pressed', SEL_KIND === 'creator' && SEL === pc[0] ? 'true' : 'false');
+      b.title = 'Highlight ' + pc[0] + ' models';
+      var d = el('span', 'pfc-dot'); d.style.background = pc[1]; d.style.borderColor = pc[1];
+      b.append(d, el('span', null, pc[0]));
+      b.addEventListener('click', function () {
+        setSel('creator', SEL_KIND === 'creator' && SEL === pc[0] ? null : pc[0]);
+      });
+      legend.append(b);
+    });
+    creatorList.forEach(function (c) { if (providerColor(c) === OTHER_COLOR) hasOther = true; });
+    if (hasOther) {
+      var o = el('span', 'pfc-lk'); var od = el('span', 'pfc-dot');
+      od.style.background = OTHER_COLOR; od.style.borderColor = OTHER_COLOR;
+      o.append(od, el('span', null, 'Other'));
+      legend.append(o);
+    }
+  }
+
   // The date the slider shows; null means the view's last day.
   var SLIDE = null;
 
@@ -576,28 +604,7 @@
     var legend = document.getElementById('pfc-frontier-legend');
     if (legend) {
       legend.replaceChildren();
-      legend.append(el('span', 'pfc-legend-title', 'Provider'));
-      var hasOther = false;
-      PROVIDER_COLORS.forEach(function (pc) {
-        if (!ms.some(function (m) { return m.creator === pc[0]; })) return;
-        var b = document.createElement('button');
-        b.type = 'button'; b.className = 'pfc-lk pfc-lk-btn';
-        b.setAttribute('aria-pressed', SEL_KIND === 'creator' && SEL === pc[0] ? 'true' : 'false');
-        b.title = 'Highlight ' + pc[0] + ' models';
-        var d = el('span', 'pfc-dot'); d.style.background = pc[1]; d.style.borderColor = pc[1];
-        b.append(d, el('span', null, pc[0]));
-        b.addEventListener('click', function () {
-          setSel('creator', SEL_KIND === 'creator' && SEL === pc[0] ? null : pc[0]);
-        });
-        legend.append(b);
-      });
-      ms.forEach(function (m) { if (providerColor(m.creator) === OTHER_COLOR) hasOther = true; });
-      if (hasOther) {
-        var o = el('span', 'pfc-lk'); var od = el('span', 'pfc-dot');
-        od.style.background = OTHER_COLOR; od.style.borderColor = OTHER_COLOR;
-        o.append(od, el('span', null, 'Other'));
-        legend.append(o);
-      }
+      appendProviderLegend(legend, ms.map(function (m) { return m.creator; }));
       var live = el('span', 'pfc-lk pfc-lk-gap');
       var d1 = el('span', 'pfc-dot');
       d1.style.background = C.deemph; d1.style.borderColor = C.deemph;
@@ -1067,6 +1074,7 @@
         svg.append(lb);
       }
     }
+    var recCreators = [];
     tiers.forEach(function (tier, i) {
       var all = tierCost[tier];
       if (!all || !all.length) return;
@@ -1087,7 +1095,9 @@
       svg.append(svgEl('path', { d: d, fill: 'none', stroke: color, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }));
       recs.forEach(function (r) {
         var x = X(r[0]), y = Y(r[1]);
-        dot(svg, x, y, 4, color, !!openByName[r[2]]);
+        var rm = modelsByName[r[2]];
+        if (rm) recCreators.push(rm.creator);
+        dot(svg, x, y, 4, rm ? providerColor(rm.creator) : color, !!openByName[r[2]]);
         if (selMatchesName(r[2])) svg.append(svgEl('circle', { cx: x, cy: y, r: 9.5, fill: 'none', stroke: C.ink, 'stroke-width': 1.5, 'class': 'pfc-sel-ring' }));
         pts.push({ x: x, y: y, key: r[2], rows: function () {
           var d1 = el('div', 'pfc-tt-name'); d1.textContent = r[2];
@@ -1097,7 +1107,7 @@
                              : isCur && ERAS.length && r[0] < ERAS[ERAS.length - 1][0];
           var s = el('span', 'pfc-tt-val'); s.textContent = (est ? '≈' : '') + (timeAxis ? fmtTime(r[1]) : fmt$(r[1]));
           d2.append(kd, s, ' new record, ' + (CAP < 0 ? 'Index' : metricName()) + ' ' + tierLabel(tier) + (est ? (timeAxis ? ' · at its nearest measured speed' : ' · estimated from price history') : ''));
-          var d3 = el('div', null, (r[4] ? r[4] + ' \u00b7 ' : 'released ' + r[0] + ' \u00b7 ') + (CAP < 0 ? 'Index ' + r[3].toFixed(1) : metricName() + ' ' + fmtScore(r[3])) + (openByName[r[2]] ? ' \u00b7 open weights' : ' \u00b7 proprietary') + (retiredByName[r[2]] ? ' \u00b7 retired' : ''));
+          var d3 = el('div', null, (r[4] ? r[4] + ' \u00b7 ' : 'released ' + r[0] + ' \u00b7 ') + (CAP < 0 ? 'Index ' + r[3].toFixed(1) : metricName() + ' ' + fmtScore(r[3])) + (rm ? ' \u00b7 ' + rm.creator : '') + (openByName[r[2]] ? ' \u00b7 open weights' : ' \u00b7 proprietary') + (retiredByName[r[2]] ? ' \u00b7 retired' : ''));
           return [d1, d2, d3];
         }});
       });
@@ -1123,6 +1133,7 @@
         item.append(sw, el('span', null, tierLabel(tier)));
         legend.append(item);
       });
+      appendProviderLegend(legend, recCreators);
     }
   }
 
