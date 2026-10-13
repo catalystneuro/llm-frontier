@@ -205,6 +205,75 @@ def test_archive_time_axis_when_backfilled(browser, site_url):
         ctx.close()
 
 
+def test_time_slider(browser, site_url):
+    ctx, page, errors = open_page(browser, site_url)
+    try:
+        dots = "#pfc-frontier svg circle"
+        today = page.locator(dots).count()
+        past = page.locator("#pfc-frontier svg .pfc-past").count()
+        assert past > 0
+        assert page.locator("#pfc-frontier .pfc-tick").count() == past
+        # Clicking the first tick moves the chart back to that date: later
+        # models disappear, along with every earlier frontier but none.
+        page.locator("#pfc-frontier .pfc-tick").first.click()
+        assert "today" not in page.locator("#pfc-frontier-stage").inner_text()
+        assert page.locator(dots).count() < today
+        assert page.locator("#pfc-frontier svg .pfc-past").count() == 0
+        assert page.locator("#pfc-frontier svg path[data-current='1']").count() == 1
+        # Arrow keys step forward to the next change; the end is today again.
+        before = page.locator("#pfc-frontier-stage").inner_text()
+        page.locator("#pfc-frontier-slider").press("ArrowRight")
+        assert page.locator("#pfc-frontier-stage").inner_text() != before
+        page.locator("#pfc-frontier-slider").press("End")
+        page.wait_for_selector("#pfc-frontier-stage:text('today')")
+        assert page.locator(dots).count() == today
+        # The start handle hides models released before it; the frontier is
+        # redrawn from the rest.
+        page.evaluate("""() => {
+            const s = document.getElementById('pfc-frontier-slider-start');
+            s.value = Math.round(Date.parse('2026-06-01T00:00:00Z') / 86400000);
+            s.dispatchEvent(new Event('input'));
+        }""")
+        assert "released Jun 1, 2026 to today" in page.locator("#pfc-frontier-stage").inner_text()
+        assert page.locator(dots).count() < today
+        assert page.locator("#pfc-frontier svg path[data-current='1']").count() == 1
+        # The start handle cannot pass the end handle.
+        page.locator("#pfc-frontier .pfc-tick").first.click()
+        assert int(page.locator("#pfc-frontier-slider-start").input_value()) <= int(page.locator("#pfc-frontier-slider").input_value())
+        page.locator("#pfc-frontier-slider-start").press("Home")
+        page.locator("#pfc-frontier-slider").press("End")
+        page.wait_for_selector("#pfc-frontier-stage:text('as of today')")
+        assert page.locator(dots).count() == today
+        assert errors == []
+    finally:
+        ctx.close()
+
+
+def test_full_window_buttons(browser, site_url):
+    ctx, page, errors = open_page(browser, site_url)
+    try:
+        buttons = page.locator(".pfc-figure .pfc-fs-btn")
+        assert buttons.count() == page.locator(".pfc-figure").count() == 2
+        normal = page.locator("#pfc-frontier svg").bounding_box()
+        buttons.first.click()
+        fig = page.locator(".pfc-figure.pfc-expanded")
+        assert fig.count() == 1
+        assert buttons.first.inner_text() == "Close full window"
+        # The expanded figure covers the window and the chart is redrawn
+        # larger, without the figure needing to scroll.
+        box = fig.bounding_box()
+        assert box["width"] == 1300 and box["height"] == 900
+        big = page.locator("#pfc-frontier svg").bounding_box()
+        assert big["width"] > normal["width"] and big["height"] > normal["height"]
+        assert page.evaluate("(() => { const f = document.querySelector('.pfc-expanded'); return f.scrollHeight <= f.clientHeight; })()")
+        page.keyboard.press("Escape")
+        assert page.locator(".pfc-figure.pfc-expanded").count() == 0
+        assert buttons.first.inner_text() == "Full window"
+        assert errors == []
+    finally:
+        ctx.close()
+
+
 def test_clicking_a_point_selects_the_model(browser, site_url):
     ctx, page, errors = open_page(browser, site_url)
     try:

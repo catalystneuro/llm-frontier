@@ -19,7 +19,6 @@
     surface: '#ffffff', grid: '#edf1f9', axis: '#d9e1f0',
     ink: '#101642', ink2: '#55607a', muted: '#5b6580', deemph: '#c2cbdc', retired: '#9aa4bb',
     mono: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
-    snap: ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#4a3aa7', '#101642'],
     ord: ['#86b6ef', '#3987e5', '#1c5cab', '#0d366b']
   };
   var SNAPS = [];
@@ -162,7 +161,6 @@
       retiredByName[m.name] = m.retired; openByName[m.name] = m.open; modelsByName[m.name] = m;
       creators[m.creator] = (creators[m.creator] || 0) + 1;
     });
-    anim.stage = SNAPS.length - 1;
   }
 
   function dot(svg, x, y, r, color, open) {
@@ -185,15 +183,16 @@
 
   var tt = el('div', 'pfc-tooltip');
   document.body.appendChild(tt);
+  window.addEventListener('scroll', hideTip, { passive: true });  // the tooltip is fixed, so it would not follow its point
 
   function showTip(box, px, py, rows) {
     tt.replaceChildren.apply(tt, rows);
     tt.style.display = 'block';
     var r = box.getBoundingClientRect();
-    var x = r.left + window.scrollX + px + 14;
-    var y = r.top + window.scrollY + py - 10;
+    var x = r.left + px + 14;
+    var y = r.top + py - 10;
     tt.style.left = '0px'; tt.style.top = '0px';
-    if (r.left + px + 14 + tt.offsetWidth > window.innerWidth - 8) x = r.left + window.scrollX + px - tt.offsetWidth - 14;
+    if (r.left + px + 14 + tt.offsetWidth > window.innerWidth - 8) x = r.left + px - tt.offsetWidth - 14;
     tt.style.left = x + 'px'; tt.style.top = y + 'px';
   }
   function hideTip() { tt.style.display = 'none'; }
@@ -204,7 +203,7 @@
       var sx = svg.viewBox.baseVal.width / r.width;
       var mx = (ev.clientX - r.left) * sx, my = (ev.clientY - r.top) * sx;
       var best = null, bd = Infinity;
-      var visible = points.filter(function (p) { return p.snap === undefined || p.snap <= anim.stage; });
+      var visible = points;
       visible.forEach(function (p) {
         var d = Math.hypot(p.x - mx, p.y - my);
         if (d < bd) { bd = d; best = p; }
@@ -242,42 +241,114 @@
     return svg;
   }
 
-  // ---- chart 1: intelligence vs cost, frontier every two months ----
-  var anim = { stage: SNAPS.length - 1, paused: true, timer: null, groups: [] };
-  var STEP_MS = 1100, HOLD_MS = 6000;
-  function applyStage() {
-    anim.groups.forEach(function (gs, i) {
-      gs.forEach(function (g) { g.setAttribute('display', i <= anim.stage ? 'inline' : 'none'); });
+  // ---- full window ----
+  // Each figure gets a button that expands it to fill the browser window.
+  // An expanded chart is drawn at the size of its box, not the page's
+  // default size, so it uses the whole window; the view state, slider
+  // window included, carries over. Escape closes it.
+  function chartSize(box, defW, defH, below) {
+    if (!box.closest('.pfc-expanded')) return { W: Math.max(320, Math.min(defW, box.clientWidth)), H: defH };
+    return { W: Math.max(320, box.clientWidth), H: Math.max(defH * 0.6, box.clientHeight - below) };
+  }
+  function setExpanded(fig) {
+    var open = document.querySelector('.pfc-expanded');
+    if (open) open.classList.remove('pfc-expanded');
+    if (fig && fig !== open) fig.classList.add('pfc-expanded');
+    var now = document.querySelector('.pfc-expanded');
+    document.documentElement.classList.toggle('pfc-noscroll', !!now);
+    Array.prototype.forEach.call(document.querySelectorAll('.pfc-fs-btn'), function (b) {
+      var on = now && now.contains(b);
+      b.textContent = on ? 'Close full window' : 'Full window';
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
-    var cap = document.getElementById('pfc-frontier-stage');
-    if (cap) cap.textContent = 'Pareto frontier as of ' + SNAPS[anim.stage][1];
-  }
-  function tick() {
-    clearTimeout(anim.timer);
-    if (anim.paused) return;
-    anim.stage = anim.stage >= SNAPS.length - 1 ? 0 : anim.stage + 1;
-    applyStage();
     hideTip();
-    anim.timer = setTimeout(tick, anim.stage === SNAPS.length - 1 ? HOLD_MS : STEP_MS);
+    renderAll();
   }
-  function setPaused(p) {
-    anim.paused = p;
-    var b = document.getElementById('pfc-frontier-toggle');
-    if (b) { b.textContent = p ? 'Play' : 'Pause'; b.setAttribute('aria-pressed', p ? 'true' : 'false'); }
-    if (p) { clearTimeout(anim.timer); return; }
-    // Pressing Play on the finished picture restarts the build-up at once;
-    // waiting out the end-hold first reads as a dead button.
-    if (anim.stage >= SNAPS.length - 1) {
-      anim.stage = 0;
-      applyStage();
-      hideTip();
+  function addExpandButtons() {
+    Array.prototype.forEach.call(document.querySelectorAll('.pfc-figure'), function (fig) {
+      var cap = fig.querySelector('figcaption');
+      if (!cap || cap.querySelector('.pfc-fs-btn')) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pfc-fs-btn';
+      b.textContent = 'Full window';
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function () { setExpanded(fig); });
+      cap.append(b);
+    });
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && document.querySelector('.pfc-expanded')) setExpanded(null);
+    });
+  }
+  // ---- chart 1: intelligence vs cost, with a time slider ----
+  // The labs with the most models on the chart each get a hue; every other
+  // lab shares a neutral gray. Five hues plus gray is as many as stay
+  // distinguishable with every pair on screen at once, as a scatter needs,
+  // under color vision deficiency as well as normal vision.
+  var PROVIDER_COLORS = [['OpenAI', '#1baf7a'], ['Anthropic', '#eb6834'], ['Google', '#2a78d6'], ['Alibaba', '#8a5a2b'], ['DeepSeek', '#4a3aa7']];
+  var OTHER_COLOR = '#a3abbd';
+  function providerColor(creator) {
+    for (var i = 0; i < PROVIDER_COLORS.length; i++) if (PROVIDER_COLORS[i][0] === creator) return PROVIDER_COLORS[i][1];
+    return OTHER_COLOR;
+  }
+  // Earlier frontiers are gray and lighten with age, newest first.
+  var PAST_GRAYS = ['#a9b2c4', '#bcc4d3', '#cdd3df', '#dbe0e9'];
+  // Reasoning variants of one model ('GPT-5.6 Luna (Xhigh)') share a base
+  // name, split the same way as split_variant in update.py. Only a suffix
+  // that names a reasoning mode groups variants, so dated versions like
+  // "(Dec '24)" stay separate models. Order matters: 'xhigh' before 'high',
+  // 'non-reasoning' before 'reasoning'.
+  var EFFORTS = [['non-reasoning', 0], ['minimal', 1], ['xhigh', 5], ['max', 6], ['high', 4], ['medium', 3], ['low', 2], ['reasoning', 4]];
+  function variantOf(name) {
+    var mm = name.match(/^(.*?)\s*\(([^()]*)\)\s*$/);
+    if (!mm) return null;
+    var v = mm[2].toLowerCase();
+    for (var i = 0; i < EFFORTS.length; i++) if (v.indexOf(EFFORTS[i][0]) >= 0) return { base: mm[1], rank: EFFORTS[i][1] };
+    return null;
+  }
+  function dayNum(iso) { return Math.round(Date.parse(iso + 'T00:00:00Z') / 86400000); }
+  function isoOfDay(n) { return new Date(n * 86400000).toISOString().slice(0, 10); }
+  function fmtShortDate(iso) {
+    var p = iso.split('-'), MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return MON[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0];
+  }
+  // The provider key shared by both charts: one button per colored lab
+  // among the given creators, which highlights that lab's models, and a gray
+  // "Other" entry if any remaining lab is present.
+  function appendProviderLegend(legend, creatorList) {
+    legend.append(el('span', 'pfc-legend-title', 'Provider'));
+    var hasOther = false;
+    PROVIDER_COLORS.forEach(function (pc) {
+      if (creatorList.indexOf(pc[0]) < 0) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pfc-lk pfc-lk-btn';
+      b.setAttribute('aria-pressed', SEL_KIND === 'creator' && SEL === pc[0] ? 'true' : 'false');
+      b.title = 'Highlight ' + pc[0] + ' models';
+      var d = el('span', 'pfc-dot'); d.style.background = pc[1]; d.style.borderColor = pc[1];
+      b.append(d, el('span', null, pc[0]));
+      b.addEventListener('click', function () {
+        setSel('creator', SEL_KIND === 'creator' && SEL === pc[0] ? null : pc[0]);
+      });
+      legend.append(b);
+    });
+    creatorList.forEach(function (c) { if (providerColor(c) === OTHER_COLOR) hasOther = true; });
+    if (hasOther) {
+      var o = el('span', 'pfc-lk'); var od = el('span', 'pfc-dot');
+      od.style.background = OTHER_COLOR; od.style.borderColor = OTHER_COLOR;
+      o.append(od, el('span', null, 'Other'));
+      legend.append(o);
     }
-    anim.timer = setTimeout(tick, STEP_MS);
   }
+
+  // The release window the slider shows: models released from SLIDE_LO
+  // through SLIDE, at prices in effect on SLIDE. null means the view's first
+  // or last day.
+  var SLIDE = null, SLIDE_LO = null;
 
   function renderFrontier() {
     var box = document.getElementById('pfc-frontier');
     if (!box) return;
+    var prevCtl = box.querySelector('.pfc-time');  // the slider block's height, kept clear of the chart in a full window
+    var below = prevCtl ? prevCtl.offsetHeight + 12 : 100;
     box.replaceChildren();
     // The chart shows one index era at a time on every tab; the era toggle
     // above the figure picks which. Scores are only comparable within an era
@@ -287,15 +358,14 @@
     // last day, so an old era is a frozen picture of how it ended.
     var eraView = DATA.era_snapshots ? ERA_VIEW : ERAS.length;
     SNAPS = (DATA.era_snapshots ? DATA.era_snapshots[eraView] : DATA.snapshots).map(function (s) { return [s[0], s[1]]; });
-    if (anim.stage >= SNAPS.length) anim.stage = SNAPS.length - 1;
-    anim.groups = SNAPS.map(function () { return []; });
     var viewEnd = SNAPS[SNAPS.length - 1][0];
     var timeAxis = isTimeAxis() && (eraView === ERAS.length || eraHasTime(eraView));
     function viewScore(m) { return CAP < 0 ? iqAt(m, viewEnd) : score(m); }
     function viewCost(m) { return timeAxis ? timeAt(m, viewEnd, eraView) : costAt(m, viewEnd); }
-    var W = Math.max(320, Math.min(880, box.clientWidth)), H = 440;
+    var size = chartSize(box, 880, 440, below);
+    var W = size.W, H = size.H;
     var M = { l: 56, r: 16, t: 12, b: 42 };
-    var svg = frame(box, W, H, M, (CAP < 0 ? 'Intelligence Index' : metricName()) + ' versus ' + (timeAxis ? 'time' : 'cost') + ' per task with Pareto frontier lines every two months');
+    var svg = frame(box, W, H, M, (CAP < 0 ? 'Intelligence Index' : metricName()) + ' versus ' + (timeAxis ? 'time' : 'cost') + ' per task, colored by provider, with the Pareto frontier at the date on the slider');
     // Models appear in an era's view only if they were measured in that era
     // (or later, for old views: their scores then are in the change history).
     var isCur = ERAS.length > 0 && eraView === ERAS.length;
@@ -359,94 +429,166 @@
     var verLbl = CAP < 0 ? eraShortLabel(eraView) : '';
     yt.textContent = CAP < 0 ? 'Artificial Analysis Intelligence Index' + (verLbl ? ' (' + verLbl + ')' : '') : metricName(); svg.append(yt);
 
-    var pts = [];
-    function windowIndex(date) {
-      for (var i = 0; i < SNAPS.length; i++) if (date <= SNAPS[i][0]) return i;
-      return SNAPS.length - 1;
-    }
-    // Colors count back from the dark end of the ramp so the newest frontier
-    // is always the darkest, however few snapshots the era has.
-    var cOff = Math.max(0, C.snap.length - SNAPS.length);
-    function snapColor(i) { return C.snap[Math.min(C.snap.length - 1, i + cOff)]; }
-    var selCount = SEL == null ? 0 : ms.filter(selMatches).length;
-    var selShown = selCount > 0;
-    ms.forEach(function (m) {
-      var sv = viewScore(m), cv = viewCost(m);
-      var x = X(cv), y = Y(sv);
-      var wi = windowIndex(m.date);
-      var isSel = selMatches(m);
-      var g = svgEl('g', { opacity: isSel ? 1 : selShown ? 0.15 : 0.45 });
-      dot(g, x, y, isSel ? (SEL_KIND === 'model' ? 5 : 4.5) : 3.5, snapColor(wi), m.open);
-      if (isSel && SEL_KIND === 'model') {
-        g.append(svgEl('circle', { cx: x, cy: y, r: 9.5, fill: 'none', stroke: C.ink, 'stroke-width': 1.5, 'class': 'pfc-sel-ring' }));
-        var anchor = x < M.l + 70 ? 'start' : x > W - M.r - 70 ? 'end' : 'middle';
-        var lx = anchor === 'start' ? x + 13 : anchor === 'end' ? x - 13 : x;
-        var ly = y < M.t + 30 ? y + 24 : y - 15;
-        var nl = svgEl('text', { x: lx, y: ly, 'text-anchor': anchor, 'font-size': 11, 'font-weight': 600, fill: C.ink, 'class': 'pfc-sel-label' });
-        nl.textContent = m.name;
-        g.append(nl);
-      } else if (isSel) {
-        g.append(svgEl('circle', { cx: x, cy: y, r: 8, fill: 'none', stroke: C.ink, 'stroke-width': 1.2, 'class': 'pfc-sel-ring' }));
-      }
-      svg.append(g);
-      anim.groups[wi].push(g);
-      pts.push({ x: x, y: y, snap: wi, key: m.name, rows: function () {
-        var d1 = el('div', 'pfc-tt-name'); d1.textContent = m.name;
-        var d2 = el('div'); var s = el('span', 'pfc-tt-val'); s.textContent = timeAxis ? fmtTime(cv) : fmt$(cv);
-        d2.append(s, ' per task at ' + (CAP < 0 ? 'Index ' + sv.toFixed(1) : metricName() + ' ' + fmtScore(sv)));
-        var d3 = el('div', null, m.creator + ' \u00b7 ' + (m.open ? 'open weights' : 'proprietary') + ' \u00b7 released ' + m.date + (m.retired ? ' \u00b7 retired' : ''));
-        var d4 = el('div', 'pfc-tt-row'); var kd = el('span', 'pfc-tt-key'); kd.style.borderTopColor = snapColor(wi);
-        d4.append(kd, 'in the ' + SNAPS[wi][1].replace('today', 'current') + ' window');
-        var rows = [d1, d2, d3, d4];
-        var sp = isCur && speedFacts(m); if (sp) rows.splice(3, 0, sp);
-        return rows;
-      }});
-    });
-
-    SNAPS.slice().reverse().forEach(function (snap, ri) {
-      var i = SNAPS.length - 1 - ri;
-      var snapDate = snap[0], snapLabel = snap[1];
-      var est = isCur && eraOfDate(snapDate) < ERAS.length;
-      var sub = ms.filter(function (m) {
-        return isCur ? m.date <= snapDate : measuredBy(m, snapDate);
+    // Every value at a date is the one in effect then: a model appears on
+    // its release (or, in an archive, its first measurement in that era) and
+    // moves as its price changes. Models released before `from`, the start of
+    // the slider's window, are left out.
+    function stateAt(date, from) {
+      var est = isCur && eraOfDate(date) < ERAS.length;
+      return ms.filter(function (m) {
+        if (from && m.date < from) return false;
+        return isCur ? m.date <= date : measuredBy(m, date);
       }).map(function (m) {
-        var c = timeAxis ? timeAt(m, snapDate, eraView) : isCur ? basisCostAt(m, snapDate) : costAt(m, snapDate);
-        var e = timeAxis ? (snapDate < viewEnd && !timeMeasuredBy(m, snapDate, eraView)) : est;
-        return { name: m.name, creator: m.creator, date: m.date, iq: CAP < 0 ? (isCur ? viewScore(m) : iqAt(m, snapDate)) : score(m), mcost: c, retired: m.retired, open: m.open, current: viewCost(m), est: e, m: m };
-      });
-      var fr = sub.filter(function (p) {
+        var c = timeAxis ? timeAt(m, date, eraView) : isCur ? basisCostAt(m, date) : costAt(m, date);
+        var e = timeAxis ? (date < viewEnd && !timeMeasuredBy(m, date, eraView)) : est;
+        return { m: m, name: m.name, iq: CAP < 0 ? (isCur ? viewScore(m) : iqAt(m, date)) : score(m), mcost: c, current: viewCost(m), est: e };
+      }).filter(function (p) { return p.mcost != null && p.iq != null; });
+    }
+    function frontierOf(sub) {
+      return sub.filter(function (p) {
         return !sub.some(function (o) { return o.iq >= p.iq && o.mcost <= p.mcost && (o.iq > p.iq || o.mcost < p.mcost); });
       }).sort(function (a, b) { return a.iq - b.iq; });
-      if (!fr.length) return;
-      var color = snapColor(i);
+    }
+    function stepPath(fr) {
       var d = 'M ' + X(fr[0].mcost) + ' ' + Y(fr[0].iq);
       fr.forEach(function (p, j) {
         if (j < fr.length - 1) d += ' H ' + X(fr[j + 1].mcost) + ' V ' + Y(fr[j + 1].iq);
       });
-      d += ' H ' + (W - M.r);
-      var sg = svgEl('g', {});
-      var pline = svgEl('path', { d: d, fill: 'none', stroke: color, 'stroke-width': i === SNAPS.length - 1 ? 3 : 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' });
-      if (i === SNAPS.length - 1) pline.setAttribute('data-current', '1');
-      sg.append(pline);
-      svg.append(sg);
-      anim.groups[i].push(sg);
-      fr.forEach(function (p) {
-        var x = X(p.mcost), y = Y(p.iq);
-        dot(sg, x, y, 4, color, p.open);
-        if (selMatchesName(p.name)) sg.append(svgEl('circle', { cx: x, cy: y, r: 9.5, fill: 'none', stroke: C.ink, 'stroke-width': 1.5, 'class': 'pfc-sel-ring' }));
-        pts.push({ x: x, y: y, snap: i, key: p.name, snapLabel: snapLabel, rows: function (labels) {
-          var d1 = el('div', 'pfc-tt-name'); d1.textContent = p.name;
-          var d2 = el('div', 'pfc-tt-row');
-          var kd = el('span', 'pfc-tt-key'); kd.style.borderTopColor = color;
-          var s = el('span', 'pfc-tt-val'); s.textContent = (p.est ? '≈' : '') + (timeAxis ? fmtTime(p.mcost) : fmt$(p.mcost));
-          d2.append(kd, s, ' at ' + (CAP < 0 ? 'Index ' + p.iq.toFixed(1) : metricName() + ' ' + fmtScore(p.iq)) + (Math.abs(p.current - p.mcost) > 1e-9 ? (timeAxis ? ' (speed then; ' + fmtTime(p.current) + ' now)' : ' (price then; ' + fmt$(p.current) + (viewEnd === DATA.updated ? ' now)' : ' at era end)')) : '') + (p.est ? (timeAxis ? ' · at its nearest measured speed' : ' · estimated from its price history') : ''));
-          var d3 = el('div', null, 'Pareto frontier as of: ' + (labels && labels.length ? labels.join('; ') : snapLabel) + ' \u00b7 ' + (p.open ? 'open weights' : 'proprietary') + ' \u00b7 released ' + p.date + (p.retired ? ' \u00b7 retired' : ''));
-          var rows = [d1, d2, d3];
-          var sp = isCur && p.m && speedFacts(p.m); if (sp) rows.push(sp);
-          return rows;
-        }});
-      });
+      return d + ' H ' + (W - M.r);
+    }
+
+    var startDay = Infinity;
+    ms.forEach(function (m) { startDay = Math.min(startDay, dayNum(m.date)); });
+    if (!isCur && eraView > 0) startDay = Math.max(startDay, dayNum(ERAS[eraView - 1][0]));
+    var endDay = dayNum(viewEnd);
+    startDay = Math.min(startDay, endDay);
+    // Days on which something on the chart changes, for keyboard stepping.
+    var stopSet = {};
+    stopSet[startDay] = 1; stopSet[endDay] = 1;
+    ms.forEach(function (m) {
+      stopSet[dayNum(m.date)] = 1;
+      (m.hist || []).forEach(function (h) { stopSet[dayNum(h[0])] = 1; });
     });
+    var stops = Object.keys(stopSet).map(Number).filter(function (n) { return n >= startDay && n <= endDay; }).sort(function (a, b) { return a - b; });
+    var t = SLIDE && dayNum(SLIDE) >= startDay && dayNum(SLIDE) < endDay ? SLIDE : viewEnd;
+    var lo = SLIDE_LO && dayNum(SLIDE_LO) > startDay && SLIDE_LO <= t ? SLIDE_LO : null;
+
+    var past = SNAPS.slice(0, -1).map(function (s) {
+      return { date: s[0], label: s[1].replace(/ 1, /, ' ') };
+    }).filter(function (e) { return dayNum(e.date) >= startDay; });
+
+    var pastLayer = svgEl('g', {}), layer = svgEl('g', {});
+    svg.append(pastLayer, layer);
+    var pts = [];
+    var selCount = SEL == null ? 0 : ms.filter(selMatches).length;
+    var selShown = selCount > 0;
+
+    function stageText() {
+      var end = t === viewEnd ? SNAPS[SNAPS.length - 1][1] : fmtShortDate(t);
+      return lo ? 'Pareto frontier of models released ' + fmtShortDate(lo) + ' to ' + end : 'Pareto frontier as of ' + end;
+    }
+    function draw() {
+      pastLayer.replaceChildren(); layer.replaceChildren(); pts.length = 0;
+      // Earlier frontiers inside the window, from the models released in it
+      // by then, labeled at their right end.
+      var shown = past.filter(function (e) { return e.date < t && (!lo || e.date > lo); }).map(function (e) {
+        return { label: e.label, fr: frontierOf(stateAt(e.date, lo)) };
+      }).filter(function (e) { return e.fr.length; });
+      var sub = stateAt(t, lo);
+      var fr = frontierOf(sub);
+      // A label is skipped where it would sit on the live frontier or on a
+      // newer label.
+      var labelYs = fr.length ? [Y(fr[fr.length - 1].iq) - 4] : [];
+      shown.slice().reverse().forEach(function (e, age) {
+        var gray = PAST_GRAYS[Math.min(age, PAST_GRAYS.length - 1)];
+        pastLayer.append(svgEl('path', { d: stepPath(e.fr), fill: 'none', stroke: gray, 'stroke-width': 1.25, 'stroke-linejoin': 'round', 'class': 'pfc-past' }));
+        var ly = Y(e.fr[e.fr.length - 1].iq) - 4;
+        if (ly < M.t + 10 || labelYs.some(function (y) { return Math.abs(y - ly) < 11; })) return;
+        labelYs.push(ly);
+        var lb = svgEl('text', { x: W - M.r - 2, y: ly, 'text-anchor': 'end', 'font-size': 10, fill: age === 0 ? '#8a94aa' : '#a3abbd', 'class': 'pfc-past-label' });
+        lb.textContent = e.label;
+        pastLayer.append(lb);
+      });
+
+      var onFr = {};
+      fr.forEach(function (p) { onFr[p.name] = 1; });
+      sub.forEach(function (p) { p.x = X(p.mcost); p.y = Y(p.iq); });
+
+      // Thin lines join the reasoning levels of one model, lowest effort first.
+      var bases = {};
+      sub.forEach(function (p) {
+        var v = variantOf(p.name);
+        if (!v) return;
+        var k = p.m.creator + '|' + v.base;
+        (bases[k] = bases[k] || []).push({ p: p, rank: v.rank });
+      });
+      Object.keys(bases).forEach(function (k) {
+        var vs = bases[k];
+        if (vs.length < 2) return;
+        vs.sort(function (a, b) { return a.rank - b.rank || a.p.mcost - b.p.mcost; });
+        var dim = selShown && !selMatches(vs[0].p.m);
+        layer.append(svgEl('polyline', {
+          points: vs.map(function (v) { return v.p.x + ',' + v.p.y; }).join(' '),
+          fill: 'none', stroke: providerColor(vs[0].p.m.creator), 'stroke-width': 1.25, 'stroke-linejoin': 'round',
+          opacity: dim ? 0.12 : 0.5, 'class': 'pfc-variants'
+        }));
+      });
+
+      function tipRows(p) {
+        var m = p.m;
+        return function () {
+          var d1 = el('div', 'pfc-tt-name'); d1.textContent = m.name;
+          var d2 = el('div'); var s = el('span', 'pfc-tt-val'); s.textContent = (p.est ? '≈' : '') + (timeAxis ? fmtTime(p.mcost) : fmt$(p.mcost));
+          d2.append(s, ' per task at ' + (CAP < 0 ? 'Index ' + p.iq.toFixed(1) : metricName() + ' ' + fmtScore(p.iq)) +
+            (Math.abs(p.current - p.mcost) > 1e-9 ? (timeAxis ? ' (speed then; ' + fmtTime(p.current) + ' now)' : ' (price then; ' + fmt$(p.current) + (viewEnd === DATA.updated ? ' now)' : ' at era end)')) : '') +
+            (p.est ? (timeAxis ? ' · at its nearest measured speed' : ' · estimated from its price history') : ''));
+          var d3 = el('div', 'pfc-tt-row'); var kd = el('span', 'pfc-tt-key'); kd.style.borderTopColor = providerColor(m.creator);
+          d3.append(kd, m.creator + ' · ' + (m.open ? 'open weights' : 'proprietary') + ' · released ' + m.date + (m.retired ? ' · retired' : ''));
+          var rows = [d1, d2, d3];
+          if (onFr[m.name]) rows.push(el('div', null, 'On the ' + stageText()));
+          var sp = isCur && speedFacts(m); if (sp) rows.push(sp);
+          return rows;
+        };
+      }
+      function selMark(g, p) {
+        if (SEL_KIND === 'model') {
+          g.append(svgEl('circle', { cx: p.x, cy: p.y, r: 9.5, fill: 'none', stroke: C.ink, 'stroke-width': 1.5, 'class': 'pfc-sel-ring' }));
+          var anchor = p.x < M.l + 70 ? 'start' : p.x > W - M.r - 70 ? 'end' : 'middle';
+          var lx = anchor === 'start' ? p.x + 13 : anchor === 'end' ? p.x - 13 : p.x;
+          var ly = p.y < M.t + 30 ? p.y + 24 : p.y - 15;
+          var nl = svgEl('text', { x: lx, y: ly, 'text-anchor': anchor, 'font-size': 11, 'font-weight': 600, fill: C.ink, 'class': 'pfc-sel-label' });
+          nl.textContent = p.name;
+          g.append(nl);
+        } else {
+          g.append(svgEl('circle', { cx: p.x, cy: p.y, r: 8, fill: 'none', stroke: C.ink, 'stroke-width': 1.2, 'class': 'pfc-sel-ring' }));
+        }
+      }
+      sub.forEach(function (p) {
+        if (onFr[p.name]) return;
+        var isSel = selMatches(p.m);
+        var g = svgEl('g', { opacity: isSel ? 1 : selShown ? 0.15 : 0.75 });
+        dot(g, p.x, p.y, isSel && SEL_KIND === 'model' ? 5 : 4, providerColor(p.m.creator), p.m.open);
+        if (isSel) selMark(g, p);
+        layer.append(g);
+        pts.push({ x: p.x, y: p.y, key: p.name, rows: tipRows(p) });
+      });
+
+      // The frontier at the slider date: the one dark line on the chart.
+      if (fr.length) {
+        var fg = svgEl('g', {});
+        var pline = svgEl('path', { d: stepPath(fr), fill: 'none', stroke: C.ink, 'stroke-width': 2.5, 'stroke-linejoin': 'round', 'stroke-linecap': 'round', 'data-current': '1' });
+        fg.append(pline);
+        fr.forEach(function (p) {
+          dot(fg, p.x, p.y, 5, providerColor(p.m.creator), p.m.open);
+          if (selMatches(p.m)) selMark(fg, p);
+          pts.push({ x: p.x, y: p.y, key: p.name, rows: tipRows(p) });
+        });
+        layer.append(fg);
+      }
+      var cap = document.getElementById('pfc-frontier-stage');
+      if (cap) cap.textContent = stageText();
+    }
+    draw();
     box.append(svg);
     // The page's one authored motion: when the view changes, the current
     // frontier draws itself in.
@@ -463,30 +605,90 @@
     }
     renderModelChip(selCount);
     attachHover(box, svg, pts);
-    var ctl = el('div', 'pfc-controls');
+
+    // The time slider has two handles that set a release window. Models
+    // released outside it are hidden, and every frontier is drawn from the
+    // models inside it, at the prices in effect on the right handle's date.
+    // Ticks mark the dates of the gray frontiers and move the right handle;
+    // arrow keys step either handle from one change to the next.
+    var ctl = el('div', 'pfc-time');
     var stageLabel = el('span', 'pfc-stage'); stageLabel.id = 'pfc-frontier-stage';
-    var btn = document.createElement('button');
-    btn.type = 'button'; btn.className = 'pfc-btn'; btn.id = 'pfc-frontier-toggle';
-    btn.addEventListener('click', function () { setPaused(!anim.paused); });
-    btn.hidden = SNAPS.length < 2;  // a single-frontier era has nothing to animate
-    ctl.append(stageLabel, btn);
+    stageLabel.textContent = stageText();
+    var range = el('div', 'pfc-range');
+    var rail = el('div', 'pfc-rail'), fill = el('div', 'pfc-rail-fill');
+    function handle(id, label, value) {
+      var h = document.createElement('input');
+      h.type = 'range'; h.id = id; h.className = 'pfc-slider';
+      h.min = startDay; h.max = endDay; h.step = 1; h.value = value;
+      h.setAttribute('aria-label', label);
+      h.disabled = startDay === endDay;
+      return h;
+    }
+    var loH = handle('pfc-frontier-slider-start', 'Earliest release date shown on the frontier chart', lo ? dayNum(lo) : startDay);
+    var hiH = handle('pfc-frontier-slider', 'Date shown on the frontier chart', dayNum(t));
+    function frac(n) { return (n - startDay) / Math.max(1, endDay - startDay); }
+    function sync() {
+      var a = frac(+loH.value), b = frac(+hiH.value);
+      fill.style.left = 'calc(8px + ' + (a * 100) + '% - ' + (a * 16) + 'px)';
+      fill.style.width = 'calc(' + ((b - a) * 100) + '% - ' + ((b - a) * 16) + 'px)';
+      // When the handles meet, the one that can still move goes on top.
+      loH.style.zIndex = +loH.value >= +hiH.value && +hiH.value > (startDay + endDay) / 2 ? 3 : 1;
+      loH.setAttribute('aria-valuetext', fmtShortDate(isoOfDay(+loH.value)));
+      hiH.setAttribute('aria-valuetext', fmtShortDate(t));
+      stageLabel.textContent = stageText();
+    }
+    function setLo(n) {
+      n = Math.max(startDay, Math.min(+hiH.value, n));
+      loH.value = n;
+      lo = n === startDay ? null : isoOfDay(n);
+      SLIDE_LO = lo;
+      hideTip(); sync(); draw();
+    }
+    function setHi(n) {
+      n = Math.max(+loH.value, Math.min(endDay, n));
+      hiH.value = n;
+      t = n === endDay ? viewEnd : isoOfDay(n);
+      SLIDE = t === viewEnd ? null : t;
+      hideTip(); sync(); draw();
+    }
+    function stepper(h, set) {
+      h.addEventListener('input', function () { set(+h.value); });
+      h.addEventListener('keydown', function (ev) {
+        var cur = +h.value, next = null;
+        if (ev.key === 'ArrowRight' || ev.key === 'ArrowUp') next = stops.filter(function (n) { return n > cur; })[0];
+        else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowDown') next = stops.filter(function (n) { return n < cur; }).pop();
+        else return;
+        ev.preventDefault();
+        if (next != null) set(next);
+      });
+    }
+    stepper(loH, setLo);
+    stepper(hiH, setHi);
+    range.append(rail, fill, loH, hiH);
+    var ticks = el('div', 'pfc-ticks');
+    past.forEach(function (e) {
+      var f = frac(dayNum(e.date));
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pfc-tick';
+      b.style.left = 'calc(8px + ' + (f * 100) + '% - ' + (f * 16) + 'px)';
+      b.title = e.label;
+      b.setAttribute('aria-label', 'Show the chart as of ' + e.label);
+      b.addEventListener('click', function () { setHi(dayNum(e.date)); });
+      ticks.append(b);
+    });
+    var track = el('div', 'pfc-slider-track');
+    var ends = el('div', 'pfc-slider-ends');
+    ends.append(el('span', null, fmtShortDate(isoOfDay(startDay))), el('span', null, SNAPS[SNAPS.length - 1][1] === 'today' ? 'today' : fmtShortDate(viewEnd)));
+    track.append(range, ticks);
+    ctl.append(stageLabel, track, ends);
     box.append(ctl);
-    applyStage();
-    setPaused(anim.paused);
+    sync();
 
     var legend = document.getElementById('pfc-frontier-legend');
     if (legend) {
       legend.replaceChildren();
-      legend.append(el('span', 'pfc-legend-title', 'Pareto frontier as of'));
-      SNAPS.slice().reverse().forEach(function (snap, ri) {
-        var i = SNAPS.length - 1 - ri;
-        var item = el('span', 'pfc-lk');
-        var sw = el('span', 'pfc-swatch');
-        sw.style.borderTopColor = snapColor(i);
-        item.append(sw, el('span', null, snap[1]));
-        legend.append(item);
-      });
-      var live = el('span', 'pfc-lk');
+      appendProviderLegend(legend, ms.map(function (m) { return m.creator; }));
+      var live = el('span', 'pfc-lk pfc-lk-gap');
       var d1 = el('span', 'pfc-dot');
       d1.style.background = C.deemph; d1.style.borderColor = C.deemph;
       live.append(d1, el('span', null, 'proprietary'));
@@ -495,6 +697,14 @@
       d2.style.background = C.surface; d2.style.borderColor = C.deemph;
       ret.append(d2, el('span', null, 'open weights'));
       legend.append(live, ret);
+      [['Pareto frontier', C.ink, 2.5], ['earlier frontiers', PAST_GRAYS[0], 1.25], ['reasoning levels', C.ink2, 1.5, 0.6]].forEach(function (k, i) {
+        var item = el('span', 'pfc-lk' + (i === 0 ? ' pfc-lk-gap' : ''));
+        var sw = el('span', 'pfc-swatch');
+        sw.style.borderTopColor = k[1]; sw.style.borderTopWidth = k[2] + 'px';
+        if (k[3]) sw.style.opacity = k[3];
+        item.append(sw, el('span', null, k[0]));
+        legend.append(item);
+      });
       if (verLbl) legend.append(el('span', 'pfc-legend-ver', 'AA Intelligence Index ' + verLbl));
     }
   }
@@ -556,7 +766,7 @@
     if (i < ERAS.length && !eraHasTime(i)) AXIS = 'cost';  // this archive has no time measurements
     advPage = 1;
     hideTip();
-    anim.stage = 1e9;  // renderFrontier clamps to the view's last stage
+    SLIDE = null; SLIDE_LO = null;  // a new view opens on its full range
     syncHash();
     renderEraNav(); renderAxisNav(); renderFrontier(); renderCapTable(); renderRecords(); renderTable(); renderAdvances();
   }
@@ -606,7 +816,7 @@
         AXIS = t[1];
         advPage = 1;
         hideTip();
-        anim.stage = 1e9;
+        SLIDE = null; SLIDE_LO = null;
         syncHash();
         renderTabs(); renderAxisNav(); renderFrontier(); renderCapTable(); renderRecords(); renderTable(); renderAdvances();
       });
@@ -849,7 +1059,8 @@
     var box = document.getElementById('pfc-records');
     if (!box) return;
     box.replaceChildren();
-    var W = Math.max(320, Math.min(880, box.clientWidth)), H = 370;
+    var size = chartSize(box, 880, 370, 4);
+    var W = size.W, H = size.H;
     var M = { l: 56, r: 60, t: 12, b: 40 };
     // The era toggle controls this chart too. The current view is one
     // continuous series rebased onto the current index: current scores, with
@@ -947,6 +1158,7 @@
         svg.append(lb);
       }
     }
+    var recCreators = [];
     tiers.forEach(function (tier, i) {
       var all = tierCost[tier];
       if (!all || !all.length) return;
@@ -967,7 +1179,9 @@
       svg.append(svgEl('path', { d: d, fill: 'none', stroke: color, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }));
       recs.forEach(function (r) {
         var x = X(r[0]), y = Y(r[1]);
-        dot(svg, x, y, 4, color, !!openByName[r[2]]);
+        var rm = modelsByName[r[2]];
+        if (rm) recCreators.push(rm.creator);
+        dot(svg, x, y, 4, rm ? providerColor(rm.creator) : color, !!openByName[r[2]]);
         if (selMatchesName(r[2])) svg.append(svgEl('circle', { cx: x, cy: y, r: 9.5, fill: 'none', stroke: C.ink, 'stroke-width': 1.5, 'class': 'pfc-sel-ring' }));
         pts.push({ x: x, y: y, key: r[2], rows: function () {
           var d1 = el('div', 'pfc-tt-name'); d1.textContent = r[2];
@@ -977,7 +1191,7 @@
                              : isCur && ERAS.length && r[0] < ERAS[ERAS.length - 1][0];
           var s = el('span', 'pfc-tt-val'); s.textContent = (est ? '≈' : '') + (timeAxis ? fmtTime(r[1]) : fmt$(r[1]));
           d2.append(kd, s, ' new record, ' + (CAP < 0 ? 'Index' : metricName()) + ' ' + tierLabel(tier) + (est ? (timeAxis ? ' · at its nearest measured speed' : ' · estimated from price history') : ''));
-          var d3 = el('div', null, (r[4] ? r[4] + ' \u00b7 ' : 'released ' + r[0] + ' \u00b7 ') + (CAP < 0 ? 'Index ' + r[3].toFixed(1) : metricName() + ' ' + fmtScore(r[3])) + (openByName[r[2]] ? ' \u00b7 open weights' : ' \u00b7 proprietary') + (retiredByName[r[2]] ? ' \u00b7 retired' : ''));
+          var d3 = el('div', null, (r[4] ? r[4] + ' \u00b7 ' : 'released ' + r[0] + ' \u00b7 ') + (CAP < 0 ? 'Index ' + r[3].toFixed(1) : metricName() + ' ' + fmtScore(r[3])) + (rm ? ' \u00b7 ' + rm.creator : '') + (openByName[r[2]] ? ' \u00b7 open weights' : ' \u00b7 proprietary') + (retiredByName[r[2]] ? ' \u00b7 retired' : ''));
           return [d1, d2, d3];
         }});
       });
@@ -1003,6 +1217,7 @@
         item.append(sw, el('span', null, tierLabel(tier)));
         legend.append(item);
       });
+      appendProviderLegend(legend, recCreators);
     }
   }
 
@@ -1207,8 +1422,9 @@
     loadData(d);
     if (PAGE_CAP) for (var i = 0; i < CAPS.length; i++) if (CAPS[i].key === PAGE_CAP) CAP = i;
     applyHash();
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderAll);
-    else renderAll();
+    function start() { addExpandButtons(); renderAll(); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
   }).catch(function (err) {
     var box = document.getElementById('pfc-frontier');
     if (box) box.textContent = 'Could not load the frontier data (' + err + ').';
@@ -1225,7 +1441,7 @@
     applyHash();
     advPage = 1;
     hideTip();
-    anim.stage = 1e9;
+    SLIDE = null; SLIDE_LO = null;
     renderAll();
   });
 })();
