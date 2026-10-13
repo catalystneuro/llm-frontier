@@ -178,8 +178,12 @@ a.pfc-tab { text-decoration: none; }
 .pfc-figure figcaption { position: relative; }
 .pfc-fs-btn { position: absolute; right: 0; top: 0.6rem; font: inherit; font-size: 0.8rem; color: var(--ink-soft); background: none; border: 0; padding: 0; cursor: pointer; }
 .pfc-fs-btn:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
-.pfc-figure:fullscreen { margin: 0; border: 0; border-radius: 0; box-shadow: none; overflow-y: auto; background: var(--surface); padding: 1.5rem max(1.5rem, calc((100vw - 1240px) / 2)); }
-.pfc-figure:fullscreen svg { width: min(100%, calc((100vh - 230px) * var(--pfc-ar))) !important; margin: 0 auto; }
+.pfc-noscroll { overflow: hidden; }
+.pfc-figure.pfc-expanded { position: fixed; inset: 0; z-index: 40; margin: 0; border: 0; border-radius: 0; box-shadow: none; display: flex; flex-direction: column; padding: 1rem 1.25rem 0.6rem; overflow: hidden; }
+.pfc-expanded .pfc-side { flex: 1 1 0; min-height: 0; align-items: stretch; }
+.pfc-expanded .pfc-side-chart { flex: 1 1 0; min-height: 0; }
+.pfc-expanded .pfc-legend-side { overflow-y: auto; }
+.pfc-expanded figcaption { max-height: 40vh; overflow-y: auto; }
 .pfc-how p { margin: 0.5rem 0 0; }
 
 /* two-column charts on wide windows */
