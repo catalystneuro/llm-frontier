@@ -73,7 +73,7 @@ a.site-title, .site-title a { color: var(--navy); text-decoration: none; }
 .pfc-lk { display: inline-flex; align-items: center; gap: 0.4rem; }
 .pfc-swatch { width: 18px; height: 0; border-top: 2.5px solid; border-radius: 2px; display: inline-block; }
 .pfc-dot { width: 9px; height: 9px; border-radius: 50%; border: 2px solid; display: inline-block; }
-.pfc-tooltip { position: absolute; pointer-events: none; z-index: 50; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 3px 14px rgba(16,22,66,0.13); padding: 0.5rem 0.65rem; font-size: 0.78rem; line-height: 1.45; color: var(--ink-muted); max-width: 250px; display: none; }
+.pfc-tooltip { position: fixed; pointer-events: none; z-index: 50; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 3px 14px rgba(16,22,66,0.13); padding: 0.5rem 0.65rem; font-size: 0.78rem; line-height: 1.45; color: var(--ink-muted); max-width: 250px; display: none; }
 .pfc-tt-name { font-weight: 600; color: var(--navy); font-size: 0.82rem; }
 .pfc-tt-val { font-weight: 600; color: var(--navy); }
 .pfc-tt-row { display: flex; align-items: center; gap: 0.45rem; }
@@ -165,6 +165,11 @@ a.pfc-tab { text-decoration: none; }
 /* collapsed chart explainers */
 .pfc-how summary { cursor: pointer; color: var(--ink-soft); font-size: 0.8rem; }
 .pfc-how summary:hover { color: var(--navy); }
+.pfc-figure figcaption { position: relative; }
+.pfc-fs-btn { position: absolute; right: 0; top: 0.6rem; font: inherit; font-size: 0.8rem; color: var(--ink-soft); background: none; border: 0; padding: 0; cursor: pointer; }
+.pfc-fs-btn:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+.pfc-figure:fullscreen { margin: 0; border: 0; border-radius: 0; box-shadow: none; overflow-y: auto; background: var(--surface); padding: 1.5rem max(1.5rem, calc((100vw - 1240px) / 2)); }
+.pfc-figure:fullscreen svg { width: min(100%, calc((100vh - 230px) * var(--pfc-ar))) !important; margin: 0 auto; }
 .pfc-how p { margin: 0.5rem 0 0; }
 
 /* two-column charts on wide windows */
