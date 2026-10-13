@@ -249,6 +249,34 @@ def test_time_slider(browser, site_url):
         ctx.close()
 
 
+def test_slider_window_in_the_url(browser, site_url):
+    ctx = browser.new_context(viewport={"width": 1300, "height": 900})
+    page = ctx.new_page()
+    errors = []
+    page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+    page.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
+    try:
+        # A shared link opens on its window.
+        page.goto(site_url + "/#index@2026-06-01..2026-09-01")
+        page.wait_for_selector("#pfc-frontier svg")
+        assert page.locator("#pfc-frontier-stage").inner_text() == (
+            "Pareto frontier of models released Jun 1, 2026 to Sep 1, 2026")
+        # Moving a handle rewrites the hash once the handle settles.
+        page.locator("#pfc-frontier-slider").press("End")
+        page.wait_for_function("location.hash === '#index@2026-06-01..'")
+        page.locator("#pfc-frontier-slider-start").press("Home")
+        page.wait_for_function("location.hash === ''")
+        # The window combines with the tab and a selection, and a hash typed
+        # over the open page applies.
+        page.evaluate("location.hash = '#coding~openai@..2026-04-01'")
+        page.wait_for_selector("#pfc-frontier svg text:text('Terminal-Bench 2.1')")
+        page.wait_for_selector("#pfc-frontier-stage:text('as of Apr 1, 2026')")
+        assert page.locator("#pfc-model-chip").is_visible()
+        assert errors == []
+    finally:
+        ctx.close()
+
+
 def test_full_window_buttons(browser, site_url):
     ctx, page, errors = open_page(browser, site_url)
     try:
