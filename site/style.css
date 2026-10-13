@@ -92,6 +92,7 @@ a.site-title, .site-title a { color: var(--navy); text-decoration: none; }
 .pfc-lk-btn:hover span:last-child { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
 .pfc-lk-btn[aria-pressed="true"] span:last-child { color: var(--navy); font-weight: 600; }
 .pfc-legend-side .pfc-lk-gap { margin-top: 0.35rem; }
+.pfc-legend-side .pfc-lk + .pfc-legend-title { margin-top: 0.6rem; }
 @media (max-width: 700px) { .pfc-legend-side .pfc-lk-gap { margin-top: 0; } }
 .pfc-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.9rem; }
 a.pfc-tab { text-decoration: none; }
