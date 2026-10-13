@@ -249,20 +249,26 @@ def test_time_slider(browser, site_url):
         ctx.close()
 
 
-def test_full_screen_buttons(browser, site_url):
+def test_full_window_buttons(browser, site_url):
     ctx, page, errors = open_page(browser, site_url)
     try:
         buttons = page.locator(".pfc-figure .pfc-fs-btn")
         assert buttons.count() == page.locator(".pfc-figure").count() == 2
+        normal = page.locator("#pfc-frontier svg").bounding_box()
         buttons.first.click()
-        page.wait_for_function("document.fullscreenElement && document.fullscreenElement.matches('.pfc-figure')")
-        page.wait_for_function("document.querySelector('.pfc-fs-btn').textContent === 'Exit full screen'")
-        # The tooltip moves into the full screen figure, where it can be seen.
-        assert page.evaluate("document.fullscreenElement.contains(document.querySelector('.pfc-tooltip'))")
-        page.locator("#pfc-frontier svg").wait_for()
-        buttons.first.click()
-        page.wait_for_function("!document.fullscreenElement")
-        page.wait_for_function("document.querySelector('.pfc-fs-btn').textContent === 'Full screen'")
+        fig = page.locator(".pfc-figure.pfc-expanded")
+        assert fig.count() == 1
+        assert buttons.first.inner_text() == "Close full window"
+        # The expanded figure covers the window and the chart is redrawn
+        # larger, without the figure needing to scroll.
+        box = fig.bounding_box()
+        assert box["width"] == 1300 and box["height"] == 900
+        big = page.locator("#pfc-frontier svg").bounding_box()
+        assert big["width"] > normal["width"] and big["height"] > normal["height"]
+        assert page.evaluate("(() => { const f = document.querySelector('.pfc-expanded'); return f.scrollHeight <= f.clientHeight; })()")
+        page.keyboard.press("Escape")
+        assert page.locator(".pfc-figure.pfc-expanded").count() == 0
+        assert buttons.first.inner_text() == "Full window"
         assert errors == []
     finally:
         ctx.close()

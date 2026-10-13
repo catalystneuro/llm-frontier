@@ -238,37 +238,45 @@
   function frame(box, W, H, M, ariaLabel) {
     var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': ariaLabel });
     svg.style.display = 'block'; svg.style.width = '100%'; svg.style.height = 'auto';
-    svg.style.setProperty('--pfc-ar', W / H);  // lets a full screen figure fit the chart to the window height
     return svg;
   }
 
-  // ---- full screen ----
-  // Each figure gets a button that opens it in full screen. The resize that
-  // follows re-renders the charts at the new width; the view state, slider
-  // date included, carries over. Browsers without the Fullscreen API for
-  // ordinary elements (Safari on iPhone) get no button.
-  function addFullscreenButtons() {
-    if (!document.fullscreenEnabled) return;
+  // ---- full window ----
+  // Each figure gets a button that expands it to fill the browser window.
+  // An expanded chart is drawn at the size of its box, not the page's
+  // default size, so it uses the whole window; the view state, slider
+  // window included, carries over. Escape closes it.
+  function chartSize(box, defW, defH, below) {
+    if (!box.closest('.pfc-expanded')) return { W: Math.max(320, Math.min(defW, box.clientWidth)), H: defH };
+    return { W: Math.max(320, box.clientWidth), H: Math.max(defH * 0.6, box.clientHeight - below) };
+  }
+  function setExpanded(fig) {
+    var open = document.querySelector('.pfc-expanded');
+    if (open) open.classList.remove('pfc-expanded');
+    if (fig && fig !== open) fig.classList.add('pfc-expanded');
+    var now = document.querySelector('.pfc-expanded');
+    document.documentElement.classList.toggle('pfc-noscroll', !!now);
+    Array.prototype.forEach.call(document.querySelectorAll('.pfc-fs-btn'), function (b) {
+      var on = now && now.contains(b);
+      b.textContent = on ? 'Close full window' : 'Full window';
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    hideTip();
+    renderAll();
+  }
+  function addExpandButtons() {
     Array.prototype.forEach.call(document.querySelectorAll('.pfc-figure'), function (fig) {
       var cap = fig.querySelector('figcaption');
       if (!cap || cap.querySelector('.pfc-fs-btn')) return;
       var b = document.createElement('button');
       b.type = 'button'; b.className = 'pfc-fs-btn';
-      b.textContent = 'Full screen';
-      b.addEventListener('click', function () {
-        hideTip();
-        if (document.fullscreenElement === fig) document.exitFullscreen();
-        else fig.requestFullscreen();
-      });
+      b.textContent = 'Full window';
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function () { setExpanded(fig); });
       cap.append(b);
     });
-    document.addEventListener('fullscreenchange', function () {
-      hideTip();
-      // Only the full screen element's subtree is drawn, so the tooltip moves into it.
-      (document.fullscreenElement || document.body).appendChild(tt);
-      Array.prototype.forEach.call(document.querySelectorAll('.pfc-fs-btn'), function (b) {
-        b.textContent = document.fullscreenElement && document.fullscreenElement.contains(b) ? 'Exit full screen' : 'Full screen';
-      });
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && document.querySelector('.pfc-expanded')) setExpanded(null);
     });
   }
   // ---- chart 1: intelligence vs cost, with a time slider ----
@@ -339,6 +347,8 @@
   function renderFrontier() {
     var box = document.getElementById('pfc-frontier');
     if (!box) return;
+    var prevCtl = box.querySelector('.pfc-time');  // the slider block's height, kept clear of the chart in a full window
+    var below = prevCtl ? prevCtl.offsetHeight + 12 : 100;
     box.replaceChildren();
     // The chart shows one index era at a time on every tab; the era toggle
     // above the figure picks which. Scores are only comparable within an era
@@ -352,7 +362,8 @@
     var timeAxis = isTimeAxis() && (eraView === ERAS.length || eraHasTime(eraView));
     function viewScore(m) { return CAP < 0 ? iqAt(m, viewEnd) : score(m); }
     function viewCost(m) { return timeAxis ? timeAt(m, viewEnd, eraView) : costAt(m, viewEnd); }
-    var W = Math.max(320, Math.min(880, box.clientWidth)), H = 440;
+    var size = chartSize(box, 880, 440, below);
+    var W = size.W, H = size.H;
     var M = { l: 56, r: 16, t: 12, b: 42 };
     var svg = frame(box, W, H, M, (CAP < 0 ? 'Intelligence Index' : metricName()) + ' versus ' + (timeAxis ? 'time' : 'cost') + ' per task, colored by provider, with the Pareto frontier at the date on the slider');
     // Models appear in an era's view only if they were measured in that era
@@ -1048,7 +1059,8 @@
     var box = document.getElementById('pfc-records');
     if (!box) return;
     box.replaceChildren();
-    var W = Math.max(320, Math.min(880, box.clientWidth)), H = 370;
+    var size = chartSize(box, 880, 370, 4);
+    var W = size.W, H = size.H;
     var M = { l: 56, r: 60, t: 12, b: 40 };
     // The era toggle controls this chart too. The current view is one
     // continuous series rebased onto the current index: current scores, with
@@ -1410,7 +1422,7 @@
     loadData(d);
     if (PAGE_CAP) for (var i = 0; i < CAPS.length; i++) if (CAPS[i].key === PAGE_CAP) CAP = i;
     applyHash();
-    function start() { addFullscreenButtons(); renderAll(); }
+    function start() { addExpandButtons(); renderAll(); }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
     else start();
   }).catch(function (err) {
