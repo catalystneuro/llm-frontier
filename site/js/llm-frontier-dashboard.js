@@ -183,15 +183,16 @@
 
   var tt = el('div', 'pfc-tooltip');
   document.body.appendChild(tt);
+  window.addEventListener('scroll', hideTip, { passive: true });  // the tooltip is fixed, so it would not follow its point
 
   function showTip(box, px, py, rows) {
     tt.replaceChildren.apply(tt, rows);
     tt.style.display = 'block';
     var r = box.getBoundingClientRect();
-    var x = r.left + window.scrollX + px + 14;
-    var y = r.top + window.scrollY + py - 10;
+    var x = r.left + px + 14;
+    var y = r.top + py - 10;
     tt.style.left = '0px'; tt.style.top = '0px';
-    if (r.left + px + 14 + tt.offsetWidth > window.innerWidth - 8) x = r.left + window.scrollX + px - tt.offsetWidth - 14;
+    if (r.left + px + 14 + tt.offsetWidth > window.innerWidth - 8) x = r.left + px - tt.offsetWidth - 14;
     tt.style.left = x + 'px'; tt.style.top = y + 'px';
   }
   function hideTip() { tt.style.display = 'none'; }
@@ -237,7 +238,38 @@
   function frame(box, W, H, M, ariaLabel) {
     var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': ariaLabel });
     svg.style.display = 'block'; svg.style.width = '100%'; svg.style.height = 'auto';
+    svg.style.setProperty('--pfc-ar', W / H);  // lets a full screen figure fit the chart to the window height
     return svg;
+  }
+
+  // ---- full screen ----
+  // Each figure gets a button that opens it in full screen. The resize that
+  // follows re-renders the charts at the new width; the view state, slider
+  // date included, carries over. Browsers without the Fullscreen API for
+  // ordinary elements (Safari on iPhone) get no button.
+  function addFullscreenButtons() {
+    if (!document.fullscreenEnabled) return;
+    Array.prototype.forEach.call(document.querySelectorAll('.pfc-figure'), function (fig) {
+      var cap = fig.querySelector('figcaption');
+      if (!cap || cap.querySelector('.pfc-fs-btn')) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pfc-fs-btn';
+      b.textContent = 'Full screen';
+      b.addEventListener('click', function () {
+        hideTip();
+        if (document.fullscreenElement === fig) document.exitFullscreen();
+        else fig.requestFullscreen();
+      });
+      cap.append(b);
+    });
+    document.addEventListener('fullscreenchange', function () {
+      hideTip();
+      // Only the full screen element's subtree is drawn, so the tooltip moves into it.
+      (document.fullscreenElement || document.body).appendChild(tt);
+      Array.prototype.forEach.call(document.querySelectorAll('.pfc-fs-btn'), function (b) {
+        b.textContent = document.fullscreenElement && document.fullscreenElement.contains(b) ? 'Exit full screen' : 'Full screen';
+      });
+    });
   }
   // ---- chart 1: intelligence vs cost, with a time slider ----
   // The labs with the most models on the chart each get a hue; every other
@@ -491,7 +523,7 @@
           var d3 = el('div', 'pfc-tt-row'); var kd = el('span', 'pfc-tt-key'); kd.style.borderTopColor = providerColor(m.creator);
           d3.append(kd, m.creator + ' · ' + (m.open ? 'open weights' : 'proprietary') + ' · released ' + m.date + (m.retired ? ' · retired' : ''));
           var rows = [d1, d2, d3];
-          if (onFr[m.name]) rows.push(el('div', null, 'On the ' + stageText().charAt(0).toLowerCase() + stageText().slice(1)));
+          if (onFr[m.name]) rows.push(el('div', null, 'On the ' + stageText()));
           var sp = isCur && speedFacts(m); if (sp) rows.push(sp);
           return rows;
         };
@@ -1338,8 +1370,9 @@
     loadData(d);
     if (PAGE_CAP) for (var i = 0; i < CAPS.length; i++) if (CAPS[i].key === PAGE_CAP) CAP = i;
     applyHash();
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderAll);
-    else renderAll();
+    function start() { addFullscreenButtons(); renderAll(); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
   }).catch(function (err) {
     var box = document.getElementById('pfc-frontier');
     if (box) box.textContent = 'Could not load the frontier data (' + err + ').';

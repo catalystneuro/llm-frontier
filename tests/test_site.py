@@ -232,6 +232,25 @@ def test_time_slider(browser, site_url):
         ctx.close()
 
 
+def test_full_screen_buttons(browser, site_url):
+    ctx, page, errors = open_page(browser, site_url)
+    try:
+        buttons = page.locator(".pfc-figure .pfc-fs-btn")
+        assert buttons.count() == page.locator(".pfc-figure").count() == 2
+        buttons.first.click()
+        page.wait_for_function("document.fullscreenElement && document.fullscreenElement.matches('.pfc-figure')")
+        page.wait_for_function("document.querySelector('.pfc-fs-btn').textContent === 'Exit full screen'")
+        # The tooltip moves into the full screen figure, where it can be seen.
+        assert page.evaluate("document.fullscreenElement.contains(document.querySelector('.pfc-tooltip'))")
+        page.locator("#pfc-frontier svg").wait_for()
+        buttons.first.click()
+        page.wait_for_function("!document.fullscreenElement")
+        page.wait_for_function("document.querySelector('.pfc-fs-btn').textContent === 'Full screen'")
+        assert errors == []
+    finally:
+        ctx.close()
+
+
 def test_clicking_a_point_selects_the_model(browser, site_url):
     ctx, page, errors = open_page(browser, site_url)
     try:
