@@ -81,8 +81,18 @@ a.site-title, .site-title a { color: var(--navy); text-decoration: none; }
 .pfc-time { margin-top: 0.5rem; }
 .pfc-stage { font-size: 0.82rem; font-weight: 600; color: var(--navy); font-variant-numeric: tabular-nums; }
 .pfc-slider-track { position: relative; margin-top: 0.3rem; }
-.pfc-slider { display: block; width: 100%; margin: 0; accent-color: var(--navy); cursor: pointer; }
-.pfc-slider:focus-visible { outline: 2px solid var(--blue-600); outline-offset: 2px; border-radius: 4px; }
+.pfc-range { position: relative; height: 20px; }
+.pfc-rail, .pfc-rail-fill { position: absolute; top: 8px; height: 4px; border-radius: 2px; }
+.pfc-rail { left: 8px; right: 8px; background: var(--line); }
+.pfc-rail-fill { background: var(--navy); }
+.pfc-slider { position: absolute; inset: 0; width: 100%; height: 20px; margin: 0; background: none; -webkit-appearance: none; appearance: none; pointer-events: none; }
+.pfc-slider::-webkit-slider-runnable-track { height: 20px; background: none; }
+.pfc-slider::-moz-range-track { height: 20px; background: none; }
+.pfc-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; pointer-events: auto; cursor: pointer; width: 16px; height: 16px; margin-top: 2px; border-radius: 50%; background: var(--navy); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--navy); }
+.pfc-slider::-moz-range-thumb { pointer-events: auto; cursor: pointer; width: 12px; height: 12px; border-radius: 50%; background: var(--navy); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--navy); }
+.pfc-slider:focus-visible { outline: none; }
+.pfc-slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 1px var(--navy), 0 0 0 4px var(--blue-600); }
+.pfc-slider:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 1px var(--navy), 0 0 0 4px var(--blue-600); }
 .pfc-ticks { position: relative; height: 12px; }
 .pfc-tick { position: absolute; top: 0; width: 12px; height: 12px; margin-left: -6px; padding: 0; border: 0; background: none; cursor: pointer; }
 .pfc-tick::before { content: ""; position: absolute; left: 5.5px; top: 1px; width: 1px; height: 7px; background: #a9b2c4; }

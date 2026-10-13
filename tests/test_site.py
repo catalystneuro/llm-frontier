@@ -227,6 +227,23 @@ def test_time_slider(browser, site_url):
         page.locator("#pfc-frontier-slider").press("End")
         page.wait_for_selector("#pfc-frontier-stage:text('today')")
         assert page.locator(dots).count() == today
+        # The start handle hides models released before it; the frontier is
+        # redrawn from the rest.
+        page.evaluate("""() => {
+            const s = document.getElementById('pfc-frontier-slider-start');
+            s.value = Math.round(Date.parse('2026-06-01T00:00:00Z') / 86400000);
+            s.dispatchEvent(new Event('input'));
+        }""")
+        assert "released Jun 1, 2026 to today" in page.locator("#pfc-frontier-stage").inner_text()
+        assert page.locator(dots).count() < today
+        assert page.locator("#pfc-frontier svg path[data-current='1']").count() == 1
+        # The start handle cannot pass the end handle.
+        page.locator("#pfc-frontier .pfc-tick").first.click()
+        assert int(page.locator("#pfc-frontier-slider-start").input_value()) <= int(page.locator("#pfc-frontier-slider").input_value())
+        page.locator("#pfc-frontier-slider-start").press("Home")
+        page.locator("#pfc-frontier-slider").press("End")
+        page.wait_for_selector("#pfc-frontier-stage:text('as of today')")
+        assert page.locator(dots).count() == today
         assert errors == []
     finally:
         ctx.close()

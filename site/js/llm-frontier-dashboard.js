@@ -331,8 +331,10 @@
     }
   }
 
-  // The date the slider shows; null means the view's last day.
-  var SLIDE = null;
+  // The release window the slider shows: models released from SLIDE_LO
+  // through SLIDE, at prices in effect on SLIDE. null means the view's first
+  // or last day.
+  var SLIDE = null, SLIDE_LO = null;
 
   function renderFrontier() {
     var box = document.getElementById('pfc-frontier');
@@ -416,12 +418,14 @@
     var verLbl = CAP < 0 ? eraShortLabel(eraView) : '';
     yt.textContent = CAP < 0 ? 'Artificial Analysis Intelligence Index' + (verLbl ? ' (' + verLbl + ')' : '') : metricName(); svg.append(yt);
 
-    // Every value at the slider date is the one in effect then: a model
-    // appears on its release (or, in an archive, its first measurement in
-    // that era) and moves as its price changes.
-    function stateAt(date) {
+    // Every value at a date is the one in effect then: a model appears on
+    // its release (or, in an archive, its first measurement in that era) and
+    // moves as its price changes. Models released before `from`, the start of
+    // the slider's window, are left out.
+    function stateAt(date, from) {
       var est = isCur && eraOfDate(date) < ERAS.length;
       return ms.filter(function (m) {
+        if (from && m.date < from) return false;
         return isCur ? m.date <= date : measuredBy(m, date);
       }).map(function (m) {
         var c = timeAxis ? timeAt(m, date, eraView) : isCur ? basisCostAt(m, date) : costAt(m, date);
@@ -456,10 +460,11 @@
     });
     var stops = Object.keys(stopSet).map(Number).filter(function (n) { return n >= startDay && n <= endDay; }).sort(function (a, b) { return a - b; });
     var t = SLIDE && dayNum(SLIDE) >= startDay && dayNum(SLIDE) < endDay ? SLIDE : viewEnd;
+    var lo = SLIDE_LO && dayNum(SLIDE_LO) > startDay && SLIDE_LO <= t ? SLIDE_LO : null;
 
     var past = SNAPS.slice(0, -1).map(function (s) {
-      return { date: s[0], label: s[1].replace(/ 1, /, ' '), fr: frontierOf(stateAt(s[0])) };
-    }).filter(function (e) { return e.fr.length && dayNum(e.date) >= startDay; });
+      return { date: s[0], label: s[1].replace(/ 1, /, ' ') };
+    }).filter(function (e) { return dayNum(e.date) >= startDay; });
 
     var pastLayer = svgEl('g', {}), layer = svgEl('g', {});
     svg.append(pastLayer, layer);
@@ -467,12 +472,18 @@
     var selCount = SEL == null ? 0 : ms.filter(selMatches).length;
     var selShown = selCount > 0;
 
-    function stageText() { return 'Pareto frontier as of ' + (t === viewEnd ? SNAPS[SNAPS.length - 1][1] : fmtShortDate(t)); }
+    function stageText() {
+      var end = t === viewEnd ? SNAPS[SNAPS.length - 1][1] : fmtShortDate(t);
+      return lo ? 'Pareto frontier of models released ' + fmtShortDate(lo) + ' to ' + end : 'Pareto frontier as of ' + end;
+    }
     function draw() {
       pastLayer.replaceChildren(); layer.replaceChildren(); pts.length = 0;
-      // Earlier frontiers before the slider date, labeled at their right end.
-      var shown = past.filter(function (e) { return e.date < t; });
-      var sub = stateAt(t);
+      // Earlier frontiers inside the window, from the models released in it
+      // by then, labeled at their right end.
+      var shown = past.filter(function (e) { return e.date < t && (!lo || e.date > lo); }).map(function (e) {
+        return { label: e.label, fr: frontierOf(stateAt(e.date, lo)) };
+      }).filter(function (e) { return e.fr.length; });
+      var sub = stateAt(t, lo);
       var fr = frontierOf(sub);
       // A label is skipped where it would sit on the live frontier or on a
       // newer label.
@@ -584,54 +595,83 @@
     renderModelChip(selCount);
     attachHover(box, svg, pts);
 
-    // The time slider: dragging it back hides models not yet released and
-    // the earlier frontiers drawn after that date. Ticks mark the dates of
-    // the gray frontiers; arrow keys step from one change to the next.
+    // The time slider has two handles that set a release window. Models
+    // released outside it are hidden, and every frontier is drawn from the
+    // models inside it, at the prices in effect on the right handle's date.
+    // Ticks mark the dates of the gray frontiers and move the right handle;
+    // arrow keys step either handle from one change to the next.
     var ctl = el('div', 'pfc-time');
     var stageLabel = el('span', 'pfc-stage'); stageLabel.id = 'pfc-frontier-stage';
     stageLabel.textContent = stageText();
-    var slider = document.createElement('input');
-    slider.type = 'range'; slider.id = 'pfc-frontier-slider'; slider.className = 'pfc-slider';
-    slider.min = startDay; slider.max = endDay; slider.step = 1; slider.value = dayNum(t);
-    slider.setAttribute('aria-label', 'Date shown on the frontier chart');
-    slider.disabled = startDay === endDay;
-    function setDay(n) {
-      n = Math.max(startDay, Math.min(endDay, n));
-      slider.value = n;
-      t = isoOfDay(n);
-      if (n === endDay) t = viewEnd;
-      SLIDE = t === viewEnd ? null : t;
-      slider.setAttribute('aria-valuetext', fmtShortDate(t));
-      hideTip();
-      draw();
+    var range = el('div', 'pfc-range');
+    var rail = el('div', 'pfc-rail'), fill = el('div', 'pfc-rail-fill');
+    function handle(id, label, value) {
+      var h = document.createElement('input');
+      h.type = 'range'; h.id = id; h.className = 'pfc-slider';
+      h.min = startDay; h.max = endDay; h.step = 1; h.value = value;
+      h.setAttribute('aria-label', label);
+      h.disabled = startDay === endDay;
+      return h;
     }
-    slider.setAttribute('aria-valuetext', fmtShortDate(t));
-    slider.addEventListener('input', function () { setDay(+slider.value); });
-    slider.addEventListener('keydown', function (ev) {
-      var cur = +slider.value, next = null;
-      if (ev.key === 'ArrowRight' || ev.key === 'ArrowUp') next = stops.filter(function (n) { return n > cur; })[0];
-      else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowDown') next = stops.filter(function (n) { return n < cur; }).pop();
-      else return;
-      ev.preventDefault();
-      if (next != null) setDay(next);
-    });
-    var track = el('div', 'pfc-slider-track');
+    var loH = handle('pfc-frontier-slider-start', 'Earliest release date shown on the frontier chart', lo ? dayNum(lo) : startDay);
+    var hiH = handle('pfc-frontier-slider', 'Date shown on the frontier chart', dayNum(t));
+    function frac(n) { return (n - startDay) / Math.max(1, endDay - startDay); }
+    function sync() {
+      var a = frac(+loH.value), b = frac(+hiH.value);
+      fill.style.left = 'calc(8px + ' + (a * 100) + '% - ' + (a * 16) + 'px)';
+      fill.style.width = 'calc(' + ((b - a) * 100) + '% - ' + ((b - a) * 16) + 'px)';
+      // When the handles meet, the one that can still move goes on top.
+      loH.style.zIndex = +loH.value >= +hiH.value && +hiH.value > (startDay + endDay) / 2 ? 3 : 1;
+      loH.setAttribute('aria-valuetext', fmtShortDate(isoOfDay(+loH.value)));
+      hiH.setAttribute('aria-valuetext', fmtShortDate(t));
+      stageLabel.textContent = stageText();
+    }
+    function setLo(n) {
+      n = Math.max(startDay, Math.min(+hiH.value, n));
+      loH.value = n;
+      lo = n === startDay ? null : isoOfDay(n);
+      SLIDE_LO = lo;
+      hideTip(); sync(); draw();
+    }
+    function setHi(n) {
+      n = Math.max(+loH.value, Math.min(endDay, n));
+      hiH.value = n;
+      t = n === endDay ? viewEnd : isoOfDay(n);
+      SLIDE = t === viewEnd ? null : t;
+      hideTip(); sync(); draw();
+    }
+    function stepper(h, set) {
+      h.addEventListener('input', function () { set(+h.value); });
+      h.addEventListener('keydown', function (ev) {
+        var cur = +h.value, next = null;
+        if (ev.key === 'ArrowRight' || ev.key === 'ArrowUp') next = stops.filter(function (n) { return n > cur; })[0];
+        else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowDown') next = stops.filter(function (n) { return n < cur; }).pop();
+        else return;
+        ev.preventDefault();
+        if (next != null) set(next);
+      });
+    }
+    stepper(loH, setLo);
+    stepper(hiH, setHi);
+    range.append(rail, fill, loH, hiH);
     var ticks = el('div', 'pfc-ticks');
     past.forEach(function (e) {
-      var f = (dayNum(e.date) - startDay) / Math.max(1, endDay - startDay);
+      var f = frac(dayNum(e.date));
       var b = document.createElement('button');
       b.type = 'button'; b.className = 'pfc-tick';
       b.style.left = 'calc(8px + ' + (f * 100) + '% - ' + (f * 16) + 'px)';
       b.title = e.label;
       b.setAttribute('aria-label', 'Show the chart as of ' + e.label);
-      b.addEventListener('click', function () { setDay(dayNum(e.date)); });
+      b.addEventListener('click', function () { setHi(dayNum(e.date)); });
       ticks.append(b);
     });
+    var track = el('div', 'pfc-slider-track');
     var ends = el('div', 'pfc-slider-ends');
     ends.append(el('span', null, fmtShortDate(isoOfDay(startDay))), el('span', null, SNAPS[SNAPS.length - 1][1] === 'today' ? 'today' : fmtShortDate(viewEnd)));
-    track.append(slider, ticks);
+    track.append(range, ticks);
     ctl.append(stageLabel, track, ends);
     box.append(ctl);
+    sync();
 
     var legend = document.getElementById('pfc-frontier-legend');
     if (legend) {
@@ -715,7 +755,7 @@
     if (i < ERAS.length && !eraHasTime(i)) AXIS = 'cost';  // this archive has no time measurements
     advPage = 1;
     hideTip();
-    SLIDE = null;  // a new view opens at its last day
+    SLIDE = null; SLIDE_LO = null;  // a new view opens on its full range
     syncHash();
     renderEraNav(); renderAxisNav(); renderFrontier(); renderCapTable(); renderRecords(); renderTable(); renderAdvances();
   }
@@ -765,7 +805,7 @@
         AXIS = t[1];
         advPage = 1;
         hideTip();
-        SLIDE = null;
+        SLIDE = null; SLIDE_LO = null;
         syncHash();
         renderTabs(); renderAxisNav(); renderFrontier(); renderCapTable(); renderRecords(); renderTable(); renderAdvances();
       });
@@ -1389,7 +1429,7 @@
     applyHash();
     advPage = 1;
     hideTip();
-    SLIDE = null;
+    SLIDE = null; SLIDE_LO = null;
     renderAll();
   });
 })();
