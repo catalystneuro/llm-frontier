@@ -472,6 +472,7 @@
     var stops = Object.keys(stopSet).map(Number).filter(function (n) { return n >= startDay && n <= endDay; }).sort(function (a, b) { return a - b; });
     var t = SLIDE && dayNum(SLIDE) >= startDay && dayNum(SLIDE) < endDay ? SLIDE : viewEnd;
     var lo = SLIDE_LO && dayNum(SLIDE_LO) > startDay && SLIDE_LO <= t ? SLIDE_LO : null;
+    SLIDE = t === viewEnd ? null : t; SLIDE_LO = lo;  // a date from the URL outside this view's range is dropped
 
     var past = SNAPS.slice(0, -1).map(function (s) {
       return { date: s[0], label: s[1].replace(/ 1, /, ' ') };
@@ -642,6 +643,7 @@
       loH.value = n;
       lo = n === startDay ? null : isoOfDay(n);
       SLIDE_LO = lo;
+      syncHashSoon();
       hideTip(); sync(); draw();
     }
     function setHi(n) {
@@ -649,6 +651,7 @@
       hiH.value = n;
       t = n === endDay ? viewEnd : isoOfDay(n);
       SLIDE = t === viewEnd ? null : t;
+      syncHashSoon();
       hideTip(); sync(); draw();
     }
     function stepper(h, set) {
@@ -710,9 +713,13 @@
   }
 
   // ---- shareable view state in the URL hash ----
+  // The slider window rides at the end as @FROM..TO, either side left
+  // empty when its handle is at the end of the range: #index@2026-01-25..
+  // shows models released since that date, as of today.
   function hashFor() {
     var key = CAP >= 0 ? CAPS[CAP].key : 'index';
-    var sel = SEL ? '~' + slugify(SEL) : '';
+    var win = SLIDE || SLIDE_LO ? '@' + (SLIDE_LO || '') + '..' + (SLIDE || '') : '';
+    var sel = (SEL ? '~' + slugify(SEL) : '') + win;
     if (ERAS.length && ERA_VIEW < ERAS.length && DATA.era_snapshots) {
       var snaps = DATA.era_snapshots[ERA_VIEW];
       return '#' + key + '-through-' + snaps[snaps.length - 1][0] + (isTimeAxis() ? '-time' : '') + sel;
@@ -721,13 +728,25 @@
     if (CAP >= 0) return key === PAGE_CAP && !sel ? '' : '#' + key + sel;
     return sel ? '#index' + sel : '';
   }
+  // Dragging a slider handle fires many input events, and Safari limits how
+  // often a page may call replaceState, so slider moves write the hash once
+  // the handle settles.
+  var hashTimer = null;
+  function syncHashSoon() { clearTimeout(hashTimer); hashTimer = setTimeout(syncHash, 250); }
   function syncHash() {
+    clearTimeout(hashTimer);
     var h = hashFor();
     if ((location.hash || '') === h) return;
     history.replaceState(null, '', h || location.pathname + location.search);
   }
   function applyHash() {
     var h = (location.hash || '').replace(/^#/, '');
+    var win = h.match(/@(\d{4}-\d{2}-\d{2})?\.\.(\d{4}-\d{2}-\d{2})?$/);
+    if (win) {
+      // renderFrontier drops a date outside the view's range.
+      SLIDE_LO = win[1] || null; SLIDE = win[2] || null;
+      h = h.slice(0, win.index);
+    }
     var tilde = h.indexOf('~');
     if (tilde >= 0) {
       var slug = h.slice(tilde + 1);
@@ -1438,10 +1457,10 @@
     if (!DATA) return;
     if ((location.hash || '') === hashFor()) return;
     CAP = -1; ERA_VIEW = ERAS.length; AXIS = 'cost'; SEL = null; SEL_KIND = 'model';
+    SLIDE = null; SLIDE_LO = null;
     applyHash();
     advPage = 1;
     hideTip();
-    SLIDE = null; SLIDE_LO = null;
     renderAll();
   });
 })();
