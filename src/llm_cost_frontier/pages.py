@@ -25,8 +25,8 @@ def metric_page(template: str, cap: dict) -> str:
     s = template
     swaps = [
         ("<title>LLM Frontier</title>", f"<title>{label} · LLM Frontier</title>"),
-        ('<meta name="description" content="The cheapest way to reach each level of LLM capability, and how fast that cost is falling. Refreshed four times a day from Artificial Analysis measurements.">',
-         f'<meta name="description" content="The cheapest way to reach each level of {cap["metric"]}, and how fast that cost is falling. Refreshed four times a day from Artificial Analysis measurements.">'),
+        ('<meta name="description" content="The cheapest way to reach each level of LLM capability, and how fast that cost is falling. Refreshed every three hours from Artificial Analysis measurements.">',
+         f'<meta name="description" content="The cheapest way to reach each level of {cap["metric"]}, and how fast that cost is falling. Refreshed every three hours from Artificial Analysis measurements.">'),
         ('<meta property="og:title" content="LLM Frontier">',
          f'<meta property="og:title" content="{label} · LLM Frontier">'),
         ('<meta property="og:image" content="https://llm-frontier.catalystneuro.com/images/frontier-card.png">',
