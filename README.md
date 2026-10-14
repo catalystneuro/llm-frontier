@@ -1,6 +1,6 @@
 # LLM Frontier
 
-This repository tracks how cheaply a given level of large language model capability can be bought, and how that price changes over time. Four times a day it reads Artificial Analysis's measured cost per Intelligence Index task for every model they benchmark, merges the result into a cumulative history, and rebuilds two artifacts: the JSON that the dashboard at [llm-frontier.catalystneuro.com](https://llm-frontier.catalystneuro.com/) renders, and an Atom feed of frontier advances.
+This repository tracks how cheaply a given level of large language model capability can be bought, and how that price changes over time. Every three hours it reads Artificial Analysis's measured cost per Intelligence Index task for every model they benchmark, merges the result into a cumulative history, and rebuilds two artifacts: the JSON that the dashboard at [llm-frontier.catalystneuro.com](https://llm-frontier.catalystneuro.com/) renders, and an Atom feed of frontier advances.
 
 The background, the method, and the argument for why the cheap end of the range matters are in the post [What Happens When the Cost of Intelligence Drops 100x](https://catalystneuro.com/blog/cost-of-intelligence-drops-100x/).
 
@@ -81,7 +81,7 @@ PYTHONPATH=src python -m llm_cost_frontier.render --force   # re-render everythi
 
 ## Schedule
 
-`.github/workflows/update.yml` runs the updater four times a day, every six hours starting at 00:00 UTC, commits `data/history.json` and the build artifacts when they change, and then redeploys the site. A failed run opens a `pipeline-failure` issue (or adds to the open one), and the next successful run closes it; while updates are stuck, the dashboard shows a staleness note based on how long ago its data file was deployed. The workflow can also be run by hand from the Actions tab.
+`.github/workflows/update.yml` runs the updater every three hours, at 17 minutes past the hour (GitHub delays scheduled runs most at the top of the hour), commits `data/history.json` and the build artifacts when they change, and then redeploys the site. A failed run opens a `pipeline-failure` issue (or adds to the open one), and the next successful run closes it; while updates are stuck, the dashboard shows a staleness note once its data file was last deployed more than 15 hours ago. The workflow can also be run by hand from the Actions tab.
 
 ## Caveats
 

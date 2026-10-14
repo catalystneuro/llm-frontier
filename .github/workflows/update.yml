@@ -2,9 +2,12 @@ name: Update frontier data
 
 on:
   schedule:
-    # Four times a day, every six hours. A successful update redeploys the
-    # site (see the deploy job).
-    - cron: "0 0,6,12,18 * * *"
+    # Every three hours, at 17 minutes past. GitHub delays and sometimes
+    # drops scheduled runs, most often at the top of the hour, and gaps of
+    # more than 13 hours were seen under the old 00/06/12/18 schedule; the
+    # off-peak minute and shorter interval keep the data fresh despite that.
+    # A successful update redeploys the site (see the deploy job).
+    - cron: "17 */3 * * *"
   workflow_dispatch:
 
 permissions:
