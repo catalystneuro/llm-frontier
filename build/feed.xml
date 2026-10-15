@@ -4,7 +4,7 @@
   <link href="https://llm-frontier.catalystneuro.com/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed.xml</id>
-  <updated>2026-10-14T06:00:00Z</updated>
+  <updated>2026-10-15T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of the Artificial Analysis Intelligence Index, through a release or a price change.</subtitle>
   <entry>
@@ -253,7 +253,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-08-25-granite-4-2-3b.png" />
     <id>https://llm-frontier.catalystneuro.com/advance/2026-08-25/granite-4-2-3b</id>
     <updated>2026-08-25T00:00:00Z</updated>
-    <summary>Granite 4.2 3B: now the cheapest way to reach index 0.0 to 14.3 at $0.0047 per task, taking it from GPT-5.6 Luna. Open weights.</summary>
+    <summary>Granite 4.2 3B: now the cheapest way to reach index 0.0 to 14.3 at $0.0047 per task, taking it from GPT-5.6 Luna and Gemma 4 E4B; Gemma 4 E4B left the frontier. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-08-18: GLM-5.3 (Max) (new model, index 59.5)</title>
@@ -349,7 +349,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-07-30-gpt-5-6-luna.png" />
     <id>https://llm-frontier.catalystneuro.com/advance/2026-07-30/gpt-5-6-luna-low</id>
     <updated>2026-07-30T00:00:00Z</updated>
-    <summary>GPT-5.6 Luna (Low): price moved from $0.044 to $0.0088 per task; now the cheapest way to reach index 0.0 to 33.9, taking it from MiMo-V2.5. New cost record for index ≥ 30. Proprietary.</summary>
+    <summary>GPT-5.6 Luna (Low): price moved from $0.044 to $0.0088 per task; now the cheapest way to reach index 8.9 to 33.9, taking it from MiMo-V2.5. New cost record for index ≥ 30. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-07-24: Claude Opus 5 (Max) (new model, index 63.1)</title>
