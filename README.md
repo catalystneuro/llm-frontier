@@ -11,6 +11,7 @@ The background, the method, and the argument for why the cheap end of the range 
 | `data/history.json` | Cumulative per-model record: release date, creator, open weights flag, retired flag, and every observed `(date, cost, index)` |
 | `data/price-events.json` | Hand-maintained price changes from before nightly observation began |
 | `data/overrides.json` | Hand-maintained corrections to upstream fields, currently the open weights flag; applied to the outputs, never to the history |
+| `data/decision-history.json` | Cumulative record of the Decision Index contestants, in the same shape as the history; costs are USD per 1,000 tasks |
 | `data/eras.json` | Hand-declared index era boundaries: dates on which the source recomposed the Intelligence Index, breaking comparability of scores and measured costs |
 | `build/llm-frontier.json` | What the dashboard renders: model rows, frontier snapshots, tier records, halving times, and frontier advances |
 | `build/feed.xml` | Atom feed of the last 60 frontier advances |
@@ -24,6 +25,8 @@ The dashboard itself lives in `site/` and is served from this repository via Git
 Any model page on artificialanalysis.ai embeds the full comparison dataset for every model they currently benchmark, including `intelligenceIndexCostPerTask`, the average billed cost to run one task from their evaluation suite with the input, reasoning, and answer tokens the run actually used. The updater fetches one page, parses that payload, and merges it into the history.
 
 Beyond the aggregate Intelligence Index, the updater also records a set of per-capability scores from the same payload, each chosen because it maps onto a class of application better than the aggregate does: Terminal-Bench 2.1 (agentic coding), the Agentic Index (tool use), AA-LCR (long context), IFBench (instruction following), Omniscience (factual recall with hallucinations penalized), GPQA Diamond (scientific reasoning), GDPval-AA (office work products), and MMMU-Pro (multimodal input). The dashboard renders these as tabs that switch the vertical axis of the frontier chart. Capability scores are stored as their latest measured values; only prices are tracked over time. Metrics measured for only a small fraction of models (LiveCodeBench, AIME) are left out.
+
+The Artificial Analysis [Decision Index](https://artificialanalysis.ai/evaluations/artificial-analysis-decision-index) gets a tab of its own. It is not a field of the main payload: its own page lists its own contestants (language models and dedicated decision models, which return a probability for every option in one call) with their own measured cost and time per task. The updater reads that page too, keeps `data/decision-history.json`, and runs the same frontier, record, and advance derivations on it, with costs per 1,000 tasks and no eras. Decision models have no published release dates, so every contestant is dated by its first observation (from October 19, 2026). A failed read of that page is a warning, not a failed run.
 
 Three properties follow from keeping a history instead of a snapshot:
 

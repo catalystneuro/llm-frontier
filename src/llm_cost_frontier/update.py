@@ -26,6 +26,7 @@ DEFAULT_HISTORY = Path("data/history.json")
 DEFAULT_EVENTS = Path("data/price-events.json")
 DEFAULT_OVERRIDES = Path("data/overrides.json")
 DEFAULT_ERAS = Path("data/eras.json")
+DEFAULT_DECISION_HISTORY = Path("data/decision-history.json")
 DEFAULT_OUTPUT = Path("build/llm-frontier.json")
 DEFAULT_FEED = Path("build/feed.xml")
 DEFAULT_SITE = "https://llm-frontier.catalystneuro.com"
@@ -79,6 +80,24 @@ CAPABILITIES = [
     dict(key="multimodal", url="https://artificialanalysis.ai/evaluations/mmmu-pro", field="mmmuPro", label="Multimodal", metric="MMMU-Pro", percent=True,
          blurb="Accuracy on MMMU-Pro, college-level problems that require reading images, diagrams, and figures. Relevant for applications with visual input."),
 ]
+
+# The Decision Index is not a field on the model rows above: Artificial
+# Analysis publishes it on its own page, for its own contestant set (language
+# models and dedicated decision models, which answer every question in one
+# call with a probability for each option), with its own measured cost and
+# time per task. It gets a separate history and its own cost axis, but the
+# same frontier, record, and advance derivations as every other tab. Its
+# costs are a few thousandths of a cent per task for the cheapest models, too
+# small for the six-decimal rounding the rest of the pipeline uses, so they
+# are stored and shown per 1,000 tasks.
+DECISION_PAGE = "https://artificialanalysis.ai/evaluations/artificial-analysis-decision-index"
+DECISION_COST_SCALE = 1000
+DECISION_MIN_LIVE = 10
+DECISION = dict(key="decision", url=DECISION_PAGE, label="Decisions", metric="Decision Index", percent=False,
+                own=True, unit="per 1K tasks",
+                blurb="Artificial Analysis's Decision Index, a composite of classification, tool calling, knowledge, and reasoning questions answered by choosing from a fixed set of options. It compares language models with dedicated decision models, which return a probability for every option in one call. Unlike the other tabs, the cost axis is the measured cost of Decision Index tasks, per 1,000 tasks, so models that are not language models can compete. Relevant for routing, moderation, triage, and any pipeline step that picks one label from a list.")
+# Every page beside the overall index: the capabilities, then the Decision Index.
+METRIC_PAGES = CAPABILITIES + [DECISION]
 
 
 def flight_payload(html: str) -> str:
@@ -166,6 +185,83 @@ def extract_models(payload: str) -> dict:
             ttft=round(float(ts["medianTimeToFirstChunk"]), 2) if ts.get("medianTimeToFirstChunk") else None,
         )
     return models
+
+
+def extract_decision(payload: str) -> dict:
+    """The Decision Index contestants from the evaluation page's payload, in
+    the record shape merge() takes. Release dates are not published there,
+    so merge_decision() dates each contestant by its first observation."""
+    at = payload.find('{"contestants":')
+    if at < 0:
+        raise RuntimeError("no Decision Index contestants found on page; the site layout may have changed")
+    out = {}
+    for c in parse_object_at(payload, at)["contestants"]:
+        score, cost = c.get("indexScore"), c.get("costPerTaskUsd")
+        if score is None or cost is None or not c.get("slug") or not c.get("name"):
+            continue
+        if float(cost) <= 0:
+            continue
+        tpt = c.get("timePerTaskMs")
+        out[c["slug"]] = dict(
+            name=c["name"],
+            creator=c.get("creatorName") or c.get("hostName") or "",
+            host=c.get("hostName") or "",
+            kind="decision" if c.get("kind") == "decisionModel" else "llm",
+            release_date=None,
+            intelligence_index=round(float(score), 1),
+            cost_per_task=round(float(cost) * DECISION_COST_SCALE, 6),
+            open_weights=False,
+            capabilities={},
+            time_per_task=round(float(tpt) / 1000, 3) if tpt else None,
+            speed_tps=None,
+            ttft=None,
+        )
+    return out
+
+
+def merge_decision(history: dict, live: dict, today: str) -> dict:
+    """merge() for the Decision Index history, keeping each contestant's kind
+    and host, and dating a new contestant by its first observation."""
+    models = history.setdefault("models", {})
+    for slug, rec in live.items():
+        rec["release_date"] = (models.get(slug) or {}).get("release_date") or today
+    merge(history, live, today)
+    for slug, rec in live.items():
+        models[slug]["kind"] = rec["kind"]
+        models[slug]["host"] = rec["host"]
+    return history
+
+
+def check_decision_set(live: dict, history: dict) -> None:
+    """Refuse a Decision Index fetch that looks broken: too few contestants,
+    or a live set that lost most of what the history has."""
+    if len(live) < DECISION_MIN_LIVE:
+        raise RuntimeError(f"only {len(live)} Decision Index contestants parsed; refusing to update")
+    prev_live = sum(1 for m in (history.get("models") or {}).values() if not m.get("retired"))
+    if prev_live and len(live) < 0.5 * prev_live:
+        raise RuntimeError(f"Decision Index contestants dropped from {prev_live} to {len(live)}; refusing to update")
+
+
+def decision_frontier_models(decision_history: dict, models: dict) -> dict:
+    """The Decision Index contestants ready for the frontier machinery.
+
+    Every contestant is dated by its first Decision Index observation, not by
+    its release. The decision models' release dates are not published, and
+    back-dating only the language models would credit the decision models
+    with a collapse in cost that is really the start of observation. A
+    language model the main history also tracks (matched by slug without the
+    host prefix, or else by name) takes its open weights flag from there,
+    overrides applied; every other contestant's weights are unknown (None)."""
+    by_name = {m["name"]: m for m in models.values()}
+    out = {}
+    for slug, m in (decision_history or {}).get("models", {}).items():
+        mm = dict(m)
+        main = None
+        if m.get("kind") == "llm":
+            main = models.get(slug.split("_", 1)[-1]) or by_name.get(m["name"])
+        mm["open_weights"] = main["open_weights"] if main is not None else None
+        out[slug] = mm
+    return out
 
 
 def merge(history: dict, live: dict, today: str) -> dict:
@@ -601,7 +697,7 @@ def time_models(models: dict, eras: list) -> dict:
         for o in m["observations"]:
             t = dated.get(o[0]) or last_t or t_latest or sorted(dated.values())[0]
             last_t = t
-            robs.append([o[0], round(t, 2), o[2]])
+            robs.append([o[0], round(t, 3), o[2]])
         mm = dict(m)
         mm["observations"] = robs
         mm["cost_per_task"] = robs[-1][1]
@@ -625,7 +721,7 @@ def era_time_models(models: dict, eras: list, era: int) -> dict:
                     break
                 v = o[2]
             return v
-        robs = [[d, round(t, 2), iq_at(d)] for d, t in sorted(dated_times(m).items())
+        robs = [[d, round(t, 3), iq_at(d)] for d, t in sorted(dated_times(m).items())
                 if era_index(d, eras) == era]
         if not robs:
             continue
@@ -748,7 +844,40 @@ def tier_summary(records: dict, eras: list = None) -> dict:
     return out
 
 
-def build_output(history: dict, events: list, overrides: dict | None = None, eras: list | None = None) -> dict:
+def decision_output(dmodels: dict) -> dict:
+    """The Decision Index's dashboard entries, in the same shapes as a
+    capability's: model rows (with the contestant's kind appended), tiers,
+    cost and speed records, and
+    advances. There are no eras and no price events on this axis."""
+    rows = []
+    for slug, m in sorted(dmodels.items(), key=lambda kv: (kv[1]["release_date"], kv[1]["name"])):
+        real_t = dated_times(m)
+        changes = [[d, round(c, 6), iq] + ([real_t[d]] if real_t.get(d) else []) for d, c, iq, _t, _n in cost_changes(slug, m, [])]
+        ow = m.get("open_weights")
+        rows.append([m["name"], m["creator"], m["release_date"], m["intelligence_index"], m["cost_per_task"], int(m["retired"]),
+                     None if ow is None else int(ow), changes if len(changes) > 1 else 0, [], 0,
+                     m.get("time_per_task"), None, None, m.get("kind", "llm")])
+    live = [m for m in dmodels.values() if not m["retired"]]
+    if not live:
+        return dict(rows=rows)
+    hi = int(max(m["intelligence_index"] for m in live) // 10) * 10
+    tiers = [t for t in (hi - 30, hi - 20, hi - 10, hi) if t > 0]
+    # open_weights stays unknown (None) on the rows; the derivations want a bool.
+    fm = {s: dict(m, open_weights=bool(m.get("open_weights"))) for s, m in dmodels.items()}
+    recs = tier_records(fm, [], tiers)
+    tm = time_models(fm, [])
+    recs_t = tier_records(tm, [], tiers)
+    return dict(rows=rows, tiers=tiers, tier_cost=recs, tier_summary=tier_summary(recs),
+                advances=frontier_advances(fm, [], recs),
+                tier_time=recs_t, tier_time_summary=tier_summary(recs_t),
+                time_advances=frontier_advances(tm, [], recs_t),
+                counts=dict(total=len(rows), live=len(live),
+                            decision=sum(1 for m in live if m.get("kind") == "decision"),
+                            llm=sum(1 for m in live if m.get("kind") != "decision")))
+
+
+def build_output(history: dict, events: list, overrides: dict | None = None, eras: list | None = None,
+                 decision: dict | None = None) -> dict:
     today = dt.date.fromisoformat(history["updated"])
     models = history["models"]
     if overrides:
@@ -822,7 +951,25 @@ def build_output(history: dict, events: list, overrides: dict | None = None, era
             recs_ek = tier_records(cet, [], tiers_k)
             era_cap_tier_time[k].append(recs_ek)
             era_cap_time_advances[k].append(frontier_advances(cet, [], recs_ek))
+    caps_meta = [{k: c[k] for k in ("key", "label", "metric", "percent", "blurb", "url")} for c in CAPABILITIES]
+    # The Decision Index rides the capability keys, so the dashboard's tab
+    # code reads it like any other metric; its own model rows replace the
+    # main ones while its tab is active.
+    extra = {}
+    d = decision_output(decision_frontier_models(decision, models)) if decision and decision.get("models") else {}
+    if "tiers" in d:
+        k = DECISION["key"]
+        caps_meta.append({f: DECISION[f] for f in ("key", "label", "metric", "percent", "blurb", "url", "own", "unit")})
+        cap_tiers[k] = d["tiers"]
+        cap_tier_cost[k] = d["tier_cost"]
+        cap_tier_summary[k] = d["tier_summary"]
+        cap_advances[k] = d["advances"]
+        cap_tier_time[k] = d["tier_time"]
+        cap_tier_time_summary[k] = d["tier_time_summary"]
+        cap_time_advances[k] = d["time_advances"]
+        extra = dict(decision_models=d["rows"], decision_counts=d["counts"])
     return dict(
+        **extra,
         advances=advances,
         cap_advances=cap_advances,
         cap_tiers=cap_tiers,
@@ -831,10 +978,11 @@ def build_output(history: dict, events: list, overrides: dict | None = None, era
         eras=[[e["start"], e.get("note", ""), e.get("label", ""), e.get("label_before", ""), settled_date(models, events, eras or [])] for e in eras or []],
         era_snapshots=era_snapshots(eras, today, models, events),
         updated=history["updated"],
+        updated_at=history.get("updated_at"),
         source="Artificial Analysis (artificialanalysis.ai), measured cost per Intelligence Index task",
         snapshots=snapshots(today),
         tiers=TIERS,
-        capabilities=[{k: c[k] for k in ("key", "label", "metric", "percent", "blurb", "url")} for c in CAPABILITIES],
+        capabilities=caps_meta,
         models=rows,
         tier_cost=records,
         tier_summary=tier_summary(records, eras=eras),
@@ -891,6 +1039,7 @@ def xml_escape(t: str) -> str:
 
 
 def describe(a: dict, cap: dict | None = None) -> str:
+    unit = (cap or {}).get("unit", "per task")
     term = cap["metric"] if cap else "index"
     pct = "%" if cap and cap["percent"] else ""
     ceiling = f"the {cap['metric']} ceiling" if cap else "the intelligence ceiling"
@@ -900,15 +1049,18 @@ def describe(a: dict, cap: dict | None = None) -> str:
     else:
         span = f"{term} {a['owns_from']:.1f}{pct} to {a['owns_to']:.1f}{pct}"
     if a["kind"] == "price change" and a["previous_cost"]:
-        parts = [f"{a['model']}: price moved from ${a['previous_cost']:.3f} to {cost} per task; now the cheapest way to reach {span}."]
+        parts = [f"{a['model']}: price moved from ${a['previous_cost']:.3f} to {cost} {unit}; now the cheapest way to reach {span}."]
     elif a.get("ceiling_from") is not None:
-        parts = [f"{a['model']}: pushed {ceiling} from {a['ceiling_from']:.1f}{pct} to {a['owns_to']:.1f}{pct}, at {cost} per task."]
+        parts = [f"{a['model']}: pushed {ceiling} from {a['ceiling_from']:.1f}{pct} to {a['owns_to']:.1f}{pct}, at {cost} {unit}."]
     else:
-        parts = [f"{a['model']}: now the cheapest way to reach {span} at {cost} per task."]
+        parts = [f"{a['model']}: now the cheapest way to reach {span} at {cost} {unit}."]
     parts[0] = parts[0][:-1] + taken_clause(a.get("taken_from") or [], a.get("displaced") or []) + "."
     if a["records"]:
         parts.append("New cost record for " + join_and([f"{term} \u2265 {t}{pct}" for t in a["records"]]) + ".")
-    parts.append("Open weights." if a["open_weights"] else "Proprietary.")
+    if cap and cap.get("own"):
+        pass  # weights are unknown for most Decision Index contestants
+    else:
+        parts.append("Open weights." if a["open_weights"] else "Proprietary.")
     return " ".join(parts)
 
 
@@ -988,6 +1140,8 @@ def parse_args(argv=None):
     p.add_argument("--feed", type=Path, default=DEFAULT_FEED, help="Atom feed to write")
     p.add_argument("--site", default=DEFAULT_SITE, help="base URL used for links in the feed")
     p.add_argument("--source", default=SOURCE_PAGE, help="Artificial Analysis model page to read the dataset from")
+    p.add_argument("--decision-history", type=Path, default=DEFAULT_DECISION_HISTORY, help="cumulative Decision Index history (read and rewritten)")
+    p.add_argument("--decision-source", default=DECISION_PAGE, help="Artificial Analysis page to read the Decision Index from")
     p.add_argument("--offline", action="store_true", help="rebuild the outputs from the stored history without fetching")
     return p.parse_args(argv)
 
@@ -998,21 +1152,39 @@ def main(argv=None):
     events = json.loads(args.events.read_text())
     overrides = json.loads(args.overrides.read_text()) if args.overrides.exists() else {}
     eras = json.loads(args.eras.read_text()) if args.eras.exists() else []
+    decision = json.loads(args.decision_history.read_text()) if args.decision_history.exists() else {"models": {}}
     if not args.offline:
         today = dt.date.today().isoformat()
         payload = fetch_payload(args.source)
         live = extract_models(payload)
         check_live_set(live, history, eras, today)
+        before = json.dumps({k: v for k, v in history.items() if k != "updated_at"}, sort_keys=True)
         history = merge(history, live, today)
+        # The moment the data last changed, shown on the dashboard. A run that
+        # changes nothing leaves it alone, so it never forces a commit.
+        if json.dumps({k: v for k, v in history.items() if k != "updated_at"}, sort_keys=True) != before:
+            history["updated_at"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         args.history.write_text(json.dumps(history, indent=1, sort_keys=True) + "\n")
         print(f"merged {len(live)} live models; history now {len(history['models'])} models")
-    out = build_output(history, events, overrides, eras)
+        # The Decision Index comes from a second page. A failure there must not
+        # hold back the main update, so it is reported (as a GitHub Actions
+        # warning annotation) and the stored Decision Index history is kept.
+        try:
+            dlive = extract_decision(fetch_payload(args.decision_source))
+            check_decision_set(dlive, decision)
+            decision = merge_decision(decision, dlive, today)
+            args.decision_history.write_text(json.dumps(decision, indent=1, sort_keys=True) + "\n")
+            print(f"merged {len(dlive)} Decision Index contestants; history now {len(decision['models'])}")
+        except Exception as err:  # noqa: BLE001
+            print(f"::warning::Decision Index not updated: {err}")
+    out = build_output(history, events, overrides, eras, decision)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(out, separators=(",", ":")) + "\n")
     write_feed(out, args.feed, args.site)
-    for c in CAPABILITIES:
-        write_feed(out, args.feed.parent / f"feed-{c['key']}.xml", args.site, cap=c)
-    print(f"wrote {args.out}, {args.feed}, and {len(CAPABILITIES)} capability feeds ({out['counts']}) as of {out['updated']}")
+    for c in METRIC_PAGES:
+        if c["key"] in out["cap_advances"] or not c.get("own"):
+            write_feed(out, args.feed.parent / f"feed-{c['key']}.xml", args.site, cap=c)
+    print(f"wrote {args.out}, {args.feed}, and {len(METRIC_PAGES)} metric feeds ({out['counts']}) as of {out['updated']}")
     for t, s in out["tier_summary"].items():
         if s:
             print(f"  index >= {t}: {s['collapse']}x from {s['first_date']} to {s['last_date']}, halving ~{s['halving_days']} d")
