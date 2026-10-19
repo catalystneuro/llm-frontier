@@ -14,8 +14,9 @@ from pathlib import Path
 import pytest
 
 from llm_cost_frontier.update import (
-    CAPABILITIES, FEED_ENTRIES, MIN_PRICE_MOVE, SNAPSHOT_COUNT, TIERS,
-    add_months, apply_overrides, build_output, capability_models, cost_changes,
+    CAPABILITIES, DECISION, FEED_ENTRIES, MIN_PRICE_MOVE, SNAPSHOT_COUNT, TIERS,
+    add_months, apply_overrides, build_output, capability_models, check_decision_set,
+    cost_changes, decision_frontier_models, extract_decision, merge_decision,
     describe, enclosing_object, extract_models, fetch_payload,
     frontier_advances, join_and, main, merge, parse_object_at, pareto,
     price_timeline, snapshots, split_variant, taken_clause, tier_records,
@@ -792,12 +793,109 @@ def test_main_offline_writes_outputs(tmp_path):
                "--history", str(tmp_path / "history.json"),
                "--events", str(tmp_path / "events.json"),
                "--overrides", str(tmp_path / "overrides.json"),
+               "--decision-history", str(tmp_path / "decision-history.json"),
                "--out", str(tmp_path / "out.json"),
                "--feed", str(tmp_path / "feed.xml")])
     assert rc == 0
     out = json.loads((tmp_path / "out.json").read_text())
     assert out["counts"]["total"] == 3
     ET.parse(tmp_path / "feed.xml")
+
+
+def test_dashboard_carries_the_update_time():
+    history = {"updated": "2026-09-04", "updated_at": "2026-09-04T13:13:00Z", "models": three_model_history()}
+    assert build_output(history, events=[])["updated_at"] == "2026-09-04T13:13:00Z"
+    del history["updated_at"]
+    assert build_output(history, events=[])["updated_at"] is None
+
+
+# ---- the Decision Index ----
+
+def contestant(slug, name, score, cost, kind="decisionModel", ms=100, creator="Lab"):
+    return dict(slug=slug, kind=kind, name=name, hostName="Host", creatorName=creator,
+                indexScore=score, costPerTaskUsd=cost, timePerTaskMs=ms, scores={}, calibrationBins=[])
+
+
+def decision_payload(contestants):
+    return 'x:["$","$L3d",null,' + json.dumps({"contestants": contestants, "defaultSlugs": []}) + "]"
+
+
+def test_extract_decision_reads_contestants_per_1k_tasks():
+    got = extract_decision(decision_payload([
+        contestant("lab_d1", "d1", 50.33, 1.5144e-05),
+        contestant("openai_gpt-x", "GPT-X (Low)", 60.0, 0.0002, kind="llm", ms=1500),
+        contestant("lab_free", "Free", 40.0, 0.0),
+    ]))
+    assert set(got) == {"lab_d1", "openai_gpt-x"}
+    assert got["lab_d1"]["cost_per_task"] == 0.015144  # dollars per 1,000 tasks
+    assert got["lab_d1"]["intelligence_index"] == 50.3
+    assert got["lab_d1"]["kind"] == "decision" and got["openai_gpt-x"]["kind"] == "llm"
+    assert got["lab_d1"]["time_per_task"] == 0.1 and got["openai_gpt-x"]["time_per_task"] == 1.5
+    with pytest.raises(RuntimeError):
+        extract_decision("no contestants here")
+
+
+def test_merge_decision_dates_by_first_observation_and_keeps_kind():
+    live = extract_decision(decision_payload([contestant("lab_d1", "d1", 50.0, 2e-05)]))
+    h = merge_decision({"models": {}}, live, "2026-10-19")
+    live = extract_decision(decision_payload([contestant("lab_d1", "d1", 50.0, 1e-05)]))
+    h = merge_decision(h, live, "2026-10-25")
+    m = h["models"]["lab_d1"]
+    assert m["release_date"] == "2026-10-19"
+    assert m["kind"] == "decision"
+    assert [o[:2] for o in m["observations"]] == [["2026-10-19", 0.02], ["2026-10-25", 0.01]]
+
+
+def test_check_decision_set_refuses_broken_fetches():
+    few = {f"s{i}": {} for i in range(3)}
+    with pytest.raises(RuntimeError):
+        check_decision_set(few, {"models": {}})
+    many = {f"s{i}": {} for i in range(12)}
+    check_decision_set(many, {"models": {}})
+    prev = {"models": {f"s{i}": {"retired": False} for i in range(30)}}
+    with pytest.raises(RuntimeError):
+        check_decision_set(many, prev)
+
+
+def test_decision_models_join_open_weights_but_not_release_dates():
+    main_models = {"gpt-x": model("GPT-X (Low)", "2026-01-01", 50.0, 0.1, open_weights=True)}
+    live = extract_decision(decision_payload([
+        contestant("openai_gpt-x", "GPT-X (Low)", 60.0, 0.0002, kind="llm"),
+        contestant("lab_d1", "d1", 50.0, 2e-05),
+    ]))
+    h = merge_decision({"models": {}}, live, "2026-10-19")
+    dm = decision_frontier_models(h, main_models)
+    assert dm["openai_gpt-x"]["open_weights"] is True
+    assert dm["openai_gpt-x"]["release_date"] == "2026-10-19"
+    assert dm["lab_d1"]["open_weights"] is None
+
+
+def test_build_output_adds_the_decision_tab():
+    history = {"updated": "2026-10-25", "models": three_model_history()}
+    live = extract_decision(decision_payload([
+        contestant("lab_d1", "d1", 52.0, 2e-05),
+        contestant("lab_d2", "d2", 45.0, 3e-05),
+        contestant("openai_big", "Big (Max)", 79.0, 0.05, kind="llm"),
+    ]))
+    decision = merge_decision({"models": {}}, live, "2026-10-19")
+    live["lab_d1"]["cost_per_task"] = 0.01
+    decision = merge_decision(decision, live, "2026-10-25")
+    out = build_output(history, events=[], decision=decision)
+    assert [c["key"] for c in out["capabilities"]] == [c["key"] for c in CAPABILITIES] + ["decision"]
+    assert out["capabilities"][-1]["own"] and out["capabilities"][-1]["unit"] == DECISION["unit"]
+    assert len(out["decision_models"]) == 3
+    assert {r[13] for r in out["decision_models"]} == {"decision", "llm"}
+    assert out["decision_counts"] == {"total": 3, "live": 3, "decision": 2, "llm": 1}
+    assert out["cap_tiers"]["decision"] == [40, 50, 60, 70]
+    # d1's price cut is a dated advance on the Decision Index's own axis.
+    cut = [a for a in out["cap_advances"]["decision"] if a["date"] == "2026-10-25"]
+    assert [(a["model"], a["kind"]) for a in cut] == [("d1", "price change")]
+    assert out["cap_tier_summary"]["decision"]["50"]["collapse"] == 2.0
+    # The main outputs are untouched by the decision data.
+    assert out["models"] == build_output(history, events=[])["models"]
+    feed_text = describe(cut[0], DECISION)
+    assert "per 1K tasks" in feed_text and "Proprietary" not in feed_text
+    json.dumps(out)
 
 
 # ---- invariants on the real repository data ----

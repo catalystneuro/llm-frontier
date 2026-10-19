@@ -26,18 +26,31 @@
   var CAPS = [];   // capability metric metadata from the data file
   var CAP = -1;    // active tab: -1 = overall Intelligence Index, else index into CAPS
   var ERAS = [];   // index era boundaries [date, note]; scores are only comparable within an era
+  var ALL_ERAS = []; // the boundaries from the data file; ERAS is empty on a tab with its own models
   var ERA_VIEW = 0; // which era the Overall frontier chart shows; defaults to the current era
   var AXIS = 'cost'; // x-axis of the current view: measured cost, or measured time per task
   var SEL = null;      // name of the highlighted model or creator
   var SEL_KIND = 'model'; // 'model' rings one point; 'creator' lights up a lab's whole fleet
 
   var models = [], retiredByName = {}, openByName = {}, modelsByName = {}, creators = {};
+  // The Decision Index tab has its own contestants (language models and
+  // dedicated decision models) on its own cost axis; while it is active they
+  // replace the main models, and there are no eras.
+  var mainModels = [], ownModels = [], modelSet = null;
   var lastDrawnView = null;
   function capMeta() { return CAP >= 0 ? CAPS[CAP] : null; }
   function curTiers() { return CAP < 0 ? TIERS : ((DATA.cap_tiers || {})[capMeta().key] || []); }
   function curTierCost() { return CAP < 0 ? DATA.tier_cost : ((DATA.cap_tier_cost || {})[capMeta().key] || {}); }
   function curTierSummary() { return CAP < 0 ? DATA.tier_summary : ((DATA.cap_tier_summary || {})[capMeta().key] || {}); }
-  function score(m) { return CAP < 0 ? m.iq : (m.caps ? m.caps[CAP] : null); }
+  function ownTab() { var c = capMeta(); return !!(c && c.own); }
+  function score(m) { return CAP < 0 || ownTab() ? m.iq : (m.caps ? m.caps[CAP] : null); }
+  // The unit costs are shown in: per task, or per 1K tasks on the Decision
+  // Index tab, whose cheapest models cost thousandths of a cent per task.
+  function costUnit() { var c = capMeta(); return c && c.unit ? c.unit : 'per task'; }
+  // Weights are unknown for most Decision Index contestants; say nothing then.
+  function licenseText(m) { return !m || m.open == null ? null : m.open ? 'open weights' : 'proprietary'; }
+  function kindText(m) { return m && m.kind ? (m.kind === 'decision' ? 'decision model' : 'language model') : null; }
+  function joinFacts(parts) { return parts.filter(function (x) { return x; }).join(' \u00b7 '); }
   function fmtScore(v) { var c = capMeta(); return v.toFixed(1) + (c && c.percent ? '%' : ''); }
   function metricName() { var c = capMeta(); return c ? c.metric : 'Index'; }
   function tierLabel(t) { var c = capMeta(); return '≥ ' + t + (c && c.percent ? '%' : ''); }
@@ -99,6 +112,7 @@
   function fmtTime(s) {
     if (s >= 5400) return (s / 3600).toFixed(1) + 'h';
     if (s >= 90) return (s / 60).toFixed(1) + 'm';
+    if (s < 1) return Math.round(s * 1000) + 'ms';
     return (s >= 10 ? s.toFixed(0) : s.toFixed(1)) + 's';
   }
   function fmtVal(v) { return isTimeAxis() ? fmtTime(v) : fmt$(v); }
@@ -149,13 +163,29 @@
     SNAPS = d.snapshots.map(function (s) { return [s[0], s[1]]; });
     TIERS = d.tiers.slice();
     CAPS = d.capabilities || [];
-    ERAS = d.eras || [];
+    ALL_ERAS = ERAS = d.eras || [];
     ERA_VIEW = ERAS.length;
-    models = d.models.map(function (m) {
-      return { name: m[0], creator: m[1], date: m[2], iq: m[3], mcost: m[4], retired: !!m[5], open: !!m[6], hist: m[7] || null, caps: m[8] || null,
+    function row(m) {
+      return { name: m[0], creator: m[1], date: m[2], iq: m[3], mcost: m[4], retired: !!m[5], open: m[6] == null ? null : !!m[6], hist: m[7] || null, caps: m[8] || null,
                era: m[9] != null ? m[9] : (d.eras || []).length,
-               time: m[10] != null ? m[10] : null, tps: m[11] != null ? m[11] : null, ttft: m[12] != null ? m[12] : null };
-    });
+               time: m[10] != null ? m[10] : null, tps: m[11] != null ? m[11] : null, ttft: m[12] != null ? m[12] : null,
+               kind: m[13] || null };
+    }
+    mainModels = d.models.map(row);
+    ownModels = (d.decision_models || []).map(row);
+    modelSet = null;
+    useModelSet();
+  }
+  // Point the page at the active tab's models: the main set, or the Decision
+  // Index contestants, which have no eras.
+  function useModelSet() {
+    var own = ownTab();
+    var key = own ? 'own' : 'main';
+    if (key === modelSet) return;
+    modelSet = key;
+    models = own ? ownModels : mainModels;
+    ERAS = own ? [] : ALL_ERAS;
+    ERA_VIEW = ERAS.length;
     retiredByName = {}; openByName = {}; modelsByName = {}; creators = {};
     models.forEach(function (m) {
       retiredByName[m.name] = m.retired; openByName[m.name] = m.open; modelsByName[m.name] = m;
@@ -356,8 +386,8 @@
     // era on every tab, since a recomposition changes the evaluation suite.
     // Every value in the selected view is the value in effect at the era's
     // last day, so an old era is a frozen picture of how it ended.
-    var eraView = DATA.era_snapshots ? ERA_VIEW : ERAS.length;
-    SNAPS = (DATA.era_snapshots ? DATA.era_snapshots[eraView] : DATA.snapshots).map(function (s) { return [s[0], s[1]]; });
+    var eraView = ERAS.length && DATA.era_snapshots ? ERA_VIEW : ERAS.length;
+    SNAPS = (ERAS.length && DATA.era_snapshots ? DATA.era_snapshots[eraView] : DATA.snapshots).map(function (s) { return [s[0], s[1]]; });
     var viewEnd = SNAPS[SNAPS.length - 1][0];
     var timeAxis = isTimeAxis() && (eraView === ERAS.length || eraHasTime(eraView));
     function viewScore(m) { return CAP < 0 ? iqAt(m, viewEnd) : score(m); }
@@ -365,7 +395,7 @@
     var size = chartSize(box, 880, 440, below);
     var W = size.W, H = size.H;
     var M = { l: 56, r: 16, t: 12, b: 42 };
-    var svg = frame(box, W, H, M, (CAP < 0 ? 'Intelligence Index' : metricName()) + ' versus ' + (timeAxis ? 'time' : 'cost') + ' per task, colored by provider, with the Pareto frontier at the date on the slider');
+    var svg = frame(box, W, H, M, (CAP < 0 ? 'Intelligence Index' : metricName()) + ' versus ' + (timeAxis ? 'time per task' : 'cost ' + costUnit()) + ', colored by provider, with the Pareto frontier at the date on the slider');
     // Models appear in an era's view only if they were measured in that era
     // (or later, for old views: their scores then are in the change history).
     var isCur = ERAS.length > 0 && eraView === ERAS.length;
@@ -407,12 +437,12 @@
     function Y(v) { return H - M.b - (v - yd[0]) / (yd[1] - yd[0]) * (H - M.t - M.b); }
 
     var cs = [];
-    if (timeAxis) [1, 10, 60, 600, 3600, 36000].forEach(function (c) { if (c >= xd[0] && c <= xd[1]) cs.push(c); });
-    else for (var c0 = 0.001; c0 <= xd[1]; c0 *= 10) if (c0 >= xd[0]) cs.push(c0);
+    if (timeAxis) [0.01, 0.1, 1, 10, 60, 600, 3600, 36000].forEach(function (c) { if (c >= xd[0] && c <= xd[1]) cs.push(c); });
+    else for (var c0 = Math.min(0.001, Math.pow(10, Math.floor(Math.log10(xd[0])))); c0 <= xd[1]; c0 *= 10) if (c0 >= xd[0]) cs.push(c0);
     cs.forEach(function (c) {
       svg.append(svgEl('line', { x1: X(c), x2: X(c), y1: M.t, y2: H - M.b, stroke: C.grid, 'stroke-width': 1 }));
       var lb = svgEl('text', { x: X(c), y: H - M.b + 18, 'text-anchor': 'middle', 'font-size': 10.5, fill: C.muted, 'font-family': C.mono });
-      lb.textContent = timeAxis ? (c >= 3600 ? (c / 3600) + 'h' : c >= 60 ? (c / 60) + 'm' : c + 's') : '$' + (c >= 1 ? c.toFixed(0) : c.toFixed(2));
+      lb.textContent = timeAxis ? (c >= 3600 ? (c / 3600) + 'h' : c >= 60 ? (c / 60) + 'm' : c >= 1 ? c + 's' : (c * 1000) + 'ms') : '$' + (c >= 1 ? c.toFixed(0) : c >= 0.01 ? c.toFixed(2) : String(+c.toPrecision(1)));
       svg.append(lb);
     });
     var qs = []; for (var q0 = yd[0]; q0 <= yd[1] - 5; q0 += 10) qs.push(q0);
@@ -424,7 +454,7 @@
     svg.append(svgEl('line', { x1: M.l, x2: W - M.r, y1: H - M.b, y2: H - M.b, stroke: C.axis, 'stroke-width': 1 }));
     svg.append(svgEl('line', { x1: M.l, x2: M.l, y1: M.t, y2: H - M.b, stroke: C.axis, 'stroke-width': 1 }));
     var xt = svgEl('text', { x: (M.l + W - M.r) / 2, y: H - 6, 'text-anchor': 'middle', 'font-size': 11.5, fill: C.ink2 });
-    xt.textContent = (timeAxis ? 'Time' : 'Cost') + ' per task (log)'; svg.append(xt);
+    xt.textContent = (timeAxis ? 'Time per task' : 'Cost ' + costUnit()) + ' (log)'; svg.append(xt);
     var yt = svgEl('text', { x: 14, y: (M.t + H - M.b) / 2, 'font-size': 11.5, fill: C.ink2, transform: 'rotate(-90 14 ' + ((M.t + H - M.b) / 2) + ')', 'text-anchor': 'middle' });
     var verLbl = CAP < 0 ? eraShortLabel(eraView) : '';
     yt.textContent = CAP < 0 ? 'Artificial Analysis Intelligence Index' + (verLbl ? ' (' + verLbl + ')' : '') : metricName(); svg.append(yt);
@@ -540,14 +570,14 @@
         return function () {
           var d1 = el('div', 'pfc-tt-name'); d1.textContent = m.name;
           var d2 = el('div'); var s = el('span', 'pfc-tt-val'); s.textContent = (p.est ? '≈' : '') + (timeAxis ? fmtTime(p.mcost) : fmt$(p.mcost));
-          d2.append(s, ' per task at ' + (CAP < 0 ? 'Index ' + p.iq.toFixed(1) : metricName() + ' ' + fmtScore(p.iq)) +
+          d2.append(s, ' ' + (timeAxis ? 'per task' : costUnit()) + ' at ' + (CAP < 0 ? 'Index ' + p.iq.toFixed(1) : metricName() + ' ' + fmtScore(p.iq)) +
             (Math.abs(p.current - p.mcost) > 1e-9 ? (timeAxis ? ' (speed then; ' + fmtTime(p.current) + ' now)' : ' (price then; ' + fmt$(p.current) + (viewEnd === DATA.updated ? ' now)' : ' at era end)')) : '') +
             (p.est ? (timeAxis ? ' · at its nearest measured speed' : ' · estimated from its price history') : ''));
           var d3 = el('div', 'pfc-tt-row'); var kd = el('span', 'pfc-tt-key'); kd.style.borderTopColor = providerColor(m.creator);
-          d3.append(kd, m.creator + ' · ' + (m.open ? 'open weights' : 'proprietary') + ' · released ' + m.date + (m.retired ? ' · retired' : ''));
+          d3.append(kd, joinFacts([m.creator, kindText(m), licenseText(m), (m.kind ? 'first measured ' : 'released ') + m.date, m.retired ? 'retired' : null]));
           var rows = [d1, d2, d3];
           if (onFr[m.name]) rows.push(el('div', null, 'On the ' + stageText()));
-          var sp = isCur && speedFacts(m); if (sp) rows.push(sp);
+          var sp = (isCur || ownTab()) && speedFacts(m); if (sp) rows.push(sp);
           return rows;
         };
       }
@@ -748,12 +778,19 @@
       h = h.slice(0, win.index);
     }
     var tilde = h.indexOf('~');
+    var slug = null;
     if (tilde >= 0) {
-      var slug = h.slice(tilde + 1);
+      slug = h.slice(tilde + 1);
       h = h.slice(0, tilde);
+    }
+    applyHashView(h);
+    useModelSet();
+    if (slug) {
       for (var cn in creators) if (slugify(cn) === slug) { SEL = cn; SEL_KIND = 'creator'; break; }
       if (!SEL) for (var nm in modelsByName) if (slugify(nm) === slug) { SEL = nm; SEL_KIND = 'model'; break; }
     }
+  }
+  function applyHashView(h) {
     if (!h || h === 'advances' || h === 'index') return;
     if (/-time$/.test(h)) {
       var base = h.replace(/-time$/, '');
@@ -884,8 +921,10 @@
   function renderSearch() {
     var input = document.getElementById('pfc-model-search');
     var list = document.getElementById('pfc-model-list');
-    if (!input || !list || input.dataset.wired) return;
-    input.dataset.wired = '1';
+    if (!input || !list || input.dataset.set === modelSet) return;
+    list.replaceChildren();
+    var first = !input.dataset.set;
+    input.dataset.set = modelSet;
     Object.keys(creators).sort().forEach(function (c) {
       var o = document.createElement('option');
       o.value = c;
@@ -898,6 +937,7 @@
       o.label = m.creator;
       list.append(o);
     });
+    if (!first) return;
     var apply = function () {
       var v = input.value.trim();
       if (creators[v]) { if (v !== SEL || SEL_KIND !== 'creator') setSel('creator', v); }
@@ -1031,7 +1071,11 @@
     for (var i = 0; i < cands.length && at < 0; i++) { at = txt.indexOf(cands[i]); if (at >= 0) hit = cands[i]; }
     if (c.url && at >= 0) p.append(txt.slice(0, at), evalLink(c.url, hit), txt.slice(at + hit.length));
     else p.append(txt);
-    p.append(' Measured for ' + n + ' of ' + models.length + ' tracked models.');
+    if (c.own) {
+      var dc = DATA.decision_counts || {};
+      var since = models.reduce(function (a, m) { return m.date < a ? m.date : a; }, DATA.updated);
+      p.append(' ' + n + ' contestants: ' + (dc.decision || 0) + ' decision models and ' + (dc.llm || 0) + ' language models. Tracked since ' + fmtDate(since) + '; earlier frontiers and cost records fill in as observations accumulate.');
+    } else p.append(' Measured for ' + n + ' of ' + models.length + ' tracked models.');
   }
   function renderCapTable() {
     var wrap = document.getElementById('pfc-cap-table-wrap');
@@ -1045,7 +1089,7 @@
     if (!tb) return;
     var timeAxis = isTimeAxis() && ERA_VIEW === ERAS.length;
     var ch = document.getElementById('pfc-cap-cost-head');
-    if (ch) ch.textContent = timeAxis ? 'Time per task' : 'Cost per task';
+    if (ch) ch.textContent = timeAxis ? 'Time per task' : 'Cost ' + costUnit();
     var bh = document.getElementById('pfc-cap-best-head');
     if (bh) bh.textContent = (timeAxis ? 'Fastest' : 'Cheapest') + ' model at or above';
     tb.replaceChildren();
@@ -1064,7 +1108,7 @@
       tr.append(cell('≥ ' + t + (c.percent ? '%' : ''), 'pfc-td-tier'));
       var w = el('div', 'pfc-ev');
       var a1 = el('div', 'pfc-ev-top'); a1.append(nameLink(best.name));
-      var a2 = el('div', 'pfc-ev-model'); a2.textContent = best.creator + ' · ' + (best.open ? 'open weights' : 'proprietary');
+      var a2 = el('div', 'pfc-ev-model'); a2.textContent = joinFacts([best.creator, kindText(best), licenseText(best)]);
       w.append(a1, a2);
       tr.append(cell(w));
       tr.append(cell(fmtVal(axisVal(best)), 'pfc-td-num'));
@@ -1094,9 +1138,10 @@
     if (lead) {
       lead.textContent = timeAxis
         ? 'The fastest measured time per task achieved by any released model at or above each ' + (CAP < 0 ? 'Intelligence Index' : metricName()) + ' tier, by release date. Each step is a model that set a new speed record for its tier.'
-        : 'The cheapest cost per task achieved by any released model at or above each ' + (CAP < 0 ? 'Intelligence Index' : metricName()) + ' tier, by release date. Each step is a model that set a new low for its tier.';
+        : 'The cheapest cost ' + costUnit() + ' achieved by any released model at or above each ' + (CAP < 0 ? 'Intelligence Index' : metricName()) + ' tier, by release date. Each step is a model that set a new low for its tier.';
+      if (ownTab()) lead.textContent = lead.textContent.replace('released model', 'measured model').replace('by release date', 'by date first measured');
     }
-    var svg = frame(box, W, H, M, 'Running minimum ' + (timeAxis ? 'time' : 'cost') + ' per task by capability tier');
+    var svg = frame(box, W, H, M, 'Running minimum ' + (timeAxis ? 'time per task' : 'cost ' + costUnit()) + ' by capability tier');
     var tiers = curTiers();
     var tierCost = curTierCost();
     if (timeAxis) {
@@ -1119,6 +1164,12 @@
     // Fixed time origin so the axis reads the same on every tab; records set
     // before it enter from the left edge at the value in effect on that date.
     var X0DATE = '2025-08-01';
+    // The Decision Index has a short history of its own; its axis starts a
+    // little before its first record and spans at least two months.
+    if (ownTab()) {
+      var firstRec = allRecs.reduce(function (a, r) { return r[0] < a ? r[0] : a; }, endDate);
+      X0DATE = isoOfDay(Math.min(dayNum(firstRec) - 7, dayNum(endDate) - 60));
+    }
     var x0d = new Date(X0DATE + 'T00:00:00Z');
     var x1d = new Date(endDate + 'T00:00:00Z');
     var x0 = x0d.getTime(), x1 = x1d.getTime();
@@ -1129,7 +1180,7 @@
     var minRec = Math.min.apply(null, allRecs.map(function (r) { return r[1]; }));
     var yd = timeAxis
       ? [Math.pow(10, Math.floor(Math.log10(minRec))), Math.pow(10, Math.ceil(Math.log10(maxRec)))]
-      : [0.005, Math.max(5, Math.pow(10, Math.ceil(Math.log10(maxRec))))];
+      : [Math.min(0.005, Math.pow(10, Math.floor(Math.log10(minRec)))), Math.max(5, Math.pow(10, Math.ceil(Math.log10(maxRec))))];
     var ticks = []; var td = new Date(x0d.getTime());
     var monthsSpan = (x1d.getUTCFullYear() - x0d.getUTCFullYear()) * 12 + x1d.getUTCMonth() - x0d.getUTCMonth();
     // Tick spacing follows the pixels available, not just the span: a month
@@ -1148,7 +1199,7 @@
       lb.textContent = t[1]; svg.append(lb);
     });
     var vs = [];
-    if (timeAxis) [1, 10, 60, 600, 3600, 36000].forEach(function (v) { if (v >= yd[0] && v <= yd[1]) vs.push(v); });
+    if (timeAxis) [0.01, 0.1, 1, 10, 60, 600, 3600, 36000].forEach(function (v) { if (v >= yd[0] && v <= yd[1]) vs.push(v); });
     else for (var v0 = 0.01; v0 <= yd[1] / 2; v0 *= 10) vs.push(v0);
     vs.forEach(function (v) {
       svg.append(svgEl('line', { x1: M.l, x2: W - M.r, y1: Y(v), y2: Y(v), stroke: C.grid, 'stroke-width': 1 }));
@@ -1210,7 +1261,7 @@
                              : isCur && ERAS.length && r[0] < ERAS[ERAS.length - 1][0];
           var s = el('span', 'pfc-tt-val'); s.textContent = (est ? '≈' : '') + (timeAxis ? fmtTime(r[1]) : fmt$(r[1]));
           d2.append(kd, s, ' new record, ' + (CAP < 0 ? 'Index' : metricName()) + ' ' + tierLabel(tier) + (est ? (timeAxis ? ' · at its nearest measured speed' : ' · estimated from price history') : ''));
-          var d3 = el('div', null, (r[4] ? r[4] + ' \u00b7 ' : 'released ' + r[0] + ' \u00b7 ') + (CAP < 0 ? 'Index ' + r[3].toFixed(1) : metricName() + ' ' + fmtScore(r[3])) + (rm ? ' \u00b7 ' + rm.creator : '') + (openByName[r[2]] ? ' \u00b7 open weights' : ' \u00b7 proprietary') + (retiredByName[r[2]] ? ' \u00b7 retired' : ''));
+          var d3 = el('div', null, (r[4] ? r[4] + ' \u00b7 ' : (ownTab() ? 'first measured ' : 'released ') + r[0] + ' \u00b7 ') + (CAP < 0 ? 'Index ' + r[3].toFixed(1) : metricName() + ' ' + fmtScore(r[3])) + (rm ? ' \u00b7 ' + rm.creator : '') + (licenseText(rm) ? ' \u00b7 ' + licenseText(rm) : '') + (retiredByName[r[2]] ? ' \u00b7 retired' : ''));
           return [d1, d2, d3];
         }});
       });
@@ -1240,6 +1291,17 @@
     }
   }
 
+  // When the data last changed, in the viewer's own time zone, named; files
+  // built before the timestamp was recorded fall back to the date.
+  function fmtUpdated() {
+    var t = DATA.updated_at ? new Date(DATA.updated_at) : null;
+    if (!t || isNaN(t)) return fmtDate(DATA.updated);
+    try {
+      return t.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+    } catch (e) {
+      return t.toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
+    }
+  }
   function fmtDate(d) { var p = d.split('-'); var MON = ['January','February','March','April','May','June','July','August','September','October','November','December']; return MON[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0]; }
   function renderTable() {
     var tb = document.getElementById('pfc-tier-table');
@@ -1296,7 +1358,7 @@
       }
       tb.append(tr);
     });
-    document.querySelectorAll('.pfc-updated').forEach(function (e) { e.textContent = fmtDate(DATA.updated); });
+    document.querySelectorAll('.pfc-updated').forEach(function (e) { e.textContent = fmtUpdated(); });
     document.querySelectorAll('.pfc-count').forEach(function (e) { e.textContent = String(DATA.counts.total); });
   }
   var ADV_DAYS_PER_PAGE = 6;
@@ -1323,15 +1385,16 @@
     if (withVariant && a.variant) { var v = el('span', 'pfc-adv-variant'); v.textContent = a.variant + ': '; text.append(v); }
     var timeAxis = isTimeAxis();
     var fmtA = timeAxis ? fmtTime : fmt$;
+    var unit = timeAxis ? 'per task' : costUnit();
     var superl = timeAxis ? 'fastest' : 'cheapest';
     var term = CAP < 0 ? 'index' : metricName();
     var span = a.owns_to.toFixed(1) === a.owns_from.toFixed(1) ? term + ' ' + fmtScore(a.owns_to) : term + ' ' + fmtScore(a.owns_from) + ' to ' + fmtScore(a.owns_to);
     var ceiling = CAP < 0 ? 'the intelligence ceiling' : 'the ' + metricName() + ' ceiling';
     var s1 = a.kind === 'price change' && a.previous_cost
-      ? (timeAxis ? 'speed' : 'price') + ' moved from ' + fmtA(a.previous_cost) + ' to ' + fmtA(a.cost_per_task) + ' per task; now the ' + superl + ' way to reach ' + span
+      ? (timeAxis ? 'speed' : 'price') + ' moved from ' + fmtA(a.previous_cost) + ' to ' + fmtA(a.cost_per_task) + ' ' + unit + '; now the ' + superl + ' way to reach ' + span
       : (a.ceiling_from !== null && a.ceiling_from !== undefined)
-        ? 'pushed ' + ceiling + ' from ' + fmtScore(a.ceiling_from) + ' to ' + fmtScore(a.owns_to) + ', at ' + fmtA(a.cost_per_task) + ' per task'
-        : 'now the ' + superl + ' way to reach ' + span + ' at ' + fmtA(a.cost_per_task) + ' per task';
+        ? 'pushed ' + ceiling + ' from ' + fmtScore(a.ceiling_from) + ' to ' + fmtScore(a.owns_to) + ', at ' + fmtA(a.cost_per_task) + ' ' + unit
+        : 'now the ' + superl + ' way to reach ' + span + ' at ' + fmtA(a.cost_per_task) + ' ' + unit;
     s1 += takenClause(a.taken_from || [], a.displaced || []) + '. ';
     if (!(withVariant && a.variant)) s1 = s1.charAt(0).toUpperCase() + s1.slice(1);
     text.append(s1);
@@ -1377,6 +1440,7 @@
       if (advLeadDefault === null) advLeadDefault = lead.innerHTML;
       if (timeAxis) lead.textContent = 'Each entry is a date on which a model became the fastest way to reach some level of ' + (CAP < 0 ? 'the Intelligence Index' : metricName()) + '. ' + (isArch ? 'Archive entries use only the speeds measured in that era.' : 'Speeds are the latest measured values, so dates before a model\u2019s first speed measurement are approximate.') + ' The Atom feed covers cost advances on the Overall view only.';
       else if (CAP < 0) lead.innerHTML = advLeadDefault;
+      else if (ownTab()) lead.textContent = 'Each entry is a date on which a model became the cheapest way to reach some level of the ' + metricName() + ', through a new contestant or a price change, derived from observed ' + metricName() + ' scores and costs. Release dates are not published for decision models, so every contestant is dated by its first observation, and the first entries are the frontier as observation began.';
       else lead.textContent = 'Each entry is a date on which a model became the cheapest way to reach some level of ' + metricName() + ', through a release or a price change, derived from release dates, observed prices, and the latest measured scores. The Atom feed covers the Overall view only.';
     }
     var list;
@@ -1459,7 +1523,7 @@
   window.addEventListener('hashchange', function () {
     if (!DATA) return;
     if ((location.hash || '') === hashFor()) return;
-    CAP = -1; ERA_VIEW = ERAS.length; AXIS = 'cost'; SEL = null; SEL_KIND = 'model';
+    CAP = -1; useModelSet(); ERA_VIEW = ERAS.length; AXIS = 'cost'; SEL = null; SEL_KIND = 'model';
     SLIDE = null; SLIDE_LO = null;
     applyHash();
     advPage = 1;

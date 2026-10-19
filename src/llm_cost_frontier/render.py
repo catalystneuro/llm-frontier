@@ -17,6 +17,7 @@ from pathlib import Path
 
 from .update import (
     DEFAULT_EVENTS,
+    DEFAULT_DECISION_HISTORY,
     DEFAULT_ERAS,
     DEFAULT_HISTORY,
     DEFAULT_OVERRIDES,
@@ -47,7 +48,8 @@ W_PX, H_PX, DPI = 1200, 630, 100
 
 # Wording and scale for the metric a card is about. main() swaps this per
 # capability; the default is the overall Intelligence Index.
-INDEX_METRIC = dict(key=None, term="index", axis="Intelligence Index", ceiling="the intelligence ceiling", label=None, percent=False)
+INDEX_METRIC = dict(key=None, term="index", axis="Intelligence Index", ceiling="the intelligence ceiling", label=None, percent=False,
+                    unit="per task")
 METRIC = dict(INDEX_METRIC)
 
 
@@ -76,11 +78,11 @@ def card_summary(a: dict) -> str:
     else:
         span = f"{METRIC['term']} {fmt_score(a['owns_from'])} to {fmt_score(a['owns_to'])}"
     if a["kind"] == "price change" and a["previous_cost"]:
-        s = f"Price moved from {fmt_cost(a['previous_cost'])} to {cost} per task; now the cheapest way to reach {span}."
+        s = f"Price moved from {fmt_cost(a['previous_cost'])} to {cost} {METRIC['unit']}; now the cheapest way to reach {span}."
     elif a.get("ceiling_from") is not None:
-        s = f"Pushed {METRIC['ceiling']} from {fmt_score(a['ceiling_from'])} to {fmt_score(a['owns_to'])}, at {cost} per task."
+        s = f"Pushed {METRIC['ceiling']} from {fmt_score(a['ceiling_from'])} to {fmt_score(a['owns_to'])}, at {cost} {METRIC['unit']}."
     else:
-        s = f"Now the cheapest way to reach {span} at {cost} per task."
+        s = f"Now the cheapest way to reach {span} at {cost} {METRIC['unit']}."
     if a["records"]:
         s += " New cost record for " + join_and([tier_text(t) for t in a["records"]]) + "."
     if a["open_weights"]:
@@ -91,7 +93,7 @@ def card_summary(a: dict) -> str:
 def group_table(group: list) -> list:
     """Header and one row per reasoning level, ascending: the level, its cost
     per task (old → new for a price change), and the index range it owns."""
-    rows = [("Reasoning level", "Cost per task", f"Owns {METRIC['term']} range")]
+    rows = [("Reasoning level", f"Cost {METRIC['unit']}", f"Owns {METRIC['term']} range")]
     for a in reversed(group):
         cost = fmt_cost(a["cost_per_task"])
         if a["kind"] == "price change" and a["previous_cost"]:
@@ -166,7 +168,8 @@ def new_figure(kicker: str, title: str, summary_lines: list, table: list = None)
         fig.text(0.048, y, line, fontsize=13.5, color=C["ink2"], va="top")
         last = y
         y -= 0.042
-    fig.text(0.048, 0.028, "Data: Artificial Analysis · measured cost per Intelligence Index task",
+    task = f"{METRIC['metric_name']} task" if METRIC.get("own") else "Intelligence Index task"
+    fig.text(0.048, 0.028, f"Data: Artificial Analysis · measured cost per {task}",
              fontsize=11.5, color=C["muted"], va="bottom")
     fig.text(0.952, 0.028, "llm-frontier.catalystneuro.com",
              fontsize=12.5, color=C["ink2"], va="bottom", ha="right", fontweight="bold")
@@ -256,7 +259,7 @@ def draw_chart(ax, state: dict, models: dict, front: set, state_before: dict = N
         lambda v, _p: f"${v:.0f}" if v >= 1 else f"${v:.2f}" if v >= 0.01 else f"${v:.4g}"))
     ax.xaxis.set_minor_locator(mticker.NullLocator())
     ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
-    ax.set_xlabel("Cost per task (log)", fontsize=12, color=C["ink2"])
+    ax.set_xlabel(f"Cost {METRIC['unit']} (log)", fontsize=12, color=C["ink2"])
     ax.set_ylabel(METRIC["axis"], fontsize=12, color=C["ink2"])
 
     def dots(slugs, color, size, z):
@@ -476,6 +479,7 @@ def parse_args(argv=None):
     p.add_argument("--events", type=Path, default=DEFAULT_EVENTS, help="hand-maintained price events")
     p.add_argument("--overrides", type=Path, default=DEFAULT_OVERRIDES, help="hand-maintained corrections to upstream fields")
     p.add_argument("--eras", type=Path, default=DEFAULT_ERAS, help="hand-declared index era boundaries")
+    p.add_argument("--decision-history", type=Path, default=DEFAULT_DECISION_HISTORY, help="cumulative Decision Index history to read")
     p.add_argument("--out", type=Path, default=DEFAULT_IMAGES, help="directory to write images into")
     p.add_argument("--force", action="store_true", help="re-render advance cards that already exist")
     return p.parse_args(argv)
@@ -497,10 +501,11 @@ def main(argv=None):
     events = json.loads(args.events.read_text())
     overrides = json.loads(args.overrides.read_text()) if args.overrides.exists() else {}
     eras = json.loads(args.eras.read_text()) if args.eras.exists() else []
-    out = build_output(history, events, overrides, eras)
+    decision = json.loads(args.decision_history.read_text()) if args.decision_history.exists() else {"models": {}}
+    out = build_output(history, events, overrides, eras, decision)
     models = history["models"]
 
-    from .update import CAPABILITIES, capability_models
+    from .update import CAPABILITIES, DECISION, capability_models, decision_frontier_models
 
     global METRIC
     # One card set per metric: the overall index in advances/, and each
@@ -510,14 +515,25 @@ def main(argv=None):
         advs = (out.get("cap_advances") or {}).get(c["key"]) or []
         if advs:
             met = dict(key=c["key"], term=c["metric"], axis=c["metric"],
-                       ceiling=f"the {c['metric']} ceiling", label=c["label"], percent=c["percent"])
+                       ceiling=f"the {c['metric']} ceiling", label=c["label"], percent=c["percent"], unit="per task")
             metric_sets.append((met, capability_models(models, c["key"]), advs, args.out / "advances" / c["key"]))
+    # The Decision Index has its own models and cost axis, no eras, and no
+    # price events; its cards go in advances/decision/.
+    d = DECISION
+    advs = (out.get("cap_advances") or {}).get(d["key"]) or []
+    if advs:
+        met = dict(key=d["key"], term=d["metric"], axis=d["metric"], ceiling=f"the {d['metric']} ceiling",
+                   label=d["label"], percent=d["percent"], unit=d["unit"], own=True, metric_name=d["metric"])
+        dm = {s: dict(m, open_weights=bool(m["open_weights"])) for s, m in decision_frontier_models(decision, models).items()}
+        metric_sets.append((met, dm, advs, args.out / "advances" / d["key"]))
 
     rendered = skipped = 0
     timeline = price_timeline(models, events)
     for met, mset, advs, outdir in metric_sets:
         METRIC = met
-        tl = timeline if met["key"] is None else price_timeline(mset, events)
+        ev = [] if met.get("own") else events
+        er = [] if met.get("own") else eras
+        tl = timeline if met["key"] is None else price_timeline(mset, ev)
         groups = {}
         for a in advs:
             groups.setdefault((a["date"], a["base"]), []).append(a)
@@ -526,12 +542,14 @@ def main(argv=None):
             if path.exists() and not args.force:
                 skipped += 1
                 continue
-            render_group(group, mset, tl, path, eras)
+            render_group(group, mset, tl, path, er)
             rendered += 1
     for met, mset, advs, outdir in metric_sets[1:]:
         METRIC = met
-        c = next(cc for cc in CAPABILITIES if cc["key"] == met["key"])
-        render_current(out, mset, price_timeline(mset, events), args.out / f"{met['key']}-card.png", eras, cap=c)
+        c = next(cc for cc in CAPABILITIES + [DECISION] if cc["key"] == met["key"])
+        own = met.get("own")
+        render_current(out, mset, price_timeline(mset, [] if own else events), args.out / f"{met['key']}-card.png",
+                       [] if own else eras, cap=c)
     METRIC = dict(INDEX_METRIC)
     render_current(out, models, timeline, args.out / "frontier-card.png", eras)
     print(f"rendered {rendered} advance cards ({skipped} already existed) and {len(metric_sets)} summary cards in {args.out}")

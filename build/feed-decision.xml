@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>LLM Frontier: Decision Index advances</title>
+  <link href="https://llm-frontier.catalystneuro.com/decision/" />
+  <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-decision.xml" />
+  <id>https://llm-frontier.catalystneuro.com/feed-decision.xml</id>
+  <updated>2026-10-19T06:00:00Z</updated>
+  <author><name>CatalystNeuro</name></author>
+  <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of Decision Index, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-10-19: Claude Opus 5.5 (Max, Default Fallback) (new model, Decision Index 79.0)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-10-19-claude-opus-5-5.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-10-19/anthropic_claude-opus-5-5</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <summary>Claude Opus 5.5 (Max, Default Fallback): now the cheapest way to reach Decision Index 75.4 to 79.0 at $51.29 per 1K tasks.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-19: Claude Opus 5.5 (Low, Default Fallback) (new model, Decision Index 75.4)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-10-19-claude-opus-5-5.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-10-19/anthropic_claude-opus-5-5-low</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <summary>Claude Opus 5.5 (Low, Default Fallback): now the cheapest way to reach Decision Index 71.5 to 75.4 at $6.69 per 1K tasks.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-19: GPT-6.1 Sol (Low) (new model, Decision Index 71.5)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-10-19-gpt-6-1-sol.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-10-19/openai_gpt-6-1-sol-low</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <summary>GPT-6.1 Sol (Low): now the cheapest way to reach Decision Index 65.2 to 71.5 at $2.05 per 1K tasks. New cost record for Decision Index ≥ 70.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-19: d1-ultra (new model, Decision Index 65.2)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-10-19-d1-ultra.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-10-19/liquid-ai_d1-ultra</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <summary>d1-ultra: now the cheapest way to reach Decision Index 53.8 to 65.2 at $0.032 per 1K tasks. New cost record for Decision Index ≥ 60.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-19: Microsoft-Decision-1 (new model, Decision Index 53.8)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-10-19-microsoft-decision-1.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-10-19/openrouter_microsoft-decision-1</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <summary>Microsoft-Decision-1: now the cheapest way to reach Decision Index 53.1 to 53.8 at $0.031 per 1K tasks.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-19: Decider v1.1 27B (new model, Decision Index 53.1)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-10-19-decider-v1-1-27b.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-10-19/perplexity_pplx-decider-v1-1-27b</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <summary>Decider v1.1 27B: now the cheapest way to reach Decision Index 52.7 to 53.1 at $0.017 per 1K tasks.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-19: Mercury Decide (new model, Decision Index 52.7)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-10-19-mercury-decide.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-10-19/inception_mercury-decide</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <summary>Mercury Decide: now the cheapest way to reach Decision Index 50.3 to 52.7 at $0.015 per 1K tasks.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-19: d1 (new model, Decision Index 50.3)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-10-19-d1.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-10-19/liquid-ai_d1</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <summary>d1: now the cheapest way to reach Decision Index 0.0 to 50.3 at $0.015 per 1K tasks. New cost record for Decision Index ≥ 50.</summary>
+  </entry>
+</feed>
