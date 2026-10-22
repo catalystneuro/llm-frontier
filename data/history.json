@@ -15321,8 +15321,8 @@
    ],
    "open_weights": false,
    "release_date": "2026-08-06",
-   "retired": true,
-   "speed_tps": 119.2,
+   "retired": false,
+   "speed_tps": 119.1,
    "time_history": [
     [
      "2026-08-14",
@@ -15337,8 +15337,8 @@
      508.87
     ]
    ],
-   "time_per_task": 2410.65,
-   "ttft": 1.66
+   "time_per_task": 2409.44,
+   "ttft": 1.64
   },
   "step-3-7-flash": {
    "capabilities": {
