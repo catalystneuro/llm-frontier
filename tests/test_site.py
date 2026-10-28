@@ -231,10 +231,10 @@ def test_time_slider(browser, site_url):
         # redrawn from the rest.
         page.evaluate("""() => {
             const s = document.getElementById('pfc-frontier-slider-start');
-            s.value = Math.round(Date.parse('2026-06-01T00:00:00Z') / 86400000);
+            s.value = Math.round(Date.parse('2026-08-01T00:00:00Z') / 86400000);
             s.dispatchEvent(new Event('input'));
         }""")
-        assert "released Jun 1, 2026 to today" in page.locator("#pfc-frontier-stage").inner_text()
+        assert "released Aug 1, 2026 to today" in page.locator("#pfc-frontier-stage").inner_text()
         assert page.locator(dots).count() < today
         assert page.locator("#pfc-frontier svg path[data-current='1']").count() == 1
         # The start handle cannot pass the end handle.
@@ -257,20 +257,20 @@ def test_slider_window_in_the_url(browser, site_url):
     page.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
     try:
         # A shared link opens on its window.
-        page.goto(site_url + "/#index@2026-06-01..2026-09-01")
+        page.goto(site_url + "/#index@2026-08-01..2026-09-01")
         page.wait_for_selector("#pfc-frontier svg")
         assert page.locator("#pfc-frontier-stage").inner_text() == (
-            "Pareto frontier of models released Jun 1, 2026 to Sep 1, 2026")
+            "Pareto frontier of models released Aug 1, 2026 to Sep 1, 2026")
         # Moving a handle rewrites the hash once the handle settles.
         page.locator("#pfc-frontier-slider").press("End")
-        page.wait_for_function("location.hash === '#index@2026-06-01..'")
+        page.wait_for_function("location.hash === '#index@2026-08-01..'")
         page.locator("#pfc-frontier-slider-start").press("Home")
         page.wait_for_function("location.hash === ''")
         # The window combines with the tab and a selection, and a hash typed
         # over the open page applies.
-        page.evaluate("location.hash = '#coding~openai@..2026-04-01'")
+        page.evaluate("location.hash = '#coding~openai@..2026-10-01'")
         page.wait_for_selector("#pfc-frontier svg text:text('Terminal-Bench 2.1')")
-        page.wait_for_selector("#pfc-frontier-stage:text('as of Apr 1, 2026')")
+        page.wait_for_selector("#pfc-frontier-stage:text('as of Oct 1, 2026')")
         assert page.locator("#pfc-model-chip").is_visible()
         assert errors == []
     finally:
