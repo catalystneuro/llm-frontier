@@ -372,7 +372,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-01",
    "intelligence_index": 49.0,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Fable 5.1 (Max, Default Fallback)",
    "observations": [
     [
@@ -423,7 +423,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-01",
    "intelligence_index": 47.0,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Fable 5.1 (High, Default Fallback)",
    "observations": [
     [
@@ -474,7 +474,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-01",
    "intelligence_index": 38.5,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Fable 5.1 (Low, Default Fallback)",
    "observations": [
     [
@@ -537,7 +537,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-01",
    "intelligence_index": 43.0,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Fable 5.1 (Medium, Default Fallback)",
    "observations": [
     [
@@ -594,7 +594,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-01",
    "intelligence_index": 49.7,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Fable 5.1 (Xhigh, Default Fallback)",
    "observations": [
     [
@@ -643,7 +643,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-10-07",
    "intelligence_index": 36.2,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Haiku 5.5 (Max)",
    "observations": [
     [
@@ -677,7 +677,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-10-07",
    "intelligence_index": 29.6,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Haiku 5.5 (High)",
    "observations": [
     [
@@ -711,7 +711,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-10-07",
    "intelligence_index": 18.6,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Haiku 5.5 (Low)",
    "observations": [
     [
@@ -751,7 +751,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-10-07",
    "intelligence_index": 24.6,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Haiku 5.5 (Medium)",
    "observations": [
     [
@@ -785,7 +785,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-10-07",
    "intelligence_index": 34.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Haiku 5.5 (Xhigh)",
    "observations": [
     [
@@ -966,7 +966,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-22",
    "intelligence_index": 58.4,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Opus 5.5 (Max, Default Fallback)",
    "observations": [
     [
@@ -1000,7 +1000,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-22",
    "intelligence_index": 51.7,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Opus 5.5 (High, Default Fallback)",
    "observations": [
     [
@@ -1034,7 +1034,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-22",
    "intelligence_index": 34.5,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Opus 5.5 (Low, Default Fallback)",
    "observations": [
     [
@@ -1068,7 +1068,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-22",
    "intelligence_index": 48.1,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Opus 5.5 (Medium, Default Fallback)",
    "observations": [
     [
@@ -1102,7 +1102,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-22",
    "intelligence_index": 57.0,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Opus 5.5 (Xhigh, Default Fallback)",
    "observations": [
     [
@@ -1549,7 +1549,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-28",
    "intelligence_index": 54.2,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Sonnet 5.5 (Max, Default Fallback)",
    "observations": [
     [
@@ -1601,7 +1601,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-28",
    "intelligence_index": 41.1,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Sonnet 5.5 (High, Default Fallback)",
    "observations": [
     [
@@ -1647,7 +1647,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-28",
    "intelligence_index": 25.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Sonnet 5.5 (Low, Default Fallback)",
    "observations": [
     [
@@ -1693,7 +1693,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-28",
    "intelligence_index": 30.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Sonnet 5.5 (Medium, Default Fallback)",
    "observations": [
     [
@@ -1745,7 +1745,7 @@
    "creator": "Anthropic",
    "first_seen": "2026-09-28",
    "intelligence_index": 49.6,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
    "observations": [
     [
@@ -2166,7 +2166,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-10-19",
    "intelligence_index": 32.5,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "DeepSeek V4.1 Flash 1017 (Max)",
    "observations": [
     [
@@ -2560,7 +2560,7 @@
    "creator": "DeepSeek",
    "first_seen": "2026-08-19",
    "intelligence_index": 23.1,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "DeepSeek V4 Pro 0813 (Max)",
    "observations": [
     [
@@ -3217,7 +3217,7 @@
    "creator": "Google",
    "first_seen": "2026-08-19",
    "intelligence_index": 11.7,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Gemini 3.5 Flash-Lite",
    "observations": [
     [
@@ -3533,7 +3533,7 @@
    "creator": "Google",
    "first_seen": "2026-09-02",
    "intelligence_index": 30.5,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Gemini 3.8 Flash (High)",
    "observations": [
     [
@@ -3632,7 +3632,7 @@
    "creator": "Google",
    "first_seen": "2026-09-02",
    "intelligence_index": 30.0,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Gemini 3.8 Flash (Medium)",
    "observations": [
     [
@@ -3675,7 +3675,7 @@
    "creator": "Google",
    "first_seen": "2026-09-30",
    "intelligence_index": 50.4,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Gemini 4 Argon (High)",
    "observations": [
     [
@@ -4223,7 +4223,7 @@
    "creator": "Z AI",
    "first_seen": "2026-08-19",
    "intelligence_index": 31.7,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GLM-5.3 (Max)",
    "observations": [
     [
@@ -4416,7 +4416,7 @@
    "creator": "Z AI",
    "first_seen": "2026-09-24",
    "intelligence_index": 23.1,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GLM-5.3 (Low)",
    "observations": [
     [
@@ -7029,7 +7029,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-29",
    "intelligence_index": 54.5,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Sol (Max)",
    "observations": [
     [
@@ -7070,7 +7070,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-29",
    "intelligence_index": 50.2,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Sol (High)",
    "observations": [
     [
@@ -7111,7 +7111,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-29",
    "intelligence_index": 34.5,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Sol (Low)",
    "observations": [
     [
@@ -7158,7 +7158,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-29",
    "intelligence_index": 46.1,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Sol (Medium)",
    "observations": [
     [
@@ -7199,7 +7199,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-29",
    "intelligence_index": 52.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Sol (Xhigh)",
    "observations": [
     [
@@ -7240,7 +7240,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-10-27",
    "intelligence_index": 51.0,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Terra (Max)",
    "observations": [
     [
@@ -7269,7 +7269,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-10-27",
    "intelligence_index": 42.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Terra (High)",
    "observations": [
     [
@@ -7298,7 +7298,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-10-27",
    "intelligence_index": 29.2,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Terra (Low)",
    "observations": [
     [
@@ -7327,7 +7327,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-10-27",
    "intelligence_index": 38.1,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Terra (Medium)",
    "observations": [
     [
@@ -7356,7 +7356,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-10-27",
    "intelligence_index": 30.4,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Terra (Non-reasoning)",
    "observations": [
     [
@@ -7385,7 +7385,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-10-27",
    "intelligence_index": 45.0,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Terra (Xhigh)",
    "observations": [
     [
@@ -7416,7 +7416,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-04",
    "intelligence_index": 56.9,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Astra (Max)",
    "observations": [
     [
@@ -7492,7 +7492,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-04",
    "intelligence_index": 54.8,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Astra (High)",
    "observations": [
     [
@@ -7580,7 +7580,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-04",
    "intelligence_index": 43.0,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Astra (Low)",
    "observations": [
     [
@@ -7650,7 +7650,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-04",
    "intelligence_index": 51.5,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Astra (Medium)",
    "observations": [
     [
@@ -7763,7 +7763,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-04",
    "intelligence_index": 55.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Astra (Xhigh)",
    "observations": [
     [
@@ -7837,7 +7837,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 27.8,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (Max)",
    "observations": [
     [
@@ -7889,7 +7889,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 21.4,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (High)",
    "observations": [
     [
@@ -7947,7 +7947,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 9.7,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (Low)",
    "observations": [
     [
@@ -7999,7 +7999,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 18.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (Medium)",
    "observations": [
     [
@@ -8048,7 +8048,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 9.4,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (Non-reasoning)",
    "observations": [
     [
@@ -8106,7 +8106,7 @@
    "creator": "OpenAI",
    "first_seen": "2026-09-22",
    "intelligence_index": 23.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (Xhigh)",
    "observations": [
     [
@@ -9711,7 +9711,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-09-21",
    "intelligence_index": 34.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Grok 4.7 (Xhigh)",
    "observations": [
     [
@@ -9745,7 +9745,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-09-21",
    "intelligence_index": 35.0,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Grok 4.7 (High)",
    "observations": [
     [
@@ -9840,7 +9840,7 @@
    "creator": "SpaceXAI",
    "first_seen": "2026-10-01",
    "intelligence_index": 30.9,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Grok 4.7 (Low)",
    "observations": [
     [
@@ -10056,7 +10056,7 @@
    "creator": "Thinking Machines",
    "first_seen": "2026-08-19",
    "intelligence_index": 12.5,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Inkling (Xhigh)",
    "observations": [
     [
@@ -10154,7 +10154,7 @@
    "creator": "Thinking Machines",
    "first_seen": "2026-08-19",
    "intelligence_index": 12.9,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Inkling Small",
    "observations": [
     [
@@ -10680,7 +10680,7 @@
    "creator": "Kimi",
    "first_seen": "2026-10-27",
    "intelligence_index": 46.0,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Kimi K3.1 Pro",
    "observations": [
     [
@@ -10885,7 +10885,7 @@
    "creator": "InclusionAI",
    "first_seen": "2026-10-22",
    "intelligence_index": 29.5,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Ling 3.1 Flash 1019",
    "observations": [
     [
@@ -11624,7 +11624,7 @@
    "creator": "Xiaomi",
    "first_seen": "2026-09-27",
    "intelligence_index": 26.7,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "MiMo-V2.6-Flash",
    "observations": [
     [
@@ -11694,7 +11694,7 @@
    "creator": "Xiaomi",
    "first_seen": "2026-09-21",
    "intelligence_index": 29.9,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "MiMo-V2.6-Pro",
    "observations": [
     [
@@ -11851,7 +11851,7 @@
    "creator": "MiniMax",
    "first_seen": "2026-08-19",
    "intelligence_index": 18.7,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "MiniMax-M3",
    "observations": [
     [
@@ -11997,7 +11997,7 @@
    "creator": "MiniMax",
    "first_seen": "2026-10-19",
    "intelligence_index": 28.9,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "MiniMax-M3.1-Flash",
    "observations": [
     [
@@ -12374,7 +12374,7 @@
    "creator": "Mistral",
    "first_seen": "2026-10-06",
    "intelligence_index": 25.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Mistral Large 4 Preview",
    "observations": [
     [
@@ -12851,7 +12851,7 @@
    "creator": "Meta",
    "first_seen": "2026-08-19",
    "intelligence_index": 6.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Muse Glimmer (High)",
    "observations": [
     [
@@ -13209,7 +13209,7 @@
    "creator": "Meta",
    "first_seen": "2026-09-05",
    "intelligence_index": 36.4,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Muse Spark 1.3 (Max)",
    "observations": [
     [
@@ -13386,7 +13386,7 @@
    "creator": "Meta",
    "first_seen": "2026-10-16",
    "intelligence_index": 24.7,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Muse Spark Open (Xhigh)",
    "observations": [
     [
@@ -13432,7 +13432,7 @@
    "creator": "Meta",
    "first_seen": "2026-10-13",
    "intelligence_index": 43.3,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Muse Wonder (Max)",
    "observations": [
     [
@@ -13565,7 +13565,7 @@
    "creator": "NVIDIA",
    "first_seen": "2026-10-16",
    "intelligence_index": 13.6,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Nemotron 3.5 Super VL",
    "observations": [
     [
@@ -13878,7 +13878,7 @@
    "creator": "NVIDIA",
    "first_seen": "2026-08-19",
    "intelligence_index": 11.8,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Nemotron 3 Ultra 550B A55B (Reasoning)",
    "observations": [
     [
@@ -15056,7 +15056,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-21",
    "intelligence_index": 20.1,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Qwen3.8 27B (Xhigh)",
    "observations": [
     [
@@ -15411,7 +15411,7 @@
    "creator": "Alibaba",
    "first_seen": "2026-08-19",
    "intelligence_index": 33.6,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Qwen3.8 Max (0902)",
    "observations": [
     [
@@ -15699,7 +15699,7 @@
    "creator": "Reflection",
    "first_seen": "2026-10-16",
    "intelligence_index": 17.7,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Beam 1.0",
    "observations": [
     [
@@ -16064,7 +16064,7 @@
    "creator": "StepFun",
    "first_seen": "2026-09-19",
    "intelligence_index": 28.5,
-   "last_seen": "2026-10-27",
+   "last_seen": "2026-10-28",
    "name": "Step 5 Preview",
    "observations": [
     [
@@ -16199,5 +16199,5 @@
    "ttft": 1.29
   }
  },
- "updated": "2026-10-27"
+ "updated": "2026-10-28"
 }
