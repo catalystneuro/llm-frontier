@@ -406,6 +406,16 @@ def test_era_records_open_on_the_first_fetch():
         ("2026-01-01", 0.10, "Stale"), ("2026-09-08", 0.30, "Fresh")]
 
 
+
+def test_settled_date_waits_for_the_first_fetch():
+    # The updater was down from the boundary until 09-08; the basis is
+    # unmeasured until then, so it cannot have settled on 09-05.
+    from llm_cost_frontier.update import settled_date
+    models = era_history()
+    models["fresh"]["observations"][-1][0] = "2026-09-08"
+    assert settled_date(models, [], ERAS) == "2026-09-08"
+    assert settled_date(era_history(), [], ERAS) == "2026-09-05"
+
 def test_stale_models_cannot_hold_new_era_records():
     models = era_history()
     recs = tier_records(models, [], tiers=[50], eras=ERAS)["50"]

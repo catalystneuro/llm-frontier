@@ -78,12 +78,17 @@
   // the cost measured then; before the recomposition it is the first settled
   // measurement scaled by the model's own price ratio from its dated history,
   // so price changes carry over, suite changes never leak in, and the series
-  // is continuous at the settle point.
+  // is continuous at the settle point. Between the recomposition and the
+  // settle point the basis is unsettled (or unmeasured, if the updater was
+  // down), so those days hold the last pre-recomposition cost, projected.
   function basisCostAt(m, date) {
-    if (!ERAS.length || eraOfDate(date) === ERAS.length) return costAt(m, date);
-    var anchor = costAt(m, ERAS[ERAS.length - 1][4] || ERAS[ERAS.length - 1][0]);
-    var lastOld = costAt(m, dayBefore(ERAS[ERAS.length - 1][0]));
-    return lastOld > 0 ? anchor * costAt(m, date) / lastOld : m.mcost;
+    if (!ERAS.length) return costAt(m, date);
+    var start = ERAS[ERAS.length - 1][0];
+    var settled = ERAS[ERAS.length - 1][4] || start;
+    if (date >= settled) return costAt(m, date);
+    var anchor = costAt(m, settled);
+    var lastOld = costAt(m, dayBefore(start));
+    return lastOld > 0 ? anchor * costAt(m, date < start ? date : dayBefore(start)) / lastOld : m.mcost;
   }
   // Whether a model had been measured under the era of snapDate by that date;
   // a model dropped at a boundary and re-measured later must not appear at
