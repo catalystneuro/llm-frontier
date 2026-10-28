@@ -1165,10 +1165,10 @@
     // before it enter from the left edge at the value in effect on that date.
     var X0DATE = '2025-08-01';
     // The Decision Index has a short history of its own; its axis starts a
-    // little before its first record and spans at least two months.
+    // couple of days before its first record and spans at least two weeks.
     if (ownTab()) {
       var firstRec = allRecs.reduce(function (a, r) { return r[0] < a ? r[0] : a; }, endDate);
-      X0DATE = isoOfDay(Math.min(dayNum(firstRec) - 7, dayNum(endDate) - 60));
+      X0DATE = isoOfDay(Math.min(dayNum(firstRec) - 2, dayNum(endDate) - 14));
     }
     var x0d = new Date(X0DATE + 'T00:00:00Z');
     var x1d = new Date(endDate + 'T00:00:00Z');
@@ -1189,7 +1189,15 @@
     var stepM = Math.ceil(monthsSpan / maxTicks);
     stepM = stepM <= 2 ? 2 : stepM <= 3 ? 3 : stepM <= 4 ? 4 : stepM <= 6 ? 6 : 12;
     var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    while (td.getTime() <= x1) { ticks.push([td.toISOString().slice(0, 10), MON[td.getUTCMonth()] + " '" + String(td.getUTCFullYear()).slice(2)]); td.setUTCMonth(td.getUTCMonth() + stepM); }
+    var spanD = (x1 - x0) / 86400000;
+    if (spanD <= 120) {
+      // A short axis gets day ticks; weekly and fortnightly steps fall on Mondays.
+      var stepD = [1, 2, 7, 14, 28].filter(function (k) { return spanD / k <= maxTicks; })[0] || 28;
+      if (stepD >= 7) td.setUTCDate(td.getUTCDate() + (8 - td.getUTCDay()) % 7);
+      while (td.getTime() <= x1) { ticks.push([td.toISOString().slice(0, 10), MON[td.getUTCMonth()] + ' ' + td.getUTCDate()]); td.setUTCDate(td.getUTCDate() + stepD); }
+    } else {
+      while (td.getTime() <= x1) { ticks.push([td.toISOString().slice(0, 10), MON[td.getUTCMonth()] + " '" + String(td.getUTCFullYear()).slice(2)]); td.setUTCMonth(td.getUTCMonth() + stepM); }
+    }
     function X(dstr) { return M.l + (Date.parse(dstr + 'T00:00:00Z') - x0) / (x1 - x0) * (W - M.l - M.r); }
     function Y(v) { return H - M.b - (Math.log10(v) - Math.log10(yd[0])) / (Math.log10(yd[1]) - Math.log10(yd[0])) * (H - M.t - M.b); }
 
