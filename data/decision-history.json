@@ -8,7 +8,7 @@
    "host": "Anthropic",
    "intelligence_index": 68.4,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Claude Haiku 5.5 (Max)",
    "observations": [
     [
@@ -33,7 +33,7 @@
    "host": "Anthropic",
    "intelligence_index": 62.6,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Claude Haiku 5.5 (High)",
    "observations": [
     [
@@ -58,7 +58,7 @@
    "host": "Anthropic",
    "intelligence_index": 60.6,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Claude Haiku 5.5 (Low)",
    "observations": [
     [
@@ -83,7 +83,7 @@
    "host": "Anthropic",
    "intelligence_index": 61.4,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Claude Haiku 5.5 (Medium)",
    "observations": [
     [
@@ -108,7 +108,7 @@
    "host": "Anthropic",
    "intelligence_index": 64.4,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Claude Haiku 5.5 (Xhigh)",
    "observations": [
     [
@@ -133,7 +133,7 @@
    "host": "Anthropic",
    "intelligence_index": 79.0,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Claude Opus 5.5 (Max, Default Fallback)",
    "observations": [
     [
@@ -158,7 +158,7 @@
    "host": "Anthropic",
    "intelligence_index": 75.4,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Claude Opus 5.5 (Low, Default Fallback)",
    "observations": [
     [
@@ -175,6 +175,31 @@
    "time_per_task": 1.87,
    "ttft": null
   },
+  "baseten_elephant-9b": {
+   "capabilities": {},
+   "cost_per_task": 0.008386,
+   "creator": "Baseten",
+   "first_seen": "2026-10-28",
+   "host": "Baseten",
+   "intelligence_index": 64.7,
+   "kind": "decision",
+   "last_seen": "2026-10-28",
+   "name": "Elephant 9B",
+   "observations": [
+    [
+     "2026-10-28",
+     0.008386,
+     64.7,
+     0.165
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-10-28",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": 0.165,
+   "ttft": null
+  },
   "celeris_celeris-1-decision": {
    "capabilities": {},
    "cost_per_task": 0.031572,
@@ -183,7 +208,7 @@
    "host": "Celeris",
    "intelligence_index": 52.3,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Celeris-1 Decision",
    "observations": [
     [
@@ -208,7 +233,7 @@
    "host": "Cloudflare",
    "intelligence_index": 48.6,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Clef",
    "observations": [
     [
@@ -233,7 +258,7 @@
    "host": "Cloudflare",
    "intelligence_index": 45.8,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Clef-Flash",
    "observations": [
     [
@@ -258,7 +283,7 @@
    "host": "Cloudflare",
    "intelligence_index": 44.3,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Clef-Omni",
    "observations": [
     [
@@ -283,7 +308,7 @@
    "host": "DeepInfra",
    "intelligence_index": 55.5,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Gemma 4 31B (Reasoning)",
    "observations": [
     [
@@ -308,7 +333,7 @@
    "host": "Fastino",
    "intelligence_index": 53.9,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "GLiDE",
    "observations": [
     [
@@ -333,7 +358,7 @@
    "host": "Inception",
    "intelligence_index": 52.7,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Mercury Decide",
    "observations": [
     [
@@ -358,7 +383,7 @@
    "host": "Liquid AI",
    "intelligence_index": 50.3,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "d1",
    "observations": [
     [
@@ -383,7 +408,7 @@
    "host": "Liquid AI",
    "intelligence_index": 65.2,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "d1-ultra",
    "observations": [
     [
@@ -408,7 +433,7 @@
    "host": "OpenAI",
    "intelligence_index": 70.9,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Sol (Max)",
    "observations": [
     [
@@ -433,7 +458,7 @@
    "host": "OpenAI",
    "intelligence_index": 71.5,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "GPT-6.1 Sol (Low)",
    "observations": [
     [
@@ -458,7 +483,7 @@
    "host": "OpenAI",
    "intelligence_index": 60.8,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (Max)",
    "observations": [
     [
@@ -483,7 +508,7 @@
    "host": "OpenAI",
    "intelligence_index": 48.5,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (Decisions)",
    "observations": [
     [
@@ -508,7 +533,7 @@
    "host": "OpenAI",
    "intelligence_index": 59.1,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (High)",
    "observations": [
     [
@@ -533,7 +558,7 @@
    "host": "OpenAI",
    "intelligence_index": 55.2,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (Low)",
    "observations": [
     [
@@ -558,7 +583,7 @@
    "host": "OpenAI",
    "intelligence_index": 58.2,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (Medium)",
    "observations": [
     [
@@ -583,7 +608,7 @@
    "host": "OpenAI",
    "intelligence_index": 49.6,
    "kind": "llm",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "GPT-6 Luna (Non-reasoning)",
    "observations": [
     [
@@ -608,7 +633,7 @@
    "host": "OpenRouter",
    "intelligence_index": 53.8,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Microsoft-Decision-1",
    "observations": [
     [
@@ -625,6 +650,31 @@
    "time_per_task": 0.207,
    "ttft": null
   },
+  "perplexity_pplx-decider-flash-v1-2": {
+   "capabilities": {},
+   "cost_per_task": 0.008229,
+   "creator": "Perplexity",
+   "first_seen": "2026-10-28",
+   "host": "Perplexity",
+   "intelligence_index": 50.2,
+   "kind": "decision",
+   "last_seen": "2026-10-28",
+   "name": "Decider Flash v1.2",
+   "observations": [
+    [
+     "2026-10-28",
+     0.008229,
+     50.2,
+     0.11
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-10-28",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": 0.11,
+   "ttft": null
+  },
   "perplexity_pplx-decider-v1-1-27b": {
    "capabilities": {},
    "cost_per_task": 0.016527,
@@ -633,7 +683,7 @@
    "host": "Perplexity",
    "intelligence_index": 53.1,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Decider v1.1 27B",
    "observations": [
     [
@@ -650,6 +700,56 @@
    "time_per_task": 0.17,
    "ttft": null
   },
+  "perplexity_pplx-decider-v1-2": {
+   "capabilities": {},
+   "cost_per_task": 0.015144,
+   "creator": "Perplexity",
+   "first_seen": "2026-10-28",
+   "host": "Perplexity",
+   "intelligence_index": 56.2,
+   "kind": "decision",
+   "last_seen": "2026-10-28",
+   "name": "Decider v1.2",
+   "observations": [
+    [
+     "2026-10-28",
+     0.015144,
+     56.2,
+     0.206
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-10-28",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": 0.206,
+   "ttft": null
+  },
+  "subquadratic_subq-snap-1-1": {
+   "capabilities": {},
+   "cost_per_task": 0.030337,
+   "creator": "Subquadratic",
+   "first_seen": "2026-10-28",
+   "host": "Subquadratic",
+   "intelligence_index": 65.0,
+   "kind": "decision",
+   "last_seen": "2026-10-28",
+   "name": "SubQ Snap 1.1",
+   "observations": [
+    [
+     "2026-10-28",
+     0.030337,
+     65.0,
+     0.19
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-10-28",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": 0.19,
+   "ttft": null
+  },
   "typesafe_jev-1-13": {
    "capabilities": {},
    "cost_per_task": 0.041527,
@@ -658,7 +758,7 @@
    "host": "TypeSafe",
    "intelligence_index": 57.5,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Jev 1.13",
    "observations": [
     [
@@ -683,7 +783,7 @@
    "host": "TypeSafe",
    "intelligence_index": 57.1,
    "kind": "decision",
-   "last_seen": "2026-10-19",
+   "last_seen": "2026-10-28",
    "name": "Jev 1.14",
    "observations": [
     [
@@ -701,5 +801,5 @@
    "ttft": null
   }
  },
- "updated": "2026-10-19"
+ "updated": "2026-10-28"
 }

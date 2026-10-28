@@ -4,9 +4,17 @@
   <link href="https://llm-frontier.catalystneuro.com/instruction/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-instruction.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-instruction.xml</id>
-  <updated>2026-10-19T06:00:00Z</updated>
+  <updated>2026-10-28T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of IFBench, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-10-21: Nemotron 3 Ultra 550B A55B (Reasoning) (price change, IFBench 81.4%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/instruction/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/instruction/2026-10-21-nemotron-3-ultra-550b-a55b.png" />
+    <id>https://llm-frontier.catalystneuro.com/instruction/advance/2026-10-21/nvidia-nemotron-3-ultra-550b-a55b</id>
+    <updated>2026-10-21T00:00:00Z</updated>
+    <summary>Nemotron 3 Ultra 550B A55B (Reasoning): price moved from $0.577 to $0.47 per task; now the cheapest way to reach IFBench 81.3% to 81.4%, taking it from MiniMax-M3. Open weights.</summary>
+  </entry>
   <entry>
     <title>2026-09-23: Ministral 3 8B (price change, IFBench 29.1%)</title>
     <link href="https://llm-frontier.catalystneuro.com/instruction/#advances" />

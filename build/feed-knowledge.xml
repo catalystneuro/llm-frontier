@@ -4,80 +4,136 @@
   <link href="https://llm-frontier.catalystneuro.com/knowledge/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-knowledge.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-knowledge.xml</id>
-  <updated>2026-10-19T06:00:00Z</updated>
+  <updated>2026-10-28T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AA Omniscience, through a release or a price change.</subtitle>
   <entry>
-    <title>2026-10-07: Claude Haiku 5.5 (Xhigh) (new model, AA Omniscience 6.0)</title>
+    <title>2026-10-26: GPT-6.1 Terra (Max) (new model, AA Omniscience 29.6)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-26-gpt-6-1-terra.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-10-26/gpt-6-1-terra</id>
+    <updated>2026-10-26T00:00:00Z</updated>
+    <summary>GPT-6.1 Terra (Max): now the cheapest way to reach AA Omniscience 28.9 to 29.6 at $0.96 per task. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-26: GPT-6.1 Terra (Xhigh) (new model, AA Omniscience 28.9)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-26-gpt-6-1-terra.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-10-26/gpt-6-1-terra-xhigh</id>
+    <updated>2026-10-26T00:00:00Z</updated>
+    <summary>GPT-6.1 Terra (Xhigh): now the cheapest way to reach AA Omniscience 27.8 to 28.9 at $0.40 per task. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-26: GPT-6.1 Terra (High) (new model, AA Omniscience 27.8)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-26-gpt-6-1-terra.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-10-26/gpt-6-1-terra-high</id>
+    <updated>2026-10-26T00:00:00Z</updated>
+    <summary>GPT-6.1 Terra (High): now the cheapest way to reach AA Omniscience 26.6 to 27.8 at $0.26 per task. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-26: GPT-6.1 Terra (Medium) (new model, AA Omniscience 26.6)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-26-gpt-6-1-terra.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-10-26/gpt-6-1-terra-medium</id>
+    <updated>2026-10-26T00:00:00Z</updated>
+    <summary>GPT-6.1 Terra (Medium): now the cheapest way to reach AA Omniscience 22.9 to 26.6 at $0.17 per task. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-26: GPT-6.1 Terra (Low) (new model, AA Omniscience 22.9)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-26-gpt-6-1-terra.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-10-26/gpt-6-1-terra-low</id>
+    <updated>2026-10-26T00:00:00Z</updated>
+    <summary>GPT-6.1 Terra (Low): now the cheapest way to reach AA Omniscience 0.0 to 22.9 at $0.071 per task. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-10-07: Claude Haiku 5.5 (Xhigh) (new model, AA Omniscience 7.8)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-07-claude-haiku-5-5.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-10-07/claude-haiku-5-5-xhigh</id>
     <updated>2026-10-07T00:00:00Z</updated>
-    <summary>Claude Haiku 5.5 (Xhigh): now the cheapest way to reach AA Omniscience 5.8 to 6.0 at $0.12 per task, taking it from GPT-6.1 Sol. Proprietary.</summary>
+    <summary>Claude Haiku 5.5 (Xhigh): now the cheapest way to reach AA Omniscience 5.3 to 7.8 at $0.12 per task, taking it from GPT-6.1 Sol. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-10-07: Claude Haiku 5.5 (High) (new model, AA Omniscience 5.8)</title>
+    <title>2026-10-07: Claude Haiku 5.5 (High) (new model, AA Omniscience 5.3)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-07-claude-haiku-5-5.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-10-07/claude-haiku-5-5-high</id>
     <updated>2026-10-07T00:00:00Z</updated>
-    <summary>Claude Haiku 5.5 (High): now the cheapest way to reach AA Omniscience 4.5 to 5.8 at $0.079 per task, taking it from GPT-6.1 Sol. Proprietary.</summary>
+    <summary>Claude Haiku 5.5 (High): now the cheapest way to reach AA Omniscience 4.2 to 5.3 at $0.079 per task, taking it from GPT-6.1 Sol. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-10-07: Claude Haiku 5.5 (Medium) (new model, AA Omniscience 4.5)</title>
+    <title>2026-10-07: Claude Haiku 5.5 (Medium) (new model, AA Omniscience 4.2)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-07-claude-haiku-5-5.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-10-07/claude-haiku-5-5-medium</id>
     <updated>2026-10-07T00:00:00Z</updated>
-    <summary>Claude Haiku 5.5 (Medium): now the cheapest way to reach AA Omniscience 3.2 to 4.5 at $0.047 per task, taking it from GPT-6.1 Sol. Proprietary.</summary>
+    <summary>Claude Haiku 5.5 (Medium): now the cheapest way to reach AA Omniscience 2.2 to 4.2 at $0.047 per task, taking it from GPT-6.1 Sol and MiMo-V2.5-Pro; MiMo-V2.5-Pro left the frontier. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-10-07: Claude Haiku 5.5 (Low) (new model, AA Omniscience 3.2)</title>
+    <title>2026-10-07: Claude Haiku 5.5 (Low) (new model, AA Omniscience 2.2)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-07-claude-haiku-5-5.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-10-07/claude-haiku-5-5-low</id>
     <updated>2026-10-07T00:00:00Z</updated>
-    <summary>Claude Haiku 5.5 (Low): now the cheapest way to reach AA Omniscience -5.0 to 3.2 at $0.024 per task, taking it from MiMo-V2.5-Pro and GPT-6 Luna; MiMo-V2.5-Pro left the frontier. Proprietary.</summary>
+    <summary>Claude Haiku 5.5 (Low): now the cheapest way to reach AA Omniscience -9.8 to 2.2 at $0.024 per task, taking it from MiMo-V2.5-Pro. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-29: GPT-6.1 Sol (High) (new model, AA Omniscience 41.5)</title>
+    <title>2026-09-30: Gemini 4 Argon (High) (new model, AA Omniscience 46.1)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-30-gemini-4-argon.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-30/gemini-4-argon</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <summary>Gemini 4 Argon (High): now the cheapest way to reach AA Omniscience 44.6 to 46.1 at $1.99 per task, taking it from Claude Opus 5.5. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-09-29: GPT-6.1 Sol (Xhigh) (new model, AA Omniscience 42.4)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-29-gpt-6-1-sol.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-29/gpt-6-1-sol-xhigh</id>
+    <updated>2026-09-29T00:00:00Z</updated>
+    <summary>GPT-6.1 Sol (Xhigh): now the cheapest way to reach AA Omniscience 41.0 to 42.4 at $0.39 per task, taking it from GPT-6 Astra. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-09-29: GPT-6.1 Sol (High) (new model, AA Omniscience 41.0)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-29-gpt-6-1-sol.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-29/gpt-6-1-sol-high</id>
     <updated>2026-09-29T00:00:00Z</updated>
-    <summary>GPT-6.1 Sol (High): now the cheapest way to reach AA Omniscience 40.0 to 41.5 at $0.32 per task, taking it from GPT-6 Astra. Proprietary.</summary>
+    <summary>GPT-6.1 Sol (High): now the cheapest way to reach AA Omniscience 40.2 to 41.0 at $0.32 per task, taking it from GPT-6 Astra. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-29: GPT-6.1 Sol (Medium) (new model, AA Omniscience 40.0)</title>
+    <title>2026-09-29: GPT-6.1 Sol (Medium) (new model, AA Omniscience 40.2)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-29-gpt-6-1-sol.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-29/gpt-6-1-sol-medium</id>
     <updated>2026-09-29T00:00:00Z</updated>
-    <summary>GPT-6.1 Sol (Medium): now the cheapest way to reach AA Omniscience 37.6 to 40.0 at $0.21 per task, taking it from GPT-6 Astra and Claude Opus 5.5. New cost record for AA Omniscience ≥ 40. Proprietary.</summary>
+    <summary>GPT-6.1 Sol (Medium): now the cheapest way to reach AA Omniscience 38.0 to 40.2 at $0.21 per task, taking it from GPT-6 Astra and Claude Opus 5.5. New cost record for AA Omniscience ≥ 40. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-29: GPT-6.1 Sol (Low) (new model, AA Omniscience 37.6)</title>
+    <title>2026-09-29: GPT-6.1 Sol (Low) (new model, AA Omniscience 38.0)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-29-gpt-6-1-sol.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-29/gpt-6-1-sol-low</id>
     <updated>2026-09-29T00:00:00Z</updated>
-    <summary>GPT-6.1 Sol (Low): now the cheapest way to reach AA Omniscience 5.2 to 37.6 at $0.13 per task, taking it from Claude Opus 5.5 and GPT-6 Sol; GPT-6 Sol left the frontier. New cost record for AA Omniscience ≥ 30. Proprietary.</summary>
+    <summary>GPT-6.1 Sol (Low): now the cheapest way to reach AA Omniscience 6.9 to 38.0 at $0.13 per task, taking it from Claude Opus 5.5 and GPT-6 Sol; GPT-6 Sol left the frontier. New cost record for AA Omniscience ≥ 30. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-22: Claude Opus 5.5 (Max, Default Fallback) (new model, AA Omniscience 46.4)</title>
+    <title>2026-09-22: Claude Opus 5.5 (Max, Default Fallback) (new model, AA Omniscience 48.1)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-22-claude-opus-5-5.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-22/claude-opus-5-5</id>
     <updated>2026-09-22T00:00:00Z</updated>
-    <summary>Claude Opus 5.5 (Max, Default Fallback): pushed the AA Omniscience ceiling from 43.7 to 46.4, at $5.98 per task. Proprietary.</summary>
+    <summary>Claude Opus 5.5 (Max, Default Fallback): pushed the AA Omniscience ceiling from 46.3 to 48.1, at $5.98 per task, taking it from Claude Fable 5.1, which left the frontier. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-22: Claude Opus 5.5 (Low, Default Fallback) (new model, AA Omniscience 38.9)</title>
+    <title>2026-09-22: Claude Opus 5.5 (Low, Default Fallback) (new model, AA Omniscience 39.0)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-22-claude-opus-5-5.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-22/claude-opus-5-5-low</id>
     <updated>2026-09-22T00:00:00Z</updated>
-    <summary>Claude Opus 5.5 (Low, Default Fallback): now the cheapest way to reach AA Omniscience 27.0 to 38.9 at $0.55 per task, taking it from GPT-6 Astra and Gemini 3.1 Pro Preview; Gemini 3.1 Pro Preview left the frontier. Proprietary.</summary>
+    <summary>Claude Opus 5.5 (Low, Default Fallback): now the cheapest way to reach AA Omniscience 27.0 to 39.0 at $0.55 per task, taking it from GPT-6 Astra and Gemini 3.1 Pro Preview; Gemini 3.1 Pro Preview left the frontier. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-09-22: GPT-6 Sol (Medium) (new model, AA Omniscience 27.0)</title>
@@ -93,103 +149,79 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-22-gpt-6-sol.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-22/gpt-6-sol-low</id>
     <updated>2026-09-22T00:00:00Z</updated>
-    <summary>GPT-6 Sol (Low): now the cheapest way to reach AA Omniscience 5.2 to 26.5 at $0.13 per task, taking it from Gemini 3.1 Pro Preview, Grok 4.6, GPT-5.6 Sol, Grok 4.3, and MiMo-V2.6-Pro; Grok 4.6, GPT-5.6 Sol, Grok 4.3, and MiMo-V2.6-Pro left the frontier. New cost record for AA Omniscience ≥ 20. Proprietary.</summary>
+    <summary>GPT-6 Sol (Low): now the cheapest way to reach AA Omniscience 6.9 to 26.5 at $0.13 per task, taking it from Gemini 3.1 Pro Preview, Grok 4.6, GPT-5.6 Sol, and Grok 4.3; Grok 4.6, GPT-5.6 Sol, and Grok 4.3 left the frontier. New cost record for AA Omniscience ≥ 20. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-22: GPT-6 Luna (Xhigh) (new model, AA Omniscience -1.8)</title>
-    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-22-gpt-6-luna.png" />
-    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-22/gpt-6-luna-xhigh</id>
-    <updated>2026-09-22T00:00:00Z</updated>
-    <summary>GPT-6 Luna (Xhigh): now the cheapest way to reach AA Omniscience -5.0 to -1.8 at $0.042 per task, taking it from MiMo-V2.5-Pro. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2026-09-22: GPT-6 Luna (Medium) (new model, AA Omniscience -5.0)</title>
-    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-22-gpt-6-luna.png" />
-    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-22/gpt-6-luna-medium</id>
-    <updated>2026-09-22T00:00:00Z</updated>
-    <summary>GPT-6 Luna (Medium): now the cheapest way to reach AA Omniscience -9.2 to -5.0 at $0.017 per task, taking it from MiMo-V2.5-Pro. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2026-09-22: GPT-6 Luna (Low) (new model, AA Omniscience -9.2)</title>
+    <title>2026-09-22: GPT-6 Luna (Low) (new model, AA Omniscience -18.1)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-22-gpt-6-luna.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-22/gpt-6-luna-low</id>
     <updated>2026-09-22T00:00:00Z</updated>
-    <summary>GPT-6 Luna (Low): now the cheapest way to reach AA Omniscience 0.0 to -9.2 at $0.0045 per task, taking it from MiMo-V2.5-Pro; GPT-5.6 Luna, Granite 4.2 3B, and MiMo-V2.5 left the frontier. Proprietary.</summary>
+    <summary>GPT-6 Luna (Low): now the cheapest way to reach AA Omniscience 0.0 to -18.1 at $0.0045 per task. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-21: MiMo-V2.6-Pro (new model, AA Omniscience 8.4)</title>
-    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-21-mimo-v2-6-pro.png" />
-    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-21/mimo-v2-6-pro</id>
-    <updated>2026-09-21T00:00:00Z</updated>
-    <summary>MiMo-V2.6-Pro: now the cheapest way to reach AA Omniscience 5.2 to 8.4 at $0.13 per task, taking it from Grok 4.3. Open weights.</summary>
-  </entry>
-  <entry>
-    <title>2026-09-03: GPT-6 Astra (High) (new model, AA Omniscience 43.7)</title>
+    <title>2026-09-03: GPT-6 Astra (High) (new model, AA Omniscience 44.6)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-03-gpt-6-astra.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-03/gpt-6-astra-high</id>
     <updated>2026-09-03T00:00:00Z</updated>
-    <summary>GPT-6 Astra (High): pushed the AA Omniscience ceiling from 43.5 to 43.7, at $0.96 per task, taking it from Claude Fable 5.1 and Claude Fable 5, both of which left the frontier. Proprietary.</summary>
+    <summary>GPT-6 Astra (High): now the cheapest way to reach AA Omniscience 41.4 to 44.6 at $0.96 per task, taking it from Claude Fable 5.1. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-03: GPT-6 Astra (Medium) (new model, AA Omniscience 42.2)</title>
+    <title>2026-09-03: GPT-6 Astra (Medium) (new model, AA Omniscience 41.4)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-03-gpt-6-astra.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-03/gpt-6-astra-medium</id>
     <updated>2026-09-03T00:00:00Z</updated>
-    <summary>GPT-6 Astra (Medium): now the cheapest way to reach AA Omniscience 40.5 to 42.2 at $0.75 per task, taking it from Claude Fable 5.1. Proprietary.</summary>
+    <summary>GPT-6 Astra (Medium): now the cheapest way to reach AA Omniscience 40.3 to 41.4 at $0.75 per task, taking it from Claude Fable 5.1. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-03: GPT-6 Astra (Low) (new model, AA Omniscience 40.5)</title>
+    <title>2026-09-03: GPT-6 Astra (Low) (new model, AA Omniscience 40.3)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-03-gpt-6-astra.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-03/gpt-6-astra-low</id>
     <updated>2026-09-03T00:00:00Z</updated>
-    <summary>GPT-6 Astra (Low): now the cheapest way to reach AA Omniscience 31.9 to 40.5 at $0.46 per task, taking it from Claude Fable 5.1. New cost record for AA Omniscience ≥ 40. Proprietary.</summary>
+    <summary>GPT-6 Astra (Low): now the cheapest way to reach AA Omniscience 31.9 to 40.3 at $0.46 per task, taking it from Claude Fable 5.1. New cost record for AA Omniscience ≥ 40. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-01: Claude Fable 5.1 (Max, Default Fallback) (new model, AA Omniscience 43.5)</title>
+    <title>2026-09-01: Claude Fable 5.1 (Max, Default Fallback) (new model, AA Omniscience 46.3)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-01-claude-fable-5-1.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-01/claude-fable-5-1</id>
     <updated>2026-09-01T00:00:00Z</updated>
-    <summary>Claude Fable 5.1 (Max, Default Fallback): pushed the AA Omniscience ceiling from 43.3 to 43.5, at $3.69 per task. Proprietary.</summary>
+    <summary>Claude Fable 5.1 (Max, Default Fallback): pushed the AA Omniscience ceiling from 43.3 to 46.3, at $3.69 per task. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-01: Claude Fable 5.1 (Xhigh, Default Fallback) (new model, AA Omniscience 42.4)</title>
+    <title>2026-09-01: Claude Fable 5.1 (Xhigh, Default Fallback) (new model, AA Omniscience 44.3)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-01-claude-fable-5-1.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-01/claude-fable-5-1-xhigh</id>
     <updated>2026-09-01T00:00:00Z</updated>
-    <summary>Claude Fable 5.1 (Xhigh, Default Fallback): now the cheapest way to reach AA Omniscience 40.8 to 42.4 at $2.65 per task, taking it from Claude Fable 5. Proprietary.</summary>
+    <summary>Claude Fable 5.1 (Xhigh, Default Fallback): pushed the AA Omniscience ceiling from 43.3 to 44.3, at $2.65 per task, taking it from Claude Fable 5, which left the frontier. New cost record for AA Omniscience ≥ 40. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-01: Claude Fable 5.1 (High, Default Fallback) (new model, AA Omniscience 40.8)</title>
+    <title>2026-09-01: Claude Fable 5.1 (High, Default Fallback) (new model, AA Omniscience 39.9)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-01-claude-fable-5-1.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-01/claude-fable-5-1-high</id>
     <updated>2026-09-01T00:00:00Z</updated>
-    <summary>Claude Fable 5.1 (High, Default Fallback): now the cheapest way to reach AA Omniscience 37.6 to 40.8 at $1.43 per task, taking it from Claude Fable 5. New cost record for AA Omniscience ≥ 40. Proprietary.</summary>
+    <summary>Claude Fable 5.1 (High, Default Fallback): now the cheapest way to reach AA Omniscience 36.4 to 39.9 at $1.43 per task, taking it from Claude Fable 5 and Claude Opus 5; Claude Opus 5 left the frontier. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-01: Claude Fable 5.1 (Medium, Default Fallback) (new model, AA Omniscience 37.6)</title>
+    <title>2026-09-01: Claude Fable 5.1 (Medium, Default Fallback) (new model, AA Omniscience 36.4)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-01-claude-fable-5-1.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-01/claude-fable-5-1-medium</id>
     <updated>2026-09-01T00:00:00Z</updated>
-    <summary>Claude Fable 5.1 (Medium, Default Fallback): now the cheapest way to reach AA Omniscience 34.1 to 37.6 at $1.00 per task, taking it from Claude Fable 5 and Claude Opus 5; Claude Opus 5 left the frontier. Proprietary.</summary>
+    <summary>Claude Fable 5.1 (Medium, Default Fallback): now the cheapest way to reach AA Omniscience 33.9 to 36.4 at $1.00 per task, taking it from Claude Opus 5. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-09-01: Claude Fable 5.1 (Low, Default Fallback) (new model, AA Omniscience 34.1)</title>
+    <title>2026-09-01: Claude Fable 5.1 (Low, Default Fallback) (new model, AA Omniscience 33.9)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-09-01-claude-fable-5-1.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-01/claude-fable-5-1-low</id>
     <updated>2026-09-01T00:00:00Z</updated>
-    <summary>Claude Fable 5.1 (Low, Default Fallback): now the cheapest way to reach AA Omniscience 31.9 to 34.1 at $0.77 per task, taking it from Claude Opus 5. Proprietary.</summary>
+    <summary>Claude Fable 5.1 (Low, Default Fallback): now the cheapest way to reach AA Omniscience 31.9 to 33.9 at $0.77 per task, taking it from Claude Opus 5. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-08-26: GLM-5.3-Flash (new model, AA Omniscience 7.5)</title>
@@ -256,12 +288,12 @@
     <summary>Claude Opus 5 (High): now the cheapest way to reach AA Omniscience 31.9 to 33.7 at $1.23 per task, taking it from Claude Fable 5. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-07-21: Gemini 3.5 Flash-Lite (new model, AA Omniscience 5.2)</title>
+    <title>2026-07-21: Gemini 3.5 Flash-Lite (new model, AA Omniscience 6.9)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-07-21-gemini-3-5-flash-lite.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-07-21/gemini-3-5-flash-lite</id>
     <updated>2026-07-21T00:00:00Z</updated>
-    <summary>Gemini 3.5 Flash-Lite: now the cheapest way to reach AA Omniscience 3.2 to 5.2 at $0.097 per task, taking it from Grok 4.3. Proprietary.</summary>
+    <summary>Gemini 3.5 Flash-Lite: now the cheapest way to reach AA Omniscience 3.2 to 6.9 at $0.097 per task, taking it from Grok 4.3. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-07-09: Muse Spark 1.1 (Xhigh) (new model, AA Omniscience 28.1)</title>

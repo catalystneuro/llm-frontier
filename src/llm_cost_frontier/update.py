@@ -56,7 +56,10 @@ SETTLE_DAYS = 7
 
 # Per-capability metrics read from the same payload, each chosen because it
 # translates to a class of application better than the aggregate index does.
-# "percent" metrics arrive as 0-1 fractions and are stored as 0-100. Metrics
+# "percent" metrics arrive as 0-1 fractions and are stored as 0-100. An "elo"
+# metric arrives as a raw rating and is first normalized as
+# clamp((Elo - offset) / span), the mapping the source used for its own
+# normalized field before dropping it. Metrics
 # measured for only a small fraction of models (LiveCodeBench, AIME) are left
 # out. The blurb is shown on the dashboard when the capability's tab is active.
 CAPABILITIES = [
@@ -75,7 +78,7 @@ CAPABILITIES = [
          blurb="Artificial Analysis's Omniscience index: factual recall with hallucinated answers penalized, on a scale from -100 to 100, where zero means as many hallucinated answers as correct ones. Relevant for question answering and customer-facing assistants, where a made-up answer is worse than no answer."),
     dict(key="science", url="https://artificialanalysis.ai/evaluations/gpqa-diamond", field="gpqa", label="Scientific Reasoning", metric="GPQA Diamond", percent=True,
          blurb="Accuracy on GPQA Diamond, graduate-level science questions written to resist lookup. Relevant for research assistance and technical question answering."),
-    dict(key="knowledgework", url="https://artificialanalysis.ai/evaluations/gdpval-aa", field="gdpvalNormalized", label="Knowledge Work", metric="GDPval-AA", percent=True,
+    dict(key="knowledgework", url="https://artificialanalysis.ai/evaluations/gdpval-aa", field="gdpval", elo=(500, 2000), label="Knowledge Work", metric="GDPval-AA", percent=True,
          blurb="Artificial Analysis's automated grading of GDPval deliverables: documents, spreadsheets, slides, and analysis drawn from real occupational tasks. Relevant for office work products beyond chat."),
     dict(key="multimodal", url="https://artificialanalysis.ai/evaluations/mmmu-pro", field="mmmuPro", label="Multimodal", metric="MMMU-Pro", percent=True,
          blurb="Accuracy on MMMU-Pro, college-level problems that require reading images, diagrams, and figures. Relevant for applications with visual input."),
@@ -167,6 +170,9 @@ def extract_models(payload: str) -> dict:
         caps = {}
         for cap in CAPABILITIES:
             v = o.get(cap["field"])
+            if v is not None and "elo" in cap:
+                offset, span = cap["elo"]
+                v = min(max((float(v) - offset) / span, 0.0), 1.0)
             if v is not None:
                 caps[cap["key"]] = round(float(v) * 100, 1) if cap["percent"] else round(float(v), 1)
         tpt = o.get("intelligenceIndexTimePerTask")
@@ -445,9 +451,21 @@ def price_timeline(models: dict, events: list) -> list:
 
 def tier_records(models: dict, events: list, tiers: list = None, eras: list = None) -> dict:
     """Running cost minimums per tier. The minimum resets at each era boundary,
-    since neither the scores nor the measured costs are comparable across one."""
+    since neither the scores nor the measured costs are comparable across one.
+
+    An era's records open on its first fetch. If the updater was down when
+    the source recomposed, models released in the gap would otherwise hold
+    the era's minimum alone until every live model is re-measured, and that
+    re-measurement would count as a cost decline."""
     timeline = price_timeline(models, events)
     starts = [e["start"] for e in eras or []]
+    obs_dates = sorted({o[0] for m in models.values() for o in m.get("observations") or []})
+    for s in starts:
+        opened = next((d for d in obs_dates if d >= s), s)
+        for e in timeline:
+            if s <= e[0] < opened:
+                e[0] = opened
+    timeline.sort(key=lambda e: (e[0], e[1]))
     out = {}
     for t in TIERS if tiers is None else tiers:
         best = math.inf

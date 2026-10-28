@@ -4,9 +4,17 @@
   <link href="https://llm-frontier.catalystneuro.com/science/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-science.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-science.xml</id>
-  <updated>2026-10-19T06:00:00Z</updated>
+  <updated>2026-10-28T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of GPQA Diamond, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-10-21: DeepSeek V4 Flash 0731 (Max) (price change, GPQA Diamond 90.8%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/science/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/science/2026-10-21-deepseek-v4-flash-0731.png" />
+    <id>https://llm-frontier.catalystneuro.com/science/advance/2026-10-21/deepseek-v4-flash</id>
+    <updated>2026-10-21T00:00:00Z</updated>
+    <summary>DeepSeek V4 Flash 0731 (Max): price moved from $0.174 to $0.15 per task; now the cheapest way to reach GPQA Diamond 89.7% to 90.8%. Open weights.</summary>
+  </entry>
   <entry>
     <title>2026-10-18: DeepSeek V4 Flash 0731 (Max) (price change, GPQA Diamond 90.8%)</title>
     <link href="https://llm-frontier.catalystneuro.com/science/#advances" />

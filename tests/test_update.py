@@ -88,6 +88,14 @@ def test_extract_models_reads_fields_and_capabilities():
     assert got["capabilities"] == {"coding": 78.9, "knowledge": -10.8, "agentic": 44.4}
 
 
+def test_extract_models_normalizes_elo_metrics():
+    # GDPval-AA arrives as a raw Elo; clamp((Elo - 500) / 2000) as a percent.
+    objs = [source_object(slug="a", gdpval=1866.27), source_object(slug="b", gdpval=300.0),
+            source_object(slug="c", gdpval=2600.0)]
+    got = extract_models(payload_for(objs))
+    assert [got[s]["capabilities"]["knowledgework"] for s in "abc"] == [68.3, 0.0, 100.0]
+
+
 def test_extract_models_skips_invalid_entries():
     objs = [
         source_object(slug="free-model", cost=0.0),
@@ -385,6 +393,18 @@ def test_tier_records_reset_at_the_era_boundary():
     # and its higher new-suite cost is a fresh record, not compared to 0.10.
     assert [(r[0], r[1], r[2]) for r in recs] == [
         ("2026-01-01", 0.10, "Stale"), ("2026-09-05", 0.30, "Fresh")]
+
+
+def test_era_records_open_on_the_first_fetch():
+    # The updater was down from the boundary until 09-08. Gap is released on
+    # 09-06 but first measured on 09-08 with everyone else; it must not hold
+    # the new era's record alone before Fresh's cheaper re-measurement lands.
+    models = era_history()
+    models["fresh"]["observations"][-1][0] = "2026-09-08"
+    models["gap"] = model("Gap", "2026-09-06", 45.0, 0.50, obs=[["2026-09-08", 0.50, 45.0]])
+    recs = tier_records(models, [], tiers=[40], eras=ERAS)["40"]
+    assert [(r[0], r[1], r[2]) for r in recs] == [
+        ("2026-01-01", 0.10, "Stale"), ("2026-09-08", 0.30, "Fresh")]
 
 
 def test_stale_models_cannot_hold_new_era_records():
