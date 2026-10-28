@@ -71,7 +71,7 @@ def test_loads_clean_and_renders(browser, site_url):
         assert page.locator("#pfc-records svg").count() == 1
         # The finished frontier is labeled today and the era toggle is present.
         assert "today" in page.locator("#pfc-frontier-stage").inner_text()
-        assert page.locator("#pfc-era-nav button").count() >= 2
+        assert page.locator("#pfc-era-select option").count() >= 2
         # Advances listed; the staleness note stays hidden for a fresh file.
         assert page.locator("#pfc-advances .pfc-adv-day").count() > 0
         assert page.locator("#pfc-stale").is_hidden()
@@ -120,7 +120,7 @@ def test_axis_toggle_switches_to_time_and_archives_force_cost(browser, site_url)
         data = json.loads((REPO / "build/llm-frontier.json").read_text())
         ett = (data.get("era_tier_time") or [{}])[0]
         has_time = any(ett.get(t) for t in ett)
-        page.locator("#pfc-era-nav button").first.click()
+        page.locator("#pfc-era-select").select_option("0")
         if has_time:
             page.wait_for_selector("#pfc-records svg text:text('measurements ended')")
             assert page.locator("#pfc-records-title").inner_text().startswith("Speed Records")
@@ -195,7 +195,7 @@ def test_archive_time_axis_when_backfilled(browser, site_url):
     ctx, page, errors = open_page(browser, site_url)
     try:
         # The archive era keeps the toggle and shows its own speed records.
-        page.locator("#pfc-era-nav button").first.click()
+        page.locator("#pfc-era-select").select_option("0")
         page.wait_for_selector("#pfc-records svg text:text('measurements ended')")
         toggle = page.locator("#pfc-axis-nav button", has_text="Time per task")
         assert toggle.count() == 1
@@ -383,11 +383,11 @@ def test_decision_tab_uses_its_own_models_and_axis(browser, site_url):
 def test_era_archive_view(browser, site_url):
     ctx, page, errors = open_page(browser, site_url)
     try:
-        page.locator("#pfc-era-nav button").first.click()
+        page.locator("#pfc-era-select").select_option("0")
         page.wait_for_selector("#pfc-records svg text:text('measurements ended')")
         assert "Sep 4, 2026" in page.locator("#pfc-frontier-stage").inner_text()
         # Back to the current era.
-        page.locator("#pfc-era-nav button", has_text="current").click()
+        page.locator("#pfc-era-select").select_option(index=0)
         page.wait_for_selector("#pfc-frontier-stage:text('today')")
         assert errors == []
     finally:
