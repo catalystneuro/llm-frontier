@@ -374,7 +374,7 @@ def test_decision_tab_uses_its_own_models_and_axis(browser, site_url):
         # A hash hop back to Overall restores the main models and the eras.
         page.goto(site_url + "/decision/#index")
         page.wait_for_selector("#pfc-frontier svg text:text('Artificial Analysis Intelligence Index')")
-        assert page.locator("#pfc-era-nav button").count() >= 2
+        assert page.locator("#pfc-era-select option").count() >= 2
         assert errors == []
     finally:
         ctx.close()
