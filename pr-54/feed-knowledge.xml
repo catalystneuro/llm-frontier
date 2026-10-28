@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>LLM Frontier: AA Omniscience advances</title>
+  <link href="https://llm-frontier.catalystneuro.com/knowledge/" />
+  <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-knowledge.xml" />
+  <id>https://llm-frontier.catalystneuro.com/feed-knowledge.xml</id>
+  <updated>2026-10-23T06:00:00Z</updated>
+  <author><name>CatalystNeuro</name></author>
+  <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AA Omniscience, through a release or a price change.</subtitle>
+</feed>

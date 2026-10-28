@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>LLM Frontier: Terminal-Bench 2.1 advances</title>
+  <link href="https://llm-frontier.catalystneuro.com/coding/" />
+  <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-coding.xml" />
+  <id>https://llm-frontier.catalystneuro.com/feed-coding.xml</id>
+  <updated>2026-10-23T06:00:00Z</updated>
+  <author><name>CatalystNeuro</name></author>
+  <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of Terminal-Bench 2.1, through a release or a price change.</subtitle>
+</feed>
