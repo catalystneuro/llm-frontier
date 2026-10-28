@@ -789,27 +789,33 @@
     syncHash();
     renderEraNav(); renderAxisNav(); renderFrontier(); renderCapTable(); renderRecords(); renderTable(); renderAdvances();
   }
+  // A dropdown, since every recomposition adds an archive: the current index
+  // first, then the archives newest first.
   function renderEraNav() {
     var nav = document.getElementById('pfc-era-nav');
     if (!nav) return;
     var show = ERAS.length > 0 && DATA.era_snapshots;
     nav.hidden = !show;
     if (!show) return;
-    nav.replaceChildren();
-    for (var i = 0; i <= ERAS.length; i++) (function (i) {
-      var b = document.createElement('button');
-      b.type = 'button';
+    var sel = document.createElement('select');
+    sel.id = 'pfc-era-select';
+    sel.setAttribute('aria-label', 'Intelligence Index version');
+    for (var i = ERAS.length; i >= 0; i--) {
+      var o = document.createElement('option');
       var end = DATA.era_snapshots[i][DATA.era_snapshots[i].length - 1][0];
       var lbl = eraShortLabel(i);
-      b.textContent = i === ERAS.length
+      o.value = String(i);
+      o.textContent = i === ERAS.length
         ? 'Index ' + (lbl || 'current') + (lbl ? ' (current)' : '')
         : 'Index ' + (lbl ? lbl + ' ' : '') + '(through ' + fmtDate(end) + ')';
-      b.setAttribute('aria-pressed', ERA_VIEW === i ? 'true' : 'false');
-      b.addEventListener('click', function () {
-        if (ERA_VIEW !== i) switchEra(i);
-      });
-      nav.append(b);
-    })(i);
+      o.selected = ERA_VIEW === i;
+      sel.append(o);
+    }
+    sel.addEventListener('change', function () {
+      var i = +sel.value;
+      if (ERA_VIEW !== i) switchEra(i);
+    });
+    nav.replaceChildren(sel);
   }
 
   // ---- the cost/time axis toggle ----
