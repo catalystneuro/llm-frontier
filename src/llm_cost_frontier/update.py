@@ -643,12 +643,13 @@ def frontier_advances(models: dict, events: list, records: dict, eras: list = No
 
 
 def settled_date(models: dict, events: list, eras: list) -> str:
-    """The day the current era's measurement basis settled: its start, or the
-    last mass re-measurement within SETTLE_DAYS of it."""
+    """The day the current era's measurement basis settled: its first fetch
+    (later than its start if the updater was down at the boundary), or the
+    last mass re-measurement within SETTLE_DAYS of the start."""
     if not eras:
         return ""
     boundary = eras[-1]["start"]
-    settled = boundary
+    settled = min((o[0] for m in models.values() for o in m.get("observations") or [] if o[0] >= boundary), default=boundary)
     limit = (dt.date.fromisoformat(boundary) + dt.timedelta(days=SETTLE_DAYS)).isoformat()
     for d in mass_move_dates(models, events, eras):
         if boundary <= d <= limit:
