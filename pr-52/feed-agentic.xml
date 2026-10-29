@@ -4,9 +4,17 @@
   <link href="https://llm-frontier.catalystneuro.com/agentic/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-agentic.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-agentic.xml</id>
-  <updated>2026-10-28T06:00:00Z</updated>
+  <updated>2026-10-29T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AutomationBench-AA, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-10-28: Gemini 4 Carbon (High) (new model, AutomationBench-AA 77.8%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-10-28-gemini-4-carbon.png" />
+    <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-10-28/gemini-4-carbon</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <summary>Gemini 4 Carbon (High): pushed the AutomationBench-AA ceiling from 77.5% to 77.8%, at $7.76 per task. Proprietary.</summary>
+  </entry>
   <entry>
     <title>2026-10-26: GPT-6.1 Terra (Max) (new model, AutomationBench-AA 60.2%)</title>
     <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
@@ -53,7 +61,7 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-10-19-minimax-m3-1-flash.png" />
     <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-10-19/minimax-m3-1-flash</id>
     <updated>2026-10-19T00:00:00Z</updated>
-    <summary>MiniMax-M3.1-Flash: now the cheapest way to reach AutomationBench-AA 64.1% to 72.5% at $0.22 per task, taking it from Gemini 4 Argon, DeepSeek V4.1 Flash, and DeepSeek V4.1 Flash 1017; DeepSeek V4.1 Flash and DeepSeek V4.1 Flash 1017 left the frontier. New cost record for AutomationBench-AA ≥ 70%. Proprietary.</summary>
+    <summary>MiniMax-M3.1-Flash: now the cheapest way to reach AutomationBench-AA 64.1% to 72.5% at $0.22 per task, taking it from Gemini 4 Argon, DeepSeek V4.1 Flash, and DeepSeek V4.1 Flash 1017; DeepSeek V4.1 Flash and DeepSeek V4.1 Flash 1017 left the frontier. New cost record for AutomationBench-AA ≥ 70%. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-10-17: DeepSeek V4.1 Flash 1017 (Max) (new model, AutomationBench-AA 66.6%)</title>
@@ -478,13 +486,5 @@
     <id>https://llm-frontier.catalystneuro.com/agentic/advance/2025-04-05/llama-4-scout</id>
     <updated>2025-04-05T00:00:00Z</updated>
     <summary>Llama 4 Scout: now the cheapest way to reach AutomationBench-AA 0.0% to 0.2% at $0.011 per task, taking it from DeepSeek V3. Open weights.</summary>
-  </entry>
-  <entry>
-    <title>2025-03-17: Mistral Small 3.1 (new model, AutomationBench-AA 1.2%)</title>
-    <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2025-03-17-mistral-small-3-1.png" />
-    <id>https://llm-frontier.catalystneuro.com/agentic/advance/2025-03-17/mistral-small-3-1</id>
-    <updated>2025-03-17T00:00:00Z</updated>
-    <summary>Mistral Small 3.1: pushed the AutomationBench-AA ceiling from 0.6% to 1.2%, at $0.044 per task. Open weights.</summary>
   </entry>
 </feed>
