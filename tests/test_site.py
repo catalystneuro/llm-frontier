@@ -75,6 +75,9 @@ def test_loads_clean_and_renders(browser, site_url):
         # Advances listed; the staleness note stays hidden for a fresh file.
         assert page.locator("#pfc-advances .pfc-adv-day").count() > 0
         assert page.locator("#pfc-stale").is_hidden()
+        # The data line names the update time and its time zone.
+        import re
+        assert re.search(r"\d{1,2}:\d{2}\s?[AP]M [A-Z]", page.locator(".pfc-updated").first.inner_text())
     finally:
         ctx.close()
 
@@ -333,13 +336,45 @@ def test_metric_page_defaults_to_its_metric(browser, site_url):
         page.wait_for_selector("#pfc-frontier svg text:text('Terminal-Bench 2.1')")
         # The page's own hash stays clean; the tab bar is links except itself.
         assert page.evaluate("location.hash") == ""
-        assert page.locator("#pfc-cap-tabs a").count() == 8
+        assert page.locator("#pfc-cap-tabs a").count() == 9
         assert page.locator("#pfc-cap-tabs span[aria-selected='true']").inner_text() == "Coding"
         assert page.locator("#pfc-cap-tabs a", has_text="Overall").get_attribute("href").endswith("/")
         # Its feed link points at the capability feed, which is served.
         href = page.locator("head link[rel='alternate']").get_attribute("href")
         assert href.endswith("feed-coding.xml")
         assert page.request.get(site_url + "/feed-coding.xml").status == 200
+        assert errors == []
+    finally:
+        ctx.close()
+
+
+@pytest.mark.skipif(not (REPO / "data/decision-history.json").exists(), reason="no Decision Index data")
+def test_decision_tab_uses_its_own_models_and_axis(browser, site_url):
+    ctx = browser.new_context(viewport={"width": 1300, "height": 900})
+    page = ctx.new_page()
+    errors = []
+    page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+    page.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
+    try:
+        page.goto(site_url + "/decision/")
+        page.wait_for_selector("#pfc-frontier svg text:text('Decision Index')")
+        page.wait_for_selector("#pfc-records svg")
+        assert page.locator("#pfc-cap-tabs span[aria-selected='true']").inner_text() == "Decisions"
+        # Its own cost axis, no eras, and contestants that are not in the main data.
+        assert page.locator("#pfc-frontier svg text:text('Cost per 1K tasks (log)')").count() == 1
+        assert page.locator("#pfc-era-nav").is_hidden()
+        assert "decision models" in page.locator("#pfc-frontier-lead").inner_text()
+        assert page.locator("#pfc-cap-table tr").count() > 0
+        assert page.locator("#pfc-advances .pfc-adv-day").count() > 0
+        options = page.locator("#pfc-model-list option").evaluate_all("os => os.map(o => o.value)")
+        assert "d1" in options
+        # The time axis works on the contestants' measured time per task.
+        page.locator("#pfc-axis-nav button", has_text="Time per task").click()
+        page.wait_for_selector("#pfc-frontier svg text:text('Time per task (log)')")
+        # A hash hop back to Overall restores the main models and the eras.
+        page.goto(site_url + "/decision/#index")
+        page.wait_for_selector("#pfc-frontier svg text:text('Artificial Analysis Intelligence Index')")
+        assert page.locator("#pfc-era-select option").count() >= 2
         assert errors == []
     finally:
         ctx.close()

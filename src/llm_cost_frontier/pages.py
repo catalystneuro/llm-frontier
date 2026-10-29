@@ -1,6 +1,6 @@
 """Generate the per-metric pages from the dashboard's index page.
 
-Each capability gets a real page at /<key>/ with its own title, meta
+Each capability, and the Decision Index, gets a real page at /<key>/ with its own title, meta
 description, canonical URL, social card, and Atom feed link, so a
 metric-specific frontier can be shared, indexed, and subscribed to
 directly. The pages are the root index.html with the head rewritten,
@@ -15,7 +15,7 @@ re-running `python -m llm_cost_frontier.pages` fails the suite.
 import sys
 from pathlib import Path
 
-from .update import CAPABILITIES, DEFAULT_SITE
+from .update import DEFAULT_SITE, METRIC_PAGES
 
 SITE_DIR = Path(__file__).resolve().parents[2] / "site"
 
@@ -60,7 +60,7 @@ def metric_page(template: str, cap: dict) -> str:
 
 def generate() -> dict:
     template = (SITE_DIR / "index.html").read_text()
-    return {SITE_DIR / c["key"] / "index.html": metric_page(template, c) for c in CAPABILITIES}
+    return {SITE_DIR / c["key"] / "index.html": metric_page(template, c) for c in METRIC_PAGES}
 
 
 def main(argv=None):
