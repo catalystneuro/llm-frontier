@@ -4,7 +4,7 @@
   <link href="https://llm-frontier.catalystneuro.com/knowledgework/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-knowledgework.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-knowledgework.xml</id>
-  <updated>2026-10-29T06:00:00Z</updated>
+  <updated>2026-10-30T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of GDPval-AA, through a release or a price change.</subtitle>
   <entry>
@@ -216,12 +216,12 @@
     <summary>Qwen3.8 Max (0902): now the cheapest way to reach GDPval-AA 57.9% to 58.7% at $0.91 per task, taking it from Claude Opus 5. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-08-26: GLM-5.3-Flash (new model, GDPval-AA 57.1%)</title>
+    <title>2026-08-26: GLM-5.3-Flash (new model, GDPval-AA 57.5%)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledgework/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledgework/2026-08-26-glm-5-3-flash.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledgework/advance/2026-08-26/glm-5-3-flash</id>
     <updated>2026-08-26T00:00:00Z</updated>
-    <summary>GLM-5.3-Flash: now the cheapest way to reach GDPval-AA 47.9% to 57.1% at $0.087 per task, taking it from GLM-5.3, Grok 4.6, GPT-5.6 Sol, and DeepSeek V4 Flash Vision; Grok 4.6, GPT-5.6 Sol, and DeepSeek V4 Flash Vision left the frontier. New cost record for GDPval-AA ≥ 50%. Open weights.</summary>
+    <summary>GLM-5.3-Flash: now the cheapest way to reach GDPval-AA 47.9% to 57.5% at $0.087 per task, taking it from GLM-5.3, Grok 4.6, GPT-5.6 Sol, and DeepSeek V4 Flash Vision; Grok 4.6, GPT-5.6 Sol, and DeepSeek V4 Flash Vision left the frontier. New cost record for GDPval-AA ≥ 50%. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-08-26: Agnes 2.5 Pro Beta (new model, GDPval-AA 47.7%)</title>

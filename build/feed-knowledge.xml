@@ -4,7 +4,7 @@
   <link href="https://llm-frontier.catalystneuro.com/knowledge/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-knowledge.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-knowledge.xml</id>
-  <updated>2026-10-29T06:00:00Z</updated>
+  <updated>2026-10-30T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AA Omniscience, through a release or a price change.</subtitle>
   <entry>
@@ -230,14 +230,6 @@
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-09-01/claude-fable-5-1-low</id>
     <updated>2026-09-01T00:00:00Z</updated>
     <summary>Claude Fable 5.1 (Low, Default Fallback): now the cheapest way to reach AA Omniscience 31.9 to 33.9 at $0.77 per task, taking it from Claude Opus 5. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2026-08-26: GLM-5.3-Flash (new model, AA Omniscience 7.5)</title>
-    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-08-26-glm-5-3-flash.png" />
-    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-08-26/glm-5-3-flash</id>
-    <updated>2026-08-26T00:00:00Z</updated>
-    <summary>GLM-5.3-Flash: now the cheapest way to reach AA Omniscience 3.2 to 7.5 at $0.087 per task, taking it from Grok 4.3 and Gemini 3.5 Flash-Lite; Gemini 3.5 Flash-Lite left the frontier. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-08-25: Granite 4.2 3B (new model, AA Omniscience -14.7)</title>
@@ -486,5 +478,13 @@
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2025-01-20/deepseek-r1-0120</id>
     <updated>2025-01-20T00:00:00Z</updated>
     <summary>DeepSeek R1 (Jan '25): pushed the AA Omniscience ceiling from -41.6 to -32.2, at $0.32 per task. Open weights.</summary>
+  </entry>
+  <entry>
+    <title>2024-12-26: DeepSeek V3 (Dec '24) (new model, AA Omniscience -41.6)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2024-12-26-deepseek-v3.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2024-12-26/deepseek-v3</id>
+    <updated>2024-12-26T00:00:00Z</updated>
+    <summary>DeepSeek V3 (Dec '24): now the cheapest way to reach AA Omniscience 0.0 to -41.6 at $0.025 per task. Open weights.</summary>
   </entry>
 </feed>
