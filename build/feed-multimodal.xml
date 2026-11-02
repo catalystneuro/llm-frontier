@@ -8,6 +8,14 @@
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of MMMU-Pro, through a release or a price change.</subtitle>
   <entry>
+    <title>2026-10-28: Gemini 4 Carbon (Medium) (new model, MMMU-Pro 89.2%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-10-28-gemini-4-carbon.png" />
+    <id>https://llm-frontier.catalystneuro.com/multimodal/advance/2026-10-28/gemini-4-carbon-medium</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <summary>Gemini 4 Carbon (Medium): pushed the MMMU-Pro ceiling from 87.7% to 89.2%, at $6.59 per task, taking it from Claude Opus 5.5. Proprietary.</summary>
+  </entry>
+  <entry>
     <title>2026-10-26: GPT-6.1 Terra (Max) (new model, MMMU-Pro 84.7%)</title>
     <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-10-26-gpt-6-1-terra.png" />

@@ -16,6 +16,14 @@
     <summary>Gemini 4 Carbon (High): pushed the AutomationBench-AA ceiling from 77.5% to 77.8%, at $7.76 per task. Proprietary.</summary>
   </entry>
   <entry>
+    <title>2026-10-28: Gemini 4 Carbon (Medium) (new model, AutomationBench-AA 77.6%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-10-28-gemini-4-carbon.png" />
+    <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-10-28/gemini-4-carbon-medium</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <summary>Gemini 4 Carbon (Medium): pushed the AutomationBench-AA ceiling from 77.5% to 77.6%, at $6.59 per task, taking it from Gemini 4 Argon, which left the frontier. Proprietary.</summary>
+  </entry>
+  <entry>
     <title>2026-10-26: GPT-6.1 Terra (Max) (new model, AutomationBench-AA 60.2%)</title>
     <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-10-26-gpt-6-1-terra.png" />
@@ -478,13 +486,5 @@
     <id>https://llm-frontier.catalystneuro.com/agentic/advance/2025-04-14/gpt-4-1-nano</id>
     <updated>2025-04-14T00:00:00Z</updated>
     <summary>GPT-4.1 nano: now the cheapest way to reach AutomationBench-AA 0.6% to 1.2% at $0.035 per task, taking it from Mistral Small 3.1, which left the frontier. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2025-04-05: Llama 4 Scout (new model, AutomationBench-AA 0.2%)</title>
-    <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2025-04-05-llama-4-scout.png" />
-    <id>https://llm-frontier.catalystneuro.com/agentic/advance/2025-04-05/llama-4-scout</id>
-    <updated>2025-04-05T00:00:00Z</updated>
-    <summary>Llama 4 Scout: now the cheapest way to reach AutomationBench-AA 0.0% to 0.2% at $0.011 per task, taking it from DeepSeek V3. Open weights.</summary>
   </entry>
 </feed>

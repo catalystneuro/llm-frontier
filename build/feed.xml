@@ -16,6 +16,14 @@
     <summary>Gemini 4 Carbon (High): pushed the intelligence ceiling from 58.4 to 59.4, at $7.76 per task, taking it from Claude Opus 5.5. Proprietary.</summary>
   </entry>
   <entry>
+    <title>2026-10-28: Gemini 4 Carbon (Medium) (new model, index 57.7)</title>
+    <link href="https://llm-frontier.catalystneuro.com/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-10-28-gemini-4-carbon.png" />
+    <id>https://llm-frontier.catalystneuro.com/advance/2026-10-28/gemini-4-carbon-medium</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <summary>Gemini 4 Carbon (Medium): now the cheapest way to reach index 57.0 to 57.7 at $6.59 per task, taking it from Claude Opus 5.5. Proprietary.</summary>
+  </entry>
+  <entry>
     <title>2026-10-26: GPT-6.1 Terra (Max) (new model, index 51.0)</title>
     <link href="https://llm-frontier.catalystneuro.com/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-10-26-gpt-6-1-terra.png" />
@@ -478,13 +486,5 @@
     <id>https://llm-frontier.catalystneuro.com/advance/2026-07-09/gpt-5-6-luna</id>
     <updated>2026-07-09T00:00:00Z</updated>
     <summary>GPT-5.6 Luna (Max): now the cheapest way to reach index 50.7 to 52.3 at $0.24 per task, taking it from Grok 4.5. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2026-07-09: GPT-5.6 Sol (Low) (new model, index 50.7)</title>
-    <link href="https://llm-frontier.catalystneuro.com/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/2026-07-09-gpt-5-6-sol.png" />
-    <id>https://llm-frontier.catalystneuro.com/advance/2026-07-09/gpt-5-6-sol-low</id>
-    <updated>2026-07-09T00:00:00Z</updated>
-    <summary>GPT-5.6 Sol (Low): now the cheapest way to reach index 50.1 to 50.7 at $0.23 per task, taking it from Grok 4.5. Proprietary.</summary>
   </entry>
 </feed>

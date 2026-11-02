@@ -16,6 +16,14 @@
     <summary>Gemini 4 Carbon (High): pushed the AA Omniscience ceiling from 48.1 to 53.5, at $7.76 per task, taking it from Claude Opus 5.5, which left the frontier. New cost record for AA Omniscience ≥ 50. Proprietary.</summary>
   </entry>
   <entry>
+    <title>2026-10-28: Gemini 4 Carbon (Medium) (new model, AA Omniscience 46.8)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-28-gemini-4-carbon.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-10-28/gemini-4-carbon-medium</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <summary>Gemini 4 Carbon (Medium): now the cheapest way to reach AA Omniscience 44.6 to 46.8 at $6.59 per task, taking it from Claude Opus 5.5 and Gemini 4 Argon; Gemini 4 Argon left the frontier. Proprietary.</summary>
+  </entry>
+  <entry>
     <title>2026-10-26: GPT-6.1 Terra (Max) (new model, AA Omniscience 29.6)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-10-26-gpt-6-1-terra.png" />
@@ -478,13 +486,5 @@
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2025-01-20/deepseek-r1-0120</id>
     <updated>2025-01-20T00:00:00Z</updated>
     <summary>DeepSeek R1 (Jan '25): pushed the AA Omniscience ceiling from -41.6 to -32.2, at $0.32 per task. Open weights.</summary>
-  </entry>
-  <entry>
-    <title>2024-12-26: DeepSeek V3 (Dec '24) (new model, AA Omniscience -41.6)</title>
-    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2024-12-26-deepseek-v3.png" />
-    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2024-12-26/deepseek-v3</id>
-    <updated>2024-12-26T00:00:00Z</updated>
-    <summary>DeepSeek V3 (Dec '24): now the cheapest way to reach AA Omniscience 0.0 to -41.6 at $0.025 per task. Open weights.</summary>
   </entry>
 </feed>
