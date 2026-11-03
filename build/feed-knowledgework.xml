@@ -301,7 +301,15 @@
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledgework/2026-08-05-muse-spark-1-2.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledgework/advance/2026-08-05/muse-spark-1-2</id>
     <updated>2026-08-05T00:00:00Z</updated>
-    <summary>Muse Spark 1.2 (Xhigh): now the cheapest way to reach GDPval-AA 47.9% to 48.6% at $0.40 per task, taking it from GPT-5.6 Sol. Proprietary.</summary>
+    <summary>Muse Spark 1.2 (Xhigh): now the cheapest way to reach GDPval-AA 47.9% to 48.6% at $0.40 per task, taking it from GPT-5.6 Sol and GPT-5.6 Terra; GPT-5.6 Terra left the frontier. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-07-30: GPT-5.6 Terra (Max) (price change, GDPval-AA 48.1%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledgework/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledgework/2026-07-30-gpt-5-6-terra.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledgework/advance/2026-07-30/gpt-5-6-terra</id>
+    <updated>2026-07-30T00:00:00Z</updated>
+    <summary>GPT-5.6 Terra (Max): price moved from $0.635 to $0.51 per task; now the cheapest way to reach GDPval-AA 47.9% to 48.1%, taking it from GPT-5.6 Sol. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-07-30: GPT-5.6 Luna (Max) (price change, GDPval-AA 47.9%)</title>
@@ -478,13 +486,5 @@
     <id>https://llm-frontier.catalystneuro.com/knowledgework/advance/2026-04-23/gpt-5-5-high</id>
     <updated>2026-04-23T00:00:00Z</updated>
     <summary>GPT-5.5 (High): now the cheapest way to reach GDPval-AA 36.5% to 41.3% at $0.80 per task, taking it from GPT-5.4. New cost record for GDPval-AA ≥ 40%. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2026-04-23: GPT-5.5 (Medium) (new model, GDPval-AA 36.5%)</title>
-    <link href="https://llm-frontier.catalystneuro.com/knowledgework/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledgework/2026-04-23-gpt-5-5.png" />
-    <id>https://llm-frontier.catalystneuro.com/knowledgework/advance/2026-04-23/gpt-5-5-medium</id>
-    <updated>2026-04-23T00:00:00Z</updated>
-    <summary>GPT-5.5 (Medium): now the cheapest way to reach GDPval-AA 34.2% to 36.5% at $0.50 per task, taking it from GPT-5.4. Proprietary.</summary>
   </entry>
 </feed>
