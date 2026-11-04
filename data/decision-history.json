@@ -334,7 +334,7 @@
    "intelligence_index": 53.9,
    "kind": "decision",
    "last_seen": "2026-11-04",
-   "name": "GLiDE",
+   "name": "GLiDE v1",
    "observations": [
     [
      "2026-10-19",
@@ -348,6 +348,31 @@
    "retired": false,
    "speed_tps": null,
    "time_per_task": 0.217,
+   "ttft": null
+  },
+  "fastino_glide-v1-2": {
+   "capabilities": {},
+   "cost_per_task": 0.031739,
+   "creator": "Fastino",
+   "first_seen": "2026-11-04",
+   "host": "Fastino",
+   "intelligence_index": 65.0,
+   "kind": "decision",
+   "last_seen": "2026-11-04",
+   "name": "GLiDE v1.2",
+   "observations": [
+    [
+     "2026-11-04",
+     0.031739,
+     65.0,
+     0.171
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-04",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": 0.171,
    "ttft": null
   },
   "inception_mercury-decide": {
