@@ -4,7 +4,7 @@
   <link href="https://llm-frontier.catalystneuro.com/knowledge/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-knowledge.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-knowledge.xml</id>
-  <updated>2026-11-04T06:00:00Z</updated>
+  <updated>2026-11-05T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AA Omniscience, through a release or a price change.</subtitle>
   <entry>
@@ -272,12 +272,12 @@
     <summary>GPT-5.6 Luna (Low): price moved from $0.044 to $0.0088 per task; now the cheapest way to reach AA Omniscience -19.7 to -14.7, taking it from MiMo-V2.5. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-07-24: Claude Opus 5 (Max) (new model, AA Omniscience 37.1)</title>
+    <title>2026-07-24: Claude Opus 5 (Max) (new model, AA Omniscience 37.6)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-07-24-claude-opus-5.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-07-24/claude-opus-5</id>
     <updated>2026-07-24T00:00:00Z</updated>
-    <summary>Claude Opus 5 (Max): now the cheapest way to reach AA Omniscience 35.4 to 37.1 at $2.34 per task, taking it from Claude Fable 5. Proprietary.</summary>
+    <summary>Claude Opus 5 (Max): now the cheapest way to reach AA Omniscience 35.4 to 37.6 at $2.34 per task, taking it from Claude Fable 5. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-07-24: Claude Opus 5 (Xhigh) (new model, AA Omniscience 35.4)</title>
