@@ -177,7 +177,7 @@
   },
   "baseten_elephant-9b": {
    "capabilities": {},
-   "cost_per_task": 0.008386,
+   "cost_per_task": 0.029352,
    "creator": "Baseten",
    "first_seen": "2026-10-28",
    "host": "Baseten",
@@ -189,6 +189,12 @@
     [
      "2026-10-28",
      0.008386,
+     64.7,
+     0.165
+    ],
+    [
+     "2026-11-06",
+     0.029352,
      64.7,
      0.165
     ]
