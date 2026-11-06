@@ -4,9 +4,17 @@
   <link href="https://llm-frontier.catalystneuro.com/decision/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-decision.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-decision.xml</id>
-  <updated>2026-11-05T06:00:00Z</updated>
+  <updated>2026-11-06T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of Decision Index, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-11-06: Celeris-1.1 Decision (price change, Decision Index 60.9)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-11-06-celeris-1-1-decision.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-11-06/celeris_celeris-1-1-decision</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <summary>Celeris-1.1 Decision: price moved from $0.032 to $0.0032 per 1K tasks; now the cheapest way to reach Decision Index 0.0 to 60.9, taking it from Elephant 9B and Decider Flash v1.2; Decider Flash v1.2 left the frontier. New cost record for Decision Index ≥ 60.</summary>
+  </entry>
   <entry>
     <title>2026-10-28: SubQ Snap 1.1 (new model, Decision Index 65.0)</title>
     <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
