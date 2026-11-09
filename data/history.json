@@ -733,6 +733,141 @@
    "time_per_task": 1141.87,
    "ttft": 93.04
   },
+  "claude-fable-5-2": {
+   "capabilities": {
+    "agentic": 76.4,
+    "knowledge": 66.8,
+    "knowledgework": 66.5,
+    "longcontext": 83.3
+   },
+   "cost_per_task": 26.538558,
+   "creator": "Anthropic",
+   "first_seen": "2026-11-09",
+   "intelligence_index": 64.6,
+   "last_seen": "2026-11-09",
+   "name": "Claude Fable 5.2 (Max, Default Fallback)",
+   "observations": [
+    [
+     "2026-11-09",
+     26.538558,
+     64.6
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-09",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "claude-fable-5-2-high": {
+   "capabilities": {
+    "agentic": 71.4,
+    "knowledge": 64.0,
+    "knowledgework": 60.9,
+    "longcontext": 83.3
+   },
+   "cost_per_task": 9.078415,
+   "creator": "Anthropic",
+   "first_seen": "2026-11-09",
+   "intelligence_index": 61.8,
+   "last_seen": "2026-11-09",
+   "name": "Claude Fable 5.2 (High, Default Fallback)",
+   "observations": [
+    [
+     "2026-11-09",
+     9.078415,
+     61.8
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-09",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "claude-fable-5-2-low": {
+   "capabilities": {
+    "agentic": 68.0,
+    "knowledge": 62.9,
+    "knowledgework": 52.3,
+    "longcontext": 80.0
+   },
+   "cost_per_task": 3.097242,
+   "creator": "Anthropic",
+   "first_seen": "2026-11-09",
+   "intelligence_index": 53.9,
+   "last_seen": "2026-11-09",
+   "name": "Claude Fable 5.2 (Low, Default Fallback)",
+   "observations": [
+    [
+     "2026-11-09",
+     3.097242,
+     53.9
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-09",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "claude-fable-5-2-medium": {
+   "capabilities": {
+    "agentic": 68.8,
+    "knowledge": 63.5,
+    "knowledgework": 54.6,
+    "longcontext": 80.0
+   },
+   "cost_per_task": 3.802605,
+   "creator": "Anthropic",
+   "first_seen": "2026-11-09",
+   "intelligence_index": 56.4,
+   "last_seen": "2026-11-09",
+   "name": "Claude Fable 5.2 (Medium, Default Fallback)",
+   "observations": [
+    [
+     "2026-11-09",
+     3.802605,
+     56.4
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-09",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
+  "claude-fable-5-2-xhigh": {
+   "capabilities": {
+    "agentic": 74.2,
+    "knowledge": 64.8,
+    "knowledgework": 62.5,
+    "longcontext": 82.7
+   },
+   "cost_per_task": 14.828588,
+   "creator": "Anthropic",
+   "first_seen": "2026-11-09",
+   "intelligence_index": 62.2,
+   "last_seen": "2026-11-09",
+   "name": "Claude Fable 5.2 (Xhigh, Default Fallback)",
+   "observations": [
+    [
+     "2026-11-09",
+     14.828588,
+     62.2
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-09",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": null,
+   "ttft": null
+  },
   "claude-haiku-5-5": {
    "capabilities": {
     "agentic": 35.4,
@@ -17699,5 +17834,5 @@
   }
  },
  "updated": "2026-11-09",
- "updated_at": "2026-11-09T19:48:48Z"
+ "updated_at": "2026-11-09T20:28:18Z"
 }
