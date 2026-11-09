@@ -7,8 +7,8 @@
  },
  {
   "start": "2026-10-24",
-  "label": "v5.0",
+  "label": "v5.0.1",
   "label_before": "v4.3",
-  "note": "Artificial Analysis recomposed the Intelligence Index (v5.0: FrontierCode 2.0, Terminal-Bench-Science and HLE-Diamond join the index; GDPval-AA, SciCode, AA-LCR and Humanity's Last Exam are removed; CritPt is replaced by CritPt v2) and cut the live comparison set to about 72 models. Scores and measured costs per task before and after this date are not comparable: live models were re-scored a median of 10 points lower on the new composition, and the new evaluation suite costs about twice as much to run."
+  "note": "Artificial Analysis recomposed the Intelligence Index (v5.0: FrontierCode 2.0, Terminal-Bench-Science and HLE-Diamond join the index; GDPval-AA, SciCode, AA-LCR and Humanity's Last Exam are removed; CritPt is replaced by CritPt v2) and cut the live comparison set to about 72 models. Scores and measured costs per task before and after this date are not comparable: live models were re-scored a median of 10 points lower on the new composition, and the new evaluation suite costs about twice as much to run. Since November 3, 2026 the scores are v5.0.1, which regraded every model on CritPt v2 with the CritPt authors' grading fixes; the composition and weights are unchanged and live scores moved a median of 0.2 points, so v5.0.1 continues this era rather than starting a new one."
  }
 ]
