@@ -8,6 +8,22 @@
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AutomationBench-AA, through a release or a price change.</subtitle>
   <entry>
+    <title>2026-11-09: Muse Ember (Max) (new model, AutomationBench-AA 68.1%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-11-09-muse-ember.png" />
+    <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-11-09/muse-ember</id>
+    <updated>2026-11-09T00:00:00Z</updated>
+    <summary>Muse Ember (Max): now the cheapest way to reach AutomationBench-AA 66.7% to 68.1% at $0.14 per task, taking it from DeepSeek V4.1 Flash 1017. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-11-09: Muse Ember (Xhigh) (new model, AutomationBench-AA 66.7%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-11-09-muse-ember.png" />
+    <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-11-09/muse-ember-xhigh</id>
+    <updated>2026-11-09T00:00:00Z</updated>
+    <summary>Muse Ember (Xhigh): now the cheapest way to reach AutomationBench-AA 56.2% to 66.7% at $0.12 per task, taking it from DeepSeek V4.1 Flash 1017 and MiMo-V2.6-Flash; MiMo-V2.6-Flash left the frontier. New cost record for AutomationBench-AA ≥ 60%. Proprietary.</summary>
+  </entry>
+  <entry>
     <title>2026-10-28: Gemini 4 Carbon (High) (new model, AutomationBench-AA 77.8%)</title>
     <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-10-28-gemini-4-carbon.png" />
@@ -470,21 +486,5 @@
     <id>https://llm-frontier.catalystneuro.com/agentic/advance/2025-06-05/gemini-2-5-pro</id>
     <updated>2025-06-05T00:00:00Z</updated>
     <summary>Gemini 2.5 Pro: pushed the AutomationBench-AA ceiling from 1.8% to 2.2%, at $0.22 per task. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2025-04-14: GPT-4.1 mini (new model, AutomationBench-AA 1.8%)</title>
-    <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2025-04-14-gpt-4-1-mini.png" />
-    <id>https://llm-frontier.catalystneuro.com/agentic/advance/2025-04-14/gpt-4-1-mini</id>
-    <updated>2025-04-14T00:00:00Z</updated>
-    <summary>GPT-4.1 mini: pushed the AutomationBench-AA ceiling from 1.2% to 1.8%, at $0.064 per task. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2025-04-14: GPT-4.1 nano (new model, AutomationBench-AA 1.2%)</title>
-    <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2025-04-14-gpt-4-1-nano.png" />
-    <id>https://llm-frontier.catalystneuro.com/agentic/advance/2025-04-14/gpt-4-1-nano</id>
-    <updated>2025-04-14T00:00:00Z</updated>
-    <summary>GPT-4.1 nano: now the cheapest way to reach AutomationBench-AA 0.6% to 1.2% at $0.035 per task, taking it from Mistral Small 3.1, which left the frontier. Proprietary.</summary>
   </entry>
 </feed>
