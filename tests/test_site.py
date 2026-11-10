@@ -41,6 +41,7 @@ def site_url(tmp_path_factory):
     # every test here also checks that the script takes over from it cleanly.
     from llm_cost_frontier import prerender
     for path, text in prerender.prerender(root, json.loads((REPO / "build/llm-frontier.json").read_text())).items():
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
     handler = functools.partial(SimpleHTTPRequestHandler, directory=str(root))
     handler.log_message = lambda *a, **k: None
@@ -120,6 +121,33 @@ def test_pages_read_without_javascript_and_hydrate_to_the_same_content(browser, 
         page.wait_for_selector("#pfc-records svg")
         for sel in parts:
             assert norm(page.locator(sel).inner_html()) == static[sel], f"{path} {sel} changes when the script runs"
+        assert errors == []
+        ctx.close()
+
+
+def test_model_pages_link_into_the_dashboard(browser, site_url):
+    """Every model has a static page; the nav reaches the index of them, and
+    a model's page opens the dashboard with that model highlighted."""
+    for width in (1300, 390):
+        ctx = browser.new_context(viewport={"width": width, "height": 900})
+        page = ctx.new_page()
+        errors = []
+        page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+        page.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
+        page.goto(site_url + "/")
+        page.locator(".site-nav a", has_text="Models").click()
+        page.wait_for_selector("h1:text('Models')")
+        data = json.loads((REPO / "build/llm-frontier.json").read_text())
+        assert page.locator("table.mdl-table tbody tr").count() == len(data["models"])
+        assert page.evaluate("document.documentElement.scrollWidth") <= width
+        page.locator("table.mdl-table tbody a").first.click()
+        page.wait_for_selector(".mdl-facts")
+        name = page.locator("h1").inner_text()
+        assert page.evaluate("document.documentElement.scrollWidth") <= width
+        assert name in page.title() and page.locator(".site-nav a[aria-current='page']").inner_text() == "Models"
+        page.locator("a.mdl-cta").click()
+        page.wait_for_selector("#pfc-model-chip:not([hidden])")
+        assert name in page.locator("#pfc-model-chip").inner_text()
         assert errors == []
         ctx.close()
 

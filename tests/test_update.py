@@ -872,12 +872,15 @@ def test_prerender_is_idempotent_and_lists_the_pages(tmp_path):
     (site / "previews" / "pr-1" / "index.html").write_text("a preview")
     first = prerender.prerender(site, data)
     for path, text in first.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
     assert prerender.prerender(site, data) == first
     locs = re.findall(r"<loc>([^<]+)</loc>", first[site / "sitemap.xml"])
     root = "https://llm-frontier.catalystneuro.com/"
     assert locs[0] == root and root + "coding/" in locs and root + "methodology/" in locs
-    assert len(locs) == len(set(locs)) == 2 + len(CAPABILITIES) + 1  # home, methodology, each metric, the Decision Index
+    # home, methodology, each metric, the Decision Index, the models index, and each model
+    assert len(locs) == len(set(locs)) == 2 + len(CAPABILITIES) + 1 + 1 + 3
+    assert root + "models/" in locs and root + "models/beta-high/" in locs
     assert not any("previews" in u or "images" in u or "404" in u for u in locs)
     assert "<lastmod>2026-09-04</lastmod>" in first[site / "sitemap.xml"]
     ET.fromstring(first[site / "sitemap.xml"])
@@ -887,6 +890,38 @@ def test_prerender_is_idempotent_and_lists_the_pages(tmp_path):
     (tmp_path / "data.json").write_text(json.dumps(data))
     assert prerender.main(["--site", str(site), "--data", str(tmp_path / "data.json")]) == 0
     assert (site / "index.html").read_text() == first[site / "index.html"]
+
+
+def test_prerender_writes_a_page_per_model(tmp_path):
+    import re
+    from llm_cost_frontier import prerender
+    site, data = prerender_fixture(tmp_path)
+    data["models"][0][5] = 1  # Alpha is retired
+    out = prerender.prerender(site, data)
+    index = out[site / "models" / "index.html"]
+    assert index.count("<tr><td><a href=") == 3 and 'href="beta-high/"' in index and "<h1>Models</h1>" in index
+    beta = out[site / "models" / "beta-high" / "index.html"]
+    assert "<h1>Beta (High)</h1>" in beta and "<title>Beta (High): cost per task and Intelligence Index" in beta
+    assert 'rel="canonical" href="https://llm-frontier.catalystneuro.com/models/beta-high/"' in beta
+    assert 'content="Beta (High) by Lab: Intelligence Index score 50.0 at a measured $2.00 per task' in beta
+    # The top of the frontier: cheapest above the next model down, and the ceiling.
+    assert "cheapest way to reach any Intelligence Index level above 45.0 and up to 50.0" in beta
+    assert "highest-scoring model measured" in beta
+    assert 'href="../../#index~beta-high"' in beta and 'href="../../coding/#coding~beta-high"' in beta and "72.5%" in beta
+    assert "cheapest model at Intelligence Index \u2265 50, at $2.00 per task" in beta and "(the current record)" in beta
+    # The chrome is the home page's, lifted two levels, with the model as the h1.
+    assert '<div class="site-title"><a href="../../">' in beta and beta.count("<h1") == 1
+    assert 'href="../../models/" aria-current="page"' in beta and 'href="../../style.css"' in beta
+    # A dominated model names what beats it; a retired one says so.
+    alpha = out[site / "models" / "alpha" / "index.html"]
+    assert "is not on the current Pareto frontier" in alpha and '<a href="../gamma/">Gamma</a> reaches Intelligence Index 45.0 for $0.50' in alpha
+    assert "retired from live benchmarking" in alpha
+    gamma = out[site / "models" / "gamma" / "index.html"]
+    assert "open weights" in gamma and "Other Lab models" in gamma
+    # Slugs are unique even when two names collapse to the same one.
+    data["models"][1][0] = "Gamma!"
+    assert {"gamma", "gamma-2", "alpha"} <= {p.parent.name for p in prerender.prerender(site, data)}
+    assert not re.search(r"<h1>[^<]*<b>", beta)
 
 
 def test_prerender_formats_numbers_as_javascript_does():
@@ -911,9 +946,11 @@ def test_prerender_covers_every_page_of_the_real_site(tmp_path):
     shutil.copytree(REPO / "site", site)
     data = json.loads((REPO / "build/llm-frontier.json").read_text())
     out = prerender.prerender(site, data)
-    assert len(out) == 2 + len(data["capabilities"])
+    assert len(out) == 2 + len(data["capabilities"]) + 1 + len(data["models"])
     for path, text in out.items():
-        if path.name != "index.html":
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.name != "index.html" or "models" in path.parts:
+            path.write_text(text)
             continue
         assert re.search(r'<tbody id="pfc-tier-table"><tr>', text), path
         assert 'class="pfc-adv-day"' in text, path

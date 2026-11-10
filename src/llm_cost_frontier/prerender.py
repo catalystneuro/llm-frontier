@@ -10,8 +10,9 @@ records table, the first page of frontier advances, and the update date.
 The script replaces each of these when it runs, with identical markup in
 the default view, so nothing changes for a reader with JavaScript.
 
-It also stamps the data's date into each page's structured data and writes
-sitemap.xml from the pages that exist.
+It also stamps the data's date into each page's structured data, writes a
+static page per model under /models/ (with an index of all of them), and
+writes sitemap.xml from the pages that exist.
 
 Only the default view of each page is rendered: cost axis, current index
 version, first page of advances. The charts stay script-drawn.
@@ -29,7 +30,7 @@ import sys
 from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
-from .update import DEFAULT_SITE, join_and, slugify, taken_clause
+from .update import DEFAULT_SITE, join_and, slugify, split_variant, taken_clause
 
 ADV_DAYS_PER_PAGE = 6  # the dashboard's first page of advances
 MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August",
@@ -285,8 +286,9 @@ def tier_table_rows(data: dict, cap: dict | None) -> str:
     return "".join(rows)
 
 
-def advance_line(a: dict, cap: dict | None, with_variant: bool) -> str:
-    """One advance, in the sentence the script's advanceLine() writes."""
+def advance_sentences(a: dict, cap: dict | None, with_variant: bool) -> tuple:
+    """One advance as (variant or None, sentence, record note or ""), in the
+    words the script's advanceLine() writes."""
     term = "index" if cap is None else metric_name(cap)
     unit = cost_unit(cap)
     lo, hi = fmt_score(a["owns_from"], cap), fmt_score(a["owns_to"], cap)
@@ -300,16 +302,23 @@ def advance_line(a: dict, cap: dict | None, with_variant: bool) -> str:
     else:
         s1 = f"now the cheapest way to reach {span} at {fmt_cost(a['cost_per_task'])} {unit}"
     s1 += taken_clause(a.get("taken_from") or [], a.get("displaced") or []) + ". "
-    variant = with_variant and a.get("variant")
+    variant = a.get("variant") if with_variant else None
     if not variant:
         s1 = s1[0].upper() + s1[1:]
+    rec = ""
+    if a.get("records"):
+        rec = "New cost record for " + join_and([f"{term} {tier_label(t, cap)}" for t in a["records"]]) + ". "
+    return variant, s1, rec
+
+
+def advance_line(a: dict, cap: dict | None, with_variant: bool) -> str:
+    variant, s1, rec = advance_sentences(a, cap, with_variant)
     out = '<div class="pfc-adv-body">'
     if variant:
-        out += f'<span class="pfc-adv-variant">{esc(a["variant"])}: </span>'
+        out += f'<span class="pfc-adv-variant">{esc(variant)}: </span>'
     out += esc(s1)
-    if a.get("records"):
-        out += ('<span class="pfc-adv-rec">' + esc("New cost record for " + join_and(
-            [f"{term} {tier_label(t, cap)}" for t in a["records"]]) + ". ") + "</span>")
+    if rec:
+        out += f'<span class="pfc-adv-rec">{esc(rec)}</span>'
     return out + "</div>"
 
 
@@ -437,20 +446,310 @@ def render_page(page: str, data: dict, cap: dict | None) -> str:
     return stamp_json_ld(page, data["updated"])
 
 
-def sitemap(site: Path, updated: str, base_url: str = DEFAULT_SITE) -> str:
+def sitemap(site: Path, updated: str, base_url: str = DEFAULT_SITE, also: list = ()) -> str:
     """Every directory of the assembled site that has an index.html, so
-    pages added later are listed without touching this module."""
-    paths = []
-    for index in site.rglob("index.html"):
+    pages added later are listed without touching this module; `also` names
+    index.html files this run is about to write."""
+    paths = set()
+    for index in list(site.rglob("index.html")) + [p for p in also if p.name == "index.html"]:
         rel = index.parent.relative_to(site)
         if rel.parts and rel.parts[0] in SITEMAP_SKIP:
             continue
-        paths.append("" if not rel.parts else rel.as_posix() + "/")
+        paths.add("" if not rel.parts else rel.as_posix() + "/")
     lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for path in sorted(paths, key=lambda p: (p.count("/"), p)):
         lines.append(f"  <url><loc>{esc(base_url.rstrip('/') + '/' + path)}</loc><lastmod>{esc(updated)}</lastmod></url>")
     lines.append("</urlset>")
     return "\n".join(lines) + "\n"
+
+
+# ---- a page per model ----
+
+def fmt_time(s: float) -> str:
+    if s >= 5400:
+        return fixed(s / 3600, 1) + "h"
+    if s >= 90:
+        return fixed(s / 60, 1) + "m"
+    if s < 1:
+        return fixed(s * 1000, 0) + "ms"
+    return (fixed(s, 0) if s >= 10 else fixed(s, 1)) + "s"
+
+
+def main_models(data: dict) -> list:
+    """The main models with everything a model page shows, each with a
+    unique slug: the dashboard's slug of the name, numbered on a clash."""
+    n_eras = len(data.get("eras") or [])
+    out, seen = [], {}
+    for m in data["models"]:
+        slug = slugify(m[0]) or "model"
+        seen[slug] = seen.get(slug, 0) + 1
+        base, variant = split_variant(m[0])
+        out.append(dict(
+            name=m[0], creator=m[1], date=m[2], score=m[3], cost=m[4], retired=bool(m[5]),
+            open=None if m[6] is None else bool(m[6]), hist=m[7] or [], caps=m[8] if len(m) > 8 and m[8] else [],
+            era=m[9] if len(m) > 9 and m[9] is not None else n_eras,
+            time=m[10] if len(m) > 10 else None, tps=m[11] if len(m) > 11 else None, ttft=m[12] if len(m) > 12 else None,
+            slug=slug if seen[slug] == 1 else f"{slug}-{seen[slug]}", hash=slug, base=base, variant=variant))
+    return out
+
+
+def current_frontier(models: list, n_eras: int) -> list:
+    """The frontier the chart draws today, lowest score first: the models
+    measured under the current index that no other such model beats on both
+    score and cost. Each entry is (model, the score the range starts above)."""
+    cur = [m for m in models if m["era"] == n_eras and m["score"] is not None and m["cost"] is not None]
+    front = [m for m in cur if not any(
+        o["score"] >= m["score"] and o["cost"] <= m["cost"] and (o["score"] > m["score"] or o["cost"] < m["cost"]) for o in cur)]
+    front.sort(key=lambda m: (m["score"], m["cost"]))
+    out, below = [], 0.0
+    for m in front:
+        out.append((m, below))
+        below = m["score"]
+    return out
+
+
+def lift(fragment: str, root: str) -> str:
+    """Point the site chrome's relative links at the site root from a page
+    `root` levels down."""
+    def fix(m):
+        attr, url = m.group(1), m.group(2)
+        if re.match(r"(?:[a-z][a-z0-9+.-]*:|/|#)", url):
+            return m.group(0)
+        return f'{attr}="{root if url == "./" else root + url}"'
+    return re.sub(r'\b(href|src)="([^"]*)"', fix, fragment)
+
+
+def chrome(home: str, root: str) -> tuple:
+    """(font links, header, footer) of the site, taken from the home page so
+    a model page always wears the current chrome."""
+    header = home[home.index('<header class="site-header">'):home.index("</header>") + len("</header>")]
+    footer = home[home.index('<footer class="site-footer">'):home.index("</footer>") + len("</footer>")]
+    # The home page's h1 is the site title; a model page's h1 is the model.
+    header = re.sub(r'<h1 class="site-title">(.*?)</h1>', r'<div class="site-title">\1</div>', header, flags=re.S)
+    header = header.replace(' aria-current="page"', "")
+    header = lift(header, root).replace(f'href="{root}models/"', f'href="{root}models/" aria-current="page"')
+    fonts = "\n".join(line.strip() for line in home[:home.index("</head>")].splitlines()
+                      if "fonts.googleapis.com" in line or "fonts.gstatic.com" in line)
+    return fonts, header, lift(footer, root)
+
+
+def page_shell(home: str, root: str, path: str, title: str, description: str, body: str) -> str:
+    fonts, header, footer = chrome(home, root)
+    url = f"{DEFAULT_SITE}/{path}"
+    image = f"{DEFAULT_SITE}/images/frontier-card.png"
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{esc(title)}</title>
+  <meta name="description" content="{esc(description)}">
+  <meta property="og:title" content="{esc(title)}">
+  <meta property="og:description" content="{esc(description)}">
+  <meta property="og:image" content="{image}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="{esc(url)}">
+  <meta property="og:site_name" content="LLM Frontier">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="{esc(url)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{esc(title)}">
+  <meta name="twitter:description" content="{esc(description)}">
+  <meta name="twitter:image" content="{image}">
+  <link rel="icon" type="image/svg+xml" href="{root}favicon.svg">
+  {fonts}
+  <link rel="stylesheet" href="{root}style.css">
+  <link rel="stylesheet" href="{root}models.css">
+</head>
+<body>
+  {header}
+
+  <main class="container prose mdl">
+{body}
+  </main>
+
+  {footer}
+</body>
+</html>
+"""
+
+
+def model_link(m: dict, here: str = "../") -> str:
+    return f'<a href="{here}{esc(m["slug"])}/">{esc(m["name"])}</a>'
+
+
+def version_phrase(m: dict, data: dict) -> tuple:
+    """(label of the index version the model's score is from, whether that
+    is the current one, the last day of that version or None)."""
+    eras = data.get("eras") or []
+    label = era_label(m["era"], eras)
+    current = m["era"] >= len(eras)
+    snaps = data.get("era_snapshots") or []
+    end = None if current or m["era"] >= len(snaps) else snaps[m["era"]][-1][0]
+    return label, current, end
+
+
+def model_page(m: dict, data: dict, models: list, frontier: list, home: str) -> str:
+    root = "../../"
+    eras = data.get("eras") or []
+    label, current, era_end = version_phrase(m, data)
+    index_name = "Intelligence Index" + (f" {label}" if label else "")
+    cur_label = era_label(len(eras), eras)
+    license_ = None if m["open"] is None else "open weights" if m["open"] else "proprietary"
+    status = "retired from live benchmarking" if m["retired"] else "live"
+
+    # ---- where it stands on the frontier
+    on = next(((fm, below) for fm, below in frontier if fm is m), None)
+    if not current:
+        standing = (f"{esc(m['name'])} was not re-scored under the current Intelligence Index"
+                    + (f" ({esc(cur_label)})" if cur_label else "") + ", so it is not on the current chart. "
+                    f"Its score and cost are from {esc(index_name)}"
+                    + (f", which ran through {esc(fmt_date(era_end))}" if era_end else "") + ". "
+                    "Scores and measured costs from different index versions are not comparable.")
+        headline = f"Last measured under {index_name}"
+    elif on:
+        lo, hi = fixed(on[1], 1), fixed(m["score"], 1)
+        span = f"Intelligence Index {hi}" if lo == hi else f"any Intelligence Index level above {lo} and up to {hi}"
+        top = on[0] is frontier[-1][0]
+        standing = (f"{esc(m['name'])} is on the current Pareto frontier: it is the cheapest way to reach {span} "
+                    f"among the models measured under {esc(index_name)}, at {fmt_cost(m['cost'])} per task."
+                    + (" It is also the highest-scoring model measured." if top else ""))
+        headline = "On the current Pareto frontier"
+    else:
+        better = next((fm for fm, _ in frontier if fm["score"] >= m["score"]), None)
+        standing = f"{esc(m['name'])} is not on the current Pareto frontier"
+        if better:
+            standing += (f": {model_link(better)} reaches Intelligence Index {fixed(better['score'], 1)} "
+                         f"for {fmt_cost(better['cost'])} per task, against {fixed(m['score'], 1)} for {fmt_cost(m['cost'])} here")
+        standing += "."
+        headline = "Not on the current frontier"
+
+    # ---- facts
+    facts = [("Intelligence Index", fixed(m["score"], 1), label or ""),
+             ("Cost per task", fmt_cost(m["cost"]), "measured by Artificial Analysis")]
+    if m["time"]:
+        facts.append(("Time per task", fmt_time(m["time"]), "end to end"))
+    if m["tps"]:
+        facts.append(("Output speed", f"{number(m['tps'])} tok/s", "median"))
+    if m["ttft"]:
+        facts.append(("First answer token", fmt_time(m["ttft"]), "median"))
+    tiles = "".join(f'<div class="mdl-fact"><div class="mdl-fact-k">{esc(k)}</div><div class="mdl-fact-v">{esc(v)}</div>'
+                    f'<div class="mdl-fact-n">{esc(n)}</div></div>' for k, v, n in facts)
+
+    subtitle = " \u00b7 ".join(x for x in (m["creator"], license_, f"released {fmt_date(m['date'])}", status) if x)
+    body = [f'    <div class="page-head">\n      <p class="mdl-crumb"><a href="../">Models</a> / {esc(m["creator"])}</p>\n'
+            f'      <h1>{esc(m["name"])}</h1>\n      <p class="subtitle">{esc(subtitle)}</p>\n    </div>',
+            f'    <div class="mdl-facts">{tiles}</div>',
+            f'    <p class="mdl-standing"><strong>{esc(headline)}.</strong> {standing}</p>',
+            f'    <p><a class="mdl-cta" href="{root}#index~{esc(m["hash"])}">See {esc(m["name"])} on the frontier chart</a></p>']
+
+    # ---- cost records and frontier advances
+    _, summary = tier_summary_for(data, None)
+    records = []
+    for t in data.get("tiers") or []:
+        for r in (data.get("tier_cost") or {}).get(str(t)) or []:
+            if r[2] == m["name"]:
+                holds = (summary.get(str(t)) or {}).get("last_model") == m["name"] and era_of(r[0], eras) == len(eras)
+                records.append(f"<li>{esc(fmt_date(r[0]))}: cheapest model at Intelligence Index {esc(tier_label(t, None))}, "
+                               f"at {fmt_cost(r[1])} per task under {esc('Intelligence Index ' + era_label(era_of(r[0], eras), eras)).strip()}"
+                               + (" (the current record)" if holds else "") + ".</li>")
+    advances = [a for a in data.get("advances") or [] if a["model"] == m["name"]]
+    if records or advances:
+        body.append("    <h2>Frontier history</h2>")
+    if advances:
+        items = "".join(f"<li>{esc(fmt_date(a['date']))}: {esc(''.join(advance_sentences(a, None, False)[1:]).strip())}</li>" for a in advances)
+        body.append(f'    <p>Dates on which this model became the cheapest way to reach some level of the index:</p>\n    <ul class="mdl-events">{items}</ul>')
+    if records:
+        body.append(f'    <p>Tier cost records it set:</p>\n    <ul class="mdl-events">{"".join(records)}</ul>')
+
+    # ---- capability scores
+    caps = [(c, m["caps"][i]) for i, c in enumerate(data.get("capabilities") or [])
+            if not c.get("own") and i < len(m["caps"]) and m["caps"][i] is not None]
+    if caps:
+        rows = "".join(
+            f'<tr><td><a href="{root}{esc(c["key"])}/#{esc(c["key"])}~{esc(m["hash"])}">{esc(c["label"])}</a></td>'
+            f'<td>{esc(c["metric"])}</td><td class="pfc-td-num">{fmt_score(v, c)}</td></tr>' for c, v in caps)
+        body.append('    <h2>Capability scores</h2>\n    <p>The latest measured value on each evaluation the dashboard tracks. '
+                    'Each links to that evaluation\'s frontier with this model highlighted.</p>\n'
+                    '    <div class="pfc-table-wrap"><table class="pfc-table mdl-table"><thead><tr><th>Capability</th><th>Evaluation</th>'
+                    f'<th class="num">Score</th></tr></thead><tbody>{rows}</tbody></table></div>')
+
+    # ---- price history
+    hist, last = [], None
+    for h in m["hist"]:
+        key = (h[1], h[2] if len(h) > 2 else None)
+        if key != last:
+            hist.append(h)
+            last = key
+    if len(hist) > 1:
+        rows = "".join(
+            f'<tr><td>{esc(fmt_date(h[0]))}</td><td class="pfc-td-num">{fmt_cost(h[1])}</td>'
+            f'<td class="pfc-td-num">{fixed(h[2], 1) if len(h) > 2 and h[2] is not None else ""}</td>'
+            f'<td>{esc(era_label(era_of(h[0], eras), eras))}</td></tr>' for h in hist)
+        body.append('    <h2>Cost and score history</h2>\n    <p>Every dated change in the measured cost per task or the index score. '
+                    'A new index version re-scores every model on a different evaluation suite, so rows from different '
+                    'versions are not comparable.</p>\n'
+                    '    <div class="pfc-table-wrap"><table class="pfc-table mdl-table"><thead><tr><th>Date</th><th class="num">Cost per task</th>'
+                    f'<th class="num">Index</th><th>Index version</th></tr></thead><tbody>{rows}</tbody></table></div>')
+
+    # ---- related models
+    siblings = [o for o in models if o is not m and o["creator"] == m["creator"] and o["base"] == m["base"] and (o["variant"] or m["variant"])]
+    if siblings:
+        items = "".join(f"<li>{model_link(o)} <span class=\"mdl-dim\">Index {fixed(o['score'], 1)} at {fmt_cost(o['cost'])}</span></li>"
+                        for o in sorted(siblings, key=lambda o: o["cost"]))
+        body.append(f'    <h2>Other reasoning levels of {esc(m["base"])}</h2>\n    <ul class="mdl-links">{items}</ul>')
+    others = [o for o in models if o is not m and o["creator"] == m["creator"] and o not in siblings]
+    if others:
+        items = "".join(f"<li>{model_link(o)}</li>" for o in sorted(others, key=lambda o: (o["date"], o["name"]), reverse=True))
+        body.append(f'    <h2>Other {esc(m["creator"])} models</h2>\n    <ul class="mdl-links">{items}</ul>')
+
+    body.append(f'    <p class="mdl-foot">Data as of {esc(fmt_date(data["updated"]))}, from <a href="https://artificialanalysis.ai/">Artificial Analysis</a>\'s '
+                f'measured cost per Intelligence Index task. The <a href="{root}methodology/">methodology</a> explains every number.</p>')
+
+    title = f"{m['name']}: cost per task and Intelligence Index \u00b7 LLM Frontier"
+    description = (f"{m['name']} by {m['creator']}: {index_name} score {fixed(m['score'], 1)} at a measured {fmt_cost(m['cost'])} per task, "
+                   f"released {fmt_date(m['date'])}. " + ("On the current Pareto frontier." if on and current else
+                                                         "Not on the current Pareto frontier." if current else "Retired before the current index version."))
+    return page_shell(home, root, f"models/{m['slug']}/", title, description, "\n".join(body))
+
+
+def models_index(data: dict, models: list, home: str) -> str:
+    eras = data.get("eras") or []
+    labs = {}
+    for m in models:
+        labs.setdefault(m["creator"], []).append(m)
+    order = sorted(labs, key=lambda c: (-len(labs[c]), c))
+    jump = " \u00b7 ".join(f'<a href="#{esc(slugify(c))}">{esc(c)}</a> <span class="mdl-dim">{len(labs[c])}</span>' for c in order)
+    body = ['    <div class="page-head">\n      <h1>Models</h1>\n'
+            f'      <p class="subtitle">Every model the dashboard tracks, {len(models)} in all, with its Intelligence Index score and '
+            'measured cost per task. Each has a page of its own.</p>\n    </div>',
+            f'    <p class="mdl-jump">{jump}</p>']
+    for c in order:
+        rows = "".join(
+            f'<tr><td>{model_link(m, "")}</td><td>{esc(fmt_date(m["date"]))}</td>'
+            f'<td class="pfc-td-num">{fixed(m["score"], 1)}</td><td>{esc(era_label(m["era"], eras))}</td>'
+            f'<td class="pfc-td-num">{fmt_cost(m["cost"])}</td><td>{"retired" if m["retired"] else "live"}</td></tr>'
+            for m in sorted(labs[c], key=lambda m: (m["date"], m["name"]), reverse=True))
+        body.append(f'    <h2 id="{esc(slugify(c))}">{esc(c)}</h2>\n'
+                    '    <div class="pfc-table-wrap"><table class="pfc-table mdl-table"><thead><tr><th>Model</th><th>Released</th>'
+                    '<th class="num">Index</th><th>Index version</th><th class="num">Cost per task</th><th>Status</th></tr></thead>'
+                    f'<tbody>{rows}</tbody></table></div>')
+    body.append(f'    <p class="mdl-foot">Data as of {esc(fmt_date(data["updated"]))}. Scores from different index versions are not comparable; '
+                'the <a href="../methodology/">methodology</a> explains why.</p>')
+    return page_shell(home, "../", "models/", "All tracked LLMs: Intelligence Index and cost per task \u00b7 LLM Frontier",
+                      f"All {len(models)} language models the LLM Frontier tracks, by lab, with each model's Intelligence Index score and "
+                      "measured cost per task from Artificial Analysis.", "\n".join(body))
+
+
+def model_pages(site: Path, data: dict, home: str) -> dict:
+    """{path: html} for /models/ and every /models/<slug>/."""
+    models = main_models(data)
+    frontier = current_frontier(models, len(data.get("eras") or []))
+    out = {site / "models" / "index.html": models_index(data, models, home)}
+    for m in models:
+        out[site / "models" / m["slug"] / "index.html"] = model_page(m, data, models, frontier, home)
+    return out
 
 
 def prerender(site: Path, data: dict, with_sitemap: bool = True, base_url: str = DEFAULT_SITE) -> dict:
@@ -463,8 +762,9 @@ def prerender(site: Path, data: dict, with_sitemap: bool = True, base_url: str =
         path = site / cap["key"] / "index.html"
         if path.exists():
             out[path] = render_page(path.read_text(), data, cap)
+    out.update(model_pages(site, data, out[home]))
     if with_sitemap:
-        out[site / "sitemap.xml"] = sitemap(site, data["updated"], base_url)
+        out[site / "sitemap.xml"] = sitemap(site, data["updated"], base_url, also=list(out))
     return out
 
 
@@ -482,6 +782,7 @@ def main(argv=None):
     data = json.loads(args.data.read_text())
     out = prerender(args.site, data, with_sitemap=not args.no_sitemap, base_url=args.base_url)
     for path, text in out.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
     print(f"prerendered {len(out)} files in {args.site} as of {data['updated']}")
     return 0
