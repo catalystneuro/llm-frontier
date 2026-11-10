@@ -21,6 +21,8 @@ The background, the method, and the argument for why the cheap end of the range 
 
 The dashboard itself lives in `site/` and is served from this repository via GitHub Pages at [llm-frontier.catalystneuro.com](https://llm-frontier.catalystneuro.com/): a deploy workflow copies `site/` and the `build/` artifacts into the Pages tree on every push that touches them, and the update workflow redeploys after each data commit. Every same-repository pull request gets a live preview of the site at `/previews/pr-<number>/`, linked by a sticky comment on the PR and removed when it closes. The old catalystneuro.com/llm-cost-frontier URLs redirect here.
 
+The dashboard script draws every number from the data file, so the deploy also runs `python -m llm_cost_frontier.prerender` on the assembled site: it writes the metric tabs, the tier tables, and the first page of advances into the pages as plain HTML (the script redraws the same markup on load), stamps the data's date into each page's structured data, and writes `sitemap.xml` from the pages that exist. A reader without JavaScript, such as a crawler or a link preview, then sees the numbers. `site/robots.txt` keeps crawlers out of the pull request previews.
+
 ## Method
 
 Any model page on artificialanalysis.ai embeds the full comparison dataset for every model they currently benchmark, including `intelligenceIndexCostPerTask`, the average billed cost to run one task from their evaluation suite with the input, reasoning, and answer tokens the run actually used. The updater fetches one page, parses that payload, and merges it into the history.
