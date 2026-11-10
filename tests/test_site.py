@@ -37,6 +37,11 @@ def site_url(tmp_path_factory):
     shutil.copy(REPO / "build/feed.xml", root / "feed.xml")
     for f in (REPO / "build").glob("feed-*.xml"):
         shutil.copy(f, root / f.name)
+    # The deploy step that writes the data into the pages as plain HTML, so
+    # every test here also checks that the script takes over from it cleanly.
+    from llm_cost_frontier import prerender
+    for path, text in prerender.prerender(root, json.loads((REPO / "build/llm-frontier.json").read_text())).items():
+        path.write_text(text)
     handler = functools.partial(SimpleHTTPRequestHandler, directory=str(root))
     handler.log_message = lambda *a, **k: None
     srv = ThreadingHTTPServer(("127.0.0.1", 0), handler)
@@ -81,6 +86,41 @@ def test_loads_clean_and_renders(browser, site_url):
         import re
         assert re.search(r"\d{1,2}:\d{2}\s?[AP]M [A-Z]", page.locator(".pfc-updated").first.inner_text())
     finally:
+        ctx.close()
+
+
+def test_pages_read_without_javascript_and_hydrate_to_the_same_content(browser, site_url):
+    """The deploy writes the data into the pages; the script then redraws the
+    same elements. A reader without JavaScript gets the tables and the
+    advances, and a reader with it sees no change in them."""
+    parts = ["#pfc-cap-tabs", "#pfc-tier-table", "#pfc-advances", "#pfc-frontier-lead", "#pfc-records-lead", "#pfc-cap-table"]
+
+    def norm(html):
+        return re.sub(r'href="(?:\.\./|\./|/)*', 'href="', html)
+
+    for path in ("/", "/coding/", "/decision/"):
+        ctx = browser.new_context(java_script_enabled=False)
+        page = ctx.new_page()
+        page.goto(site_url + path)
+        assert page.locator("#pfc-tier-table tr").count() >= 3
+        assert page.locator("#pfc-advances .pfc-adv-day").count() > 0
+        assert page.locator("#pfc-cap-tabs a.pfc-tab").count() >= 9
+        # The "cheapest model at or above" table belongs to the metric pages.
+        assert (page.locator("#pfc-cap-table tr").count() > 0) == (path != "/")
+        assert page.locator("#pfc-cap-table-wrap").is_hidden() == (path == "/")
+        static = {sel: norm(page.locator(sel).inner_html()) for sel in parts}
+        ctx.close()
+        ctx = browser.new_context(viewport={"width": 1300, "height": 900})
+        page = ctx.new_page()
+        errors = []
+        page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+        page.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
+        page.goto(site_url + path)
+        page.wait_for_selector("#pfc-frontier svg")
+        page.wait_for_selector("#pfc-records svg")
+        for sel in parts:
+            assert norm(page.locator(sel).inner_html()) == static[sel], f"{path} {sel} changes when the script runs"
+        assert errors == []
         ctx.close()
 
 

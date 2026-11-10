@@ -813,6 +813,143 @@ def test_write_feed_is_valid_atom(tmp_path):
     assert len(enclosures) == 2
 
 
+# ---- static rendering for readers without JavaScript ----
+
+def prerender_fixture(tmp_path):
+    """A copy of site/ and a small data file with one capability measured."""
+    import shutil
+    site = tmp_path / "site"
+    shutil.copytree(REPO / "site", site)
+    models = {
+        "alpha": model("Alpha", "2026-01-01", 40.0, 1.0, caps={"coding": 55.0}),
+        "beta": model("Beta (High)", "2026-02-01", 50.0, 2.0, caps={"coding": 72.5}),
+        "gamma": model("Gamma", "2026-03-01", 45.0, 0.5, caps={"coding": 61.0}, open_weights=True),
+    }
+    data = build_output({"updated": "2026-09-04", "updated_at": "2026-09-04T13:05:00Z", "models": models}, events=[])
+    return site, json.loads(json.dumps(data))
+
+
+def test_prerender_writes_what_the_script_writes(tmp_path):
+    from llm_cost_frontier import prerender
+    site, data = prerender_fixture(tmp_path)
+    out = prerender.prerender(site, data)
+    home = out[site / "index.html"]
+    # The tier table: one row per tier, newest tier first, with its record.
+    tiers = home[home.index('id="pfc-tier-table"'):home.index("</tbody>", home.index('id="pfc-tier-table"'))]
+    assert tiers.count("<tr>") == len(TIERS)
+    assert "\u2265 50" in tiers and "$2.00" in tiers and "February 1, 2026" in tiers and "Beta (High)" in tiers
+    assert "not yet reached" in tiers  # nothing has reached index 60
+    # The advances, in the dashboard's sentences, grouped under their dates.
+    adv = home[home.index('id="pfc-advances"'):home.index('id="pfc-adv-pager"')]
+    assert adv.count('class="pfc-adv-day"') == 3
+    assert "Now the cheapest way to reach index 0.0 to 45.0 at $0.50 per task" in adv
+    assert '<span class="pfc-adv-variant">High: </span>' in adv
+    assert "images/advances/2026-02-01-beta.png" in adv and "open weights" in adv
+    # The tabs are real links, so the metric pages are reachable without the script.
+    assert '<span class="pfc-tab" role="tab" aria-selected="true">Overall</span>' in home
+    assert '<a class="pfc-tab" role="tab" aria-selected="false" href="coding/">Coding</a>' in home
+    assert "September 4, 2026 at 1:05 PM UTC" in home and '<span class="pfc-count">3</span>' in home
+    assert '"dateModified":"2026-09-04"' in home
+    # A metric page gets its own data: its tiers, its table, its lead.
+    coding = out[site / "coding" / "index.html"]
+    assert "\u2265 70%" in coding and "72.5%" in coding and "index 0.0" not in coding
+    assert 'id="pfc-cap-table-wrap" hidden' not in coding and 'id="pfc-cap-table-wrap" hidden' in home
+    assert "Measured for 3 of 3 tracked models." in coding
+    assert 'href="../">Overall</a>' in coding and '<span class="pfc-tab" role="tab" aria-selected="true">Coding</span>' in coding
+    assert "../images/advances/coding/" in coding
+    # Text from the data is escaped on its way into the page.
+    data["models"][0][0] = "A<b>&"
+    assert "A<b>&" not in prerender.prerender(site, data)[site / "index.html"]
+
+
+def test_prerender_is_idempotent_and_lists_the_pages(tmp_path):
+    import re
+    from llm_cost_frontier import prerender
+    site, data = prerender_fixture(tmp_path)
+    (site / "images" / "advances").mkdir(parents=True)
+    (site / "images" / "advances" / "index.html").write_text("not a page")
+    (site / "previews" / "pr-1").mkdir(parents=True)
+    (site / "previews" / "pr-1" / "index.html").write_text("a preview")
+    first = prerender.prerender(site, data)
+    for path, text in first.items():
+        path.write_text(text)
+    assert prerender.prerender(site, data) == first
+    locs = re.findall(r"<loc>([^<]+)</loc>", first[site / "sitemap.xml"])
+    root = "https://llm-frontier.catalystneuro.com/"
+    assert locs[0] == root and root + "coding/" in locs and root + "methodology/" in locs
+    assert len(locs) == len(set(locs)) == 2 + len(CAPABILITIES) + 1  # home, methodology, each metric, the Decision Index
+    assert not any("previews" in u or "images" in u or "404" in u for u in locs)
+    assert "<lastmod>2026-09-04</lastmod>" in first[site / "sitemap.xml"]
+    ET.fromstring(first[site / "sitemap.xml"])
+    # A preview is not the canonical site and gets no sitemap.
+    assert site / "sitemap.xml" not in prerender.prerender(site, data, with_sitemap=False)
+    # The command writes the same files in place.
+    (tmp_path / "data.json").write_text(json.dumps(data))
+    assert prerender.main(["--site", str(site), "--data", str(tmp_path / "data.json")]) == 0
+    assert (site / "index.html").read_text() == first[site / "index.html"]
+
+
+def test_prerender_formats_numbers_as_javascript_does():
+    from llm_cost_frontier.prerender import fixed, fmt_cost, number, set_inner
+    assert fixed(0.125, 2) == "0.13" and f"{0.125:.2f}" == "0.12"  # toFixed rounds the exact half up
+    assert fmt_cost(26.54) == "$26.54" and fmt_cost(0.0684) == "$0.068" and fmt_cost(0.003157) == "$0.0032"
+    assert number(1.0) == "1" and number(14.6) == "14.6" and number(9) == "9"
+    # Replacing an element's contents skips over nested elements of the same
+    # tag, and a page without the element is left alone.
+    page = '<div id="x"><div>old</div><div>older</div></div><div id="y">keep</div>'
+    assert set_inner(page, 'id="x"', "<div>new</div>") == '<div id="x"><div>new</div></div><div id="y">keep</div>'
+    assert set_inner(page, 'id="missing"', "new") == page
+    assert set_inner('<b class="u">a</b> <b class="u">b</b>', 'class="u"', "c", every=True) == '<b class="u">c</b> <b class="u">c</b>'
+
+
+@pytest.mark.skipif(not (REPO / "build/llm-frontier.json").exists(), reason="no built data")
+def test_prerender_covers_every_page_of_the_real_site(tmp_path):
+    import re
+    import shutil
+    from llm_cost_frontier import prerender
+    site = tmp_path / "site"
+    shutil.copytree(REPO / "site", site)
+    data = json.loads((REPO / "build/llm-frontier.json").read_text())
+    out = prerender.prerender(site, data)
+    assert len(out) == 2 + len(data["capabilities"])
+    for path, text in out.items():
+        if path.name != "index.html":
+            continue
+        assert re.search(r'<tbody id="pfc-tier-table"><tr>', text), path
+        assert 'class="pfc-adv-day"' in text, path
+        assert 'class="pfc-updated">&hellip;' not in text and 'class="pfc-count">&hellip;' not in text, path
+        assert json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', text).group(1))["@graph"][1]["dateModified"] == data["updated"]
+        path.write_text(text)
+    assert prerender.prerender(site, data) == out
+
+
+def test_pages_carry_search_and_link_preview_metadata():
+    import re
+    from llm_cost_frontier import pages
+    home = (REPO / "site/index.html").read_text()
+    assert f"<title>{pages.HOME_TITLE}</title>" in home and len(pages.HOME_TITLE) <= 60
+    assert pages.json_ld() in home
+    for tag in ('name="twitter:card" content="summary_large_image"', 'property="og:url"', 'property="og:site_name"',
+                'property="og:image:width" content="1200"', 'property="og:image:alt"'):
+        assert tag in home, tag
+    titles = set()
+    for path, content in pages.generate().items():
+        cap = next(c for c in CAPABILITIES + [DECISION] if c["key"] == path.parent.name)
+        title = re.search(r"<title>(.*?)</title>", content).group(1)
+        assert title.startswith("Cheapest LLMs for ") and cap["metric"] in title
+        titles.add(title)
+        ld = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', content).group(1))
+        dataset = ld["@graph"][1]
+        assert dataset["@type"] == "Dataset" and dataset["url"].endswith(f"/{cap['key']}/") and "license" not in dataset
+        assert f'property="og:url" content="https://llm-frontier.catalystneuro.com/{cap["key"]}/"' in content
+        assert f"images/{cap['key']}-card.png" in content and "frontier-card.png" not in content
+    assert len(titles) == len(CAPABILITIES) + 1
+    robots = (REPO / "site/robots.txt").read_text()
+    assert "Disallow: /previews/" in robots and "Sitemap: https://llm-frontier.catalystneuro.com/sitemap.xml" in robots
+    missing = (REPO / "site/404.html").read_text()
+    assert 'content="noindex"' in missing and 'href="/"' in missing and "../" not in missing
+
+
 # ---- end to end, offline ----
 
 def test_main_offline_writes_outputs(tmp_path):

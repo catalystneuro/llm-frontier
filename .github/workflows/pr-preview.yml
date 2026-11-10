@@ -49,6 +49,9 @@ jobs:
           cp build/feed.xml preview/feed.xml
           cp build/feed-*.xml preview/ 2>/dev/null || true
           cp build/images/frontier-card.png preview/images/frontier-card.png
+          # The same static rendering production gets, without a sitemap: a
+          # preview is not the canonical site (robots.txt keeps crawlers out).
+          PYTHONPATH=src python -m llm_cost_frontier.prerender --site preview --data build/llm-frontier.json --no-sitemap
       - name: Update the previews branch
         run: |
           git config user.name "github-actions[bot]"
