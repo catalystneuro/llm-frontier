@@ -879,7 +879,8 @@ def test_prerender_is_idempotent_and_lists_the_pages(tmp_path):
     root = "https://llm-frontier.catalystneuro.com/"
     assert locs[0] == root and root + "coding/" in locs and root + "methodology/" in locs
     # home, methodology, each metric, the Decision Index, the models index, and each model
-    assert len(locs) == len(set(locs)) == 2 + len(CAPABILITIES) + 1 + 1 + 3
+    assert len(locs) == len(set(locs)) == 2 + len(CAPABILITIES) + 1 + 1 + 3 + 2
+    assert root + "about/" in locs and root + "notes/" in locs
     assert root + "models/" in locs and root + "models/beta-high/" in locs
     assert not any("previews" in u or "images" in u or "404" in u for u in locs)
     assert "<lastmod>2026-09-04</lastmod>" in first[site / "sitemap.xml"]
