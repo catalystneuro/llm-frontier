@@ -125,6 +125,7 @@ def metric_page(template: str, cap: dict) -> str:
         ('href="cn-logo.png"', 'href="../cn-logo.png"'),
         ('src="cn-logo.png"', 'src="../cn-logo.png"'),
         ('href="methodology/"', 'href="../methodology/"'),
+        ('href="models/"', 'href="../models/"'),
         ('href="feed.xml"', f'href="../feed-{key}.xml"'),
     ]:
         s = s.replace(old, new)
