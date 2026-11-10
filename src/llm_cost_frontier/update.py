@@ -55,6 +55,12 @@ MASS_MOVE_FRACTION = 0.15
 # baseline snapshot uses the last mass re-measurement within this many days
 # of the era's start, so baselines compare against settled values.
 SETTLE_DAYS = 7
+# A halving time is reported only when the records it is computed from span
+# at least this many days. A tier whose record fell twice in three weeks
+# would otherwise advertise a halving time of a few days, which says more
+# about how short the history is than about how fast cost is falling. The
+# collapse is a plain ratio and is always reported.
+MIN_HALVING_SPAN_DAYS = 30
 
 # Per-capability metrics read from the same payload, each chosen because it
 # translates to a class of application better than the aggregate index does.
@@ -855,7 +861,8 @@ def tier_summary(records: dict, eras: list = None) -> dict:
     and its own span of days, and the contributions are pooled. The collapse
     is the product of the within-era ratios, and the halving time is the
     pooled days per pooled halving, so older eras keep informing the estimate
-    without a cost ever being compared across a boundary."""
+    without a cost ever being compared across a boundary. The halving time
+    is None while the pooled days are under MIN_HALVING_SPAN_DAYS."""
     out = {}
     for t, recs in records.items():
         if not recs:
@@ -874,7 +881,7 @@ def tier_summary(records: dict, eras: list = None) -> dict:
             first_date=first[0], first_model=first[2], first_cost=first[1],
             last_date=last[0], last_model=last[2], last_cost=last[1],
             collapse=round(2 ** log_drop, 1),
-            halving_days=round(days / log_drop) if log_drop > 0 and days else None,
+            halving_days=round(days / log_drop) if log_drop > 0 and days >= MIN_HALVING_SPAN_DAYS else None,
         )
     return out
 
@@ -1255,5 +1262,6 @@ def main(argv=None):
     print(f"wrote {args.out}, {args.feed}, and {len(METRIC_PAGES)} metric feeds ({out['counts']}) as of {out['updated']}")
     for t, s in out["tier_summary"].items():
         if s:
-            print(f"  index >= {t}: {s['collapse']}x from {s['first_date']} to {s['last_date']}, halving ~{s['halving_days']} d")
+            halving = f", halving ~{s['halving_days']} d" if s["halving_days"] else ""
+            print(f"  index >= {t}: {s['collapse']}x from {s['first_date']} to {s['last_date']}{halving}")
     return 0

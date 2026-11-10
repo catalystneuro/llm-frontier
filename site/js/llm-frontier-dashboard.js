@@ -1353,17 +1353,18 @@
     }
   }
   function fmtDate(d) { var p = d.split('-'); var MON = ['January','February','March','April','May','June','July','August','September','October','November','December']; return MON[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0]; }
-  function renderTable() {
-    var tb = document.getElementById('pfc-tier-table');
-    if (!tb) return;
-    tb.replaceChildren();
-    function cell(html, cls) { var td = document.createElement('td'); if (cls) td.className = cls; td.append(html); return td; }
-    function event(date, model, cost) {
-      var w = el('div', 'pfc-ev');
-      var a = el('div', 'pfc-ev-top'); var c = el('span', 'pfc-ev-cost'); c.textContent = fmtVal(cost); a.append(c, ' \u00b7 ' + fmtDate(date));
-      var b = el('div', 'pfc-ev-model'); b.append(nameLink(model));
-      w.append(a, b); return w;
-    }
+  // A halving time is shown only when the records it is computed from span
+  // at least this many days, the same minimum the updater applies: a record
+  // that fell twice in three weeks would otherwise advertise a halving time
+  // of a few days. The span is checked here from the summary's own dates,
+  // so data files built before the updater had the rule read the same way.
+  var MIN_HALVING_SPAN_DAYS = 30;
+  function recordSpanDays(s) { return (Date.parse(s.last_date) - Date.parse(s.first_date)) / 86400000; }
+  function halvingOf(s) { return s && s.halving_days && recordSpanDays(s) >= MIN_HALVING_SPAN_DAYS ? s.halving_days : null; }
+  // The per-tier record summaries of the view on screen: the tab, the index
+  // version, and the cost or time axis. The records table and the headline
+  // tiles both read this, so they cannot disagree.
+  function viewSummary() {
     var isCur = ERAS.length > 0 && ERA_VIEW === ERAS.length;
     var isArch = ERAS.length > 0 && ERA_VIEW < ERAS.length;
     var timeAxis = isTimeAxis() && (!isArch || eraHasTime(ERA_VIEW));
@@ -1380,7 +1381,7 @@
         out[t] = { first_date: f[0], first_model: f[2], first_cost: f[1],
                    last_date: l[0], last_model: l[2], last_cost: l[1],
                    collapse: Math.round(ratio * 10) / 10,
-                   halving_days: ratio > 1 && days ? Math.round(days / (Math.log(ratio) / Math.LN2)) : null };
+                   halving_days: ratio > 1 && days >= MIN_HALVING_SPAN_DAYS ? Math.round(days / (Math.log(ratio) / Math.LN2)) : null };
       });
       return out;
     }
@@ -1394,6 +1395,78 @@
     } else if (isCur && DATA.tier_summary_rebased) {
       summary = CAP < 0 ? DATA.tier_summary_rebased : ((DATA.cap_tier_summary_rebased || {})[capMeta().key] || summary);
     }
+    return summary || {};
+  }
+  // ---- the headline tiles above the charts ----
+  // The page's claim, as numbers: for up to three tiers, the current record,
+  // the model that holds it, and how far the record has fallen. Tiers whose
+  // record has fallen come first, highest tier first, since a tier crossed
+  // once has no decline to report; those fill in only when fewer than three
+  // tiers have one. A tier whose record is the same model at the same cost
+  // as a higher tier already shown is left out, because the higher tile
+  // already says it. The tiles follow the view exactly as the table does.
+  var MAX_STATS = 3;
+  function renderStats(summary) {
+    var box = document.getElementById('pfc-stats');
+    if (!box) return;
+    var tiers = curTiers().slice().reverse().filter(function (t) { return summary[t]; });
+    var picked = [];
+    function take(t) {
+      if (picked.length >= MAX_STATS || picked.indexOf(t) >= 0) return;
+      var s = summary[t];
+      var dup = picked.some(function (o) { return o > t && summary[o].last_model === s.last_model && summary[o].last_cost === s.last_cost; });
+      if (!dup) picked.push(t);
+    }
+    tiers.filter(function (t) { return summary[t].collapse > 1; }).forEach(take);
+    tiers.forEach(take);
+    picked.sort(function (a, b) { return b - a; });
+    box.replaceChildren();
+    box.hidden = !picked.length;
+    var isArch = ERAS.length > 0 && ERA_VIEW < ERAS.length && eraSnaps();
+    var timeAxis = isTimeAxis() && (!isArch || eraHasTime(ERA_VIEW));
+    picked.forEach(function (t) {
+      var s = summary[t];
+      var tile = el('div', 'pfc-stat');
+      tile.dataset.tier = String(t);
+      var label = el('div', 'pfc-stat-label', (CAP < 0 ? 'Intelligence Index' : metricName()) + ' ' + tierLabel(t));
+      var value = el('div', 'pfc-stat-value');
+      value.append(el('span', 'pfc-stat-num', fmtVal(s.last_cost)), el('span', 'pfc-stat-unit', timeAxis ? 'per task' : costUnit()));
+      var model = el('div', 'pfc-stat-model', timeAxis ? 'fastest: ' : 'cheapest: ');
+      model.append(nameLink(s.last_model));
+      // How far the record has fallen, and how fast where the history is
+      // long enough to say; each on its own line so neither breaks mid-phrase.
+      var delta = el('div', 'pfc-stat-delta');
+      delta.append(el('span', null, s.collapse > 1 ? s.collapse + 'x ' + (timeAxis ? 'faster' : 'cheaper') + ' since ' + fmtShortDate(s.first_date)
+                                                   : 'first reached ' + fmtShortDate(s.first_date)));
+      var h = halvingOf(s);
+      if (h) delta.append(el('span', null, 'halving every ~' + h + ' days'));
+      // An archive's record is where that index version ended, not today's.
+      if (isArch) delta.append(el('span', null, 'as of ' + fmtShortDate(eraEndDate(ERA_VIEW)) + ' (' + eraPhrase(ERA_VIEW) + ')'));
+      tile.append(label, value, model, delta);
+      box.append(tile);
+    });
+  }
+  function renderTable() {
+    var tb = document.getElementById('pfc-tier-table');
+    if (!tb) return;
+    tb.replaceChildren();
+    function cell(html, cls) { var td = document.createElement('td'); if (cls) td.className = cls; td.append(html); return td; }
+    function event(date, model, cost) {
+      var w = el('div', 'pfc-ev');
+      var a = el('div', 'pfc-ev-top'); var c = el('span', 'pfc-ev-cost'); c.textContent = fmtVal(cost); a.append(c, ' \u00b7 ' + fmtDate(date));
+      var b = el('div', 'pfc-ev-model'); b.append(nameLink(model));
+      w.append(a, b); return w;
+    }
+    // A record that has fallen, but over too few days for a halving time,
+    // says so; a cell left empty would read as missing data.
+    function halvingCell(s) {
+      var h = halvingOf(s);
+      if (h) return cell('~' + h + ' days', 'pfc-td-num');
+      if (!(s.collapse > 1)) return cell('', 'pfc-td-num');
+      return cell(el('span', 'pfc-td-note', 'records span under ' + MIN_HALVING_SPAN_DAYS + ' days'), 'pfc-td-num');
+    }
+    var summary = viewSummary();
+    renderStats(summary);
     curTiers().slice().reverse().forEach(function (t) {
       var s = summary[t];
       var tr = document.createElement('tr');
@@ -1402,7 +1475,7 @@
         tr.append(cell(event(s.first_date, s.first_model, s.first_cost)));
         tr.append(cell(event(s.last_date, s.last_model, s.last_cost)));
         tr.append(cell(s.collapse + 'x', 'pfc-td-num'));
-        tr.append(cell(s.halving_days ? '~' + s.halving_days + ' days' : '', 'pfc-td-num'));
+        tr.append(halvingCell(s));
       } else {
         var td = cell('not yet reached'); td.colSpan = 4; tr.append(td);
       }

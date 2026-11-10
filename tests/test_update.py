@@ -1014,6 +1014,34 @@ def test_dashboard_carries_the_update_time():
     assert build_output(history, events=[])["updated_at"] is None
 
 
+def test_tier_summary_reports_no_halving_time_on_a_short_history():
+    from llm_cost_frontier.update import MIN_HALVING_SPAN_DAYS
+
+    assert MIN_HALVING_SPAN_DAYS == 30
+    # One day under the minimum: the collapse stands, the halving time does not.
+    recs = {"40": [["2026-01-01", 1.0, "A", 45.0], ["2026-01-30", 0.25, "C", 46.0]]}
+    out = tier_summary(recs)["40"]
+    assert out["collapse"] == 4.0 and out["halving_days"] is None
+    # Exactly the minimum: 30 days over two halvings.
+    recs = {"40": [["2026-01-01", 1.0, "A", 45.0], ["2026-01-31", 0.25, "C", 46.0]]}
+    assert tier_summary(recs)["40"]["halving_days"] == 15
+
+
+def test_tier_summary_halving_minimum_counts_the_pooled_span():
+    # Each era's records span 20 days: neither would qualify alone, but the
+    # halving time is computed from both, 40 days over three halvings.
+    recs = {"40": [["2026-08-01", 1.0, "A", 45.0], ["2026-08-21", 0.25, "C", 46.0],
+                   ["2026-09-05", 0.6, "C", 41.0], ["2026-09-25", 0.3, "D", 42.0]]}
+    out = tier_summary(recs, eras=ERAS)["40"]
+    assert out["collapse"] == 8.0 and out["halving_days"] == 13
+    # The days between the eras' records are not part of the span: 20 + 9
+    # days of records do not qualify, although the first and last dates are
+    # 44 days apart.
+    recs["40"][-1][0] = "2026-09-14"
+    out = tier_summary(recs, eras=ERAS)["40"]
+    assert out["collapse"] == 8.0 and out["halving_days"] is None
+
+
 # ---- the Decision Index ----
 
 def contestant(slug, name, score, cost, kind="decisionModel", ms=100, creator="Lab"):
