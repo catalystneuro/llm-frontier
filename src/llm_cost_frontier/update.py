@@ -18,6 +18,7 @@ import argparse
 import datetime as dt
 import json
 import math
+import os
 import re
 import urllib.request
 from pathlib import Path
@@ -27,6 +28,7 @@ DEFAULT_EVENTS = Path("data/price-events.json")
 DEFAULT_OVERRIDES = Path("data/overrides.json")
 DEFAULT_ERAS = Path("data/eras.json")
 DEFAULT_DECISION_HISTORY = Path("data/decision-history.json")
+DEFAULT_DECISION_ERAS = Path("data/decision-eras.json")
 DEFAULT_OUTPUT = Path("build/llm-frontier.json")
 DEFAULT_FEED = Path("build/feed.xml")
 DEFAULT_SITE = "https://llm-frontier.catalystneuro.com"
@@ -88,8 +90,10 @@ CAPABILITIES = [
 # Analysis publishes it on its own page, for its own contestant set (language
 # models and dedicated decision models, which answer every question in one
 # call with a probability for each option), with its own measured cost and
-# time per task. It gets a separate history and its own cost axis, but the
-# same frontier, record, and advance derivations as every other tab. Its
+# time per task. It gets a separate history, its own cost axis, and its own
+# eras (data/decision-eras.json: the Decision Index is versioned separately
+# from the Intelligence Index), but the same frontier, record, and advance
+# derivations as every other tab. Its
 # costs are a few thousandths of a cent per task for the cheapest models, too
 # small for the six-decimal rounding the rest of the pipeline uses, so they
 # are stored and shown per 1,000 tasks.
@@ -98,7 +102,7 @@ DECISION_COST_SCALE = 1000
 DECISION_MIN_LIVE = 10
 DECISION = dict(key="decision", url=DECISION_PAGE, label="Decisions", metric="Decision Index", percent=False,
                 own=True, unit="per 1K tasks",
-                blurb="Artificial Analysis's Decision Index, a composite of classification, tool calling, knowledge, and reasoning questions answered by choosing from a fixed set of options. It compares language models with dedicated decision models, which return a probability for every option in one call. Unlike the other tabs, the cost axis is the measured cost of Decision Index tasks, per 1,000 tasks, so models that are not language models can compete. Relevant for routing, moderation, triage, and any pipeline step that picks one label from a list.")
+                blurb="Artificial Analysis's Decision Index, a composite of document decision, tool calling, knowledge, reasoning, and consistency questions answered by choosing from a fixed set of options. It compares language models with dedicated decision models, which return a probability for every option in one call. Unlike the other tabs, the cost axis is the measured cost of Decision Index tasks, per 1,000 tasks, so models that are not language models can compete. Relevant for routing, moderation, triage, and any pipeline step that picks one label from a list.")
 # Every page beside the overall index: the capabilities, then the Decision Index.
 METRIC_PAGES = CAPABILITIES + [DECISION]
 
@@ -238,14 +242,26 @@ def merge_decision(history: dict, live: dict, today: str) -> dict:
     return history
 
 
-def check_decision_set(live: dict, history: dict) -> None:
+def check_decision_set(live: dict, history: dict, eras: list = None, today: str = None) -> None:
     """Refuse a Decision Index fetch that looks broken: too few contestants,
-    or a live set that lost most of what the history has."""
+    a live set that lost most of what the history has, or scores that moved
+    together. The last is the source recomposing the Decision Index, which
+    must be declared as an era in data/decision-eras.json before the updater
+    will merge it, as check_live_set() demands for the Intelligence Index."""
     if len(live) < DECISION_MIN_LIVE:
         raise RuntimeError(f"only {len(live)} Decision Index contestants parsed; refusing to update")
-    prev_live = sum(1 for m in (history.get("models") or {}).values() if not m.get("retired"))
+    models = history.get("models") or {}
+    prev_live = sum(1 for m in models.values() if not m.get("retired"))
     if prev_live and len(live) < 0.5 * prev_live:
         raise RuntimeError(f"Decision Index contestants dropped from {prev_live} to {len(live)}; refusing to update")
+    if today and any(abs((dt.date.fromisoformat(today) - dt.date.fromisoformat(e["start"])).days) <= 7 for e in eras or []):
+        return
+    shifts = sorted(abs(rec["intelligence_index"] - models[s]["intelligence_index"])
+                    for s, rec in live.items() if s in models and not models[s].get("retired"))
+    if len(shifts) >= DECISION_MIN_LIVE and shifts[len(shifts) // 2] > 2.0:
+        raise RuntimeError(
+            f"median Decision Index shift is {shifts[len(shifts) // 2]:.1f} points across {len(shifts)} contestants; "
+            f"if the source recomposed the index, declare an era in data/decision-eras.json before updating")
 
 
 def decision_frontier_models(decision_history: dict, models: dict) -> dict:
@@ -863,40 +879,58 @@ def tier_summary(records: dict, eras: list = None) -> dict:
     return out
 
 
-def decision_output(dmodels: dict) -> dict:
+def decision_output(dmodels: dict, eras: list = None, today: dt.date = None) -> dict:
     """The Decision Index's dashboard entries, in the same shapes as a
     capability's: model rows (with the contestant's kind appended), tiers,
-    cost and speed records, and
-    advances. There are no eras and no price events on this axis."""
+    cost and speed records, and advances. There are no price events on this
+    axis. Its eras are its own (the source versions the Decision Index
+    separately from the Intelligence Index), and they are handled exactly as
+    the Overall view handles the main ones: the scores are versioned in the
+    observations, records reset at a boundary, the current view is rebased
+    onto the current version, and each earlier version is an archive."""
+    eras = eras or []
     rows = []
     for slug, m in sorted(dmodels.items(), key=lambda kv: (kv[1]["release_date"], kv[1]["name"])):
         real_t = dated_times(m)
         changes = [[d, round(c, 6), iq] + ([real_t[d]] if real_t.get(d) else []) for d, c, iq, _t, _n in cost_changes(slug, m, [])]
         ow = m.get("open_weights")
         rows.append([m["name"], m["creator"], m["release_date"], m["intelligence_index"], m["cost_per_task"], int(m["retired"]),
-                     None if ow is None else int(ow), changes if len(changes) > 1 else 0, [], 0,
+                     None if ow is None else int(ow), changes if len(changes) > 1 else 0, [], model_era(m, eras),
                      m.get("time_per_task"), None, None, m.get("kind", "llm")])
-    live = [m for m in dmodels.values() if not m["retired"]]
+    live = [m for m in dmodels.values() if not m["retired"] and model_era(m, eras) == len(eras)]
     if not live:
         return dict(rows=rows)
     hi = int(max(m["intelligence_index"] for m in live) // 10) * 10
     tiers = [t for t in (hi - 30, hi - 20, hi - 10, hi) if t > 0]
     # open_weights stays unknown (None) on the rows; the derivations want a bool.
     fm = {s: dict(m, open_weights=bool(m.get("open_weights"))) for s, m in dmodels.items()}
-    recs = tier_records(fm, [], tiers)
-    tm = time_models(fm, [])
+    recs = tier_records(fm, [], tiers, eras=eras)
+    recs_r = tier_records(rebased_models(fm, eras), [], tiers)
+    tm = time_models(fm, eras)
     recs_t = tier_records(tm, [], tiers)
-    return dict(rows=rows, tiers=tiers, tier_cost=recs, tier_summary=tier_summary(recs),
-                advances=frontier_advances(fm, [], recs),
+    era_tier_time, era_time_advances = [], []
+    for e in range(len(eras)):
+        etm = era_time_models(fm, eras, e)
+        recs_e = tier_records(etm, [], tiers)
+        era_tier_time.append(recs_e)
+        era_time_advances.append(frontier_advances(etm, [], recs_e))
+    if today is None:
+        today = dt.date.fromisoformat(max(m.get("last_seen") or m["release_date"] for m in dmodels.values()))
+    return dict(rows=rows, tiers=tiers, tier_cost=recs, tier_summary=tier_summary(recs, eras=eras),
+                tier_cost_rebased=recs_r, tier_summary_rebased=tier_summary(recs_r),
+                advances=frontier_advances(fm, [], recs, eras=eras),
                 tier_time=recs_t, tier_time_summary=tier_summary(recs_t),
                 time_advances=frontier_advances(tm, [], recs_t),
+                era_tier_time=era_tier_time, era_time_advances=era_time_advances,
+                eras=[[e["start"], e.get("note", ""), e.get("label", ""), e.get("label_before", ""), settled_date(fm, [], eras)] for e in eras],
+                era_snapshots=era_snapshots(eras, today, fm, []),
                 counts=dict(total=len(rows), live=len(live),
                             decision=sum(1 for m in live if m.get("kind") == "decision"),
                             llm=sum(1 for m in live if m.get("kind") != "decision")))
 
 
 def build_output(history: dict, events: list, overrides: dict | None = None, eras: list | None = None,
-                 decision: dict | None = None) -> dict:
+                 decision: dict | None = None, decision_eras: list | None = None) -> dict:
     today = dt.date.fromisoformat(history["updated"])
     models = history["models"]
     if overrides:
@@ -975,18 +1009,24 @@ def build_output(history: dict, events: list, overrides: dict | None = None, era
     # code reads it like any other metric; its own model rows replace the
     # main ones while its tab is active.
     extra = {}
-    d = decision_output(decision_frontier_models(decision, models)) if decision and decision.get("models") else {}
+    d = decision_output(decision_frontier_models(decision, models), decision_eras, today) if decision and decision.get("models") else {}
     if "tiers" in d:
         k = DECISION["key"]
         caps_meta.append({f: DECISION[f] for f in ("key", "label", "metric", "percent", "blurb", "url", "own", "unit")})
         cap_tiers[k] = d["tiers"]
         cap_tier_cost[k] = d["tier_cost"]
         cap_tier_summary[k] = d["tier_summary"]
+        cap_tier_cost_rebased[k] = d["tier_cost_rebased"]
+        cap_tier_summary_rebased[k] = d["tier_summary_rebased"]
         cap_advances[k] = d["advances"]
         cap_tier_time[k] = d["tier_time"]
         cap_tier_time_summary[k] = d["tier_time_summary"]
         cap_time_advances[k] = d["time_advances"]
-        extra = dict(decision_models=d["rows"], decision_counts=d["counts"])
+        # Indexed by the Decision Index's own eras, not the main ones.
+        era_cap_tier_time[k] = d["era_tier_time"]
+        era_cap_time_advances[k] = d["era_time_advances"]
+        extra = dict(decision_models=d["rows"], decision_counts=d["counts"],
+                     decision_eras=d["eras"], decision_era_snapshots=d["era_snapshots"])
     return dict(
         **extra,
         advances=advances,
@@ -1161,6 +1201,7 @@ def parse_args(argv=None):
     p.add_argument("--source", default=SOURCE_PAGE, help="Artificial Analysis model page to read the dataset from")
     p.add_argument("--decision-history", type=Path, default=DEFAULT_DECISION_HISTORY, help="cumulative Decision Index history (read and rewritten)")
     p.add_argument("--decision-source", default=DECISION_PAGE, help="Artificial Analysis page to read the Decision Index from")
+    p.add_argument("--decision-eras", type=Path, default=DEFAULT_DECISION_ERAS, help="hand-declared Decision Index era boundaries")
     p.add_argument("--offline", action="store_true", help="rebuild the outputs from the stored history without fetching")
     return p.parse_args(argv)
 
@@ -1172,6 +1213,7 @@ def main(argv=None):
     overrides = json.loads(args.overrides.read_text()) if args.overrides.exists() else {}
     eras = json.loads(args.eras.read_text()) if args.eras.exists() else []
     decision = json.loads(args.decision_history.read_text()) if args.decision_history.exists() else {"models": {}}
+    decision_eras = json.loads(args.decision_eras.read_text()) if args.decision_eras.exists() else []
     if not args.offline:
         today = dt.date.today().isoformat()
         payload = fetch_payload(args.source)
@@ -1186,17 +1228,24 @@ def main(argv=None):
         args.history.write_text(json.dumps(history, indent=1, sort_keys=True) + "\n")
         print(f"merged {len(live)} live models; history now {len(history['models'])} models")
         # The Decision Index comes from a second page. A failure there must not
-        # hold back the main update, so it is reported (as a GitHub Actions
-        # warning annotation) and the stored Decision Index history is kept.
+        # hold back the main update, so the stored Decision Index history is
+        # kept and the failure is reported: as a GitHub Actions warning
+        # annotation, and as a step output the update workflow turns into an
+        # issue, since a refused fetch leaves the tab stale until someone acts.
+        decision_error = ""
         try:
             dlive = extract_decision(fetch_payload(args.decision_source))
-            check_decision_set(dlive, decision)
+            check_decision_set(dlive, decision, decision_eras, today)
             decision = merge_decision(decision, dlive, today)
             args.decision_history.write_text(json.dumps(decision, indent=1, sort_keys=True) + "\n")
             print(f"merged {len(dlive)} Decision Index contestants; history now {len(decision['models'])}")
         except Exception as err:  # noqa: BLE001
-            print(f"::warning::Decision Index not updated: {err}")
-    out = build_output(history, events, overrides, eras, decision)
+            decision_error = " ".join(str(err).split())
+            print(f"::warning::Decision Index not updated: {decision_error}")
+        if os.environ.get("GITHUB_OUTPUT"):
+            with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+                fh.write(f"decision_error={decision_error}\n")
+    out = build_output(history, events, overrides, eras, decision, decision_eras)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(out, separators=(",", ":")) + "\n")
     write_feed(out, args.feed, args.site)

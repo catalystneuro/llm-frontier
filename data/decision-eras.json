@@ -1,0 +1,8 @@
+[
+ {
+  "start": "2026-11-07",
+  "label": "v2.0",
+  "label_before": "v1.0",
+  "note": "Artificial Analysis recomposed the Decision Index (v2.0: AA-Paperclip, EvalSafe-O*NET-AA and AA-Symmetry join the index and WildGuardTest is removed; AA-Omniscience-Decision and HLE-MultiChoice move to v1.1; every evaluation is scored on the Decision Score, accuracy less the Brier score of the chosen answer's probability; language models now answer with probabilities) and cut the live set from 38 contestants to 21. Scores and measured costs per 1,000 tasks before and after this date are not comparable: the 20 contestants measured on both sides were re-scored a median of 9.8 points higher, and the new evaluation suite costs a median of 4.3 times as much to run."
+ }
+]
