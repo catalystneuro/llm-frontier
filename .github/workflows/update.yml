@@ -23,12 +23,15 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    outputs:
+      decision_error: ${{ steps.refresh.outputs.decision_error }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Refresh data from Artificial Analysis
+        id: refresh
         run: python -m llm_cost_frontier
         env:
           PYTHONPATH: src
@@ -88,6 +91,37 @@ jobs:
               --body "The scheduled update or its deploy failed: $url
 
           Until this is fixed the dashboard serves its last good data and shows a staleness note. Common causes: the source page's layout changed (fetch_payload found no data), or check_live_set refused a suspicious fetch (a shrunken live set or a mass index shift needs an era declared in data/eras.json). This issue closes automatically on the next successful run."
+          fi
+
+  # The Decision Index is read from a second page, and a failed or refused
+  # read there does not fail the run, so the Decisions tab would go stale
+  # unnoticed. The first such run opens one labeled issue, and the next good
+  # read closes it.
+  decision-alert:
+    needs: update
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          DECISION_ERROR: ${{ needs.update.outputs.decision_error }}
+        run: |
+          repo="${{ github.repository }}"
+          url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh label create decision-index-stale --repo "$repo" \
+            --description "The Decision Index fetch failed or was refused" --color d93f0b --force
+          existing=$(gh issue list --repo "$repo" --label decision-index-stale --state open --json number -q '.[0].number')
+          if [ -n "$DECISION_ERROR" ] && [ -z "$existing" ]; then
+            gh issue create --repo "$repo" --label decision-index-stale \
+              --title "Decision Index not updating" \
+              --body "The scheduled update could not merge the Decision Index: $DECISION_ERROR
+
+          Run: $url
+
+          The rest of the dashboard updated normally; the Decisions tab serves its last good data until this is fixed. If Artificial Analysis recomposed the Decision Index (every contestant re-scored at once), declare the new version in data/decision-eras.json and the next run will merge it. This issue closes automatically on the next successful read."
+          elif [ -z "$DECISION_ERROR" ] && [ -n "$existing" ]; then
+            gh issue close "$existing" --repo "$repo" --comment "Recovered: $url"
           fi
 
   recover:

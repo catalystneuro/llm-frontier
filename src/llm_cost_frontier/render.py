@@ -17,6 +17,7 @@ from pathlib import Path
 
 from .update import (
     DEFAULT_EVENTS,
+    DEFAULT_DECISION_ERAS,
     DEFAULT_DECISION_HISTORY,
     DEFAULT_ERAS,
     DEFAULT_HISTORY,
@@ -480,6 +481,7 @@ def parse_args(argv=None):
     p.add_argument("--overrides", type=Path, default=DEFAULT_OVERRIDES, help="hand-maintained corrections to upstream fields")
     p.add_argument("--eras", type=Path, default=DEFAULT_ERAS, help="hand-declared index era boundaries")
     p.add_argument("--decision-history", type=Path, default=DEFAULT_DECISION_HISTORY, help="cumulative Decision Index history to read")
+    p.add_argument("--decision-eras", type=Path, default=DEFAULT_DECISION_ERAS, help="hand-declared Decision Index era boundaries")
     p.add_argument("--out", type=Path, default=DEFAULT_IMAGES, help="directory to write images into")
     p.add_argument("--force", action="store_true", help="re-render advance cards that already exist")
     return p.parse_args(argv)
@@ -502,7 +504,8 @@ def main(argv=None):
     overrides = json.loads(args.overrides.read_text()) if args.overrides.exists() else {}
     eras = json.loads(args.eras.read_text()) if args.eras.exists() else []
     decision = json.loads(args.decision_history.read_text()) if args.decision_history.exists() else {"models": {}}
-    out = build_output(history, events, overrides, eras, decision)
+    decision_eras = json.loads(args.decision_eras.read_text()) if args.decision_eras.exists() else []
+    out = build_output(history, events, overrides, eras, decision, decision_eras)
     models = history["models"]
 
     from .update import CAPABILITIES, DECISION, capability_models, decision_frontier_models
@@ -517,7 +520,7 @@ def main(argv=None):
             met = dict(key=c["key"], term=c["metric"], axis=c["metric"],
                        ceiling=f"the {c['metric']} ceiling", label=c["label"], percent=c["percent"], unit="per task")
             metric_sets.append((met, capability_models(models, c["key"]), advs, args.out / "advances" / c["key"]))
-    # The Decision Index has its own models and cost axis, no eras, and no
+    # The Decision Index has its own models, cost axis, and eras, and no
     # price events; its cards go in advances/decision/.
     d = DECISION
     advs = (out.get("cap_advances") or {}).get(d["key"]) or []
@@ -532,7 +535,7 @@ def main(argv=None):
     for met, mset, advs, outdir in metric_sets:
         METRIC = met
         ev = [] if met.get("own") else events
-        er = [] if met.get("own") else eras
+        er = decision_eras if met.get("own") else eras
         tl = timeline if met["key"] is None else price_timeline(mset, ev)
         groups = {}
         for a in advs:
@@ -549,7 +552,7 @@ def main(argv=None):
         c = next(cc for cc in CAPABILITIES + [DECISION] if cc["key"] == met["key"])
         own = met.get("own")
         render_current(out, mset, price_timeline(mset, [] if own else events), args.out / f"{met['key']}-card.png",
-                       [] if own else eras, cap=c)
+                       decision_eras if own else eras, cap=c)
     METRIC = dict(INDEX_METRIC)
     render_current(out, models, timeline, args.out / "frontier-card.png", eras)
     print(f"rendered {rendered} advance cards ({skipped} already existed) and {len(metric_sets)} summary cards in {args.out}")

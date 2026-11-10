@@ -824,6 +824,7 @@ def test_main_offline_writes_outputs(tmp_path):
                "--events", str(tmp_path / "events.json"),
                "--overrides", str(tmp_path / "overrides.json"),
                "--decision-history", str(tmp_path / "decision-history.json"),
+               "--decision-eras", str(tmp_path / "decision-eras.json"),
                "--out", str(tmp_path / "out.json"),
                "--feed", str(tmp_path / "feed.xml")])
     assert rc == 0
@@ -885,6 +886,64 @@ def test_check_decision_set_refuses_broken_fetches():
     prev = {"models": {f"s{i}": {"retired": False} for i in range(30)}}
     with pytest.raises(RuntimeError):
         check_decision_set(many, prev)
+
+
+def test_check_decision_set_refuses_a_recomposition_until_an_era_is_declared():
+    prev = {"models": {f"s{i}": {"retired": False, "intelligence_index": 50.0 + i} for i in range(12)}}
+    same = {f"s{i}": {"intelligence_index": 50.0 + i} for i in range(12)}
+    check_decision_set(same, prev, [], "2026-11-07")
+    # Every score moving together is the source re-scoring on a new composition.
+    moved = {f"s{i}": {"intelligence_index": 60.0 + i} for i in range(12)}
+    with pytest.raises(RuntimeError, match="decision-eras.json"):
+        check_decision_set(moved, prev, [], "2026-11-07")
+    check_decision_set(moved, prev, [{"start": "2026-11-07"}], "2026-11-08")
+    # An era declared long ago does not excuse a new shift.
+    with pytest.raises(RuntimeError, match="decision-eras.json"):
+        check_decision_set(moved, prev, [{"start": "2026-09-01"}], "2026-11-07")
+
+
+def test_decision_eras_split_the_tab_at_a_recomposition():
+    history = {"updated": "2026-11-10", "models": three_model_history()}
+    live = extract_decision(decision_payload([
+        contestant("lab_d1", "d1", 52.0, 2e-05),
+        contestant("lab_d2", "d2", 45.0, 3e-05),
+        contestant("openai_big", "Big (Max)", 79.0, 0.05, kind="llm"),
+    ]))
+    decision = merge_decision({"models": {}}, live, "2026-10-19")
+    # d1 halves its price under v1.0. Then v2.0 re-scores d1 and Big on a
+    # costlier suite and drops d2.
+    live["lab_d1"]["cost_per_task"] = 0.01
+    decision = merge_decision(decision, live, "2026-10-25")
+    live = extract_decision(decision_payload([
+        contestant("lab_d1", "d1", 63.0, 4e-05),
+        contestant("openai_big", "Big (Max)", 77.0, 0.15, kind="llm"),
+    ]))
+    decision = merge_decision(decision, live, "2026-11-07")
+    eras = [{"start": "2026-11-07", "label": "v2.0", "label_before": "v1.0"}]
+    out = build_output(history, events=[], decision=decision, decision_eras=eras)
+    assert out["decision_eras"] == [["2026-11-07", "", "v2.0", "v1.0", "2026-11-07"]]
+    assert [s[-1] for s in out["decision_era_snapshots"]] == [["2026-11-06", "Nov 6, 2026"], ["2026-11-10", "today"]]
+    # Each contestant belongs to the version it was last measured under, and
+    # only the current version's contestants count as live.
+    assert {r[0]: r[9] for r in out["decision_models"]} == {"d1": 1, "d2": 0, "Big (Max)": 1}
+    assert out["decision_counts"] == {"total": 3, "live": 2, "decision": 1, "llm": 1}
+    # Cost records reset at the boundary instead of reading v2.0's costlier
+    # suite as a price rise, or its higher scores as a tier newly crossed.
+    recs = out["cap_tier_cost"]["decision"]
+    assert [(r[0], r[1]) for r in recs["50"]] == [("2026-10-19", 0.02), ("2026-10-25", 0.01), ("2026-11-07", 0.04)]
+    assert [(r[0], r[3]) for r in recs["60"]] == [("2026-10-19", 79.0), ("2026-11-07", 63.0)]
+    # The current view is one series on the v2.0 basis: current scores, with
+    # d1's own price cut carried back as a ratio.
+    reb = out["cap_tier_cost_rebased"]["decision"]["60"]
+    assert [(r[0], r[1], r[3]) for r in reb] == [("2026-10-19", 0.08, 63.0), ("2026-10-25", 0.04, 63.0)]
+    assert out["cap_tier_summary_rebased"]["decision"]["60"]["collapse"] == 2.0
+    # A first measurement under the new version is not an advance.
+    assert not [a for a in out["cap_advances"]["decision"] if a["date"] >= "2026-11-07"]
+    # Speed archives are indexed by the Decision Index's own eras.
+    assert len(out["era_cap_tier_time"]["decision"]) == len(out["era_cap_time_advances"]["decision"]) == 1
+    # The Intelligence Index's eras are separate, and are untouched.
+    assert out["eras"] == [] and out["models"] == build_output(history, events=[])["models"]
+    json.dumps(out)
 
 
 def test_decision_models_join_open_weights_but_not_release_dates():

@@ -10,6 +10,8 @@ Requires playwright (pip install playwright; playwright install chromium);
 skipped when it is not installed, so the unit suite stays dependency-free.
 """
 import functools
+import json
+import re
 import shutil
 import threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -113,7 +115,11 @@ def test_axis_toggle_switches_to_time_and_archives_force_cost(browser, site_url)
         assert "fastest way" in page.locator("#pfc-adv-lead").inner_text()
         assert page.locator("#pfc-advances .pfc-adv-day").count() > 0
         assert page.locator("#pfc-advances .pfc-adv-card").count() == 0
-        assert "fastest way to reach" in page.locator("#pfc-advances .pfc-adv-body").first.inner_text()
+        # An entry reads as a speed either way: the fastest way to reach a
+        # range, or a new ceiling reached at some time per task.
+        first = page.locator("#pfc-advances .pfc-adv-body").first.inner_text()
+        assert "fastest way to reach" in first or "per task" in first
+        assert "$" not in first
         # Switching to an archive era keeps the time axis when that era has
         # backfilled measurements; without them it falls back to cost.
         import json
@@ -360,14 +366,40 @@ def test_decision_tab_uses_its_own_models_and_axis(browser, site_url):
         page.wait_for_selector("#pfc-frontier svg text:text('Decision Index')")
         page.wait_for_selector("#pfc-records svg")
         assert page.locator("#pfc-cap-tabs span[aria-selected='true']").inner_text() == "Decisions"
-        # Its own cost axis, no eras, and contestants that are not in the main data.
+        # Its own cost axis, its own index versions, and contestants that are not in the main data.
         assert page.locator("#pfc-frontier svg text:text('Cost per 1K tasks (log)')").count() == 1
-        assert page.locator("#pfc-era-nav").is_hidden()
+        versions = page.locator("#pfc-era-select option").all_inner_texts()
+        assert versions[0].startswith("Decision Index") and versions[0].endswith("(current)")
         assert "decision models" in page.locator("#pfc-frontier-lead").inner_text()
         assert page.locator("#pfc-cap-table tr").count() > 0
         assert page.locator("#pfc-advances .pfc-adv-day").count() > 0
         options = page.locator("#pfc-model-list option").evaluate_all("os => os.map(o => o.value)")
         assert "d1" in options
+        # The Decision Index is versioned on its own: an earlier version is an
+        # archive on that version's scores, and a contestant never re-scored
+        # under the current one is not drawn among the current scores.
+        data = json.loads((REPO / "build/llm-frontier.json").read_text())
+        n_eras = len(data["decision_eras"])
+        old = [m for m in data["decision_models"] if m[9] < n_eras]
+        if old:
+            m = old[0]
+            label = data["decision_eras"][m[9]][3] if m[9] == 0 else data["decision_eras"][m[9] - 1][2]
+            page.goto(site_url + "/decision/#decision~" + re.sub(r"[^a-z0-9]+", "-", m[0].lower()).strip("-"))
+            page.wait_for_selector("#pfc-model-chip:has-text('not measured under the current Decision Index')")
+            assert page.locator("#pfc-frontier svg .pfc-sel-ring").count() == 0
+            page.locator("#pfc-model-chip button", has_text="archive").click()
+            page.wait_for_selector(f"#pfc-frontier svg text:text('Decision Index ({label})')")
+            page.wait_for_selector("#pfc-records svg text:text('measurements ended')")
+            assert page.locator("#pfc-frontier svg .pfc-sel-ring").count() == 1
+            assert f"{m[3]:.1f}" in page.locator("#pfc-model-chip").inner_text()
+            assert "-through-" in page.evaluate("location.hash")
+            assert page.locator("#pfc-advances .pfc-adv-era").count() >= 1
+            # The archive link reloads into the same view.
+            page.reload()
+            page.wait_for_selector(f"#pfc-frontier svg text:text('Decision Index ({label})')")
+            page.locator("#pfc-era-select").select_option(index=0)
+            page.wait_for_selector("#pfc-frontier-stage:text('today')")
+            page.locator("#pfc-model-chip .pfc-chip-clear").click()
         # The time axis works on the contestants' measured time per task.
         page.locator("#pfc-axis-nav button", has_text="Time per task").click()
         page.wait_for_selector("#pfc-frontier svg text:text('Time per task (log)')")
