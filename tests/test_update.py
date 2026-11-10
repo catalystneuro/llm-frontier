@@ -879,7 +879,8 @@ def test_prerender_is_idempotent_and_lists_the_pages(tmp_path):
     root = "https://llm-frontier.catalystneuro.com/"
     assert locs[0] == root and root + "coding/" in locs and root + "methodology/" in locs
     # home, methodology, each metric, the Decision Index, the models index, and each model
-    assert len(locs) == len(set(locs)) == 2 + len(CAPABILITIES) + 1 + 1 + 3
+    assert len(locs) == len(set(locs)) == 2 + len(CAPABILITIES) + 1 + 1 + 3 + 2
+    assert root + "about/" in locs and root + "notes/" in locs
     assert root + "models/" in locs and root + "models/beta-high/" in locs
     assert not any("previews" in u or "images" in u or "404" in u for u in locs)
     assert "<lastmod>2026-09-04</lastmod>" in first[site / "sitemap.xml"]
@@ -1159,6 +1160,29 @@ def test_build_output_adds_the_decision_tab():
     feed_text = describe(cut[0], DECISION)
     assert "per 1K tasks" in feed_text and "Proprietary" not in feed_text
     json.dumps(out)
+
+
+# ---- citation metadata ----
+
+def test_citation_file_names_the_site_and_no_person():
+    lines = (REPO / "CITATION.cff").read_text().splitlines()
+    fields = dict(line.split(": ", 1) for line in lines if line and not line.startswith((" ", "-")) and ": " in line)
+    assert fields["cff-version"] == "1.2.0"
+    assert fields["title"] == '"LLM Frontier"'
+    assert fields["url"] == '"https://llm-frontier.catalystneuro.com/"'
+    assert fields["repository-code"] == '"https://github.com/catalystneuro/llm-frontier"'
+    assert fields["license"] == "BSD-3-Clause"
+    assert fields["message"].startswith('"') and "Artificial Analysis" in fields["message"]
+    # One author, an organization: an entity has a name, a person has given and family names.
+    start = lines.index("authors:")
+    block = []
+    for line in lines[start + 1:]:
+        if not line.startswith((" ", "-")):
+            break
+        block.append(line.strip())
+    assert block[0] == '- name: "CatalystNeuro"'
+    assert sum(1 for b in block if b.startswith("- ")) == 1
+    assert not any("given-names" in b or "family-names" in b for b in block)
 
 
 # ---- invariants on the real repository data ----

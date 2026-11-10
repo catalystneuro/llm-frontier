@@ -114,6 +114,8 @@ def metric_page(template: str, cap: dict) -> str:
         ("<body>", f'<body data-cap="{key}" data-root="../">'),
         ('<script src="js/llm-frontier-dashboard.js" defer></script>',
          '<script src="../js/llm-frontier-dashboard.js" defer></script>'),
+        ('<script src="js/llm-frontier-extras.js" defer></script>',
+         '<script src="../js/llm-frontier-extras.js" defer></script>'),
     ]
     for old, new in swaps:
         assert old in s, f"template drifted: {old[:60]}"
@@ -126,6 +128,9 @@ def metric_page(template: str, cap: dict) -> str:
         ('src="cn-logo.png"', 'src="../cn-logo.png"'),
         ('href="methodology/"', 'href="../methodology/"'),
         ('href="models/"', 'href="../models/"'),
+        ('href="about/"', 'href="../about/"'),
+        ('href="notes/"', 'href="../notes/"'),
+        ('href="data/llm-frontier.json"', 'href="../data/llm-frontier.json"'),
         ('href="feed.xml"', f'href="../feed-{key}.xml"'),
     ]:
         s = s.replace(old, new)

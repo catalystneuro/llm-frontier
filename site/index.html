@@ -119,16 +119,27 @@
     </nav>
 
     <div class="prose pfc-notes">
-      <p>The method behind every number on this page, its limitations, and the handling of index recompositions are described on the <a href="methodology/">methodology page</a>. The updater, the observation history, and this page's data live in the <a href="https://github.com/catalystneuro/llm-frontier">llm-frontier repository</a>.</p>
+      <p>The method behind every number on this page, its limitations, and the handling of index recompositions are described on the <a href="methodology/">methodology page</a>. Events that changed how the numbers should be read are logged in the <a href="notes/">data notes</a>, and the <a href="about/">about page</a> says who maintains the site and how to cite it. The updater, the observation history, and this page's data live in the <a href="https://github.com/catalystneuro/llm-frontier">llm-frontier repository</a>.</p>
+      <div class="pfc-tools" id="pfc-tools">
+        <button type="button" id="pfc-dl-csv">Download CSV</button>
+        <a id="pfc-dl-json" href="data/llm-frontier.json" download="llm-frontier.json">Download JSON</a>
+        <button type="button" id="pfc-embed-btn" aria-expanded="false" aria-controls="pfc-embed-box">Embed</button>
+      </div>
+      <div class="pfc-embed-box" id="pfc-embed-box" hidden>
+        <label for="pfc-embed-code">Paste this where the chart should appear. It shows the frontier chart as it is set now: this tab, the highlighted model, and the slider dates.</label>
+        <textarea id="pfc-embed-code" rows="4" readonly spellcheck="false"></textarea>
+        <button type="button" id="pfc-embed-copy">Copy</button>
+      </div>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      A <a href="https://catalystneuro.com">CatalystNeuro</a> project &middot; data from <a href="https://artificialanalysis.ai/">Artificial Analysis</a> &middot; <a href="https://github.com/catalystneuro/llm-frontier">source and history on GitHub</a>
+      A <a href="https://catalystneuro.com">CatalystNeuro</a> project &middot; data from <a href="https://artificialanalysis.ai/">Artificial Analysis</a> &middot; <a href="about/">about and citing</a> &middot; <a href="notes/">data notes</a> &middot; <a href="https://github.com/catalystneuro/llm-frontier">source and history on GitHub</a>
     </div>
   </footer>
 
   <script src="js/llm-frontier-dashboard.js" defer></script>
+  <script src="js/llm-frontier-extras.js" defer></script>
 </body>
 </html>

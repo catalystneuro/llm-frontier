@@ -212,3 +212,47 @@ a.pfc-tab { text-decoration: none; }
 /* staleness note */
 .pfc-stale { border: 1px solid #e8c76e; background: #fdf6e3; color: #7a5d1a; border-radius: 8px; padding: 0.6rem 0.9rem; font-size: 0.9rem; margin: 1.2rem 0 0; }
 .pfc-stale[hidden] { display: none; }
+
+/* downloads and the embed snippet, at the foot of the dashboard */
+.pfc-tools { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0 0 0.8rem; }
+.pfc-tools button, .pfc-tools a, .pfc-embed-box button { font: inherit; font-size: 0.78rem; line-height: 1.5; padding: 0.34rem 0.85rem; border: 1px solid var(--card-border); border-radius: 9px; background: var(--surface); color: var(--ink-muted); cursor: pointer; text-decoration: none; }
+.pfc-tools button:hover, .pfc-tools a:hover, .pfc-embed-box button:hover { border-color: var(--blue-600); color: var(--navy); }
+.pfc-tools button[aria-expanded="true"] { background: var(--blue-50); color: var(--navy); border-color: rgba(42, 120, 214, 0.4); }
+.pfc-tools button:disabled { opacity: 0.6; cursor: default; }
+.pfc-embed-box { max-width: 40rem; margin: 0 0 1rem; }
+.pfc-embed-box[hidden] { display: none; }
+.pfc-embed-box label { display: block; font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+.pfc-embed-box textarea { display: block; width: 100%; font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.5; color: var(--navy); padding: 0.55rem 0.7rem; border: 1px solid var(--card-border); border-radius: 9px; background: var(--surface); resize: vertical; margin-bottom: 0.5rem; word-break: break-all; }
+.pfc-embed-box textarea:focus { outline: none; border-color: var(--blue-600); box-shadow: 0 0 0 2px rgba(42, 120, 214, 0.18); }
+
+/* embed mode (?embed=1): the frontier chart alone, for an iframe */
+html.pfc-embed body { background: var(--surface); }
+html.pfc-embed .site-header, html.pfc-embed .site-footer,
+html.pfc-embed main.pfc-wrap > :not(.pfc-cols),
+html.pfc-embed .pfc-cols > section:not(:first-child),
+html.pfc-embed .pfc-cols > section:first-child > :not(.pfc-figure):not(.pfc-embed-credit),
+html.pfc-embed .pfc-fs-btn { display: none; }
+html.pfc-embed main.pfc-wrap { max-width: none; padding: 0; }
+html.pfc-embed .pfc-cols { display: block; }
+html.pfc-embed .pfc-figure { margin: 0; border: 0; border-radius: 0; box-shadow: none; padding: 0.7rem 0.9rem 0.3rem; }
+.pfc-embed-credit { margin: 0; padding: 0 0.9rem 0.7rem; font-size: 0.78rem; text-align: right; }
+.pfc-embed-credit a { color: var(--ink-soft); text-decoration: none; }
+.pfc-embed-credit a:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+
+/* the data notes and about pages */
+/* On pages whose title is a plain link (not a heading), the mark needs the
+   same gap from the name that the dashboard's heading gives it. */
+a.site-title { display: inline-flex; align-items: center; gap: 0.5rem; }
+.prose code { font-family: var(--font-mono); font-size: 0.86em; color: var(--navy); }
+.notes-list { border-top: 1px solid var(--line); margin-top: 1.6rem; }
+.note { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 0.2rem 1rem; padding: 1rem 0.5rem; margin: 0 -0.5rem; border-bottom: 1px solid var(--line-soft); border-radius: 6px; scroll-margin-top: 1rem; }
+.note:target { background: rgba(42, 120, 214, 0.06); }
+.note-date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft); text-decoration: none; padding-top: 0.2rem; }
+.note-date:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+.note h2 { font-size: 1.05rem; margin: 0 0 0.3rem; }
+.note p { margin: 0; font-size: 0.95rem; }
+.notes-end { margin-top: 1.4rem; font-size: 0.9rem; color: var(--ink-soft); }
+@media (max-width: 600px) { .note { grid-template-columns: 1fr; } }
+.cite-text { border-left: 3px solid var(--line); padding-left: 0.9rem; color: var(--navy); overflow-wrap: anywhere; }
+.cite-code { overflow-x: auto; background: var(--surface); border: 1px solid var(--card-border); border-radius: 9px; padding: 0.8rem 1rem; margin: 0 0 1rem; font-size: 0.8rem; line-height: 1.55; }
+.cite-code code { font-size: inherit; }

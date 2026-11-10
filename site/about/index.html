@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About &middot; LLM Frontier</title>
+  <meta name="description" content="Who maintains LLM Frontier, where its measurements come from, and how to cite, download, and correct it.">
+  <link rel="canonical" href="https://llm-frontier.catalystneuro.com/about/">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="../"><svg class="site-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="13" fill="#101642"/><path d="M10 50 H22 V38 H34 V26 H46 V16" fill="none" stroke="#7fb2ec" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="46" cy="16" r="6" fill="#eb6834" stroke="#101642" stroke-width="2.5"/></svg>LLM Frontier</a>
+      <nav class="site-nav">
+        <a href="../">Dashboard</a>
+        <a href="../methodology/">Methodology</a>
+        <a href="../feed.xml" type="application/atom+xml"><svg aria-hidden="true" viewBox="0 0 16 16" fill="#eb6834"><path d="M2.5 13.5a1.8 1.8 0 1 1 3.6 0 1.8 1.8 0 0 1-3.6 0z"/><path d="M.7 5.6c5.3 0 9.7 4.3 9.7 9.7H7.9A7.2 7.2 0 0 0 .7 8.1V5.6z"/><path d="M.7.7c8 0 14.6 6.5 14.6 14.6h-2.5C12.8 8.6 7.4 3.2.7 3.2V.7z"/></svg> Feed</a>
+        <a href="https://github.com/catalystneuro/llm-frontier"><svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a>
+        <a href="https://catalystneuro.com" class="nav-cn" aria-label="A CatalystNeuro project"><img src="../cn-logo.png" alt="CatalystNeuro" height="18"></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container prose">
+    <div class="page-head">
+      <h1>About</h1>
+      <p class="subtitle">What this site is, who maintains it, and how to cite, reuse, and correct it.</p>
+    </div>
+
+    <h2>Overview</h2>
+    <p>LLM Frontier tracks the cheapest way to reach each level of large language model capability, and how fast that cost is falling. It is a derived view of <a href="https://artificialanalysis.ai/">Artificial Analysis</a>'s measurements, rebuilt every three hours; the <a href="../methodology/">methodology page</a> describes every derivation, and the <a href="../notes/">data notes</a> log what has happened to the record.</p>
+
+    <h2>Maintainer</h2>
+    <p>The site is a project of <a href="https://catalystneuro.com">CatalystNeuro</a>, a team that does data and software engineering for open neuroscience. The argument for why the cheap end of the range matters is in the post <a href="https://catalystneuro.com/blog/cost-of-intelligence-drops-100x/">What Happens When the Cost of Intelligence Drops 100x</a>. To work with CatalystNeuro, <a href="https://catalystneuro.com/consultation/">request a consultation</a>.</p>
+
+    <h2>Data Source</h2>
+    <p>Every score, cost per task, and time per task is measured and published by Artificial Analysis; this site adds the history, the frontiers, the records, and the advances. Reuse of the measurements is governed by Artificial Analysis's terms. The code that builds the site, and the site itself, are in the <a href="https://github.com/catalystneuro/llm-frontier">llm-frontier repository</a> under the BSD 3-Clause license.</p>
+
+    <h2>How to Cite</h2>
+    <p>Cite the site with the date you read it, since the numbers change every few hours, and credit Artificial Analysis as the source of the measurements:</p>
+    <p class="cite-text">CatalystNeuro. LLM Frontier. https://llm-frontier.catalystneuro.com/ (accessed YYYY-MM-DD). Measurements from Artificial Analysis, https://artificialanalysis.ai/.</p>
+    <pre class="cite-code"><code>@misc{llmfrontier,
+  author       = {{CatalystNeuro}},
+  title        = {LLM Frontier},
+  year         = {2026},
+  howpublished = {\url{https://llm-frontier.catalystneuro.com/}},
+  note         = {Accessed YYYY-MM-DD. Measurements from Artificial Analysis.}
+}</code></pre>
+    <p>The repository carries the same information in a <a href="https://github.com/catalystneuro/llm-frontier/blob/main/CITATION.cff">CITATION.cff</a> file. For a figure that depends on one day's data, the <a href="https://github.com/catalystneuro/llm-frontier/commits/main/data/history.json">commit history of the observation record</a> gives a permanent reference for that day.</p>
+
+    <h2>The Data</h2>
+    <p>Everything the dashboard draws comes from one file, <a href="../data/llm-frontier.json">data/llm-frontier.json</a>, rebuilt every three hours. Its main keys:</p>
+    <ul>
+      <li><code>updated</code> and <code>updated_at</code>: the date of the data, and the time it last changed.</li>
+      <li><code>models</code>: one row per model, as an array: name, lab, release date, Intelligence Index, cost per task in US dollars, retired flag, open weights flag, the dated changes in cost and index, the capability scores in the order of <code>capabilities</code>, the index era the scores belong to, and the measured time per task, output speed, and time to first answer token.</li>
+      <li><code>capabilities</code>: the metric behind each tab. <code>eras</code>: the dates on which the source recomposed the Intelligence Index.</li>
+      <li><code>tiers</code>, <code>tier_cost</code>, and <code>tier_summary</code>: the cost records for each Intelligence Index tier, with the collapse and halving time derived from them. Keys beginning <code>cap_</code> hold the same for each capability, and keys containing <code>time</code> hold the speed records.</li>
+      <li><code>advances</code>: every date on which the frontier changed, newest first.</li>
+      <li><code>decision_models</code>: the Decision Index contestants, in the same row shape, with costs per 1,000 tasks.</li>
+    </ul>
+    <p>The file is shaped for the dashboard, and keys are added as the dashboard grows. The full observation history, with every dated cost and score per model, is <a href="https://github.com/catalystneuro/llm-frontier/blob/main/data/history.json">data/history.json</a> in the repository. The dashboard's Download CSV button gives the current models as a table.</p>
+    <p>Frontier advances are also published as Atom feeds: <a href="../feed.xml">Overall</a>, and one per metric (<a href="../feed-coding.xml">Coding</a>, <a href="../feed-agentic.xml">Agentic Tool Use</a>, <a href="../feed-longcontext.xml">Long Context</a>, <a href="../feed-instruction.xml">Instruction Following</a>, <a href="../feed-knowledge.xml">Factual Recall</a>, <a href="../feed-science.xml">Scientific Reasoning</a>, <a href="../feed-knowledgework.xml">Knowledge Work</a>, <a href="../feed-multimodal.xml">Multimodal</a>, <a href="../feed-decision.xml">Decisions</a>).</p>
+
+    <h2>Problem Reports</h2>
+    <p>If a number looks wrong, <a href="https://github.com/catalystneuro/llm-frontier/issues">open an issue on GitHub</a> with a link to the view; the hash in the address bar records the tab, the highlighted model, and the slider dates. Corrections are logged in the <a href="../notes/">data notes</a>.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      A <a href="https://catalystneuro.com">CatalystNeuro</a> project &middot; data from <a href="https://artificialanalysis.ai/">Artificial Analysis</a> &middot; <a href="../about/">about and citing</a> &middot; <a href="../notes/">data notes</a> &middot; <a href="https://github.com/catalystneuro/llm-frontier">source and history on GitHub</a>
+    </div>
+  </footer>
+</body>
+</html>

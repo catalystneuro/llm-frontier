@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use LLM Frontier, please cite it as below, with the date you accessed it, and credit Artificial Analysis as the source of the measurements."
+title: "LLM Frontier"
+abstract: "Tracks the cheapest way to reach each level of large language model capability, and how fast that cost is falling, from Artificial Analysis's measured cost per task."
+type: software
+authors:
+  - name: "CatalystNeuro"
+    website: "https://catalystneuro.com"
+url: "https://llm-frontier.catalystneuro.com/"
+repository-code: "https://github.com/catalystneuro/llm-frontier"
+license: BSD-3-Clause
+keywords:
+  - large language models
+  - Pareto frontier
+  - cost per task
+  - Artificial Analysis
