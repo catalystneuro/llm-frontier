@@ -4,7 +4,7 @@ This repository tracks how cheaply a given level of large language model capabil
 
 The background, the method, and the argument for why the cheap end of the range matters are in the post [What Happens When the Cost of Intelligence Drops 100x](https://catalystneuro.com/blog/cost-of-intelligence-drops-100x/).
 
-## What It Produces
+## Outputs
 
 | File | Contents |
 |---|---|
