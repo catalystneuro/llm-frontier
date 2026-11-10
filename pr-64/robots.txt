@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+# Pull request previews are copies of these pages, not pages of their own.
+Disallow: /previews/
+
+Sitemap: https://llm-frontier.catalystneuro.com/sitemap.xml
