@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Notes &middot; LLM Frontier</title>
+  <meta name="description" content="A dated log of index recompositions, gaps, corrections, and method changes behind the LLM Frontier dashboard.">
+  <link rel="canonical" href="https://llm-frontier.catalystneuro.com/notes/">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="../"><svg class="site-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="13" fill="#101642"/><path d="M10 50 H22 V38 H34 V26 H46 V16" fill="none" stroke="#7fb2ec" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="46" cy="16" r="6" fill="#eb6834" stroke="#101642" stroke-width="2.5"/></svg>LLM Frontier</a>
+      <nav class="site-nav">
+        <a href="../">Dashboard</a>
+        <a href="../methodology/">Methodology</a>
+        <a href="../feed.xml" type="application/atom+xml"><svg aria-hidden="true" viewBox="0 0 16 16" fill="#eb6834"><path d="M2.5 13.5a1.8 1.8 0 1 1 3.6 0 1.8 1.8 0 0 1-3.6 0z"/><path d="M.7 5.6c5.3 0 9.7 4.3 9.7 9.7H7.9A7.2 7.2 0 0 0 .7 8.1V5.6z"/><path d="M.7.7c8 0 14.6 6.5 14.6 14.6h-2.5C12.8 8.6 7.4 3.2.7 3.2V.7z"/></svg> Feed</a>
+        <a href="https://github.com/catalystneuro/llm-frontier"><svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a>
+        <a href="https://catalystneuro.com" class="nav-cn" aria-label="A CatalystNeuro project"><img src="../cn-logo.png" alt="CatalystNeuro" height="18"></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container prose">
+    <div class="page-head">
+      <h1>Data Notes</h1>
+      <p class="subtitle">A dated log of every event that changed how the numbers on this site should be read: recompositions of the source's indexes, gaps and corrections in the record, and changes to the derivations. Newest first. The rules themselves are on the <a href="../methodology/">methodology page</a>.</p>
+    </div>
+
+    <div class="notes-list">
+      <article class="note" id="n-2026-11-10">
+        <a class="note-date" href="#n-2026-11-10"><time datetime="2026-11-10">November 10, 2026</time></a>
+        <div>
+          <h2>The Decisions tab is split at Decision Index v2.0</h2>
+          <p>From November 7 until this fix was merged on November 10, the Decisions tab drew Decision Index v1.0 and v2.0 scores and costs on one chart, compared them in the cost records, and listed retired v1.0 contestants beside re-scored ones. The tab now has its own index versions: the current view is on the v2.0 basis, and v1.0 (through November 6) is an archive in the version dropdown. The updater also refuses a Decision Index fetch whose scores shift by a median of more than 2 points until a new version is declared. <a href="https://github.com/catalystneuro/llm-frontier/pull/59">Pull request 59</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-11-07">
+        <a class="note-date" href="#n-2026-11-07"><time datetime="2026-11-07">November 7, 2026</time></a>
+        <div>
+          <h2>Decision Index v2.0</h2>
+          <p>Artificial Analysis recomposed the <a href="https://artificialanalysis.ai/evaluations/artificial-analysis-decision-index">Decision Index</a>: AA-Paperclip, EvalSafe-O*NET-AA and AA-Symmetry joined the index, WildGuardTest was removed, every evaluation is scored on the Decision Score, and language models now answer with probabilities. The live set went from 38 contestants to 21. The 20 contestants measured under both versions were re-scored a median of 9.8 points higher at a median of 4.3 times the measured cost, so Decision Index scores and costs before and after this date are not comparable.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-11-03">
+        <a class="note-date" href="#n-2026-11-03"><time datetime="2026-11-03">November 3, 2026</time></a>
+        <div>
+          <h2>Intelligence Index v5.0.1</h2>
+          <p>Artificial Analysis regraded every model on CritPt v2 with the CritPt authors' grading fixes. The composition and weights are unchanged and live scores moved a median of 0.2 points, so v5.0.1 continues the era that began on October 24 and no records reset; the current views have been labeled v5.0.1 since November 9. <a href="https://github.com/catalystneuro/llm-frontier/pull/58">Pull request 58</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-10-27">
+        <a class="note-date" href="#n-2026-10-27"><time datetime="2026-10-27">October 27, 2026</time></a>
+        <div>
+          <h2>Updates resume after a four-day gap</h2>
+          <p>The updater failed on every run from October 23 to October 27, because the v5.0 recomposition removed the field the Knowledge Work tab read. No observations exist for October 24 to 26, and the first v5.0 measurements are dated October 27. GDPval-AA has since been read from its raw Elo and normalized, records in the new era open on its first fetch, and history is projected onto the v5.0 basis from the October 27 measurements. <a href="https://github.com/catalystneuro/llm-frontier/pull/54">Pull request 54</a>, <a href="https://github.com/catalystneuro/llm-frontier/pull/57">pull request 57</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-10-24">
+        <a class="note-date" href="#n-2026-10-24"><time datetime="2026-10-24">October 24, 2026</time></a>
+        <div>
+          <h2>Intelligence Index v5.0</h2>
+          <p>Artificial Analysis recomposed the Intelligence Index: FrontierCode 2.0, Terminal-Bench-Science and HLE-Diamond joined; GDPval-AA, SciCode, AA-LCR and Humanity's Last Exam were removed; and CritPt was replaced by CritPt v2. The live comparison set was cut to about 72 models, live models were re-scored a median of 10 points lower, and the new suite costs about twice as much to run. Scores and measured costs per task before and after this date are not comparable; v4.3 (through October 23) is an archive.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-10-19">
+        <a class="note-date" href="#n-2026-10-19"><time datetime="2026-10-19">October 19, 2026</time></a>
+        <div>
+          <h2>Decision Index observation begins</h2>
+          <p>The first Decision Index contestants were recorded on this date, and the Decisions tab was published on October 29. Release dates are not published for decision models, so every contestant on that tab is dated by its first observation, and the tab has no history before October 19. <a href="https://github.com/catalystneuro/llm-frontier/pull/52">Pull request 52</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-10-14">
+        <a class="note-date" href="#n-2026-10-14"><time datetime="2026-10-14">October 14, 2026</time></a>
+        <div>
+          <h2>Updates every three hours</h2>
+          <p>The updater moved from four runs a day, its schedule since September 4, to a run every three hours. A change in price or score is dated to the day of the run that first observed it. <a href="https://github.com/catalystneuro/llm-frontier/pull/51">Pull request 51</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-09-22">
+        <a class="note-date" href="#n-2026-09-22"><time datetime="2026-09-22">September 22, 2026</time></a>
+        <div>
+          <h2>Claude Opus 5.5 is dated to its release day</h2>
+          <p>Artificial Analysis dates four of Claude Opus 5.5's effort variants September 17, five days before the model was available. An override dates them September 22, so the model's variants form one advance on its release day. The stored history keeps the source's value; the correction is applied when the outputs are built. <a href="https://github.com/catalystneuro/llm-frontier/pull/48">Pull request 48</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-09-21-price-moves">
+        <a class="note-date" href="#n-2026-09-21-price-moves"><time datetime="2026-09-21">September 21, 2026</time></a>
+        <div>
+          <h2>A 20% price move counts as an advance</h2>
+          <p>A price change on a model already on the frontier used to count only when it moved by at least two cents, which hid real cuts on cheap models. It now counts when it moved by at least two cents or at least twenty percent. Rebuilding the history under the new rule surfaced one previously hidden advance, on the Instruction Following tab. <a href="https://github.com/catalystneuro/llm-frontier/pull/43">Pull request 43</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-09-21-coding">
+        <a class="note-date" href="#n-2026-09-21-coding"><time datetime="2026-09-21">September 21, 2026</time></a>
+        <div>
+          <h2>Coding scores restored</h2>
+          <p>The Coding tab was empty from the September 19 data update until this date. Artificial Analysis renamed the Terminal-Bench 2.1 field in its payload, so no coding score was found for any model and the stored scores were dropped. The scores were restored for 124 live models, and the updater now refuses a fetch in which a capability that history has scores for is reported by no live model. <a href="https://github.com/catalystneuro/llm-frontier/pull/45">Pull request 45</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-09-11">
+        <a class="note-date" href="#n-2026-09-11"><time datetime="2026-09-11">September 11, 2026</time></a>
+        <div>
+          <h2>Time per task</h2>
+          <p>Artificial Analysis's measured end-to-end time per Intelligence Index task has been recorded live since this date, and a change of more than 20% is kept as a dated observation. Measurements for July 7 through September 4, 2026, 741 of them across 50 days, were recovered from archived copies of the source's pages and appear only in the v4.1 archive. <a href="https://github.com/catalystneuro/llm-frontier/pull/34">Pull request 34</a>, <a href="https://github.com/catalystneuro/llm-frontier/pull/37">pull request 37</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-09-09">
+        <a class="note-date" href="#n-2026-09-09"><time datetime="2026-09-09">September 9, 2026</time></a>
+        <div>
+          <h2>History is drawn on the current index basis</h2>
+          <p>The current views began projecting history onto the current index: scores are the current measurements, and costs before a recomposition are estimated by scaling each model's first settled measurement by its own dated price ratios. Estimated points are marked in chart tooltips, and the archive views show only actual measurements. On the same day the Agentic Tool Use tab began reading AutomationBench-AA, the successor to the Agentic Index, which the source removed in v4.3. <a href="https://github.com/catalystneuro/llm-frontier/pull/23">Pull request 23</a>, <a href="https://github.com/catalystneuro/llm-frontier/pull/24">pull request 24</a>, <a href="https://github.com/catalystneuro/llm-frontier/pull/12">pull request 12</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-09-07">
+        <a class="note-date" href="#n-2026-09-07"><time datetime="2026-09-07">September 7, 2026</time></a>
+        <div>
+          <h2>A mass re-measurement of the v4.3 suite</h2>
+          <p>The measured cost moved by more than 10% for 129 models at once, two days after the v4.3 recomposition. A date like this is treated as a re-measurement of the evaluation suite, not a wave of price changes: it produces no advances, and the v4.3 views compare against the values settled on this date, not the first v4.3 measurements of September 5. <a href="https://github.com/catalystneuro/llm-frontier/pull/13">Pull request 13</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-09-05">
+        <a class="note-date" href="#n-2026-09-05"><time datetime="2026-09-05">September 5, 2026</time></a>
+        <div>
+          <h2>Intelligence Index v4.3</h2>
+          <p>Artificial Analysis recomposed the Intelligence Index (AutomationBench-AA joined, &tau;&sup3;-Banking was removed) and cut the live comparison set to about 52 models. Live models were re-scored 4 to 12 points lower, the new suite costs more to run, and 117 models were retired with their earlier scores. Scores and measured costs before and after this date are not comparable, so recompositions have been declared as eras since: records reset at the boundary, v4.1 (through September 4) is an archive, and collapse and halving figures pool the declines within each era. <a href="https://github.com/catalystneuro/llm-frontier/pull/9">Pull request 9</a>, <a href="https://github.com/catalystneuro/llm-frontier/pull/11">pull request 11</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-08-30">
+        <a class="note-date" href="#n-2026-08-30"><time datetime="2026-08-30">August 30, 2026</time></a>
+        <div>
+          <h2>Capability scores</h2>
+          <p>The updater began recording per-capability scores from the same source, shown as the dashboard's tabs. Capability scores are the latest measured values; only prices are tracked over time. <a href="https://github.com/catalystneuro/llm-frontier/pull/6">Pull request 6</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-08-26">
+        <a class="note-date" href="#n-2026-08-26"><time datetime="2026-08-26">August 26, 2026</time></a>
+        <div>
+          <h2>GLM-5.3-Flash is marked as open weights</h2>
+          <p>Artificial Analysis lists GLM-5.3-Flash as proprietary, but Z.ai has published the <a href="https://huggingface.co/zai-org/GLM-5.3-Flash">weights</a>. An override marks the model as open weights when the outputs are built; the stored history keeps the source's value. <a href="https://github.com/catalystneuro/llm-frontier/pull/1">Pull request 1</a>.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-08-19">
+        <a class="note-date" href="#n-2026-08-19"><time datetime="2026-08-19">August 19, 2026</time></a>
+        <div>
+          <h2>Observation begins</h2>
+          <p>Prices have been recorded since this date, and every change is kept, so from here on each snapshot and record uses the price in effect at the time. Before this date the only available value is a model's price at first observation, indexed by its release date, except for the price events recorded by hand. Earlier cuts that are not recorded make older points look cheaper than they were.</p>
+        </div>
+      </article>
+      <article class="note" id="n-2026-07-30">
+        <a class="note-date" href="#n-2026-07-30"><time datetime="2026-07-30">July 30, 2026</time></a>
+        <div>
+          <h2>Two price cuts recorded by hand</h2>
+          <p>OpenAI cut GPT-5.6 Luna from $1.00/$6.00 to $0.20/$1.20 per million tokens, and GPT-5.6 Terra from $2.50/$15 to $2.00/$12. Both happened before observation began, so they are recorded by hand in <a href="https://github.com/catalystneuro/llm-frontier/blob/main/data/price-events.json">price-events.json</a>, and the two models are drawn at their launch prices before this date.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="notes-end">Found something that looks wrong? <a href="https://github.com/catalystneuro/llm-frontier/issues">Open an issue</a>; corrections are logged here.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      A <a href="https://catalystneuro.com">CatalystNeuro</a> project &middot; data from <a href="https://artificialanalysis.ai/">Artificial Analysis</a> &middot; <a href="../about/">about and citing</a> &middot; <a href="../notes/">data notes</a> &middot; <a href="https://github.com/catalystneuro/llm-frontier">source and history on GitHub</a>
+    </div>
+  </footer>
+</body>
+</html>

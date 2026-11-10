@@ -1161,6 +1161,29 @@ def test_build_output_adds_the_decision_tab():
     json.dumps(out)
 
 
+# ---- citation metadata ----
+
+def test_citation_file_names_the_site_and_no_person():
+    lines = (REPO / "CITATION.cff").read_text().splitlines()
+    fields = dict(line.split(": ", 1) for line in lines if line and not line.startswith((" ", "-")) and ": " in line)
+    assert fields["cff-version"] == "1.2.0"
+    assert fields["title"] == '"LLM Frontier"'
+    assert fields["url"] == '"https://llm-frontier.catalystneuro.com/"'
+    assert fields["repository-code"] == '"https://github.com/catalystneuro/llm-frontier"'
+    assert fields["license"] == "BSD-3-Clause"
+    assert fields["message"].startswith('"') and "Artificial Analysis" in fields["message"]
+    # One author, an organization: an entity has a name, a person has given and family names.
+    start = lines.index("authors:")
+    block = []
+    for line in lines[start + 1:]:
+        if not line.startswith((" ", "-")):
+            break
+        block.append(line.strip())
+    assert block[0] == '- name: "CatalystNeuro"'
+    assert sum(1 for b in block if b.startswith("- ")) == 1
+    assert not any("given-names" in b or "family-names" in b for b in block)
+
+
 # ---- invariants on the real repository data ----
 
 @pytest.mark.skipif(not (REPO / "data/history.json").exists(), reason="repository data not present")

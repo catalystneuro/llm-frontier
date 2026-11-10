@@ -422,6 +422,144 @@ def test_metric_page_defaults_to_its_metric(browser, site_url):
         ctx.close()
 
 
+def test_notes_and_about_pages_load_and_link(browser, site_url):
+    ctx = browser.new_context(viewport={"width": 1300, "height": 900})
+    page = ctx.new_page()
+    errors = []
+    page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+    page.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
+    try:
+        for slug, heading in (("notes", "Data Notes"), ("about", "About")):
+            page.goto(site_url + f"/{slug}/")
+            assert page.locator("h1").inner_text() == heading
+            # Every link into the site resolves: the nav, the footer, and the prose.
+            hrefs = page.locator("a[href]").evaluate_all(
+                "(as, origin) => [...new Set(as.map(a => a.href).filter(h => h.startsWith(origin)).map(h => h.split('#')[0]))]",
+                site_url)
+            assert len(hrefs) >= 4
+            for href in hrefs:
+                assert page.request.get(href).status == 200, href
+        # Each note has an anchor of its own, newest first.
+        page.goto(site_url + "/notes/")
+        ids = page.locator(".note").evaluate_all("ns => ns.map(n => n.id)")
+        dates = [i[2:12] for i in ids]
+        assert len(ids) == len(set(ids)) >= 10 and dates == sorted(dates, reverse=True)
+        assert page.locator(".note-date").first.get_attribute("href") == "#" + ids[0]
+        # The dashboard and a metric page link to both.
+        for path in ("/", "/coding/"):
+            page.goto(site_url + path)
+            page.wait_for_selector("#pfc-frontier svg")
+            for slug in ("notes", "about"):
+                href = page.locator(f".site-footer a[href$='{slug}/']").evaluate("a => a.href")
+                assert href == site_url + f"/{slug}/"
+        assert errors == []
+    finally:
+        ctx.close()
+
+
+def test_csv_download_has_a_row_per_model(browser, site_url):
+    import csv
+    import io
+    import json
+
+    data = json.loads((REPO / "build/llm-frontier.json").read_text())
+    ctx = browser.new_context(viewport={"width": 1300, "height": 900}, accept_downloads=True)
+    page = ctx.new_page()
+    errors = []
+    page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+    page.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
+
+    def download(path):
+        page.goto(site_url + path)
+        page.wait_for_selector("#pfc-frontier svg")
+        with page.expect_download() as got:
+            page.locator("#pfc-dl-csv").click()
+        name = got.value.suggested_filename
+        rows = list(csv.reader(io.StringIO(Path(got.value.path()).read_text(encoding="utf-8"), newline="")))
+        return name, rows
+
+    try:
+        name, rows = download("/")
+        assert name == f"llm-frontier-models-{data['updated']}.csv"
+        assert rows[0][:6] == ["model", "lab", "release_date", "intelligence_index", "index_version", "cost_per_task_usd"]
+        assert len(rows) == len(data["models"]) + 1
+        assert len({len(r) for r in rows}) == 1
+        assert len(rows[0]) == 9 + sum(1 for c in data["capabilities"] if not c.get("own"))
+        by_name = {r[0]: r for r in rows[1:]}
+        m = data["models"][-1]
+        assert by_name[m[0]][1] == m[1] and float(by_name[m[0]][3]) == m[3] and float(by_name[m[0]][5]) == m[4]
+        # No cell can open a formula in a spreadsheet.
+        assert not any(cell[:1] in "=+@" for r in rows[1:] for cell in r[:3])
+        assert page.locator("#pfc-dl-json").evaluate("a => a.href") == site_url + "/data/llm-frontier.json"
+        if data.get("decision_models"):
+            name, rows = download("/decision/")
+            assert name == f"llm-frontier-decision-models-{data['updated']}.csv"
+            assert "cost_per_1k_tasks_usd" in rows[0]
+            assert len(rows) == len(data["decision_models"]) + 1
+            assert page.locator("#pfc-dl-json").evaluate("a => a.href") == site_url + "/data/llm-frontier.json"
+        assert errors == []
+    finally:
+        ctx.close()
+
+
+def test_embed_mode_shows_only_the_frontier_chart(browser, site_url):
+    ctx = browser.new_context(viewport={"width": 800, "height": 660})
+    page = ctx.new_page()
+    errors = []
+    page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+    page.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
+    try:
+        # The snippet the Embed button offers carries the current view.
+        page.goto(site_url + "/coding/")
+        page.wait_for_selector("#pfc-frontier svg")
+        assert page.locator("#pfc-embed-box").is_hidden()
+        page.locator("#pfc-embed-btn").click()
+        code = page.locator("#pfc-embed-code").input_value()
+        assert code.startswith("<iframe ") and f'src="{site_url}/coding/?embed=1"' in code
+        # Embed mode keeps the chart and drops the page around it.
+        page.goto(site_url + "/coding/?embed=1")
+        page.wait_for_selector("#pfc-frontier svg text:text('Terminal-Bench 2.1')")
+        assert page.locator("#pfc-frontier svg").is_visible()
+        assert page.locator("#pfc-frontier-slider").is_visible()
+        for sel in (".site-header", ".site-footer", "#pfc-cap-tabs", ".pfc-intro", "#pfc-records", "#pfc-advances", ".pfc-notes"):
+            assert page.locator(sel).is_hidden(), sel
+        credit = page.locator(".pfc-embed-credit a")
+        assert credit.get_attribute("target") == "_blank"
+        assert credit.evaluate("a => a.href") == site_url + "/coding/"
+        # The chart fits the frame: no sideways scroll, and it is re-measured.
+        page.wait_for_timeout(400)
+        assert page.evaluate("document.documentElement.scrollWidth - window.innerWidth") <= 2
+        box = page.locator("#pfc-frontier svg").bounding_box()
+        assert box["x"] >= 0 and box["x"] + box["width"] <= 800
+        # The hash still picks the view, and the credit link carries it along.
+        page.goto(site_url + "/?embed=1#coding")
+        page.wait_for_selector("#pfc-frontier svg text:text('Terminal-Bench 2.1')")
+        assert page.evaluate("location.search") == "?embed=1"
+        assert page.locator(".site-header").is_hidden()
+        with page.expect_popup() as popup:
+            page.locator(".pfc-embed-credit a").click()
+        assert popup.value.url == site_url + "/#coding"
+        assert errors == []
+    finally:
+        ctx.close()
+
+
+def test_new_pages_never_overflow_a_phone(browser, site_url):
+    ctx = browser.new_context(viewport={"width": 390, "height": 844})
+    page = ctx.new_page()
+    try:
+        for path in ("/notes/", "/about/"):
+            page.goto(site_url + path)
+            assert page.evaluate("document.documentElement.scrollWidth - window.innerWidth") <= 2, path
+        # The dashboard's own foot, with the embed box open.
+        page.goto(site_url + "/")
+        page.wait_for_selector("#pfc-records svg")
+        page.locator("#pfc-embed-btn").click()
+        assert page.evaluate("document.documentElement.scrollWidth - window.innerWidth") <= 2
+    finally:
+        ctx.close()
+
+
 @pytest.mark.skipif(not (REPO / "data/decision-history.json").exists(), reason="no Decision Index data")
 def test_decision_tab_uses_its_own_models_and_axis(browser, site_url):
     ctx = browser.new_context(viewport={"width": 1300, "height": 900})

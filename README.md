@@ -96,3 +96,7 @@ The Intelligence Index is one aggregate of nine evaluations, so two models with 
 ## License
 
 BSD 3-Clause. Data is derived from [Artificial Analysis](https://artificialanalysis.ai/), whose terms govern its use.
+
+## Citing
+
+The site's [about page](https://llm-frontier.catalystneuro.com/about/) has a suggested citation, and `CITATION.cff` carries the same information for GitHub's "Cite this repository" button. Cite the date you read the site, since the numbers change every few hours, and credit Artificial Analysis as the source of the measurements. Events that changed how the numbers should be read (index recompositions, gaps, corrections) are logged in the site's [data notes](https://llm-frontier.catalystneuro.com/notes/), in `site/notes/index.html`; add an entry there when one happens.
