@@ -4,9 +4,17 @@
   <link href="https://llm-frontier.catalystneuro.com/decision/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-decision.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-decision.xml</id>
-  <updated>2026-11-10T06:00:00Z</updated>
+  <updated>2026-11-11T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of Decision Index, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-11-11: Claude Haiku 5.5 (Max) (price change, Decision Index 76.5)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-11-11-claude-haiku-5-5.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-11-11/anthropic_claude-haiku-5-5</id>
+    <updated>2026-11-11T00:00:00Z</updated>
+    <summary>Claude Haiku 5.5 (Max): price moved from $6.240 to $6.22 per 1K tasks; now the cheapest way to reach Decision Index 75.7 to 76.5.</summary>
+  </entry>
   <entry>
     <title>2026-11-06: Celeris-1.1 Decision (price change, Decision Index 60.9)</title>
     <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />

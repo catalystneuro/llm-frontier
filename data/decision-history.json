@@ -2,13 +2,13 @@
  "models": {
   "anthropic_claude-haiku-5-5": {
    "capabilities": {},
-   "cost_per_task": 6.239825,
+   "cost_per_task": 6.218277,
    "creator": "Anthropic",
    "first_seen": "2026-10-19",
    "host": "Anthropic",
-   "intelligence_index": 77.1,
+   "intelligence_index": 76.5,
    "kind": "llm",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Claude Haiku 5.5 (Max)",
    "observations": [
     [
@@ -22,13 +22,19 @@
      6.239825,
      77.1,
      32.648
+    ],
+    [
+     "2026-11-11",
+     6.218277,
+     76.5,
+     32.323
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 32.648,
+   "time_per_task": 32.323,
    "ttft": null
   },
   "anthropic_claude-haiku-5-5-high": {
@@ -58,13 +64,13 @@
   },
   "anthropic_claude-haiku-5-5-low": {
    "capabilities": {},
-   "cost_per_task": 0.858097,
+   "cost_per_task": 0.861122,
    "creator": "Anthropic",
    "first_seen": "2026-10-19",
    "host": "Anthropic",
-   "intelligence_index": 66.7,
+   "intelligence_index": 67.2,
    "kind": "llm",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Claude Haiku 5.5 (Low)",
    "observations": [
     [
@@ -78,13 +84,19 @@
      0.858097,
      66.7,
      3.188
+    ],
+    [
+     "2026-11-11",
+     0.861122,
+     67.2,
+     3.013
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 3.188,
+   "time_per_task": 3.013,
    "ttft": null
   },
   "anthropic_claude-haiku-5-5-medium": {
@@ -189,13 +201,13 @@
   },
   "baseten_elephant-9b": {
    "capabilities": {},
-   "cost_per_task": 0.09164,
+   "cost_per_task": 0.092251,
    "creator": "Base Labs",
    "first_seen": "2026-10-28",
    "host": "Base Labs",
-   "intelligence_index": 67.5,
+   "intelligence_index": 66.4,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Elephant 9B",
    "observations": [
     [
@@ -215,24 +227,30 @@
      0.09164,
      67.5,
      0.07
+    ],
+    [
+     "2026-11-11",
+     0.092251,
+     66.4,
+     0.079
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-28",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.07,
+   "time_per_task": 0.079,
    "ttft": null
   },
   "baseten_mammoth-27b": {
    "capabilities": {},
-   "cost_per_task": 0.261827,
+   "cost_per_task": 0.263573,
    "creator": "Base Labs",
    "first_seen": "2026-11-07",
    "host": "Base Labs",
-   "intelligence_index": 72.4,
+   "intelligence_index": 71.4,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Mammoth 27B",
    "observations": [
     [
@@ -240,24 +258,30 @@
      0.261827,
      72.4,
      0.096
+    ],
+    [
+     "2026-11-11",
+     0.263573,
+     71.4,
+     0.106
     ]
    ],
    "open_weights": false,
    "release_date": "2026-11-07",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.096,
+   "time_per_task": 0.106,
    "ttft": null
   },
   "celeris_celeris-1-1-decision": {
    "capabilities": {},
-   "cost_per_task": 0.013602,
+   "cost_per_task": 0.013674,
    "creator": "Celeris",
    "first_seen": "2026-11-05",
    "host": "Celeris",
-   "intelligence_index": 63.5,
+   "intelligence_index": 62.0,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Celeris-1.1 Decision",
    "observations": [
     [
@@ -277,13 +301,19 @@
      0.013602,
      63.5,
      0.056
+    ],
+    [
+     "2026-11-11",
+     0.013674,
+     62.0,
+     0.061
     ]
    ],
    "open_weights": false,
    "release_date": "2026-11-05",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.056,
+   "time_per_task": 0.061,
    "ttft": null
   },
   "celeris_celeris-1-decision": {
@@ -313,13 +343,13 @@
   },
   "cloudflare_clef": {
    "capabilities": {},
-   "cost_per_task": 0.859083,
+   "cost_per_task": 0.863148,
    "creator": "Cloudflare",
    "first_seen": "2026-10-19",
    "host": "Cloudflare",
-   "intelligence_index": 60.2,
+   "intelligence_index": 60.3,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Clef",
    "observations": [
     [
@@ -333,13 +363,19 @@
      0.859083,
      60.2,
      0.335
+    ],
+    [
+     "2026-11-11",
+     0.863148,
+     60.3,
+     0.354
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.335,
+   "time_per_task": 0.354,
    "ttft": null
   },
   "cloudflare_clef-flash": {
@@ -369,13 +405,13 @@
   },
   "cloudflare_clef-omni": {
    "capabilities": {},
-   "cost_per_task": 0.526892,
+   "cost_per_task": 0.529386,
    "creator": "Cloudflare",
    "first_seen": "2026-10-19",
    "host": "Cloudflare",
-   "intelligence_index": 59.3,
+   "intelligence_index": 57.8,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Clef-Omni",
    "observations": [
     [
@@ -389,13 +425,19 @@
      0.526892,
      59.3,
      0.183
+    ],
+    [
+     "2026-11-11",
+     0.529386,
+     57.8,
+     0.192
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.183,
+   "time_per_task": 0.192,
    "ttft": null
   },
   "deepinfra_gemma-4-31b": {
@@ -450,13 +492,13 @@
   },
   "fastino_glide-v1-2": {
    "capabilities": {},
-   "cost_per_task": 0.779703,
+   "cost_per_task": 0.780402,
    "creator": "Fastino",
    "first_seen": "2026-11-04",
    "host": "Fastino",
-   "intelligence_index": 72.8,
+   "intelligence_index": 72.5,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "GLiDE v1.2",
    "observations": [
     [
@@ -470,24 +512,30 @@
      0.779703,
      72.8,
      0.289
+    ],
+    [
+     "2026-11-11",
+     0.780402,
+     72.5,
+     0.284
     ]
    ],
    "open_weights": false,
    "release_date": "2026-11-04",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.289,
+   "time_per_task": 0.284,
    "ttft": null
   },
   "inception_mercury-decide": {
    "capabilities": {},
-   "cost_per_task": 0.06916,
+   "cost_per_task": 0.069525,
    "creator": "Inception",
    "first_seen": "2026-10-19",
    "host": "Inception",
-   "intelligence_index": 63.0,
+   "intelligence_index": 62.1,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Mercury Decide",
    "observations": [
     [
@@ -501,24 +549,30 @@
      0.06916,
      63.0,
      0.25
+    ],
+    [
+     "2026-11-11",
+     0.069525,
+     62.1,
+     0.245
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.25,
+   "time_per_task": 0.245,
    "ttft": null
   },
   "liquid-ai_d1": {
    "capabilities": {},
-   "cost_per_task": 0.06299,
+   "cost_per_task": 0.063351,
    "creator": "Liquid AI",
    "first_seen": "2026-10-19",
    "host": "Liquid AI",
-   "intelligence_index": 61.6,
+   "intelligence_index": 60.8,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "d1",
    "observations": [
     [
@@ -532,24 +586,30 @@
      0.06299,
      61.6,
      0.141
+    ],
+    [
+     "2026-11-11",
+     0.063351,
+     60.8,
+     0.151
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.141,
+   "time_per_task": 0.151,
    "ttft": null
   },
   "liquid-ai_d1-ultra": {
    "capabilities": {},
-   "cost_per_task": 0.132278,
+   "cost_per_task": 0.133036,
    "creator": "Liquid AI",
    "first_seen": "2026-10-19",
    "host": "Liquid AI",
-   "intelligence_index": 70.4,
+   "intelligence_index": 70.6,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "d1-ultra",
    "observations": [
     [
@@ -563,13 +623,19 @@
      0.132278,
      70.4,
      0.295
+    ],
+    [
+     "2026-11-11",
+     0.133036,
+     70.6,
+     0.301
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.295,
+   "time_per_task": 0.301,
    "ttft": null
   },
   "nace_drex-max": {
@@ -605,13 +671,13 @@
   },
   "nace_drex-max-v1-1": {
    "capabilities": {},
-   "cost_per_task": 0.102151,
+   "cost_per_task": 0.102676,
    "creator": "Nace.AI",
    "first_seen": "2026-11-05",
    "host": "Nace.AI",
-   "intelligence_index": 73.4,
+   "intelligence_index": 72.6,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Drex Max v1.1",
    "observations": [
     [
@@ -625,13 +691,19 @@
      0.102151,
      73.4,
      0.275
+    ],
+    [
+     "2026-11-11",
+     0.102676,
+     72.6,
+     0.283
     ]
    ],
    "open_weights": false,
    "release_date": "2026-11-05",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.275,
+   "time_per_task": 0.283,
    "ttft": null
   },
   "nace_drex-v1-5": {
@@ -661,13 +733,13 @@
   },
   "nace_drex-v2-0": {
    "capabilities": {},
-   "cost_per_task": 0.198907,
+   "cost_per_task": 0.199958,
    "creator": "Nace.AI",
    "first_seen": "2026-10-30",
    "host": "Nace.AI",
-   "intelligence_index": 63.4,
+   "intelligence_index": 61.6,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Drex 2.0",
    "observations": [
     [
@@ -681,13 +753,19 @@
      0.198907,
      63.4,
      0.254
+    ],
+    [
+     "2026-11-11",
+     0.199958,
+     61.6,
+     0.255
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-30",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.254,
+   "time_per_task": 0.255,
    "ttft": null
   },
   "openai_gpt-6-1-sol": {
@@ -742,13 +820,13 @@
   },
   "openai_gpt-6-luna": {
    "capabilities": {},
-   "cost_per_task": 1.530371,
+   "cost_per_task": 1.548457,
    "creator": "OpenAI",
    "first_seen": "2026-10-19",
    "host": "OpenAI",
-   "intelligence_index": 76.4,
+   "intelligence_index": 75.7,
    "kind": "llm",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "GPT-6 Luna (Max)",
    "observations": [
     [
@@ -762,13 +840,19 @@
      1.530371,
      76.4,
      11.344
+    ],
+    [
+     "2026-11-11",
+     1.548457,
+     75.7,
+     11.36
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 11.344,
+   "time_per_task": 11.36,
    "ttft": null
   },
   "openai_gpt-6-luna-decisions": {
@@ -797,7 +881,7 @@
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
-   "retired": false,
+   "retired": true,
    "speed_tps": null,
    "time_per_task": 0.209,
    "ttft": null
@@ -829,13 +913,13 @@
   },
   "openai_gpt-6-luna-low": {
    "capabilities": {},
-   "cost_per_task": 0.483673,
+   "cost_per_task": 0.4852,
    "creator": "OpenAI",
    "first_seen": "2026-10-19",
    "host": "OpenAI",
-   "intelligence_index": 69.2,
+   "intelligence_index": 68.8,
    "kind": "llm",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "GPT-6 Luna (Low)",
    "observations": [
     [
@@ -849,13 +933,19 @@
      0.483673,
      69.2,
      4.651
+    ],
+    [
+     "2026-11-11",
+     0.4852,
+     68.8,
+     4.445
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 4.651,
+   "time_per_task": 4.445,
    "ttft": null
   },
   "openai_gpt-6-luna-medium": {
@@ -910,13 +1000,13 @@
   },
   "openrouter_microsoft-decision-1": {
    "capabilities": {},
-   "cost_per_task": 0.141753,
+   "cost_per_task": 0.142562,
    "creator": "Microsoft",
    "first_seen": "2026-10-19",
    "host": "OpenRouter",
-   "intelligence_index": 62.8,
+   "intelligence_index": 62.1,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Microsoft-Decision-1",
    "observations": [
     [
@@ -930,24 +1020,30 @@
      0.141753,
      62.8,
      0.261
+    ],
+    [
+     "2026-11-11",
+     0.142562,
+     62.1,
+     0.274
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.261,
+   "time_per_task": 0.274,
    "ttft": null
   },
   "perplexity_pplx-decider-flash-v1-2": {
    "capabilities": {},
-   "cost_per_task": 0.195612,
+   "cost_per_task": 0.195787,
    "creator": "Perplexity",
    "first_seen": "2026-10-28",
    "host": "Perplexity",
-   "intelligence_index": 61.6,
+   "intelligence_index": 60.1,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Decider Flash v1.2",
    "observations": [
     [
@@ -961,13 +1057,19 @@
      0.195612,
      61.6,
      0.124
+    ],
+    [
+     "2026-11-11",
+     0.195787,
+     60.1,
+     0.134
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-28",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.124,
+   "time_per_task": 0.134,
    "ttft": null
   },
   "perplexity_pplx-decider-v1-1-27b": {
@@ -997,13 +1099,13 @@
   },
   "perplexity_pplx-decider-v1-2": {
    "capabilities": {},
-   "cost_per_task": 0.068106,
+   "cost_per_task": 0.068456,
    "creator": "Perplexity",
    "first_seen": "2026-10-28",
    "host": "Perplexity",
-   "intelligence_index": 70.5,
+   "intelligence_index": 69.8,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Decider v1.2",
    "observations": [
     [
@@ -1017,24 +1119,30 @@
      0.068106,
      70.5,
      0.222
+    ],
+    [
+     "2026-11-11",
+     0.068456,
+     69.8,
+     0.229
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-28",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.222,
+   "time_per_task": 0.229,
    "ttft": null
   },
   "subquadratic_subq-snap-1-1": {
    "capabilities": {},
-   "cost_per_task": 0.136202,
+   "cost_per_task": 0.136902,
    "creator": "Subquadratic",
    "first_seen": "2026-10-28",
    "host": "Subquadratic",
-   "intelligence_index": 69.2,
+   "intelligence_index": 67.9,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "SubQ Snap 1.1",
    "observations": [
     [
@@ -1048,13 +1156,19 @@
      0.136202,
      69.2,
      0.138
+    ],
+    [
+     "2026-11-11",
+     0.136902,
+     67.9,
+     0.144
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-28",
    "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.138,
+   "time_per_task": 0.144,
    "ttft": null
   },
   "typesafe_jev-1-13": {
@@ -1084,13 +1198,13 @@
   },
   "typesafe_jev-1-14": {
    "capabilities": {},
-   "cost_per_task": 0.155546,
+   "cost_per_task": 0.156228,
    "creator": "TypeSafe",
    "first_seen": "2026-10-19",
    "host": "TypeSafe",
-   "intelligence_index": 67.0,
+   "intelligence_index": 66.2,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "Jev 1.14",
    "observations": [
     [
@@ -1104,6 +1218,12 @@
      0.155546,
      67.0,
      0.092
+    ],
+    [
+     "2026-11-11",
+     0.156228,
+     66.2,
+     0.092
     ]
    ],
    "open_weights": false,
@@ -1114,5 +1234,5 @@
    "ttft": null
   }
  },
- "updated": "2026-11-10"
+ "updated": "2026-11-11"
 }
