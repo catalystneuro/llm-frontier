@@ -772,6 +772,268 @@ def test_build_output_shape():
     json.dumps(out)  # everything must be serializable
 
 
+# ---- posting advances to Bluesky and Mastodon ----
+
+def social_out(*groups):
+    """A dashboard output holding only advances; each argument is one advance."""
+    return {"advances": list(groups)}
+
+
+class FakeSocialHttp:
+    """Stands in for the network: records every request and answers the
+    Bluesky and Mastodon endpoints the poster uses."""
+
+    def __init__(self, fail=()):
+        self.calls, self.fail = [], tuple(fail)
+
+    def __call__(self, method, url, headers, body=None):
+        self.calls.append((method, url, headers, body))
+        if any(f in url for f in self.fail):
+            return 500, b'{"error":"InternalServerError","message":"boom"}'
+        if "createSession" in url:
+            return 200, b'{"accessJwt":"jwt-1","did":"did:plc:poster"}'
+        if "resolveHandle" in url:
+            return 200, b'{"did":"did:plc:lab"}'
+        if "uploadBlob" in url:
+            return 200, b'{"blob":{"$type":"blob","ref":{"$link":"bafy"},"mimeType":"image/png","size":3}}'
+        if "createRecord" in url:
+            return 200, b'{"uri":"at://did:plc:poster/app.bsky.feed.post/1","cid":"c"}'
+        if url.endswith("/api/v2/media"):
+            return 200, b'{"id":"m1"}'
+        if url.endswith("/api/v1/statuses"):
+            return 200, b'{"id":"s1","url":"https://social.example/@frontier/1"}'
+        return 404, b"{}"
+
+    def records(self):
+        return [json.loads(b)["record"] for m, u, h, b in self.calls if "createRecord" in u]
+
+    def statuses(self):
+        return [json.loads(b) for m, u, h, b in self.calls if u.endswith("/api/v1/statuses")]
+
+
+SOCIAL_ENV = {"BLUESKY_HANDLE": "frontier.example.com", "BLUESKY_APP_PASSWORD": "app-pass-123",
+              "MASTODON_BASE_URL": "https://social.example", "MASTODON_ACCESS_TOKEN": "tok-456"}
+
+
+def social_run(tmp_path, out, env=SOCIAL_ENV, http=None, state=None, **kw):
+    from llm_cost_frontier.social import run
+    path = tmp_path / "posted.json"
+    if state is not None:
+        path.write_text(json.dumps(state))
+    http = http or FakeSocialHttp()
+    kw.setdefault("today", dt.date(2026, 11, 10))
+    done = run(out, path, tmp_path / "images", {}, env, http=http, sleep=lambda s: None, **kw)
+    return done, http, (json.loads(path.read_text()) if path.exists() else None)
+
+
+def test_social_groups_follow_the_cards():
+    from llm_cost_frontier.social import advance_groups, card_path, link_for
+    out = social_out(
+        advance(date="2026-11-09", model="Zeta (Max)", base="Zeta", variant="Max", intelligence_index=60.0),
+        advance(date="2026-11-09", model="Zeta (Low)", base="Zeta", variant="Low", intelligence_index=50.0),
+        advance(date="2026-11-01", model="Gamma", intelligence_index=45.0))
+    groups = advance_groups(out)
+    # One post per base model per date, oldest first, named as its card is.
+    assert [g["id"] for g in groups] == ["2026-11-01/gamma", "2026-11-09/zeta"]
+    assert [a["variant"] for a in groups[1]["advances"]] == ["Max", "Low"]
+    assert card_path(groups[1], Path("build/images")) == Path("build/images/advances/2026-11-09-zeta.png")
+    assert link_for(groups[1], "https://example.org/") == "https://example.org/#index~zeta-max"
+
+
+def test_social_text_says_what_the_card_says():
+    from llm_cost_frontier.social import advance_groups, compose
+    one = advance_groups(social_out(advance(model="Gamma (High)", base="Gamma", variant="High", owns_from=40.0, records=[40],
+                                            taken_from=["Beta"], displaced=["Beta"], open_weights=True)))[0]
+    post = compose(one, "mastodon", "https://example.org")
+    assert post["text"] == ("Gamma (High): now the cheapest way to reach index 40.0 to 45.0 at $0.40 per task, taking it from Beta, "
+                            "which left the frontier. New cost record for index ≥ 40. Open weights.\n"
+                            "https://example.org/#index~gamma-high")
+    assert post["alt"].startswith("Gamma (High): now the cheapest way") and "Pareto frontier before and after" in post["alt"]
+    # Bluesky shows the host and carries the address in a facet.
+    assert compose(one, "bluesky", "https://example.org")["text"].endswith("Open weights.\nexample.org")
+    # Reasoning levels share one post, and a qualifier they all carry is said once.
+    levels = advance_groups(social_out(
+        advance(model="Zeta (Max, Default Fallback)", base="Zeta", variant="Max, Default Fallback", intelligence_index=64.0,
+                cost_per_task=26.5, owns_from=62.0, owns_to=64.0, ceiling_from=60.0),
+        advance(model="Zeta (High, Default Fallback)", base="Zeta", variant="High, Default Fallback", intelligence_index=62.0,
+                cost_per_task=9.08, owns_from=60.0, owns_to=62.0, ceiling_from=60.0)))[0]
+    post = compose(levels, "mastodon", "https://example.org")
+    assert post["text"].startswith("Zeta (High and Max; Default Fallback): now on the cost frontier at 2 reasoning levels, "
+                                   "from $9.08 to $26.50 per task. Pushed the intelligence ceiling from 60.0 to 64.0.")
+    assert "By reasoning level: High, Default Fallback, $9.08 per task, index 60.0 to 62.0; Max" in post["alt"]
+    # A price change too small to print is not worded as a move from $x to $x.
+    tiny = advance_groups(social_out(advance(kind="price change", previous_cost=0.067929, cost_per_task=0.067654)))[0]
+    assert "price moved" not in compose(tiny, "mastodon")["text"]
+    real = advance_groups(social_out(advance(kind="price change", previous_cost=0.8, cost_per_task=0.4)))[0]
+    assert "price moved from $0.80 to $0.40 per task" in compose(real, "mastodon")["text"]
+
+
+def test_social_text_drops_clauses_to_fit_and_never_cuts_a_word():
+    from llm_cost_frontier.social import BLUESKY_LIMIT, MASTODON_LIMIT, advance_groups, compose, truncate_words
+    long_names = [f"Competitor Model Number {i} Extended" for i in range(5)]
+    g = advance_groups(social_out(advance(model="Gamma (High)", base="Gamma", variant="High", records=[30, 40],
+                                          taken_from=long_names, displaced=long_names, open_weights=True)))[0]
+    handles = {"Lab": {"bluesky": "lab.example.com", "mastodon": "@lab@social.example"}}
+    blue = compose(g, "bluesky", "https://example.org", handles)
+    assert len(blue["text"]) <= BLUESKY_LIMIT
+    # The long "taking it from" clause is what goes; the record and the mention stay.
+    assert "taking it from" not in blue["text"] and "New cost record for index ≥ 30 and index ≥ 40." in blue["text"]
+    assert blue["mention"] == "@lab.example.com" and "From @lab.example.com." in blue["text"]
+    assert blue["text"].split("\n")[0].endswith(".") and blue["text"].endswith("\nexample.org")
+    masto = compose(g, "mastodon", "https://example.org", handles)
+    assert len(masto["text"]) - len(masto["link"]) + 23 <= MASTODON_LIMIT
+    assert "taking it from Competitor Model Number 0 Extended" in masto["text"]
+    # The last resort cuts between words and says so.
+    cut = truncate_words("alpha beta gamma delta", 14)
+    assert cut == "alpha beta…" and len(cut) <= 14
+    assert truncate_words("alpha beta", 10) == "alpha beta"
+    # Every advance in the repository's own data fits both networks whole.
+    if (REPO / "build/llm-frontier.json").exists():
+        for group in advance_groups(json.loads((REPO / "build/llm-frontier.json").read_text())):
+            b, m = compose(group, "bluesky"), compose(group, "mastodon")
+            assert len(b["text"]) <= BLUESKY_LIMIT and "…" not in b["text"]
+            assert len(m["text"]) - len(m["link"]) + 23 <= MASTODON_LIMIT
+
+
+def test_social_facets_use_utf8_byte_offsets(tmp_path):
+    from llm_cost_frontier.social import byte_span
+    out = social_out(advance(date="2026-11-09", model="Zêta-β (Max)", base="Zêta-β", variant="Max", creator="Lab"))
+    (tmp_path / "images/advances").mkdir(parents=True)
+    (tmp_path / "images/advances/2026-11-09-z-ta.png").write_bytes(b"png")
+    from llm_cost_frontier.social import run
+    http = FakeSocialHttp()
+    (tmp_path / "posted.json").write_text('{"bluesky": []}')
+    run(out, tmp_path / "posted.json", tmp_path / "images", {"Lab": {"bluesky": "@lab.example.com"}},
+        {k: v for k, v in SOCIAL_ENV.items() if k.startswith("BLUESKY")}, site="https://example.org",
+        today=dt.date(2026, 11, 10), http=http)
+    record = http.records()[0]
+    raw = record["text"].encode("utf-8")
+    link, mention = record["facets"]
+    assert raw[link["index"]["byteStart"]:link["index"]["byteEnd"]].decode() == "example.org"
+    assert link["features"][0] == {"$type": "app.bsky.richtext.facet#link", "uri": "https://example.org/#index~z-ta-max"}
+    assert raw[mention["index"]["byteStart"]:mention["index"]["byteEnd"]].decode() == "@lab.example.com"
+    assert mention["features"][0] == {"$type": "app.bsky.richtext.facet#mention", "did": "did:plc:lab"}
+    # The offsets are bytes, not characters: the accented name pushes them out.
+    assert link["index"]["byteStart"] > record["text"].rindex("example.org")
+    assert byte_span("é x", "x") == (3, 4)
+    # The card went up as a blob with alt text, and the session token never leaves the headers.
+    image = record["embed"]["images"][0]
+    assert image["image"]["ref"]["$link"] == "bafy" and image["alt"].startswith("Zêta-β (Max): now the cheapest way")
+    upload = next(c for c in http.calls if "uploadBlob" in c[1])
+    assert upload[3] == b"png" and upload[2]["Authorization"] == "Bearer jwt-1"
+
+
+def test_social_first_run_marks_history_and_posts_nothing(tmp_path):
+    out = social_out(advance(date="2026-11-09", model="Zeta", base="Zeta"), advance(date="2026-06-01"))
+    done, http, state = social_run(tmp_path, out)
+    assert http.calls == []
+    assert state == {"bluesky": ["2026-06-01/gamma", "2026-11-09/zeta"], "mastodon": ["2026-06-01/gamma", "2026-11-09/zeta"]}
+    # The next advance is the first one posted, once to each network.
+    out["advances"].append(advance(date="2026-11-10", model="Eta", base="Eta"))
+    done, http, state = social_run(tmp_path, out)
+    assert done == {"bluesky": ["2026-11-10/eta"], "mastodon": ["2026-11-10/eta"]}
+    assert len(http.records()) == len(http.statuses()) == 1
+    assert http.statuses()[0]["status"].startswith("Eta: now the cheapest way")
+    assert "2026-11-10/eta" in state["bluesky"] and "2026-11-10/eta" in state["mastodon"]
+    # And only once.
+    done, http, state = social_run(tmp_path, out)
+    assert done == {"bluesky": [], "mastodon": []} and http.calls == []
+    # A network switched on later starts from its own first run.
+    done, http, state = social_run(tmp_path, out, state={"bluesky": []}, env=dict(SOCIAL_ENV, BLUESKY_APP_PASSWORD=""))
+    assert http.calls == [] and state["bluesky"] == [] and len(state["mastodon"]) == 3
+
+
+def test_social_age_window_and_per_run_cap(tmp_path):
+    out = social_out(*[advance(date=f"2026-11-{d:02d}", model=f"M{d}", base=f"M{d}") for d in (1, 6, 7, 8, 9, 10)])
+    empty = {"bluesky": [], "mastodon": []}
+    # Nov 1 and Nov 6 are past the three-day window on Nov 10; the rest go oldest first.
+    done, http, state = social_run(tmp_path, out, state=empty)
+    assert done["bluesky"] == done["mastodon"] == ["2026-11-07/m7", "2026-11-08/m8", "2026-11-09/m9", "2026-11-10/m10"]
+    assert "2026-11-01/m1" not in state["bluesky"] and "2026-11-06/m6" not in state["bluesky"]
+    # The cap holds a burst back; what is left goes on the next run.
+    done, http, state = social_run(tmp_path, out, state=empty, max_posts=2)
+    assert done["bluesky"] == ["2026-11-07/m7", "2026-11-08/m8"]
+    done, http, state = social_run(tmp_path, out, max_posts=2)
+    assert done["bluesky"] == ["2026-11-09/m9", "2026-11-10/m10"]
+    done, http, state = social_run(tmp_path, out, state=empty, max_age_days=0)
+    assert done["mastodon"] == ["2026-11-10/m10"]
+
+
+def test_social_records_only_what_a_network_accepted(tmp_path, capsys):
+    out = social_out(advance(date="2026-11-09", model="Zeta", base="Zeta"), advance(date="2026-11-10", model="Eta", base="Eta"))
+    empty = {"bluesky": [], "mastodon": []}
+    # Bluesky refuses the record; Mastodon is unaffected, and nothing is raised.
+    done, http, state = social_run(tmp_path, out, state=empty, http=FakeSocialHttp(fail=["createRecord"]))
+    assert done == {"bluesky": [], "mastodon": ["2026-11-09/zeta", "2026-11-10/eta"]}
+    assert state == {"bluesky": [], "mastodon": ["2026-11-09/zeta", "2026-11-10/eta"]}
+    printed = capsys.readouterr().out
+    assert "::warning::bluesky: could not post 2026-11-09/zeta" in printed and "returned 500: boom" in printed
+    assert "app-pass-123" not in printed and "tok-456" not in printed and "jwt-1" not in printed
+    # It stops at the first refusal, so the order of posts is kept for the retry.
+    assert len([c for c in http.calls if "createRecord" in c[1]]) == 1
+    # The other way round: a bad Mastodon login leaves Bluesky posting.
+    done, http, state = social_run(tmp_path, out, state=empty, http=FakeSocialHttp(fail=["/api/v1/statuses"]))
+    assert done == {"bluesky": ["2026-11-09/zeta", "2026-11-10/eta"], "mastodon": []}
+    # The retry posts what was refused, with the same idempotency key as before.
+    first_key = next(c[2]["Idempotency-Key"] for c in http.calls if c[1].endswith("/api/v1/statuses"))
+    done, http, state = social_run(tmp_path, out)
+    assert done == {"bluesky": [], "mastodon": ["2026-11-09/zeta", "2026-11-10/eta"]}
+    assert next(c[2]["Idempotency-Key"] for c in http.calls if c[1].endswith("/api/v1/statuses")) == first_key
+    # A missing card image costs the picture, not the post.
+    assert "media_ids" not in http.statuses()[0]
+
+
+def test_social_without_credentials_does_nothing(tmp_path, capsys):
+    out = social_out(advance(date="2026-11-10", model="Eta", base="Eta"))
+    done, http, state = social_run(tmp_path, out, env={})
+    assert done == {} and http.calls == [] and state is None
+    assert "nothing to do" in capsys.readouterr().out
+    # Half a credential pair is no credentials.
+    done, http, state = social_run(tmp_path, out, env={"BLUESKY_HANDLE": "frontier.example.com"})
+    assert http.calls == [] and state is None
+
+
+def test_social_dry_run_prints_and_writes_nothing(tmp_path, capsys):
+    from llm_cost_frontier.social import main
+    out = social_out(advance(date="2026-11-09", model="Zeta", base="Zeta"), advance(date="2026-11-10", model="Eta", base="Eta"))
+    (tmp_path / "out.json").write_text(json.dumps(out))
+    state = tmp_path / "posted.json"
+    state.write_text('{"bluesky": ["2026-11-09/zeta"], "mastodon": []}')
+    before = state.read_text()
+    args = ["--data", str(tmp_path / "out.json"), "--state", str(state), "--images", str(tmp_path / "images"),
+            "--handles", str(tmp_path / "handles.json"), "--site", "https://example.org", "--today", "2026-11-10"]
+    assert main(args + ["--dry-run"]) == 0
+    printed = capsys.readouterr().out
+    assert "bluesky: 1 advance(s) to post" in printed and "mastodon: 2 advance(s) to post" in printed
+    assert printed.count("Eta: now the cheapest way to reach index 0.0 to 45.0 at $0.40 per task.") >= 2
+    assert "[link] https://example.org/#index~eta" in printed and "(missing; the post goes out without it)" in printed
+    assert state.read_text() == before
+    # With no state file a dry run reports the first-run rule and still writes nothing.
+    state.unlink()
+    assert main(args + ["--dry-run"]) == 0
+    assert "first run; would mark 2 existing advances as posted" in capsys.readouterr().out and not state.exists()
+    # --preview shows the latest posts whatever the state says.
+    assert main(args + ["--preview", "1"]) == 0
+    printed = capsys.readouterr().out
+    assert "--- bluesky: 2026-11-10/eta" in printed and "--- mastodon: 2026-11-10/eta" in printed and not state.exists()
+
+
+def test_social_mastodon_upload_waits_for_processing():
+    from llm_cost_frontier.social import Mastodon
+    calls, naps = [], []
+    def http(method, url, headers, body=None):
+        calls.append((method, url, headers, body))
+        if method == "POST":
+            return 202, b'{"id":"m9"}'
+        return (206, b"{}") if len(calls) < 3 else (200, b'{"id":"m9"}')
+    m = Mastodon({"MASTODON_BASE_URL": "social.example/", "MASTODON_ACCESS_TOKEN": "tok"}, http, sleep=naps.append)
+    assert m.base == "https://social.example" and m.upload(b"png", "alt text") == "m9"
+    assert [c[0] for c in calls] == ["POST", "GET", "GET"] and len(naps) == 2
+    body = calls[0][3]
+    assert b'name="description"\r\n\r\nalt text\r\n' in body and b"Content-Type: image/png\r\n\r\npng\r\n" in body
+    assert calls[0][2]["Content-Type"].startswith("multipart/form-data; boundary=")
+
+
 def test_join_and_and_taken_clause():
     assert join_and(["A"]) == "A"
     assert join_and(["A", "B"]) == "A and B"

@@ -43,6 +43,41 @@ When the source recomposes the Intelligence Index, as it did on September 5, 202
 
 Free and promotional endpoints with a measured cost of zero are excluded, since they distort the cost axis.
 
+## Posting Advances
+
+`llm_cost_frontier.social` announces each new frontier advance on the Overall view to Bluesky and Mastodon: one post per base model per date, reasoning levels together as on the cards, with the card image attached (with alt text) and a link that opens the dashboard with the model highlighted. The update workflow runs it in a `post` job after each deploy that followed a data change, so the card a post attaches is already live.
+
+It is off until credentials exist. With none of the four repository secrets below set, the job exits having done nothing and commits nothing. To switch a network on, add its two secrets under Settings, Secrets and variables, Actions:
+
+| Secret | Value |
+|---|---|
+| `BLUESKY_HANDLE` | The posting account's handle, such as `llm-frontier.bsky.social` |
+| `BLUESKY_APP_PASSWORD` | An app password for that account: in Bluesky, Settings, Privacy and security, App passwords, Add App Password. Do not use the account password |
+| `MASTODON_BASE_URL` | The account's server, such as `https://mastodon.social` |
+| `MASTODON_ACCESS_TOKEN` | An access token for that account: in Mastodon, Preferences, Development, New application, with only the `write:statuses` and `write:media` scopes checked; the token is on the application's page |
+
+The rules that keep it from flooding a timeline:
+
+- A network's first run with credentials marks every advance already in the data as posted and posts nothing, so switching it on never back-posts history. Posting starts with the next advance.
+- Only advances dated within the last three days are ever posted (`--max-age-days`), and at most four per network per run, oldest first (`--max-posts`).
+- `data/social-posted.json` records what each network accepted. It is written after each accepted post and committed by the job, and an advance in it is never posted again. Deleting a network's key from the file makes its next run a first run.
+- A failure on one network is reported as a warning annotation on the run. It never blocks the other network, fails the run, or opens a pipeline-failure issue, and the refused advance is retried on the next run while it is still inside the three-day window.
+
+A post is kept within Bluesky's 300 graphemes and Mastodon's 500 characters by leaving out whole clauses, least important first, never by cutting a sentence. To mention the lab behind a model, add its handles to `data/social-handles.json`, keyed by the creator name the dashboard shows; the file ships empty, and a lab without an entry is not mentioned:
+
+```json
+{"Example Lab": {"bluesky": "example-lab.com", "mastodon": "@examplelab@mastodon.social"}}
+```
+
+To read what would be posted without credentials and without writing anything:
+
+```bash
+PYTHONPATH=src python -m llm_cost_frontier.social --preview 3   # the posts for the three most recent advances
+PYTHONPATH=src python -m llm_cost_frontier.social --dry-run     # what the next run would post, given the state file
+```
+
+To turn a network off, delete its secrets; the state file can stay. X and LinkedIn are not covered: posting with an image through the X API needs paid access, and LinkedIn needs an approved developer application.
+
 ## Usage
 
 The updater is standard library only, so it needs no dependencies to run:
