@@ -527,6 +527,31 @@
    "time_per_task": 0.284,
    "ttft": null
   },
+  "google-ai-studio_gemini-decision-1": {
+   "capabilities": {},
+   "cost_per_task": 0.345412,
+   "creator": "Google",
+   "first_seen": "2026-11-11",
+   "host": "Google AI Studio",
+   "intelligence_index": 66.0,
+   "kind": "decision",
+   "last_seen": "2026-11-11",
+   "name": "Gemini Decision 1",
+   "observations": [
+    [
+     "2026-11-11",
+     0.345412,
+     66.0,
+     0.211
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-11",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": 0.211,
+   "ttft": null
+  },
   "inception_mercury-decide": {
    "capabilities": {},
    "cost_per_task": 0.069525,
@@ -857,13 +882,13 @@
   },
   "openai_gpt-6-luna-decisions": {
    "capabilities": {},
-   "cost_per_task": 0.337038,
+   "cost_per_task": 0.338737,
    "creator": "OpenAI",
    "first_seen": "2026-10-19",
    "host": "OpenAI",
-   "intelligence_index": 61.7,
+   "intelligence_index": 60.2,
    "kind": "decision",
-   "last_seen": "2026-11-10",
+   "last_seen": "2026-11-11",
    "name": "GPT-6 Luna (Decisions)",
    "observations": [
     [
@@ -877,13 +902,19 @@
      0.337038,
      61.7,
      0.209
+    ],
+    [
+     "2026-11-11",
+     0.338737,
+     60.2,
+     0.206
     ]
    ],
    "open_weights": false,
    "release_date": "2026-10-19",
-   "retired": true,
+   "retired": false,
    "speed_tps": null,
-   "time_per_task": 0.209,
+   "time_per_task": 0.206,
    "ttft": null
   },
   "openai_gpt-6-luna-high": {

@@ -200,14 +200,6 @@
     <summary>Gemini 3.8 Flash (High): pushed the MMMU-Pro ceiling from 85.5% to 85.6%, at $0.58 per task. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-08-26: Qwen3.8-Flash-Next (new model, MMMU-Pro 79.8%)</title>
-    <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-08-26-qwen3-8-flash-next.png" />
-    <id>https://llm-frontier.catalystneuro.com/multimodal/advance/2026-08-26/qwen3-8-flash-next</id>
-    <updated>2026-08-26T00:00:00Z</updated>
-    <summary>Qwen3.8-Flash-Next: now the cheapest way to reach MMMU-Pro 79.0% to 79.8% at $0.097 per task, taking it from Gemini 3.7 Flash. Open weights.</summary>
-  </entry>
-  <entry>
     <title>2026-08-13: Gemini 3.7 Flash (High) (new model, MMMU-Pro 85.5%)</title>
     <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-08-13-gemini-3-7-flash.png" />
