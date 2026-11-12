@@ -8,6 +8,14 @@
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AA Omniscience, through a release or a price change.</subtitle>
   <entry>
+    <title>2026-11-12: Gemini 4 Hydrogen (High) (new model, AA Omniscience 43.7)</title>
+    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-11-12-gemini-4-hydrogen.png" />
+    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2026-11-12/gemini-4-hydrogen-high</id>
+    <updated>2026-11-12T00:00:00Z</updated>
+    <summary>Gemini 4 Hydrogen (High): now the cheapest way to reach AA Omniscience 42.4 to 43.7 at $1.87 per task, taking it from Claude Fable 5.2. Proprietary.</summary>
+  </entry>
+  <entry>
     <title>2026-11-09: Claude Fable 5.2 (Max, Default Fallback) (new model, AA Omniscience 66.8)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2026-11-09-claude-fable-5-2.png" />
@@ -478,13 +486,5 @@
     <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2025-08-07/gpt-5</id>
     <updated>2025-08-07T00:00:00Z</updated>
     <summary>GPT-5 (high): pushed the AA Omniscience ceiling from -16.4 to -8.7, at $0.26 per task. Proprietary.</summary>
-  </entry>
-  <entry>
-    <title>2025-08-07: GPT-5 mini (High) (new model, AA Omniscience -17.3)</title>
-    <link href="https://llm-frontier.catalystneuro.com/knowledge/#advances" />
-    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledge/2025-08-07-gpt-5-mini.png" />
-    <id>https://llm-frontier.catalystneuro.com/knowledge/advance/2025-08-07/gpt-5-mini</id>
-    <updated>2025-08-07T00:00:00Z</updated>
-    <summary>GPT-5 mini (High): now the cheapest way to reach AA Omniscience -41.6 to -17.3 at $0.036 per task, taking it from Gemini 2.5 Pro and DeepSeek V3 0324; DeepSeek V3 0324 left the frontier. Proprietary.</summary>
   </entry>
 </feed>
