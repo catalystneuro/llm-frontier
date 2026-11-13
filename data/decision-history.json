@@ -626,6 +626,31 @@
    "time_per_task": 0.151,
    "ttft": null
   },
+  "liquid-ai_d1-1": {
+   "capabilities": {},
+   "cost_per_task": 0.063351,
+   "creator": "Liquid AI",
+   "first_seen": "2026-11-13",
+   "host": "Liquid AI",
+   "intelligence_index": 66.5,
+   "kind": "decision",
+   "last_seen": "2026-11-13",
+   "name": "d1.1",
+   "observations": [
+    [
+     "2026-11-13",
+     0.063351,
+     66.5,
+     0.253
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-13",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": 0.253,
+   "ttft": null
+  },
   "liquid-ai_d1-ultra": {
    "capabilities": {},
    "cost_per_task": 0.133036,
