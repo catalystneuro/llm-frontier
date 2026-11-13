@@ -56,6 +56,14 @@
     <summary>GPT-6.1 Terra (Low): now the cheapest way to reach MMMU-Pro 0.0% to 82.5% at $0.071 per task. Proprietary.</summary>
   </entry>
   <entry>
+    <title>2026-09-30: Gemini 4 Argon (Medium) (new model, MMMU-Pro 88.3%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-09-30-gemini-4-argon.png" />
+    <id>https://llm-frontier.catalystneuro.com/multimodal/advance/2026-09-30/gemini-4-argon-medium</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <summary>Gemini 4 Argon (Medium): pushed the MMMU-Pro ceiling from 87.7% to 88.3%, at $4.31 per task, taking it from Claude Opus 5.5, which left the frontier. Proprietary.</summary>
+  </entry>
+  <entry>
     <title>2026-09-29: GPT-6.1 Sol (Max) (new model, MMMU-Pro 86.0%)</title>
     <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-09-29-gpt-6-1-sol.png" />
