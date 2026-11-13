@@ -8,7 +8,7 @@
    "host": "Anthropic",
    "intelligence_index": 76.5,
    "kind": "llm",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Claude Haiku 5.5 (Max)",
    "observations": [
     [
@@ -70,7 +70,7 @@
    "host": "Anthropic",
    "intelligence_index": 67.2,
    "kind": "llm",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Claude Haiku 5.5 (Low)",
    "observations": [
     [
@@ -207,7 +207,7 @@
    "host": "Base Labs",
    "intelligence_index": 66.4,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Elephant 9B",
    "observations": [
     [
@@ -250,7 +250,7 @@
    "host": "Base Labs",
    "intelligence_index": 71.4,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Mammoth 27B",
    "observations": [
     [
@@ -281,7 +281,7 @@
    "host": "Celeris",
    "intelligence_index": 62.0,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Celeris-1.1 Decision",
    "observations": [
     [
@@ -349,7 +349,7 @@
    "host": "Cloudflare",
    "intelligence_index": 60.3,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Clef",
    "observations": [
     [
@@ -411,7 +411,7 @@
    "host": "Cloudflare",
    "intelligence_index": 57.8,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Clef-Omni",
    "observations": [
     [
@@ -498,7 +498,7 @@
    "host": "Fastino",
    "intelligence_index": 72.5,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "GLiDE v1.2",
    "observations": [
     [
@@ -535,7 +535,7 @@
    "host": "Google AI Studio",
    "intelligence_index": 66.0,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Gemini Decision 1",
    "observations": [
     [
@@ -560,7 +560,7 @@
    "host": "Inception",
    "intelligence_index": 62.1,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Mercury Decide",
    "observations": [
     [
@@ -597,7 +597,7 @@
    "host": "Liquid AI",
    "intelligence_index": 60.8,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "d1",
    "observations": [
     [
@@ -634,7 +634,7 @@
    "host": "Liquid AI",
    "intelligence_index": 70.6,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "d1-ultra",
    "observations": [
     [
@@ -702,7 +702,7 @@
    "host": "Nace.AI",
    "intelligence_index": 72.6,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Drex Max v1.1",
    "observations": [
     [
@@ -764,7 +764,7 @@
    "host": "Nace.AI",
    "intelligence_index": 61.6,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Drex 2.0",
    "observations": [
     [
@@ -851,7 +851,7 @@
    "host": "OpenAI",
    "intelligence_index": 75.7,
    "kind": "llm",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "GPT-6 Luna (Max)",
    "observations": [
     [
@@ -888,7 +888,7 @@
    "host": "OpenAI",
    "intelligence_index": 60.2,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "GPT-6 Luna (Decisions)",
    "observations": [
     [
@@ -950,7 +950,7 @@
    "host": "OpenAI",
    "intelligence_index": 68.8,
    "kind": "llm",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "GPT-6 Luna (Low)",
    "observations": [
     [
@@ -1037,7 +1037,7 @@
    "host": "OpenRouter",
    "intelligence_index": 62.1,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Microsoft-Decision-1",
    "observations": [
     [
@@ -1074,7 +1074,7 @@
    "host": "Perplexity",
    "intelligence_index": 60.1,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Decider Flash v1.2",
    "observations": [
     [
@@ -1101,6 +1101,31 @@
    "retired": false,
    "speed_tps": null,
    "time_per_task": 0.134,
+   "ttft": null
+  },
+  "perplexity_pplx-decider-flash-v1-3": {
+   "capabilities": {},
+   "cost_per_task": 0.03402,
+   "creator": "Perplexity",
+   "first_seen": "2026-11-13",
+   "host": "Perplexity",
+   "intelligence_index": 64.1,
+   "kind": "decision",
+   "last_seen": "2026-11-13",
+   "name": "Decider Flash v1.3",
+   "observations": [
+    [
+     "2026-11-13",
+     0.03402,
+     64.1,
+     0.178
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-13",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": 0.178,
    "ttft": null
   },
   "perplexity_pplx-decider-v1-1-27b": {
@@ -1136,7 +1161,7 @@
    "host": "Perplexity",
    "intelligence_index": 69.8,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Decider v1.2",
    "observations": [
     [
@@ -1165,6 +1190,31 @@
    "time_per_task": 0.229,
    "ttft": null
   },
+  "perplexity_pplx-decider-v1-3": {
+   "capabilities": {},
+   "cost_per_task": 0.06804,
+   "creator": "Perplexity",
+   "first_seen": "2026-11-13",
+   "host": "Perplexity",
+   "intelligence_index": 70.4,
+   "kind": "decision",
+   "last_seen": "2026-11-13",
+   "name": "Decider v1.3",
+   "observations": [
+    [
+     "2026-11-13",
+     0.06804,
+     70.4,
+     0.289
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-13",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": 0.289,
+   "ttft": null
+  },
   "subquadratic_subq-snap-1-1": {
    "capabilities": {},
    "cost_per_task": 0.136902,
@@ -1173,7 +1223,7 @@
    "host": "Subquadratic",
    "intelligence_index": 67.9,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "SubQ Snap 1.1",
    "observations": [
     [
@@ -1210,7 +1260,7 @@
    "host": "Subquadratic",
    "intelligence_index": 72.6,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "SubQ Snap 1.2",
    "observations": [
     [
@@ -1260,7 +1310,7 @@
    "host": "TypeSafe",
    "intelligence_index": 66.2,
    "kind": "decision",
-   "last_seen": "2026-11-12",
+   "last_seen": "2026-11-13",
    "name": "Jev 1.14",
    "observations": [
     [
@@ -1290,5 +1340,5 @@
    "ttft": null
   }
  },
- "updated": "2026-11-12"
+ "updated": "2026-11-13"
 }

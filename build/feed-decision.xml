@@ -4,9 +4,25 @@
   <link href="https://llm-frontier.catalystneuro.com/decision/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-decision.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-decision.xml</id>
-  <updated>2026-11-12T06:00:00Z</updated>
+  <updated>2026-11-13T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of Decision Index, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-11-13: Decider v1.3 (new model, Decision Index 70.4)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-11-13-decider-v1-3.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-11-13/perplexity_pplx-decider-v1-3</id>
+    <updated>2026-11-13T00:00:00Z</updated>
+    <summary>Decider v1.3: now the cheapest way to reach Decision Index 64.1 to 70.4 at $0.068 per 1K tasks, taking it from Drex Max v1.1 and Decider v1.2; Decider v1.2 left the frontier. New cost record for Decision Index ≥ 70.</summary>
+  </entry>
+  <entry>
+    <title>2026-11-13: Decider Flash v1.3 (new model, Decision Index 64.1)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-11-13-decider-flash-v1-3.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-11-13/perplexity_pplx-decider-flash-v1-3</id>
+    <updated>2026-11-13T00:00:00Z</updated>
+    <summary>Decider Flash v1.3: now the cheapest way to reach Decision Index 62.0 to 64.1 at $0.034 per 1K tasks, taking it from Decider v1.2.</summary>
+  </entry>
   <entry>
     <title>2026-11-11: Claude Haiku 5.5 (Max) (price change, Decision Index 76.5)</title>
     <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
