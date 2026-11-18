@@ -25,7 +25,9 @@ The dashboard script draws every number from the data file, so the deploy also r
 
 ## Method
 
-Any model page on artificialanalysis.ai embeds the full comparison dataset for every model they currently benchmark, including `intelligenceIndexCostPerTask`, the average billed cost to run one task from their evaluation suite with the input, reasoning, and answer tokens the run actually used. The updater fetches one page, parses that payload, and merges it into the history.
+The [model leaderboard](https://artificialanalysis.ai/leaderboards/models) on artificialanalysis.ai embeds a row for every model they currently list, including `intelligenceIndexCostPerTask`, the average billed cost to run one task from their evaluation suite with the input, reasoning, and answer tokens the run actually used. The updater fetches that page, parses the rows, and merges them into the history. A row has no slug of its own, so a model already in the history is matched by Artificial Analysis's id for it (stored as `aa_id`) or by its name, and a new model's slug is read once from its release's page.
+
+Until November 13, 2026 the updater read the full comparison dataset that every model page embedded, which also covered models Artificial Analysis had deprecated. That dataset has since moved into a separate encrypted file, which the updater does not read. The leaderboard lists only the models that are not deprecated, so a deprecated model is now marked retired.
 
 Beyond the aggregate Intelligence Index, the updater also records a set of per-capability scores from the same payload, each chosen because it maps onto a class of application better than the aggregate does: Terminal-Bench 2.1 (agentic coding), the Agentic Index (tool use), AA-LCR (long context), IFBench (instruction following), Omniscience (factual recall with hallucinations penalized), GPQA Diamond (scientific reasoning), GDPval-AA (office work products), and MMMU-Pro (multimodal input). The dashboard renders these as tabs that switch the vertical axis of the frontier chart. Capability scores are stored as their latest measured values; only prices are tracked over time. Metrics measured for only a small fraction of models (LiveCodeBench, AIME) are left out.
 
@@ -33,7 +35,7 @@ The Artificial Analysis [Decision Index](https://artificialanalysis.ai/evaluatio
 
 Three properties follow from keeping a history instead of a snapshot:
 
-- **Models that leave keep their data.** When Artificial Analysis retires a model from live benchmarking, its observations stay and it is marked retired, so the record only grows.
+- **Models that leave keep their data.** When a model leaves Artificial Analysis's leaderboard, because they deprecated it or stopped benchmarking it, its observations stay and it is marked retired, so the record only grows.
 - **Prices are dated.** An observation is appended whenever a model's cost or index changes, so a price cut is dated to when it was observed instead of being back-dated to the model's release. Frontier snapshots and tier records use the price in effect on each date.
 - **Advances are derived, not curated.** A frontier advance is any date on which the Pareto frontier of (higher index, lower cost) changed, whether through a release or a price change. Each one records the index range the model took over, the models it took that range from, any tier cost record it set, and whether it pushed the intelligence ceiling.
 
