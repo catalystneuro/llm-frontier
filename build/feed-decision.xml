@@ -4,9 +4,25 @@
   <link href="https://llm-frontier.catalystneuro.com/decision/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-decision.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-decision.xml</id>
-  <updated>2026-11-13T06:00:00Z</updated>
+  <updated>2026-11-18T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of Decision Index, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-11-18: d1.2-ultra (new model, Decision Index 74.8)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-11-18-d1-2-ultra.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-11-18/liquid-ai_d1-2-ultra</id>
+    <updated>2026-11-18T00:00:00Z</updated>
+    <summary>d1.2-ultra: now the cheapest way to reach Decision Index 72.6 to 74.8 at $0.13 per 1K tasks, taking it from GPT-6 Luna.</summary>
+  </entry>
+  <entry>
+    <title>2026-11-18: d1.2 (new model, Decision Index 68.7)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-11-18-d1-2.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-11-18/liquid-ai_d1-2</id>
+    <updated>2026-11-18T00:00:00Z</updated>
+    <summary>d1.2: now the cheapest way to reach Decision Index 64.1 to 68.7 at $0.063 per 1K tasks, taking it from Decider v1.3 and d1.1; d1.1 left the frontier.</summary>
+  </entry>
   <entry>
     <title>2026-11-13: Decider v1.3 (new model, Decision Index 70.4)</title>
     <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />

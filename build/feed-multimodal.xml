@@ -4,9 +4,49 @@
   <link href="https://llm-frontier.catalystneuro.com/multimodal/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-multimodal.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-multimodal.xml</id>
-  <updated>2026-11-13T06:00:00Z</updated>
+  <updated>2026-11-18T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of MMMU-Pro, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-11-17: GPT-6.2 Astra (Max) (new model, MMMU-Pro 89.5%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-11-17-gpt-6-2-astra.png" />
+    <id>https://llm-frontier.catalystneuro.com/multimodal/advance/2026-11-17/gpt-6-2-astra</id>
+    <updated>2026-11-17T00:00:00Z</updated>
+    <summary>GPT-6.2 Astra (Max): pushed the MMMU-Pro ceiling from 89.2% to 89.5%, at $4.00 per task, taking it from Gemini 4 Carbon, which left the frontier. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-11-17: GPT-6.2 Astra (Xhigh) (new model, MMMU-Pro 87.9%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-11-17-gpt-6-2-astra.png" />
+    <id>https://llm-frontier.catalystneuro.com/multimodal/advance/2026-11-17/gpt-6-2-astra-xhigh</id>
+    <updated>2026-11-17T00:00:00Z</updated>
+    <summary>GPT-6.2 Astra (Xhigh): now the cheapest way to reach MMMU-Pro 87.7% to 87.9% at $2.52 per task, taking it from Gemini 4 Carbon. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-11-17: GPT-6.2 Astra (High) (new model, MMMU-Pro 87.7%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-11-17-gpt-6-2-astra.png" />
+    <id>https://llm-frontier.catalystneuro.com/multimodal/advance/2026-11-17/gpt-6-2-astra-high</id>
+    <updated>2026-11-17T00:00:00Z</updated>
+    <summary>GPT-6.2 Astra (High): now the cheapest way to reach MMMU-Pro 86.1% to 87.7% at $2.07 per task, taking it from Gemini 4 Carbon and GPT-6 Astra; GPT-6 Astra left the frontier. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-11-17: GPT-6.2 Astra (Medium) (new model, MMMU-Pro 86.1%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-11-17-gpt-6-2-astra.png" />
+    <id>https://llm-frontier.catalystneuro.com/multimodal/advance/2026-11-17/gpt-6-2-astra-medium</id>
+    <updated>2026-11-17T00:00:00Z</updated>
+    <summary>GPT-6.2 Astra (Medium): now the cheapest way to reach MMMU-Pro 86.0% to 86.1% at $1.62 per task, taking it from GPT-6 Astra. Proprietary.</summary>
+  </entry>
+  <entry>
+    <title>2026-11-17: GPT-6.2 Astra (Low) (new model, MMMU-Pro 85.1%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/multimodal/2026-11-17-gpt-6-2-astra.png" />
+    <id>https://llm-frontier.catalystneuro.com/multimodal/advance/2026-11-17/gpt-6-2-astra-low</id>
+    <updated>2026-11-17T00:00:00Z</updated>
+    <summary>GPT-6.2 Astra (Low): now the cheapest way to reach MMMU-Pro 84.9% to 85.1% at $0.66 per task, taking it from GPT-6.1 Sol. Proprietary.</summary>
+  </entry>
   <entry>
     <title>2026-11-12: Gemini 4 Carbon (Medium) (price change, MMMU-Pro 89.2%)</title>
     <link href="https://llm-frontier.catalystneuro.com/multimodal/#advances" />
