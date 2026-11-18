@@ -1,10 +1,10 @@
 """Track the Pareto frontier of LLM intelligence against measured cost per task.
 
-Any model page on artificialanalysis.ai embeds the full comparison dataset for
-every currently benchmarked model, including the measured cost per Intelligence
-Index task. This module fetches one page, parses that payload, merges it into a
-cumulative history, applies known price events, and writes the JSON and Atom
-feed that the dashboard at llm-frontier.catalystneuro.com renders.
+The model leaderboard on artificialanalysis.ai embeds a row for every model it
+currently lists, including the measured cost per Intelligence Index task. This
+module fetches that page, parses the rows, merges them into a cumulative
+history, applies known price events, and writes the JSON and Atom feed that the
+dashboard at llm-frontier.catalystneuro.com renders.
 
 The history keeps every observed (date, cost, index) per model, appending an
 observation whenever a value changes. Snapshots and tier records use the cost in
@@ -34,8 +34,14 @@ DEFAULT_FEED = Path("build/feed.xml")
 DEFAULT_SITE = "https://llm-frontier.catalystneuro.com"
 FEED_ENTRIES = 60
 
-# Any model page works; this one is stable and cheap to serve.
-SOURCE_PAGE = "https://artificialanalysis.ai/models/gpt-5-6-luna-xhigh"
+# The public model leaderboard. Its page data carries one row per model the
+# source currently lists, which leaves out the models it has deprecated. Until
+# November 2026 any model page embedded the full comparison dataset, deprecated
+# models included; the source then moved that dataset into a separate encrypted
+# file, which this updater does not read.
+SOURCE_PAGE = "https://artificialanalysis.ai/leaderboards/models"
+# A release's own page, read only to learn the slugs of models that are new.
+MODEL_PAGE = "https://artificialanalysis.ai/models/"
 TIERS = [30, 40, 50, 60]
 SNAPSHOT_COUNT = 8
 SNAPSHOT_MONTHS = 2
@@ -58,6 +64,8 @@ SETTLE_DAYS = 7
 
 # Per-capability metrics read from the same payload, each chosen because it
 # translates to a class of application better than the aggregate index does.
+# "field" names the metric on a leaderboard row: a key of the row itself or of
+# its "scores" object.
 # "percent" metrics arrive as 0-1 fractions and are stored as 0-100. An "elo"
 # metric arrives as a raw rating and is first normalized as
 # clamp((Elo - offset) / span), the mapping the source used for its own
@@ -65,24 +73,24 @@ SETTLE_DAYS = 7
 # measured for only a small fraction of models (LiveCodeBench, AIME) are left
 # out. The blurb is shown on the dashboard when the capability's tab is active.
 CAPABILITIES = [
-    dict(key="coding", url="https://artificialanalysis.ai/evaluations/terminalbench-v2-1", field="terminalBench21", label="Coding", metric="Terminal-Bench 2.1", percent=True,
+    dict(key="coding", url="https://artificialanalysis.ai/evaluations/terminalbench-v2-1", field="terminalbench-2-1", label="Coding", metric="Terminal-Bench 2.1", percent=True,
          blurb="Completion rate on Terminal-Bench 2.1: real software engineering tasks run agentically in a terminal. The axis to watch when picking a model for a coding assistant or an autonomous software agent."),
     # agenticIndex was removed when AA recomposed the index (v4.3, September
     # 2026); AutomationBench-AA is its successor for tool use and multi-step
     # task completion. The key stays "agentic" so the tab and links carry over.
-    dict(key="agentic", url="https://artificialanalysis.ai/evaluations/automationbench-aa", field="automationBenchPartialScore", label="Agentic Tool Use", metric="AutomationBench-AA", percent=True,
+    dict(key="agentic", url="https://artificialanalysis.ai/evaluations/automationbench-aa", field="automationbench-aa", label="Agentic Tool Use", metric="AutomationBench-AA", percent=True,
          blurb="Score on AutomationBench-AA, Artificial Analysis's benchmark of tool calling and multi-step task completion, which replaced their Agentic Index in September 2026. Relevant for models that orchestrate tools and workflows rather than answer single prompts."),
-    dict(key="longcontext", url="https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning", field="lcr", label="Long Context", metric="AA-LCR", percent=True,
+    dict(key="longcontext", url="https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning", field="artificial-analysis-long-context-reasoning", label="Long Context", metric="AA-LCR", percent=True,
          blurb="Accuracy on AA-LCR, Artificial Analysis's long context reasoning suite, which requires answers grounded in roughly 100k tokens of source material. Relevant for document analysis, retrieval pipelines, and codebase-scale prompts."),
     dict(key="instruction", url="https://artificialanalysis.ai/evaluations/ifbench", field="ifbench", label="Instruction Following", metric="IFBench", percent=True,
          blurb="Accuracy on IFBench, which checks precise compliance with constraints on the output. Relevant for structured output, templated generation, and any pipeline that parses what the model returns."),
     dict(key="knowledge", url="https://artificialanalysis.ai/evaluations/omniscience", field="omniscience", label="Factual Recall", metric="AA Omniscience", percent=False,
          blurb="Artificial Analysis's Omniscience index: factual recall with hallucinated answers penalized, on a scale from -100 to 100, where zero means as many hallucinated answers as correct ones. Relevant for question answering and customer-facing assistants, where a made-up answer is worse than no answer."),
-    dict(key="science", url="https://artificialanalysis.ai/evaluations/gpqa-diamond", field="gpqa", label="Scientific Reasoning", metric="GPQA Diamond", percent=True,
+    dict(key="science", url="https://artificialanalysis.ai/evaluations/gpqa-diamond", field="gpqa-diamond", label="Scientific Reasoning", metric="GPQA Diamond", percent=True,
          blurb="Accuracy on GPQA Diamond, graduate-level science questions written to resist lookup. Relevant for research assistance and technical question answering."),
-    dict(key="knowledgework", url="https://artificialanalysis.ai/evaluations/gdpval-aa", field="gdpval", elo=(500, 2000), label="Knowledge Work", metric="GDPval-AA", percent=True,
+    dict(key="knowledgework", url="https://artificialanalysis.ai/evaluations/gdpval-aa", field="gdpval-aa-normalized", elo=(500, 2000), label="Knowledge Work", metric="GDPval-AA", percent=True,
          blurb="Artificial Analysis's automated grading of GDPval deliverables: documents, spreadsheets, slides, and analysis drawn from real occupational tasks. Relevant for office work products beyond chat."),
-    dict(key="multimodal", url="https://artificialanalysis.ai/evaluations/mmmu-pro", field="mmmuPro", label="Multimodal", metric="MMMU-Pro", percent=True,
+    dict(key="multimodal", url="https://artificialanalysis.ai/evaluations/mmmu-pro", field="mmmu-pro", label="Multimodal", metric="MMMU-Pro", percent=True,
          blurb="Accuracy on MMMU-Pro, college-level problems that require reading images, diagrams, and figures. Relevant for applications with visual input."),
 ]
 
@@ -162,39 +170,89 @@ def enclosing_object(s: str, idx: int) -> dict:
 
 
 def extract_models(payload: str) -> dict:
+    """The leaderboard's rows as {source id: record}, in the shape merge()
+    takes plus the slug of each row's release. A row carries no slug of its
+    own and no release date: assign_slugs() supplies the first, and the
+    second comes from the list of releases the same page embeds."""
+    released = {}
+    for m in re.finditer(r'"releaseDate":\s*"', payload):
+        o = enclosing_object(payload, m.start())
+        if o.get("slug") and "intelligenceIndex" not in o:
+            released[o["slug"]] = o["releaseDate"][:10]
     models = {}
     for m in re.finditer(r'"intelligenceIndexCostPerTask"', payload):
         o = enclosing_object(payload, m.start())
-        cost = ((o.get("intelligenceIndexCostPerTask") or {}).get("cost") or {}).get("total")
+        cost = o.get("intelligenceIndexCostPerTask")
         iq = o.get("intelligenceIndex")
-        if cost is None or iq is None or not o.get("releaseDate") or not o.get("slug"):
+        release = (o.get("release") or {}).get("slug")
+        if cost is None or iq is None or not o.get("id") or not o.get("name") or release not in released:
             continue
         if float(cost) <= 0:
             continue  # free or promotional endpoints distort the cost axis
+        scores = o.get("scores") or {}
         caps = {}
         for cap in CAPABILITIES:
-            v = o.get(cap["field"])
+            v = o.get(cap["field"], scores.get(cap["field"]))
             if v is not None and "elo" in cap:
                 offset, span = cap["elo"]
                 v = min(max((float(v) - offset) / span, 0.0), 1.0)
             if v is not None:
                 caps[cap["key"]] = round(float(v) * 100, 1) if cap["percent"] else round(float(v), 1)
         tpt = o.get("intelligenceIndexTimePerTask")
-        ts = o.get("timescaleData") or {}
-        models[o["slug"]] = dict(
+        models[o["id"]] = dict(
+            aa_id=o["id"],
+            release=release,
             name=o["name"],
-            creator=(o.get("creator") or {}).get("name") or "",
-            release_date=o["releaseDate"][:10],
+            creator=o.get("modelCreatorName") or "",
+            release_date=released[release],
             intelligence_index=round(float(iq), 1),
             cost_per_task=round(float(cost), 6),
             open_weights=bool(o.get("isOpenWeights")),
-            deprecated=bool(o.get("deprecated")),
             capabilities=caps,
             time_per_task=round(float(tpt), 2) if tpt else None,
-            speed_tps=round(float(ts["medianOutputSpeed"]), 1) if ts.get("medianOutputSpeed") else None,
-            ttft=round(float(ts["medianTimeToFirstChunk"]), 2) if ts.get("medianTimeToFirstChunk") else None,
+            speed_tps=round(float(o["outputSpeed"]), 1) if o.get("outputSpeed") else None,
+            ttft=round(float(o["timeToFirstToken"]), 2) if o.get("timeToFirstToken") else None,
         )
     return models
+
+
+def assign_slugs(rows: dict, models: dict, fetch=None) -> dict:
+    """Key the leaderboard rows by the slugs the history uses.
+
+    A model the history already has keeps its slug: it is matched by the
+    source's id for the model, which the source documents as stable, or, for
+    a model stored before ids were recorded, by its name. A model that is new
+    gets the source's own slug for it, read from its release's page, which
+    lists each variant with its id and slug. The default variant's slug is the
+    bare release slug, so it cannot be derived from the name; a slug made
+    from the name is only the fallback when that page cannot be read."""
+    fetch = fetch or fetch_payload
+    by_id = {m["aa_id"]: slug for slug, m in models.items() if m.get("aa_id")}
+    by_name = {}
+    for slug, m in models.items():
+        if m["name"] not in by_name or not m.get("retired"):
+            by_name[m["name"]] = slug
+    pages = {}
+    out = {}
+    for aa_id, row in rows.items():
+        rec = {k: v for k, v in row.items() if k != "release"}
+        slug = by_id.get(aa_id) or by_name.get(rec["name"])
+        if slug is None:
+            release = row["release"]
+            if release not in pages:
+                try:
+                    pages[release] = dict(re.findall(r'\{"id":\s*"([^"]+)",\s*"slug":\s*"([^"]+)"', fetch(MODEL_PAGE + release)))
+                except Exception as err:  # noqa: BLE001
+                    print(f"::warning::could not read the page of release {release}: {' '.join(str(err).split())}")
+                    pages[release] = {}
+            slug = pages[release].get(aa_id)
+            if slug is None:
+                slug = slugify(rec["name"])
+                print(f"::warning::no slug found for {rec['name']} on its release page; using {slug}")
+        if slug in out:
+            raise RuntimeError(f"{out[slug]['name']} and {rec['name']} both resolve to the slug {slug}; refusing to update")
+        out[slug] = rec
+    return out
 
 
 def extract_decision(payload: str) -> dict:
@@ -312,6 +370,7 @@ def merge(history: dict, live: dict, today: str) -> dict:
             capabilities=rec.get("capabilities") or prev.get("capabilities") or {},
             time_per_task=tpt or prev.get("time_per_task"),
             **({"time_history": prev["time_history"]} if prev.get("time_history") else {}),
+            **({"aa_id": rec.get("aa_id") or prev["aa_id"]} if rec.get("aa_id") or prev.get("aa_id") else {}),
             speed_tps=rec.get("speed_tps") or prev.get("speed_tps"),
             ttft=rec.get("ttft") or prev.get("ttft"),
             retired=False,
@@ -1198,7 +1257,7 @@ def parse_args(argv=None):
     p.add_argument("--out", type=Path, default=DEFAULT_OUTPUT, help="dashboard JSON to write")
     p.add_argument("--feed", type=Path, default=DEFAULT_FEED, help="Atom feed to write")
     p.add_argument("--site", default=DEFAULT_SITE, help="base URL used for links in the feed")
-    p.add_argument("--source", default=SOURCE_PAGE, help="Artificial Analysis model page to read the dataset from")
+    p.add_argument("--source", default=SOURCE_PAGE, help="Artificial Analysis leaderboard page to read the models from")
     p.add_argument("--decision-history", type=Path, default=DEFAULT_DECISION_HISTORY, help="cumulative Decision Index history (read and rewritten)")
     p.add_argument("--decision-source", default=DECISION_PAGE, help="Artificial Analysis page to read the Decision Index from")
     p.add_argument("--decision-eras", type=Path, default=DEFAULT_DECISION_ERAS, help="hand-declared Decision Index era boundaries")
@@ -1217,7 +1276,7 @@ def main(argv=None):
     if not args.offline:
         today = dt.date.today().isoformat()
         payload = fetch_payload(args.source)
-        live = extract_models(payload)
+        live = assign_slugs(extract_models(payload), history["models"])
         check_live_set(live, history, eras, today)
         before = json.dumps({k: v for k, v in history.items() if k != "updated_at"}, sort_keys=True)
         history = merge(history, live, today)

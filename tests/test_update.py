@@ -15,7 +15,7 @@ import pytest
 
 from llm_cost_frontier.update import (
     CAPABILITIES, DECISION, FEED_ENTRIES, MIN_PRICE_MOVE, SNAPSHOT_COUNT, TIERS,
-    add_months, apply_overrides, build_output, capability_models, check_decision_set,
+    add_months, apply_overrides, assign_slugs, build_output, capability_models, check_decision_set,
     cost_changes, decision_frontier_models, extract_decision, merge_decision,
     describe, enclosing_object, extract_models, fetch_payload,
     frontier_advances, join_and, main, merge, parse_object_at, pareto,
@@ -41,15 +41,21 @@ def payload_for(objects):
     return "".join(json.dumps(o) for o in objects)
 
 
-def source_object(slug="test-model", name="Test Model (high)", cost=0.123456, iq=50.06, **extra):
+def source_object(id="id-1", name="Test Model (high)", cost=0.123456, iq=50.06, release="test-model", scores=None, **extra):
+    """A leaderboard row. Scores sit under "scores" and the cost is a plain number."""
     o = dict(
-        slug=slug, name=name, releaseDate="2026-01-05T00:00:00.000Z",
+        id=id, release=dict(slug=release, name="Test Model"), name=name,
         intelligenceIndex=iq, isOpenWeights=False, deprecated=False,
-        creator=dict(name="Lab"),
-        intelligenceIndexCostPerTask=dict(cost=dict(total=cost)),
+        modelCreatorName="Lab", scores=scores or {},
+        intelligenceIndexCostPerTask=cost,
     )
     o.update(extra)
     return o
+
+
+def release_object(slug="test-model", date="2026-01-05"):
+    """An entry of the list of releases the leaderboard page embeds."""
+    return dict(slug=slug, name="Test Model", deprecated=False, releaseDate=date, modelNames=[], creator=dict(slug="lab", name="Lab"))
 
 
 def test_parse_object_at_handles_nesting_and_strings():
@@ -61,7 +67,7 @@ def test_enclosing_object_returns_outer_object():
     o = source_object()
     s = payload_for([{"other": 1}, o])
     idx = s.index('"intelligenceIndexCostPerTask"')
-    assert enclosing_object(s, idx)["slug"] == "test-model"
+    assert enclosing_object(s, idx)["id"] == "id-1"
 
 
 def test_fetch_payload_joins_escaped_chunks(monkeypatch):
@@ -78,38 +84,107 @@ def test_fetch_payload_rejects_pages_without_chunks(monkeypatch):
 
 
 def test_extract_models_reads_fields_and_capabilities():
-    o = source_object(terminalBench21=0.789, omniscience=-10.76, automationBenchPartialScore=0.444)
-    got = extract_models(payload_for([o]))["test-model"]
+    o = source_object(scores={"terminalbench-2-1": 0.789, "automationbench-aa": 0.444}, omniscience=-10.76,
+                      intelligenceIndexTimePerTask=224.867, outputSpeed=136.72, timeToFirstToken=5.2024)
+    got = extract_models(payload_for([release_object(), o]))["id-1"]
+    assert got["aa_id"] == "id-1"
+    assert got["release"] == "test-model"
     assert got["name"] == "Test Model (high)"
     assert got["creator"] == "Lab"
     assert got["release_date"] == "2026-01-05"
     assert got["intelligence_index"] == 50.1
     assert got["cost_per_task"] == 0.123456
     assert got["capabilities"] == {"coding": 78.9, "knowledge": -10.8, "agentic": 44.4}
+    assert (got["time_per_task"], got["speed_tps"], got["ttft"]) == (224.87, 136.7, 5.2)
 
 
 def test_extract_models_normalizes_elo_metrics():
     # GDPval-AA arrives as a raw Elo; clamp((Elo - 500) / 2000) as a percent.
-    objs = [source_object(slug="a", gdpval=1866.27), source_object(slug="b", gdpval=300.0),
-            source_object(slug="c", gdpval=2600.0)]
+    objs = [release_object()] + [source_object(id=i, scores={"gdpval-aa-normalized": elo})
+                                 for i, elo in (("a", 1866.27), ("b", 300.0), ("c", 2600.0))]
     got = extract_models(payload_for(objs))
-    assert [got[s]["capabilities"]["knowledgework"] for s in "abc"] == [68.3, 0.0, 100.0]
+    assert [got[i]["capabilities"]["knowledgework"] for i in "abc"] == [68.3, 0.0, 100.0]
 
 
 def test_extract_models_skips_invalid_entries():
     objs = [
-        source_object(slug="free-model", cost=0.0),
-        dict(source_object(slug="undated"), releaseDate=None),
-        source_object(slug="kept"),
+        release_object(),
+        source_object(id="free-model", cost=0.0),
+        source_object(id="unmeasured", cost=None),
+        source_object(id="undated", release="release-without-a-date"),
+        source_object(id="kept"),
     ]
     assert set(extract_models(payload_for(objs))) == {"kept"}
+
+
+def leaderboard_row(aa_id, name, release="rel"):
+    return dict(live_record(name, "2026-01-01", 50.0, 1.0), aa_id=aa_id, release=release)
+
+
+def test_assign_slugs_keeps_known_slugs_by_id_then_name():
+    models = {
+        "by-id": dict(model("Old Name", "2026-01-01", 50.0, 1.0), aa_id="id-a"),
+        "by-name": model("Named", "2026-01-01", 50.0, 1.0),
+        "gone": model("Returning", "2026-01-01", 50.0, 1.0, retired=True),
+    }
+    rows = {"id-a": leaderboard_row("id-a", "New Name"), "id-b": leaderboard_row("id-b", "Named"),
+            "id-c": leaderboard_row("id-c", "Returning")}
+
+    def no_fetch(url):
+        raise AssertionError("known models need no page")
+
+    got = assign_slugs(rows, models, no_fetch)
+    assert set(got) == {"by-id", "by-name", "gone"}
+    assert got["by-id"]["name"] == "New Name"  # a rename upstream keeps its history
+    assert "release" not in got["by-id"]
+
+
+def test_assign_slugs_reads_new_slugs_from_the_release_page():
+    # The default variant's slug is the bare release slug, which the name does not give away.
+    page = payload_for([dict(id="id-max", slug="rel", name="Rel (Max)"), dict(id="id-low", slug="rel-low", name="Rel (Low)")])
+    fetched = []
+
+    def fetch(url):
+        fetched.append(url)
+        return page
+
+    rows = {"id-max": leaderboard_row("id-max", "Rel (Max)"), "id-low": leaderboard_row("id-low", "Rel (Low)")}
+    got = assign_slugs(rows, {}, fetch)
+    assert {slug: rec["name"] for slug, rec in got.items()} == {"rel": "Rel (Max)", "rel-low": "Rel (Low)"}
+    assert fetched == ["https://artificialanalysis.ai/models/rel"]  # one read per release
+
+
+def test_assign_slugs_falls_back_to_the_name(capsys):
+    def broken(url):
+        raise OSError("page gone")
+
+    got = assign_slugs({"id-x": leaderboard_row("id-x", "Rel 2.5 (High)")}, {}, broken)
+    assert set(got) == {"rel-2-5-high"}
+    assert "::warning::" in capsys.readouterr().out
+
+
+def test_assign_slugs_refuses_two_rows_on_one_slug():
+    models = {"m": dict(model("M", "2026-01-01", 50.0, 1.0), aa_id="id-a")}
+    rows = {"id-a": leaderboard_row("id-a", "M (renamed)"), "id-b": leaderboard_row("id-b", "M")}
+    with pytest.raises(RuntimeError):
+        assign_slugs(rows, models, lambda url: "")
+
+
+def test_merge_records_the_source_id_and_keeps_it():
+    history = {"updated": "2026-09-01", "models": {"m": model("M", "2026-01-01", 50.0, 1.0)}}
+    merge(history, {"m": dict(live_record("M", "2026-01-01", 50.0, 1.0), aa_id="id-a")}, "2026-09-02")
+    assert history["models"]["m"]["aa_id"] == "id-a"
+    merge(history, {"m": live_record("M", "2026-01-01", 50.0, 1.0)}, "2026-09-03")
+    assert history["models"]["m"]["aa_id"] == "id-a"
+    merge(history, {"n": live_record("N", "2026-01-01", 50.0, 1.0)}, "2026-09-04")
+    assert "aa_id" not in history["models"]["n"]
 
 
 # ---- history merging ----
 
 def live_record(name, release, iq, cost, caps=None):
     return dict(name=name, creator="Lab", release_date=release, intelligence_index=iq,
-                cost_per_task=cost, open_weights=False, deprecated=False, capabilities=caps or {})
+                cost_per_task=cost, open_weights=False, capabilities=caps or {})
 
 
 def test_merge_appends_observation_only_on_change():
