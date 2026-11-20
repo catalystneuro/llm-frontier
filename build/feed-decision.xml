@@ -8,6 +8,14 @@
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of Decision Index, through a release or a price change.</subtitle>
   <entry>
+    <title>2026-11-20: Bison 31B (new model, Decision Index 75.9)</title>
+    <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-11-20-bison-31b.png" />
+    <id>https://llm-frontier.catalystneuro.com/decision/advance/2026-11-20/baseten_bison-31b</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <summary>Bison 31B: now the cheapest way to reach Decision Index 74.8 to 75.9 at $0.34 per 1K tasks, taking it from Claude Haiku 5.5 and GPT-6 Luna; GPT-6 Luna left the frontier.</summary>
+  </entry>
+  <entry>
     <title>2026-11-18: d1.2-ultra (new model, Decision Index 74.8)</title>
     <link href="https://llm-frontier.catalystneuro.com/decision/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/decision/2026-11-18-d1-2-ultra.png" />

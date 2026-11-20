@@ -224,6 +224,31 @@
    "time_per_task": 0.123,
    "ttft": null
   },
+  "baseten_bison-31b": {
+   "capabilities": {},
+   "cost_per_task": 0.344957,
+   "creator": "Base Labs",
+   "first_seen": "2026-11-20",
+   "host": "Base Labs",
+   "intelligence_index": 75.9,
+   "kind": "decision",
+   "last_seen": "2026-11-20",
+   "name": "Bison 31B",
+   "observations": [
+    [
+     "2026-11-20",
+     0.344957,
+     75.9,
+     0.154
+    ]
+   ],
+   "open_weights": false,
+   "release_date": "2026-11-20",
+   "retired": false,
+   "speed_tps": null,
+   "time_per_task": 0.154,
+   "ttft": null
+  },
   "baseten_elephant-9b": {
    "capabilities": {},
    "cost_per_task": 0.092251,
