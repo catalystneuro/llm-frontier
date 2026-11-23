@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       decision_error: ${{ steps.refresh.outputs.decision_error }}
+      pushed: ${{ steps.commit.outputs.pushed }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -65,6 +66,61 @@ jobs:
       contents: read
       pages: write
       id-token: write
+
+  # Announce new Overall frontier advances on Bluesky and Mastodon. It runs
+  # after the deploy, since each post links to the dashboard and attaches a
+  # card the deploy just published, and only when the update pushed new data.
+  # Without the four secrets the poster exits having done nothing, so this
+  # job is inert until a maintainer adds them (see "Posting Advances" in the
+  # README). The poster reports a network's failure as a warning and still
+  # exits 0, and continue-on-error covers the rest, so nothing here can turn
+  # the run red or open a pipeline-failure issue: the alert and recover jobs
+  # below do not wait on it.
+  post:
+    needs: [update, deploy]
+    if: needs.update.outputs.pushed == 'true'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Post new advances
+        run: python -m llm_cost_frontier.social
+        env:
+          PYTHONPATH: src
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          MASTODON_BASE_URL: ${{ secrets.MASTODON_BASE_URL }}
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+      # The record of what was posted is what stops a second post, so it is
+      # committed even if a later post in the same run failed.
+      - name: Record what was posted
+        if: always()
+        run: |
+          if [ ! -f data/social-posted.json ]; then
+            echo "Nothing recorded."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/social-posted.json
+          if git diff --cached --quiet; then
+            echo "Nothing new was posted."
+            exit 0
+          fi
+          git commit -m "Record posted advances ($(date -u '+%Y-%m-%d %H:%M UTC'))"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((attempt * 5))
+          done
+          echo "::warning::Could not push data/social-posted.json; the advances just posted may be posted again on the next run."
+          exit 1
 
   # A failed scheduled run would otherwise just turn Actions red silently
   # while the dashboard goes stale. Failures open (or add to) a labeled
