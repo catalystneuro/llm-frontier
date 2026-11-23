@@ -168,6 +168,121 @@ def test_capability_tab_switches_everything(browser, site_url):
         ctx.close()
 
 
+def test_headline_tiles_follow_the_view_and_the_halving_minimum(browser, site_url):
+    import json
+    from datetime import date
+
+    data = json.loads((REPO / "build/llm-frontier.json").read_text())
+
+    def tiles(page):
+        return page.locator("#pfc-stats .pfc-stat").evaluate_all(
+            "ts => ts.map(t => ({tier: t.dataset.tier, label: t.querySelector('.pfc-stat-label').textContent,"
+            " num: t.querySelector('.pfc-stat-num').textContent,"
+            " holder: t.querySelector('.pfc-stat-model').textContent,"
+            " model: t.querySelector('.pfc-stat-model .pfc-name-link').textContent,"
+            " delta: t.querySelector('.pfc-stat-delta').textContent}))")
+
+    def table(page):
+        return page.locator("#pfc-tier-table tr").evaluate_all(
+            "rs => Object.fromEntries(rs.filter(r => r.cells.length === 5).map(r => ["
+            " r.cells[0].textContent.replace(/[^0-9]/g, ''),"
+            " {num: r.cells[2].querySelector('.pfc-ev-cost').textContent,"
+            "  model: r.cells[2].querySelector('.pfc-ev-model').textContent,"
+            "  halving: r.cells[4].textContent}]))")
+
+    def agree(page):
+        """Every tile repeats its tier's current record from the table, and
+        shows a halving time exactly when the table does."""
+        page.wait_for_selector("#pfc-stats .pfc-stat")
+        ts, rows = tiles(page), table(page)
+        assert 1 <= len(ts) <= 3
+        tiers = [int(t["tier"]) for t in ts]
+        assert tiers == sorted(set(tiers), reverse=True)
+        for t in ts:
+            row = rows[t["tier"]]
+            assert (t["num"], t["model"]) == (row["num"], row["model"])
+            assert ("halving every" in t["delta"]) == row["halving"].startswith("~")
+        return ts
+
+    def qualifies(s):
+        span = (date.fromisoformat(s["last_date"]) - date.fromisoformat(s["first_date"])).days
+        return bool(s["halving_days"]) and span >= 30
+
+    ctx, page, errors = open_page(browser, site_url)
+    try:
+        # Overall: the current view's records, on the rebased basis the table uses.
+        summary = data["tier_summary_rebased"]
+        for t in agree(page):
+            s = summary[t["tier"]]
+            assert t["label"] == f"Intelligence Index \u2265 {t['tier']}"
+            assert t["model"] == s["last_model"] and t["holder"].startswith("cheapest: ")
+            assert ("halving every" in t["delta"]) == qualifies(s)
+        # An archived index version: that version's own records, dated to its end.
+        page.locator("#pfc-era-select").select_option("0")
+        page.wait_for_selector("#pfc-records svg text:text('measurements ended')")
+        assert all("as of " in t["delta"] for t in agree(page))
+        page.locator("#pfc-era-select").select_option(index=0)
+        page.wait_for_selector("#pfc-frontier-stage:text('today')")
+        assert not any("as of " in t["delta"] for t in agree(page))
+        # The time axis: speed records, in the same tiles.
+        toggle = page.locator("#pfc-axis-nav button", has_text="Time per task")
+        if toggle.count():
+            toggle.click()
+            page.wait_for_selector("#pfc-frontier svg text:text('Time per task (log)')")
+            assert all(t["holder"].startswith("fastest: ") and "$" not in t["num"] for t in agree(page))
+        # A metric tab: its own tiers, named by the metric.
+        page.goto(site_url + "/coding/")
+        page.wait_for_selector("#pfc-records svg")
+        metric = next(c["metric"] for c in data["capabilities"] if c["key"] == "coding")
+        summary = data["cap_tier_summary_rebased"]["coding"]
+        for t in agree(page):
+            assert t["label"].startswith(metric + " \u2265 ")
+            assert t["model"] == summary[t["tier"]]["last_model"]
+        assert errors == []
+    finally:
+        ctx.close()
+
+
+@pytest.mark.skipif(not (REPO / "data/decision-history.json").exists(), reason="no Decision Index data")
+def test_short_histories_show_no_halving_time(browser, site_url):
+    """The Decisions tab is a few weeks old. While none of its tiers has
+    records spanning the minimum, no halving time appears anywhere on it,
+    and a record that has fallen says why its halving cell is empty."""
+    import json
+    from datetime import date
+
+    data = json.loads((REPO / "build/llm-frontier.json").read_text())
+    key = "cap_tier_summary_rebased" if data.get("decision_eras") else "cap_tier_summary"
+    summary = {t: s for t, s in data[key]["decision"].items() if s}
+
+    def span(s):
+        return (date.fromisoformat(s["last_date"]) - date.fromisoformat(s["first_date"])).days
+
+    ctx = browser.new_context(viewport={"width": 1300, "height": 900})
+    page = ctx.new_page()
+    errors = []
+    page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+    page.on("console", lambda m: errors.append(f"console: {m.text}") if m.type == "error" else None)
+    try:
+        page.goto(site_url + "/decision/")
+        page.wait_for_selector("#pfc-records svg")
+        page.wait_for_selector("#pfc-stats .pfc-stat")
+        assert "per 1K tasks" in page.locator("#pfc-stats .pfc-stat-unit").first.inner_text()
+        cells = page.locator("#pfc-tier-table tr").evaluate_all(
+            "rs => Object.fromEntries(rs.filter(r => r.cells.length === 5).map(r => ["
+            " r.cells[0].textContent.replace(/[^0-9]/g, ''), r.cells[4].textContent]))")
+        for t, s in summary.items():
+            if span(s) >= 30:
+                continue
+            assert not cells[t].startswith("~")
+            assert (cells[t] == "records span under 30 days") == (s["collapse"] > 1)
+        if all(span(s) < 30 for s in summary.values()):
+            assert "halving" not in page.locator("#pfc-stats").inner_text()
+        assert errors == []
+    finally:
+        ctx.close()
+
+
 def test_axis_toggle_switches_to_time_and_archives_force_cost(browser, site_url):
     ctx, page, errors = open_page(browser, site_url)
     try:

@@ -447,8 +447,11 @@ def render_current(out: dict, models: dict, timeline: list, path: Path, eras: li
         summary = f"The cheapest way to reach each level of {cap['metric']}, across {live} measured models."
         summaries = (out.get("cap_tier_summary") or {}).get(cap["key"]) or {}
         pct = "%" if cap["percent"] else ""
-        # The headline stat comes from the tier with the longest record, so a
-        # tier crossed two weeks ago cannot put a 5-day halving on the card.
+        # The headline stat comes from the tier with the longest record, and
+        # tier_summary() reports no halving time for a record history under
+        # MIN_HALVING_SPAN_DAYS, so a tier crossed two weeks ago cannot put a
+        # 5-day halving on the card; with no tier that qualifies, the card
+        # makes no claim about the rate.
         def span(t):
             r = summaries[t]
             return (dt.date.fromisoformat(r["last_date"]) - dt.date.fromisoformat(r["first_date"])).days

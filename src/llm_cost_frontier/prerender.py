@@ -30,7 +30,7 @@ import sys
 from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
-from .update import DEFAULT_SITE, join_and, slugify, split_variant, taken_clause
+from .update import DEFAULT_SITE, MIN_HALVING_SPAN_DAYS, join_and, slugify, split_variant, taken_clause
 
 ADV_DAYS_PER_PAGE = 6  # the dashboard's first page of advances
 MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August",
@@ -275,11 +275,20 @@ def tier_table_rows(data: dict, cap: dict | None) -> str:
         s = summary.get(str(t))
         row = f'<tr><td class="pfc-td-tier">{esc(tier_label(t, cap))}</td>'
         if s:
-            halving = f"~{number(s['halving_days'])} days" if s.get("halving_days") else ""
+            # The same rule as the dashboard script: a halving time needs
+            # records spanning MIN_HALVING_SPAN_DAYS, checked from the
+            # summary's own dates so older data files read the same way.
+            span = (dt.date.fromisoformat(s["last_date"]) - dt.date.fromisoformat(s["first_date"])).days
+            if s.get("halving_days") and span >= MIN_HALVING_SPAN_DAYS:
+                halving = f"~{number(s['halving_days'])} days"
+            elif s.get("collapse", 0) > 1:
+                halving = f'<span class="pfc-td-note">records span under {MIN_HALVING_SPAN_DAYS} days</span>'
+            else:
+                halving = ""
             row += (f"<td>{event(s['first_date'], s['first_model'], s['first_cost'])}</td>"
                     f"<td>{event(s['last_date'], s['last_model'], s['last_cost'])}</td>"
                     f'<td class="pfc-td-num">{number(s["collapse"])}x</td>'
-                    f'<td class="pfc-td-num">{esc(halving)}</td>')
+                    f'<td class="pfc-td-num">{halving}</td>')
         else:
             row += '<td colspan="4">not yet reached</td>'
         rows.append(row + "</tr>")
