@@ -16,12 +16,12 @@
     <summary>Qwen4 Max: now the cheapest way to reach GDPval-AA 62.3% to 65.4% at $3.27 per task, taking it from Kimi K3.1 Pro. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-10-26: GPT-6.1 Terra (Max) (new model, GDPval-AA 48.8%)</title>
+    <title>2026-10-26: GPT-6.1 Terra (Max) (new model, GDPval-AA 48.7%)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledgework/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledgework/2026-10-26-gpt-6-1-terra.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledgework/advance/2026-10-26/gpt-6-1-terra</id>
     <updated>2026-10-26T00:00:00Z</updated>
-    <summary>GPT-6.1 Terra (Max): now the cheapest way to reach GDPval-AA 45.8% to 48.8% at $0.96 per task. Proprietary.</summary>
+    <summary>GPT-6.1 Terra (Max): now the cheapest way to reach GDPval-AA 45.8% to 48.7% at $0.96 per task. Proprietary.</summary>
   </entry>
   <entry>
     <title>2026-10-26: GPT-6.1 Terra (Xhigh) (new model, GDPval-AA 45.8%)</title>
@@ -56,12 +56,12 @@
     <summary>GPT-6.1 Terra (Low): now the cheapest way to reach GDPval-AA 0.0% to 35.2% at $0.071 per task. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-10-23: Kimi K3.1 Pro (new model, GDPval-AA 68.0%)</title>
+    <title>2026-10-23: Kimi K3.1 Pro (new model, GDPval-AA 67.8%)</title>
     <link href="https://llm-frontier.catalystneuro.com/knowledgework/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/knowledgework/2026-10-23-kimi-k3-1-pro.png" />
     <id>https://llm-frontier.catalystneuro.com/knowledgework/advance/2026-10-23/kimi-k3-1-pro</id>
     <updated>2026-10-23T00:00:00Z</updated>
-    <summary>Kimi K3.1 Pro: now the cheapest way to reach GDPval-AA 66.8% to 68.0% at $3.68 per task, taking it from Claude Opus 5.5 and Claude Sonnet 5.5; Claude Sonnet 5.5 left the frontier. Open weights.</summary>
+    <summary>Kimi K3.1 Pro: now the cheapest way to reach GDPval-AA 66.8% to 67.8% at $3.68 per task, taking it from Claude Opus 5.5 and Claude Sonnet 5.5; Claude Sonnet 5.5 left the frontier. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-10-17: DeepSeek V4.1 Flash 1017 (Max) (new model, GDPval-AA 62.3%)</title>
