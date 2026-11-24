@@ -104,12 +104,12 @@
     <summary>Qwen3.8-Flash-Next: now the cheapest way to reach Terminal-Bench 2.1 84.3% to 86.1% at $0.097 per task, taking it from GPT-5.6 Sol. Open weights.</summary>
   </entry>
   <entry>
-    <title>2026-08-26: GLM-5.3-Flash (new model, Terminal-Bench 2.1 84.3%)</title>
+    <title>2026-08-26: GLM-5.3-Flash (Max) (new model, Terminal-Bench 2.1 84.3%)</title>
     <link href="https://llm-frontier.catalystneuro.com/coding/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/coding/2026-08-26-glm-5-3-flash.png" />
     <id>https://llm-frontier.catalystneuro.com/coding/advance/2026-08-26/glm-5-3-flash</id>
     <updated>2026-08-26T00:00:00Z</updated>
-    <summary>GLM-5.3-Flash: now the cheapest way to reach Terminal-Bench 2.1 80.9% to 84.3% at $0.087 per task, taking it from GPT-5.6 Sol and Kimi K3; Kimi K3 left the frontier. Open weights.</summary>
+    <summary>GLM-5.3-Flash (Max): now the cheapest way to reach Terminal-Bench 2.1 80.9% to 84.3% at $0.087 per task, taking it from GPT-5.6 Sol and Kimi K3; Kimi K3 left the frontier. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-08-25: GPT-5.6 Sol (Xhigh) (price change, Terminal-Bench 2.1 89.5%)</title>

@@ -288,12 +288,12 @@
     <summary>GPT-6 Astra (Medium): now the cheapest way to reach AutomationBench-AA 62.2% to 64.6% at $0.75 per task, taking it from Grok 4.6. Proprietary.</summary>
   </entry>
   <entry>
-    <title>2026-08-26: GLM-5.3-Flash (new model, AutomationBench-AA 60.4%)</title>
+    <title>2026-08-26: GLM-5.3-Flash (Max) (new model, AutomationBench-AA 60.4%)</title>
     <link href="https://llm-frontier.catalystneuro.com/agentic/#advances" />
     <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/agentic/2026-08-26-glm-5-3-flash.png" />
     <id>https://llm-frontier.catalystneuro.com/agentic/advance/2026-08-26/glm-5-3-flash</id>
     <updated>2026-08-26T00:00:00Z</updated>
-    <summary>GLM-5.3-Flash: now the cheapest way to reach AutomationBench-AA 56.3% to 60.4% at $0.087 per task, taking it from Gemini 3.7 Flash, Grok 4.5, and DeepSeek V4 Pro 0813; Grok 4.5 and DeepSeek V4 Pro 0813 left the frontier. New cost record for AutomationBench-AA ≥ 60%. Open weights.</summary>
+    <summary>GLM-5.3-Flash (Max): now the cheapest way to reach AutomationBench-AA 56.3% to 60.4% at $0.087 per task, taking it from Gemini 3.7 Flash, Grok 4.5, and DeepSeek V4 Pro 0813; Grok 4.5 and DeepSeek V4 Pro 0813 left the frontier. New cost record for AutomationBench-AA ≥ 60%. Open weights.</summary>
   </entry>
   <entry>
     <title>2026-08-26: Agnes 2.5 Pro Beta (new model, AutomationBench-AA 43.8%)</title>
