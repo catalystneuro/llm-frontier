@@ -4,9 +4,17 @@
   <link href="https://llm-frontier.catalystneuro.com/longcontext/" />
   <link rel="self" href="https://llm-frontier.catalystneuro.com/feed-longcontext.xml" />
   <id>https://llm-frontier.catalystneuro.com/feed-longcontext.xml</id>
-  <updated>2026-11-26T06:00:00Z</updated>
+  <updated>2026-11-27T06:00:00Z</updated>
   <author><name>CatalystNeuro</name></author>
   <subtitle>Each entry is a date on which a model became the cheapest way to reach some level of AA-LCR, through a release or a price change.</subtitle>
+  <entry>
+    <title>2026-11-27: Muse Glimmer (High) (price change, AA-LCR 83.3%)</title>
+    <link href="https://llm-frontier.catalystneuro.com/longcontext/#advances" />
+    <link rel="enclosure" type="image/png" href="https://llm-frontier.catalystneuro.com/images/advances/longcontext/2026-11-27-muse-glimmer.png" />
+    <id>https://llm-frontier.catalystneuro.com/longcontext/advance/2026-11-27/muse-glimmer</id>
+    <updated>2026-11-27T00:00:00Z</updated>
+    <summary>Muse Glimmer (High): price moved from $0.206 to $0.15 per task; now the cheapest way to reach AA-LCR 81.0% to 83.3%, taking it from GPT-6 Luna. Open weights.</summary>
+  </entry>
   <entry>
     <title>2026-10-26: GPT-6.1 Terra (Max) (new model, AA-LCR 82.7%)</title>
     <link href="https://llm-frontier.catalystneuro.com/longcontext/#advances" />
